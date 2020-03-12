@@ -7,9 +7,12 @@
 import Foundation
 import UIKit
     
-open class TNRouter {
+open class TNRouter<Route: TNRouterProtocol> {
+    /// Add a default constructor just to be able to create instances.
+    public init() { }
+    
     /**
-     Wrapper method that starts a TNRequest requess. The response object in success callback is of type Decodable.
+     Starts a requess. The response object in success callback is of type Decodable.
      
      - parameters:
      - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -18,14 +21,14 @@ open class TNRouter {
      - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
      - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
      */
-    public static func start<T, R: TNRouterProtocol>(queue: TNQueue? = TNQueue.shared, _ route: R, responseType: T.Type, onSuccess: @escaping TNSuccessCallback<T>, onFailure: @escaping TNFailureCallback) where T: Decodable {
+    public func start<T>(queue: TNQueue? = TNQueue.shared, _ route: Route, responseType: T.Type, onSuccess: @escaping TNSuccessCallback<T>, onFailure: @escaping TNFailureCallback) where T: Decodable {
         let call = TNRequest(route: route)
         
         call.start(queue: queue, responseType: responseType, onSuccess: onSuccess, onFailure: onFailure)
     }
     
     /**
-     Wrapper method that starts a TNRequest requess. The response object in success callback is of type UIImage.
+     Starts a  requess. The response object in success callback is of type UIImage.
      
      - parameters:
      - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -34,13 +37,13 @@ open class TNRouter {
      - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
      - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
      */
-    public static func start<T: UIImage, R: TNRouterProtocol>(queue: TNQueue? = TNQueue.shared, _ route: R, responseType: T.Type, onSuccess: @escaping TNSuccessCallback<T>, onFailure: @escaping TNFailureCallback) {
+    public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared, _ route: Route, responseType: T.Type, onSuccess: @escaping TNSuccessCallback<T>, onFailure: @escaping TNFailureCallback) {
         let call = TNRequest(route: route)
         call.start(queue: queue, responseType: responseType, onSuccess: onSuccess, onFailure: onFailure)
     }
     
     /**
-     Wrapper method that starts a TNRequest requess. The response object in success callback is of type Data.
+     Starts a requess. The response object in success callback is of type Data.
      
      - parameters:
      - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -49,7 +52,7 @@ open class TNRouter {
      - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
      - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
      */
-    public static func start<R: TNRouterProtocol>(queue: TNQueue? = TNQueue.shared, _ route: R, onSuccess: @escaping TNSuccessCallback<Data>, onFailure: @escaping TNFailureCallback) {
+    public func start(queue: TNQueue? = TNQueue.shared, _ route: Route, onSuccess: @escaping TNSuccessCallback<Data>, onFailure: @escaping TNFailureCallback) {
         let call = TNRequest(route: route)
         call.start(queue: queue, responseType: Data.self, onSuccess: onSuccess, onFailure: onFailure)
     }

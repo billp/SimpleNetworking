@@ -25,7 +25,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        TNRouter.start(APIFoodRouter.categories, responseType: FoodCategories.self, onSuccess: { categories in
+        let router = TNRouter<APIFoodRouter>()
+        
+        router.start(.categories, responseType: FoodCategories.self, onSuccess: { categories in
             self.categories = categories.categories
             self.tableView.reloadData()
             self.tableView.isHidden = false

@@ -11,6 +11,9 @@ import TermiNetwork
 import SwiftyJSON
 
 class TestTNRequest: XCTestCase {
+    lazy var router: TNRouter<APIRouter> = {
+       return TNRouter<APIRouter>()
+    }()
     
     override func setUp() {
         super.setUp()
@@ -27,7 +30,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test headers")
         var failed = true
 
-        TNRouter.start(APIRouter.testHeaders, responseType: TestHeaders.self, onSuccess: { object in
+        router.start(APIRouter.testHeaders, responseType: TestHeaders.self, onSuccess: { object in
             failed = !(object.authorization == "XKJajkBXAUIbakbxjkasbxjkas" && object.customHeader == "test!!!!")
             expectation.fulfill()
         }) { error, _ in
@@ -42,7 +45,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
 
-        TNRouter.start(APIRouter.testGetParams(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestParam.self, onSuccess: { object in
+        router.start(APIRouter.testGetParams(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestParam.self, onSuccess: { object in
             failed = !(object.param1 == "true" && object.param2 == "3" && object.param3 == "5.13453124189" && object.param4 == "test" && object.param5 == nil)
             failed = false
             expectation.fulfill()
@@ -59,7 +62,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
         
-        TNRouter.start(APIRouter.testGetParams(value1: true, value2: 3, value3: 5.13453124189, value4: "τεστ", value5: nil), responseType: TestParam.self, onSuccess: { object in
+        router.start(APIRouter.testGetParams(value1: true, value2: 3, value3: 5.13453124189, value4: "τεστ", value5: nil), responseType: TestParam.self, onSuccess: { object in
             failed = !(object.param1 == "true" && object.param2 == "3" && object.param3 == "5.13453124189" && object.param4 == "τεστ" && object.param5 == nil)
             failed = false
             expectation.fulfill()
@@ -76,7 +79,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test post params")
         var failed = true
         
-        TNRouter.start(APIRouter.testPostParamsxWWWFormURLEncoded(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestParam.self, onSuccess: { object in
+        router.start(APIRouter.testPostParamsxWWWFormURLEncoded(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestParam.self, onSuccess: { object in
             failed = !(object.param1 == "true" && object.param2 == "3" && object.param3 == "5.13453124189" && object.param4 == "test" && object.param5 == nil)
             expectation.fulfill()
         }) { error, _ in
@@ -92,7 +95,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test JSON post params")
         var failed = true
                 
-        TNRouter.start(APIRouter.testPostParams(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestJSONParams.self, onSuccess: { object in
+        router.start(APIRouter.testPostParams(value1: true, value2: 3, value3: 5.13453124189, value4: "test", value5: nil), responseType: TestJSONParams.self, onSuccess: { object in
             failed = !(object.param1 == true && object.param2 == 3 && object.param3 == 5.13453124189 && object.param4 == "test" && object.param5 == nil)
             expectation.fulfill()
         }) { error, _ in
