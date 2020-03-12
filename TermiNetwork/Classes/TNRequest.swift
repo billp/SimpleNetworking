@@ -264,8 +264,11 @@ open class TNRequest: TNOperation {
     
     // MARK: - Helper methods
     internal func sessionDataTask(request: URLRequest, completionHandler: ((Data)->())?, onFailure: TNFailureCallback?) -> URLSessionDataTask {
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                    delegate: TNSession.shared,
+                                    delegateQueue: OperationQueue.current)
         
-        let dataTask = URLSession.shared.dataTask(with: request) { data, urlResponse, error in
+        let dataTask = session.dataTask(with: request) { data, urlResponse, error in
             var statusCode: Int?
             self.data = data
             self.urlResponse = urlResponse
@@ -369,13 +372,9 @@ open class TNRequest: TNOperation {
                 return
             }
             
-            DispatchQueue.main.sync {
-                TNLog.logRequest(request: self)
-                onSuccess?(object)
-                self.handleDataTaskCompleted()
-            }
-            
-            
+            TNLog.logRequest(request: self)
+            onSuccess?(object)
+            self.handleDataTaskCompleted()
         }, onFailure: { error, data in
             onFailure?(error, data)
             self.handleDataTaskFailure()
@@ -412,16 +411,12 @@ open class TNRequest: TNOperation {
                 self.customError = .responseInvalidImageData
                 TNLog.logRequest(request: self)
 
-                DispatchQueue.main.sync {
-                    onFailure?(.responseInvalidImageData, data)
-                }
+                onFailure?(.responseInvalidImageData, data)
                 self.handleDataTaskFailure()
             } else {
-                DispatchQueue.main.sync {
-                    TNLog.logRequest(request: self)
-                    onSuccess?(image!)
-                    self.handleDataTaskCompleted()
-                }
+                TNLog.logRequest(request: self)
+                onSuccess?(image!)
+                self.handleDataTaskCompleted()
             }
         }, onFailure: { error, data in
             onFailure?(error, data)

@@ -39,6 +39,7 @@
 		E0186A63060F0EB3676F95CD0ACE0E18 /* SVProgressAnimatedView.h in Headers */ = {isa = PBXBuildFile; fileRef = E8CF300EA321AFF06300AEC02C1494D9 /* SVProgressAnimatedView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA50D9B8D9C5E625FD4B1A55C5F4A992 /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85F71B570C4D692BBBF480DC1EA65C5 /* Request+Extensions.swift */; };
 		EEAA1518C49804736C3F40117D064CBE /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */; };
+		F3043EF3241A84650018A34D /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043EEF241A835B0018A34D /* TNSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +65,7 @@
 		0671AED63A66F9E9B12EF7C2BCE3D0E7 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		0908972AD0680C9F0973B75A3FA15A11 /* TNRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNRouter.swift; path = TermiNetwork/Classes/TNRouter.swift; sourceTree = "<group>"; };
 		12637D5A78AB26D08A6570EE1DC5B83B /* TNOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNOperation.swift; path = TermiNetwork/Classes/TNOperation.swift; sourceTree = "<group>"; };
-		151A840DBB24014CB63DE62BEDF7A9E9 /* TermiNetwork.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TermiNetwork.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		151A840DBB24014CB63DE62BEDF7A9E9 /* TermiNetwork.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = TermiNetwork.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		15C425A1530551239497A48ADD282663 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		21F19D2E64F9E29C1CD83D0D2B3B5618 /* SVProgressHUD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SVProgressHUD-Info.plist"; sourceTree = "<group>"; };
 		24834323EF4983343BD0C67499B36169 /* Pods-TermiNetwork_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TermiNetwork_Example-frameworks.sh"; sourceTree = "<group>"; };
@@ -85,15 +86,15 @@
 		79BA31643C37E73001A0D47041E93619 /* TermiNetwork.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TermiNetwork.modulemap; sourceTree = "<group>"; };
 		823553515B0C21BA5E8B2DAB2BF3CDA0 /* Pods-TermiNetwork_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TermiNetwork_Example-dummy.m"; sourceTree = "<group>"; };
 		87F0B05DCD0A765DB673B753946C0E95 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVRadialGradientLayer.m; path = SVProgressHUD/SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F5BF164562939FF99173A16E9CE5C5A /* TermiNetwork-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TermiNetwork-dummy.m"; sourceTree = "<group>"; };
 		A11B61A5CF9F5A92C306480806BD13E0 /* Pods-TermiNetwork_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TermiNetwork_Example-umbrella.h"; sourceTree = "<group>"; };
-		A2456D54E170E10595A1E972B4FBEFC0 /* TermiNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TermiNetwork.framework; path = TermiNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5411F17C799586CF1ECFF3069A08556 /* Pods_TermiNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TermiNetwork_Example.framework; path = "Pods-TermiNetwork_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2456D54E170E10595A1E972B4FBEFC0 /* TermiNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TermiNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5411F17C799586CF1ECFF3069A08556 /* Pods_TermiNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TermiNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCAF187E3E2D4D70792BE2FB0CF70F9 /* Pods-TermiNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TermiNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AF342095293272EEC92E98971F299F6A /* SVProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-umbrella.h"; sourceTree = "<group>"; };
-		B44E341690600A6327304F5CFC9CEE8E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		BD13E8EB970C2798376541F12468275B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		B44E341690600A6327304F5CFC9CEE8E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BD13E8EB970C2798376541F12468275B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BE166000A68247085728C1A4D94A2F14 /* TNRouteProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNRouteProtocol.swift; path = TermiNetwork/Classes/TNRouteProtocol.swift; sourceTree = "<group>"; };
 		CB6193BDF9256B1B2DC71E7CF8BFFB3D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		CBB0D9A97D5522A744F725263AC17933 /* TermiNetwork-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TermiNetwork-prefix.pch"; sourceTree = "<group>"; };
@@ -103,10 +104,11 @@
 		D33F3F8E8B40F940D3C53C54DB509D46 /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
 		D85F71B570C4D692BBBF480DC1EA65C5 /* Request+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Request+Extensions.swift"; sourceTree = "<group>"; };
 		E8CF300EA321AFF06300AEC02C1494D9 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressAnimatedView.h; path = SVProgressHUD/SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		E97D43C46A45EE515A4DA3AF94398441 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SVProgressHUD.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E97D43C46A45EE515A4DA3AF94398441 /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAC6954634F898848FA9C40A25D50535 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVIndefiniteAnimatedView.m; path = SVProgressHUD/SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		EB0F1732A2D4DBA41714F9E205837D34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F0D1219DAB6941A0AA2777D180B36AAD /* TNErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNErrors.swift; path = TermiNetwork/Classes/TNErrors.swift; sourceTree = "<group>"; };
+		F3043EEF241A835B0018A34D /* TNSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TNSession.swift; path = TermiNetwork/Classes/TNSession.swift; sourceTree = "<group>"; };
 		F3248F7C44DBEB262DFFCFDE05DDA76E /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
 		F87E01423D61B8CDD7003CD68E8DD738 /* Pods-TermiNetwork_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TermiNetwork_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -187,12 +189,13 @@
 			isa = PBXGroup;
 			children = (
 				35CCF23510696ED0B838B47DF17E9155 /* TNEnvironment.swift */,
+				F3043EEF241A835B0018A34D /* TNSession.swift */,
+				CF8B3C20ECFE1823FAC743BDDFE0542A /* TNRequest.swift */,
+				FBD1272355855BB5CB2D7EEFF6EFD62E /* TNQueue.swift */,
 				F0D1219DAB6941A0AA2777D180B36AAD /* TNErrors.swift */,
 				0655BFEC619E7DFD10283C3C137BC391 /* TNLog.swift */,
 				12637D5A78AB26D08A6570EE1DC5B83B /* TNOperation.swift */,
 				D1670C68570040F3653B397DECAFC9C1 /* TNPath.swift */,
-				FBD1272355855BB5CB2D7EEFF6EFD62E /* TNQueue.swift */,
-				CF8B3C20ECFE1823FAC743BDDFE0542A /* TNRequest.swift */,
 				BE166000A68247085728C1A4D94A2F14 /* TNRouteProtocol.swift */,
 				0908972AD0680C9F0973B75A3FA15A11 /* TNRouter.swift */,
 				EA3E4E7DDA2927E01639A07673180E06 /* Extensions */,
@@ -270,7 +273,6 @@
 				96EC1FDA8213EA94182AF633E3DDBC12 /* Resources */,
 				E72B1AB9FC36AA84956754C27C30A816 /* Support Files */,
 			);
-			name = SVProgressHUD;
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -416,6 +418,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
+				TargetAttributes = {
+					D21FCAE3475DEE2984D36188D6F2C6C5 = {
+						LastSwiftMigration = 1130;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -478,6 +485,7 @@
 				683D7B031938FF235A8E7DC5098A8B79 /* Data+Extensions.swift in Sources */,
 				77B4CCB2E2091DC3E9D5C8AC1D77209D /* Dictionary+Extensions.swift in Sources */,
 				EA50D9B8D9C5E625FD4B1A55C5F4A992 /* Request+Extensions.swift in Sources */,
+				F3043EF3241A84650018A34D /* TNSession.swift in Sources */,
 				D9D61F09265AD7C7CBEEF7F2FD1D917B /* TermiNetwork-dummy.m in Sources */,
 				3EB1CCC7F943A4B7A6805F3941B05111 /* TNEnvironment.swift in Sources */,
 				8BFFF0A68D985646238CCDDF308741EE /* TNErrors.swift in Sources */,
@@ -527,6 +535,7 @@
 			baseConfigurationReference = 5D3D25BA9236237D8928F3030D5F4519 /* Pods-TermiNetwork_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -549,6 +558,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -735,8 +745,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -811,6 +820,7 @@
 			baseConfigurationReference = ABCAF187E3E2D4D70792BE2FB0CF70F9 /* Pods-TermiNetwork_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -833,6 +843,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
