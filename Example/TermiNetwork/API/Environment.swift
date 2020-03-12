@@ -27,12 +27,12 @@ enum Environment: TNEnvironmentProtocol {
         case .dev:
             return TNEnvironment(scheme: .https,
                                  host: "mydevserver.com",
-                                 suffix: path("v1"),
+                                 suffix: .path(["v1"]),
                                  requestConfiguration: requestConfiguration)
         case .production:
             return TNEnvironment(scheme: .http,
                                  host: "www.themealdb.com",
-                                 suffix: path("api", "json", "v1", "1"),
+                                 suffix: .path(["api", "json", "v1", "1"]),
                                  requestConfiguration: requestConfiguration)
         }
     }

@@ -155,7 +155,7 @@ open class TNRequest: TNOperation {
     public init(method: TNMethod, headers: [String: String]?, cachePolicy: URLRequest.CachePolicy?, timeoutInterval: TimeInterval?, path: TNPath, params: [String: Any?]?, requestBodyType: TNRequestBodyType? = nil) {
         self.method = method
         self.headers = headers
-        self.path = path.components.joined(separator: "/")
+        self.path = path.convertedPath()
         self.cachePolicy = cachePolicy ?? .useProtocolCachePolicy
         self.timeoutInterval = timeoutInterval ?? 60
         self.params = params
@@ -231,7 +231,8 @@ open class TNRequest: TNOperation {
         self.method = route.method
         self.headers = route.headers
         self.params = route.params
-        self.path = route.path.components.joined(separator: "/")
+        self.path = route.path.convertedPath()
+
         self.cachePolicy = TNEnvironment.current?.requestConfiguration?.cachePolicy ?? route.requestConfiguration!.cachePolicy!
         self.timeoutInterval = TNEnvironment.current?.requestConfiguration?.timeoutInterval ?? route.requestConfiguration!.timeoutInterval!
         self.requestBodyType = TNEnvironment.current?.requestConfiguration?.requestBodyType ?? route.requestConfiguration!.requestBodyType!

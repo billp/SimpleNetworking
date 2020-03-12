@@ -70,9 +70,8 @@ extension TNEnvironment: CustomStringConvertible {
         var urlComponents = [String]()
         urlComponents.append(scheme.rawValue + ":/")
         urlComponents.append(port != nil ? host + ":" + String(describing: port!) : host)
-        
-        if suffix != nil {
-            urlComponents.append(suffix!.components.joined(separator: "/"))
+        if let suffix = suffix {
+            urlComponents.append(suffix.convertedPath())
         }
         
         return urlComponents.joined(separator: "/")

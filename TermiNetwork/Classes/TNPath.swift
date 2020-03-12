@@ -8,15 +8,18 @@
 
 import Foundation
 
-public struct TNPath {
-    var components: [String]!
+public enum TNPath {
+    case path(_ components: [String])
     
     public init(_ components: String...) {
-        self.components = components
+        self = .path(components)
     }
     
-    public init(_ components: [String]) {
-        self.components = components
+    func convertedPath() -> String {
+        switch self {
+        case .path(let components):
+            return components.joined(separator: "/")
+        }
     }
 }
 
@@ -24,5 +27,3 @@ internal enum SNPathType: Error {
     case normal
     case full
 }
-
-public typealias path = TNPath
