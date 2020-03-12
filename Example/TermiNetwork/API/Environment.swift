@@ -13,7 +13,7 @@ enum Environment: TNEnvironmentProtocol {
     case localhost
     case dev
     case production
-    
+
     func configure() -> TNEnvironment {
         let requestConfiguration = TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
                                                           timeoutInterval: 30,

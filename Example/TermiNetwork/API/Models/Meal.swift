@@ -8,8 +8,8 @@
 
 import UIKit
 
-class Meal : NSObject, Codable {
-    var idMeal : String
-    var strMeal : String
-    var strMealThumb : String
+class Meal: NSObject, Codable {
+    var idMeal: String
+    var strMeal: String
+    var strMealThumb: String
 }

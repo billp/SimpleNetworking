@@ -9,6 +9,8 @@
 import Foundation
 import TermiNetwork
 
+// swiftlint:disable function_body_length
+
 enum APIRouter: TNRouterProtocol {
     // Define your routes
     case testHeaders
@@ -20,7 +22,7 @@ enum APIRouter: TNRouterProtocol {
     case testEmptyBody
     case testConfiguration
     case testImage(imageName: String)
-    
+
     // Set method, path, params, headers for each route
     func configure() -> TNRouteConfiguration {
         switch self {
@@ -47,7 +49,9 @@ enum APIRouter: TNRouterProtocol {
             return TNRouteConfiguration(
                 method: .post,
                 path: .path(["test_params"]),
-                requestConfiguration: TNRequestConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 12, requestBodyType: .JSON)
+                requestConfiguration: TNRequestConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                                             timeoutInterval: 12,
+                                                             requestBodyType: .JSON)
             )
         case let .testPostParams(value1, value2, value3, value4, value5):
             return TNRouteConfiguration(

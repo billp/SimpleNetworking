@@ -12,7 +12,7 @@ class FoodCategoryCell: UITableViewCell {
     @IBOutlet weak var thumbImageView: CustomImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

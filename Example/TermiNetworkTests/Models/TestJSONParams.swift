@@ -9,12 +9,12 @@
 import Foundation
 
 struct TestJSONParams: Codable {
-    
-    let param1 : Bool
-    let param2 : Int
-    let param3 : Double
-    let param4 : String
-    let param5 : String?
+
+    let param1: Bool
+    let param2: Int
+    let param3: Double
+    let param4: String
+    let param5: String?
 
     enum CodingKeys: String, CodingKey {
         case param1 = "key1"

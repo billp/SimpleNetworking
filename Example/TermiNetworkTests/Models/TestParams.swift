@@ -9,12 +9,12 @@
 import Foundation
 
 struct TestParam: Codable {
-    
-    let param1 : String
-    let param2 : String
-    let param3 : String
-    let param4 : String
-    let param5 : String?
+
+    let param1: String
+    let param2: String
+    let param3: String
+    let param4: String
+    let param5: String?
 
     enum CodingKeys: String, CodingKey {
         case param1 = "key1"
