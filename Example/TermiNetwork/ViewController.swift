@@ -8,7 +8,6 @@
 
 import UIKit
 import TermiNetwork
-import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!

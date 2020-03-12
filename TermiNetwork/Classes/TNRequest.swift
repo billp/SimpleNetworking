@@ -7,12 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
 import UIKit
-
-// Backward compatibility for TNCall (is being replaced with TNRequest)
-@available(*, deprecated, message: "TNCall is deprecated and will be removed from future releases. Use TNRequest instead")
-public typealias TNCall = TNRequest
 
 //MARK: - Custom types
 public typealias TNSuccessCallback<T> = (T)->()
@@ -100,68 +95,8 @@ open class TNRequest: TNOperation {
     // MARK: - Public properties
     public var cachePolicy: URLRequest.CachePolicy
     public var requestBodyType: TNRequestBodyType = .xWWWFormURLEncoded
-
-    // MARK: - Deprecations
-    @available(*, deprecated, message: "beforeAllRequestsBlock Hook is deprecated and will be removed from future releases. Use TNQueue hooks instead. All TNCall hooks are forewarded to TNQueue.shared.[HOOK]. See docs for more info.")
-    public static var beforeAllRequestsBlock: TNBeforeAllRequestsCallback? {
-        didSet {
-            TNQueue.shared.beforeAllRequestsCallback = {
-                beforeAllRequestsBlock?()
-            }
-        }
-    }
-    @available(*, deprecated, message: "afterAllRequestsBlock Hook is deprecated and will be removed from future releases. Use TNQueue hooks instead. All TNCall hooks are forewarded to TNQueue.shared.[HOOK]. See docs for more info.")
-    public static var afterAllRequestsBlock: TNAfterAllRequestsCallback? {
-        didSet {
-            TNQueue.shared.afterAllRequestsCallback = { _ in
-                afterAllRequestsBlock?()
-            }
-        }
-    }
-    @available(*, deprecated, message: "beforeEachRequestBlock Hook is deprecated and will be removed from future releases. Use TNQueue hooks instead. All TNCall hooks are forewarded to TNQueue.shared.[HOOK]. See docs for more info.")
-    public static var beforeEachRequestBlock: TNBeforeEachRequestCallback? {
-        didSet {
-            TNQueue.shared.beforeEachRequestCallback = { request in
-                beforeEachRequestBlock?(request)
-            }
-        }
-    }
-    @available(*, deprecated, message: "afterEachRequestBlock Hook is deprecated and will be removed from future releases. Use TNQueue hooks instead. All TNCall hooks are forewarded to TNQueue.shared.[HOOK]. See docs for more info.")
-    public static var afterEachRequestBlock: TNAfterEachRequestCallback? {
-        didSet {
-            TNQueue.shared.afterEachRequestCallback = { request, data, response, error in
-                afterEachRequestBlock?(request, data, response, error)
-            }
-        }
-    }
-
-    @available(*, deprecated, message: "skipBeforeAfterAllRequestsHooks Hook is deprecated and will be removed from future releases.")
-    public var skipBeforeAfterAllRequestsHooks: Bool = false
         
     //MARK: - Initializers
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - method:
-            The http method of request, e.g. .get, .post, .head, etc.
-         - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-         - cachePolicy: Cache policy of type URLRequest.CachePolicy. See Apple's documentation for details (optional)
-         - timeoutInterval: Timeout interval of request in seconds (optional)
-         - path: The path that is appended to your Environments current hostname and prefix. Use 'path(...)' for this, e.g. path("user", "5"), it generates http//website.com/user/5
-         - params: A Dictionary that is send as request params. If method is .get it automatically appends them to url, otherwise it sets them as request body.
-     */
-    @available(*, deprecated, message: "is deprecated and will be removed from future releases. use TNRequest(method:url:headers:params:configuration) instead.")
-    public init(method: TNMethod, headers: [String: String]?, cachePolicy: URLRequest.CachePolicy?, timeoutInterval: TimeInterval?, path: TNPath, params: [String: Any?]?, requestBodyType: TNRequestBodyType? = nil) {
-        self.method = method
-        self.headers = headers
-        self.path = path.convertedPath()
-        self.cachePolicy = cachePolicy ?? .useProtocolCachePolicy
-        self.timeoutInterval = timeoutInterval ?? 60
-        self.params = params
-        self.requestBodyType = requestBodyType ?? .xWWWFormURLEncoded
-    }
-    
     /**
      Initializes a TNRequest request
      
@@ -310,7 +245,6 @@ open class TNRequest: TNOperation {
         return request
     }
     
-    // Cancelation
     /**
      Cancels a TNRequest started request
      */
@@ -392,7 +326,6 @@ open class TNRequest: TNOperation {
         currentQueue.afterOperationFinished(request: self, data: data, response: urlResponse, error: customError)
     }
     
-    // Deserialize objects with Decodable
     /**
      Adds a request to a queue and starts it's execution. The response object in success callback is of type Decodable
      
@@ -442,7 +375,6 @@ open class TNRequest: TNOperation {
         currentQueue.addOperation(self)
     }
     
-    // Deserialize objects with UIImage
     /**
      Adds a request to a queue and starts it's execution. The response object in success callback is of type UIImage
      
@@ -490,53 +422,9 @@ open class TNRequest: TNOperation {
         currentQueue.addOperation(self)
     }
     
-    // Swifty JSON
-    /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type JSON (SwiftyJSON)
-     
-     - parameters:
-     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
-    public func start(queue: TNQueue? = TNQueue.shared, responseType: JSON.Type, onSuccess: TNSuccessCallback<JSON>?, onFailure: TNFailureCallback?) {
-        currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
-        
-        let request: URLRequest!
-        do {
-            request = try asRequest()
-        } catch let error {
-            onFailure?(error as! TNError, nil)
-            self.handleDataTaskFailure()
-            return
-        }
-        
-        dataTask = sessionDataTask(request: request, completionHandler: { data in
-            DispatchQueue.main.async {
-                TNLog.logRequest(request: self)
-                do {
-                    let json = try JSON(data: data)
-                    TNLog.logRequest(request: self)
-                    onSuccess?(json)
-                    self.handleDataTaskCompleted()
-                } catch let error {
-                    let error = TNError.cannotConvertToJSON(error)
-                    onFailure?(error, nil)
-                    self.handleDataTaskFailure()
-                }
-            }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
-        })
-        
-        currentQueue.addOperation(self)
-    }
     
-    // String
     /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type Data
+     Adds a request to a queue and starts it's execution. The response object in success callback is of type String
      
      - parameters:
      - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)

@@ -25,9 +25,6 @@ public struct TNRouteConfiguration {
 }
 
 // MARK: - Protocols
-@available(*, deprecated, message: "is deprecated and will be removed from future releases. Use TNRouterProtocol instead.")
-public typealias TNRouteProtocol = TNRouterProtocol
-
 public protocol TNRouterProtocol {
     func configure() -> TNRouteConfiguration
 }

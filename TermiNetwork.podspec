@@ -38,5 +38,4 @@ TermiNetwork is a networking library written with Swift 4.0 that supports multi-
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SwiftyJSON', '~> 4.2'
 end

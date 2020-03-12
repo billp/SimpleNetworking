@@ -3,5 +3,4 @@ use_frameworks!
 target 'TermiNetwork_Example' do
   pod 'TermiNetwork', :path => '../'
   pod 'SVProgressHUD'
-  pod 'SwiftyJSON'
 end

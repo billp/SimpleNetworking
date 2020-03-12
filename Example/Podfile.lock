@@ -1,18 +1,14 @@
 PODS:
   - SVProgressHUD (2.2.5)
-  - SwiftyJSON (4.2.0)
-  - TermiNetwork (0.3.1):
-    - SwiftyJSON (~> 4.0)
+  - TermiNetwork (0.3.3)
 
 DEPENDENCIES:
   - SVProgressHUD
-  - SwiftyJSON
   - TermiNetwork (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - SVProgressHUD
-    - SwiftyJSON
 
 EXTERNAL SOURCES:
   TermiNetwork:
@@ -20,9 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  TermiNetwork: ab58864af196bb20e03c6c734825acddf074a702
+  TermiNetwork: 0e000731156e915294715def54f5d59f581253f9
 
-PODFILE CHECKSUM: f7178b88751a7ad0816d1c0c0b19523d1edcfbba
+PODFILE CHECKSUM: af8b5f936ba5753b3879a1b53e3f4c098f948f9d
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.8.4

@@ -1,7 +1,7 @@
 {
   "name": "TermiNetwork",
-  "version": "0.3.1",
-  "summary": "A Networking Library written in Swift 4.0",
+  "version": "0.3.3",
+  "summary": "A Networking Library written in Swift 5.0",
   "description": "TermiNetwork is a networking library written with Swift 4.0 that supports multi-environment configuration, routing and automatic deserialization (currently Codable and UIImage deserialization is supported).",
   "homepage": "https://github.com/billp/TermiNetwork.git",
   "license": {
@@ -13,15 +13,10 @@
   },
   "source": {
     "git": "https://github.com/billp/TermiNetwork.git",
-    "tag": "0.3.1"
+    "tag": "0.3.3"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "TermiNetwork/Classes/**/*",
-  "dependencies": {
-    "SwiftyJSON": [
-      "~> 4.0"
-    ]
-  }
+  "source_files": "TermiNetwork/Classes/**/*"
 }

@@ -16,15 +16,11 @@ public enum TNError: Error {
     case responseDataIsEmpty
     case responseInvalidImageData
     case cannotDeserialize(Error)
-    case cannotConvertToJSON(Error)
     case cannotConvertToString
     case networkError(Error)
     case notSuccess(Int)
     case cancelled(Error)
 }
-
-@available(*, deprecated, message: "and will be removed from future releases. Use TNError instead.")
-typealias TNRequestError = TNError
 
 extension TNError: LocalizedError {
     public var localizedDescription: String? {
@@ -51,8 +47,6 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Cannot deserialize object: ", comment: "TNError") + fullDescription
         case .networkError(let error):
                 return NSLocalizedString("Network error: ", comment: "TNError") + error.localizedDescription
-        case .cannotConvertToJSON(let error):
-            return NSLocalizedString("Cannot create JSON object (SwiftyJSON): ", comment: "TNError") + error.localizedDescription
         case .cannotConvertToString:
             return NSLocalizedString("Cannot convert to String", comment: "TNError")
         case .notSuccess(let code):
