@@ -21,11 +21,11 @@ import Foundation
 
 public enum TNPath {
     case path(_ components: [String])
-    
+
     public init(_ components: String...) {
         self = .path(components)
     }
-    
+
     func convertedPath() -> String {
         switch self {
         case .path(let components):

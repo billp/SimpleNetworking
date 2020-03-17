@@ -23,11 +23,14 @@ import Foundation
 public struct TNRouteConfiguration {
     var method: TNMethod
     var path: TNPath
-    var params: [String: Any?]? = nil
-    var headers: [String: String]? = nil
-    var requestConfiguration: TNRequestConfiguration? = nil
-    
-    public init(method: TNMethod, path: TNPath, params: [String: Any?]? = nil, headers: [String: String]? = nil, requestConfiguration: TNRequestConfiguration? = TNRequestConfiguration.default) {
+    var params: [String: Any?]?
+    var headers: [String: String]?
+    var requestConfiguration: TNRequestConfiguration?
+
+    public init(method: TNMethod,
+                path: TNPath, params: [String: Any?]? = nil,
+                headers: [String: String]? = nil,
+                requestConfiguration: TNRequestConfiguration? = TNRequestConfiguration.default) {
         self.method = method
         self.path = path
         self.params = params

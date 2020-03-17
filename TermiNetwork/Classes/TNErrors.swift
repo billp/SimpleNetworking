@@ -17,6 +17,8 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable line_length
+
 import Foundation
 
 // Errors before execution of a request
@@ -47,7 +49,7 @@ extension TNError: LocalizedError {
         case .responseInvalidImageData:
             return NSLocalizedString("The response data is not a valid image", comment: "TNError")
         case .cannotDeserialize(let error):
-            let debugDescription = (error as NSError).userInfo["NSDebugDescription"] as! String
+            let debugDescription = (error as NSError).userInfo["NSDebugDescription"] as? String ?? ""
             var errorKeys = ""
             if let codingPath = (error as NSError).userInfo["NSCodingPath"] as? [CodingKey] {
                 errorKeys = (codingPath.count > 0 ? " Key(s): " : "") + codingPath.map({

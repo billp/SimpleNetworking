@@ -23,10 +23,10 @@ internal class TNLog {
      static func logRequest(request: TNRequest) {
         guard TNEnvironment.verbose else { return }
         guard let urlRequest = try? request.asRequest() else { return }
-        
+
         let url = urlRequest.url?.absoluteString ?? "n/a"
         let headers = urlRequest.allHTTPHeaderFields
-        
+
         print("--------------------------------")
         print("🌎 URL: " + url)
         print("🎛️ Method: " + request.method.rawValue.uppercased())
@@ -34,13 +34,13 @@ internal class TNLog {
         if let headers = headers, headers.keys.count > 0 {
             print("📃 Request Headers: " + headers.description)
         }
-        if let params = request.params as [String: AnyObject]?, params.keys.count > 0 {
-            if request.method != .get {
-                if request.requestBodyType == .JSON {
-                    print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
-                } else {
-                    print("🗃️ Request Body: " + params.description)
-                }
+        if let params = request.params as [String: AnyObject]?,
+            params.keys.count > 0,
+            request.method != .get {
+            if request.requestBodyType == .JSON {
+                print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
+            } else {
+                print("🗃️ Request Body: " + params.description)
             }
         }
 
@@ -49,7 +49,7 @@ internal class TNLog {
         } else if let response = request.urlResponse as? HTTPURLResponse {
             print("✅ Status: " + String(response.statusCode))
         }
-        
+
         if let data = request.data {
             if let responseJSON = data.toJSONString() {
                 print("📦 Response: " + responseJSON)

@@ -30,6 +30,21 @@
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		F3044008241A8C850018A34D /* TNRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FF7241A8C850018A34D /* TNRouter.swift */; };
+		F3044009241A8C850018A34D /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FF8241A8C850018A34D /* TNSession.swift */; };
+		F304400A241A8C850018A34D /* TNRouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FF9241A8C850018A34D /* TNRouteProtocol.swift */; };
+		F304400B241A8C850018A34D /* TNPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FFA241A8C850018A34D /* TNPath.swift */; };
+		F304400C241A8C850018A34D /* TNErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FFB241A8C850018A34D /* TNErrors.swift */; };
+		F304400D241A8C850018A34D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FFD241A8C850018A34D /* UIImageView+Extensions.swift */; };
+		F304400E241A8C850018A34D /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FFE241A8C850018A34D /* Dictionary+Extensions.swift */; };
+		F304400F241A8C850018A34D /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043FFF241A8C850018A34D /* Request+Extensions.swift */; };
+		F3044010241A8C850018A34D /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044000241A8C850018A34D /* Data+Extensions.swift */; };
+		F3044011241A8C850018A34D /* TNOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044001241A8C850018A34D /* TNOperation.swift */; };
+		F3044012241A8C850018A34D /* TNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044002241A8C850018A34D /* TNLog.swift */; };
+		F3044013241A8C850018A34D /* TNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044003241A8C850018A34D /* TNQueue.swift */; };
+		F3044014241A8C850018A34D /* TNRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044004241A8C850018A34D /* TNRequest.swift */; };
+		F3044015241A8C850018A34D /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044005241A8C850018A34D /* TNEnvironment.swift */; };
+		F3044016241A8C850018A34D /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = F3044007241A8C850018A34D /* .gitkeep */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +91,21 @@
 		9CE2EB115537B49E5697580B /* Pods_TermiNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TermiNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23E0C53115D7D13327E82BB /* Pods-TermiNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TermiNetwork_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TermiNetwork_Example/Pods-TermiNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F242CB5337AE09D99DC7CF33 /* TermiNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TermiNetwork.podspec; path = ../TermiNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F3043FF7241A8C850018A34D /* TNRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouter.swift; sourceTree = "<group>"; };
+		F3043FF8241A8C850018A34D /* TNSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSession.swift; sourceTree = "<group>"; };
+		F3043FF9241A8C850018A34D /* TNRouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouteProtocol.swift; sourceTree = "<group>"; };
+		F3043FFA241A8C850018A34D /* TNPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNPath.swift; sourceTree = "<group>"; };
+		F3043FFB241A8C850018A34D /* TNErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNErrors.swift; sourceTree = "<group>"; };
+		F3043FFD241A8C850018A34D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		F3043FFE241A8C850018A34D /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		F3043FFF241A8C850018A34D /* Request+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Extensions.swift"; sourceTree = "<group>"; };
+		F3044000241A8C850018A34D /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		F3044001241A8C850018A34D /* TNOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNOperation.swift; sourceTree = "<group>"; };
+		F3044002241A8C850018A34D /* TNLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNLog.swift; sourceTree = "<group>"; };
+		F3044003241A8C850018A34D /* TNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNQueue.swift; sourceTree = "<group>"; };
+		F3044004241A8C850018A34D /* TNRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequest.swift; sourceTree = "<group>"; };
+		F3044005241A8C850018A34D /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
+		F3044007241A8C850018A34D /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		F676F90F742CED352BDC092A /* Pods-TermiNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TermiNetwork_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TermiNetwork_Example/Pods-TermiNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
 		FEFDE3F46E74354242844F3F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +211,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				F3043FF5241A8C850018A34D /* TermiNetwork */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for TermiNetwork */,
 				595BA53520459A2F0029D903 /* TermiNetworkTests */,
@@ -243,6 +274,53 @@
 				86F5A98A93DF2EDB1A8F2054 /* Pods_TermiNetwork_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F3043FF5241A8C850018A34D /* TermiNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				F3043FF6241A8C850018A34D /* Classes */,
+				F3044006241A8C850018A34D /* Assets */,
+			);
+			name = TermiNetwork;
+			path = ../TermiNetwork;
+			sourceTree = "<group>";
+		};
+		F3043FF6241A8C850018A34D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F3043FF7241A8C850018A34D /* TNRouter.swift */,
+				F3043FF8241A8C850018A34D /* TNSession.swift */,
+				F3043FF9241A8C850018A34D /* TNRouteProtocol.swift */,
+				F3043FFA241A8C850018A34D /* TNPath.swift */,
+				F3043FFB241A8C850018A34D /* TNErrors.swift */,
+				F3043FFC241A8C850018A34D /* Extensions */,
+				F3044001241A8C850018A34D /* TNOperation.swift */,
+				F3044002241A8C850018A34D /* TNLog.swift */,
+				F3044003241A8C850018A34D /* TNQueue.swift */,
+				F3044004241A8C850018A34D /* TNRequest.swift */,
+				F3044005241A8C850018A34D /* TNEnvironment.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F3043FFC241A8C850018A34D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F3043FFD241A8C850018A34D /* UIImageView+Extensions.swift */,
+				F3043FFE241A8C850018A34D /* Dictionary+Extensions.swift */,
+				F3043FFF241A8C850018A34D /* Request+Extensions.swift */,
+				F3044000241A8C850018A34D /* Data+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F3044006241A8C850018A34D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F3044007241A8C850018A34D /* .gitkeep */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +422,7 @@
 				594C21A9203D9EA100FFE7A6 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				F3044016241A8C850018A34D /* .gitkeep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,7 +482,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect\n  swiftlint\n  swiftlint autocorrect --path ../Terminetwork\n  swiftlint --path ../Terminetwork\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -429,14 +508,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F304400D241A8C850018A34D /* UIImageView+Extensions.swift in Sources */,
 				594D5937216502CD00B0C0EE /* Meal.swift in Sources */,
 				594C21AE203D9EC300FFE7A6 /* FoodCategoryCell.swift in Sources */,
+				F3044014241A8C850018A34D /* TNRequest.swift in Sources */,
+				F3044010241A8C850018A34D /* Data+Extensions.swift in Sources */,
 				594C21BA203D9F9B00FFE7A6 /* FoodCategory.swift in Sources */,
+				F304400A241A8C850018A34D /* TNRouteProtocol.swift in Sources */,
 				594C21BB203D9F9B00FFE7A6 /* FoodCategories.swift in Sources */,
 				594C21AF203D9EC300FFE7A6 /* CustomImageView.swift in Sources */,
+				F3044011241A8C850018A34D /* TNOperation.swift in Sources */,
+				F304400E241A8C850018A34D /* Dictionary+Extensions.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				F304400B241A8C850018A34D /* TNPath.swift in Sources */,
+				F3044008241A8C850018A34D /* TNRouter.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				F3044012241A8C850018A34D /* TNLog.swift in Sources */,
+				F3044015241A8C850018A34D /* TNEnvironment.swift in Sources */,
+				F3044013241A8C850018A34D /* TNQueue.swift in Sources */,
+				F304400C241A8C850018A34D /* TNErrors.swift in Sources */,
+				F304400F241A8C850018A34D /* Request+Extensions.swift in Sources */,
 				594C21B9203D9F9B00FFE7A6 /* Environment.swift in Sources */,
+				F3044009241A8C850018A34D /* TNSession.swift in Sources */,
 				594C21BD203D9F9B00FFE7A6 /* APIFoodRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

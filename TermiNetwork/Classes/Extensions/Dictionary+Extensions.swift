@@ -20,10 +20,11 @@
 import UIKit
 
 extension Dictionary {
+    internal func toJSONData() throws -> Data? {
+        return try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+    }
+
     internal func toJSONString() -> String? {
-        if let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted) {
-            return data.toJSONString()
-        }
-        return nil
+        return try? self.toJSONData()?.toJSONString()
     }
 }

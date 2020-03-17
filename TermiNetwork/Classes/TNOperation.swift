@@ -17,6 +17,8 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable identifier_name
+
 import Foundation
 
 open class TNOperation: Operation {
@@ -28,29 +30,29 @@ open class TNOperation: Operation {
             didChangeValue(forKey: "isExecuting")
         }
     }
-    
+
     override open var isExecuting: Bool {
         return _executing
     }
-    
+
     internal var _finished = false {
         willSet {
             willChangeValue(forKey: "isFinished")
         }
-        
+
         didSet {
             didChangeValue(forKey: "isFinished")
         }
     }
-    
+
     override open var isFinished: Bool {
         return _finished
     }
-    
+
     func executing(_ executing: Bool) {
         _executing = executing
     }
-    
+
     func finish(_ finished: Bool) {
         _finished = finished
     }
