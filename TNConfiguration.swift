@@ -39,7 +39,9 @@ public struct TNRequestConfiguration {
         self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.default.timeoutInterval
         self.requestBodyType = requestBodyType ?? TNRequestConfiguration.default.requestBodyType
         
-        if let certPath = Bundle.main.path(forResource: certificateName, ofType: "cer"),
+        if let certName = certificateName,
+            let certPath = Bundle.main.path(forResource: certName.fileName,
+                                            ofType: certName.fileExtension),
             let certData = NSData(contentsOfFile: certPath) {
             self.certificateData = certData
         }
@@ -48,10 +50,16 @@ public struct TNRequestConfiguration {
     public init(cachePolicy: URLRequest.CachePolicy?) {
         self.init(cachePolicy: cachePolicy, timeoutInterval: nil, requestBodyType: nil)
     }
+    
     public init(timeoutInterval: TimeInterval?) {
         self.init(cachePolicy: nil, timeoutInterval: timeoutInterval, requestBodyType: nil)
     }
+    
     public init(requestBodyType: TNRequestBodyType?) {
         self.init(cachePolicy: nil, timeoutInterval: nil, requestBodyType: requestBodyType)
+    }
+    
+    public init(certificateName name: String) {
+        self.init(cachePolicy: nil, timeoutInterval: nil, requestBodyType: nil, certificateName: name)
     }
 }

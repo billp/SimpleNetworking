@@ -29,8 +29,33 @@ class TNSession: NSObject, URLSessionDelegate {
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
                     completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-      //  if let certData = request.
 
-        completionHandler(.performDefaultHandling, nil)
+        var challengeDisposition: URLSession.AuthChallengeDisposition = .cancelAuthenticationChallenge
+        guard let serverTrust = challenge.protectionSpace.serverTrust else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+
+        if let certData = request.configuration.certificateData,
+            let remoteCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
+            let policies = NSMutableArray()
+            policies.add(SecPolicyCreateSSL(true, (challenge.protectionSpace.host as CFString)))
+            SecTrustSetPolicies(serverTrust, policies)
+
+            // Evaluate server certificate
+            var result: SecTrustResultType = SecTrustResultType(rawValue: 0)!
+            SecTrustEvaluate(serverTrust, &result)
+            let isServerTrusted = result ==  SecTrustResultType.proceed
+
+            let remoteCertificateData: NSData = SecCertificateCopyData(remoteCert)
+            if isServerTrusted && remoteCertificateData.isEqual(to: certData as Data) {
+                challengeDisposition = .useCredential
+            }
+        } else {
+            challengeDisposition = .performDefaultHandling
+        }
+
+        completionHandler(challengeDisposition, URLCredential(trust: serverTrust)
+)
     }
 }

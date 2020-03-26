@@ -22,6 +22,7 @@ enum APIRouter: TNRouterProtocol {
     case testEmptyBody
     case testConfiguration
     case testImage(imageName: String)
+    case testPinning(certName: String)
 
     // Set method, path, params, headers for each route
     func configure() -> TNRouteConfiguration {
@@ -81,6 +82,12 @@ enum APIRouter: TNRouterProtocol {
             return TNRouteConfiguration(
                 method: .get,
                 path: .path([imageName])
+            )
+        case .testPinning(let certName):
+            return TNRouteConfiguration(
+                method: .get,
+                path: .path(["test_empty_response"]),
+                requestConfiguration: TNRequestConfiguration(certificateName: certName)
             )
         }
     }

@@ -45,7 +45,12 @@
 		F3044014241A8C850018A34D /* TNRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044004241A8C850018A34D /* TNRequest.swift */; };
 		F3044015241A8C850018A34D /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3044005241A8C850018A34D /* TNEnvironment.swift */; };
 		F3044016241A8C850018A34D /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = F3044007241A8C850018A34D /* .gitkeep */; };
-		F351E122242CBABA000485B1 /* TNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351E121242CBABA000485B1 /* TNConfiguration.swift */; };
+		F351E124242CD8EA000485B1 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F351E123242CD8EA000485B1 /* herokuapp.com.cer */; };
+		F351E126242CDD6B000485B1 /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F351E125242CDD6B000485B1 /* forums.swift.org.cer */; };
+		F351E127242CDED7000485B1 /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F351E125242CDD6B000485B1 /* forums.swift.org.cer */; };
+		F351E128242CDED9000485B1 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F351E123242CD8EA000485B1 /* herokuapp.com.cer */; };
+		F351E12C242CE093000485B1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351E12B242CE093000485B1 /* String+Extensions.swift */; };
+		F351E12E242CE0F7000485B1 /* TNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351E121242CBABA000485B1 /* TNConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +113,9 @@
 		F3044005241A8C850018A34D /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F3044007241A8C850018A34D /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		F351E121242CBABA000485B1 /* TNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TNConfiguration.swift; path = ../../TNConfiguration.swift; sourceTree = "<group>"; };
+		F351E123242CD8EA000485B1 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
+		F351E125242CDD6B000485B1 /* forums.swift.org.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = forums.swift.org.cer; sourceTree = "<group>"; };
+		F351E12B242CE093000485B1 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		F676F90F742CED352BDC092A /* Pods-TermiNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TermiNetwork_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TermiNetwork_Example/Pods-TermiNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
 		FEFDE3F46E74354242844F3F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +243,8 @@
 		607FACD21AFB9204008FA782 /* Example for TermiNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				F351E125242CDD6B000485B1 /* forums.swift.org.cer */,
+				F351E123242CD8EA000485B1 /* herokuapp.com.cer */,
 				594C21B1203D9F9B00FFE7A6 /* API */,
 				594C21AA203D9EC300FFE7A6 /* Cells */,
 				594C21AC203D9EC300FFE7A6 /* Custom Classes */,
@@ -310,6 +320,7 @@
 		F3043FFC241A8C850018A34D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F351E12B242CE093000485B1 /* String+Extensions.swift */,
 				F3043FFD241A8C850018A34D /* UIImageView+Extensions.swift */,
 				F3043FFE241A8C850018A34D /* Dictionary+Extensions.swift */,
 				F3043FFF241A8C850018A34D /* Request+Extensions.swift */,
@@ -415,6 +426,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F351E127242CDED7000485B1 /* forums.swift.org.cer in Resources */,
+				F351E128242CDED9000485B1 /* herokuapp.com.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +436,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				594C21A9203D9EA100FFE7A6 /* Main.storyboard in Resources */,
+				F351E124242CD8EA000485B1 /* herokuapp.com.cer in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				F351E126242CDD6B000485B1 /* forums.swift.org.cer in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				F3044016241A8C850018A34D /* .gitkeep in Resources */,
 			);
@@ -512,9 +527,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F304400D241A8C850018A34D /* UIImageView+Extensions.swift in Sources */,
+				F351E12E242CE0F7000485B1 /* TNConfiguration.swift in Sources */,
 				594D5937216502CD00B0C0EE /* Meal.swift in Sources */,
 				594C21AE203D9EC300FFE7A6 /* FoodCategoryCell.swift in Sources */,
 				F3044014241A8C850018A34D /* TNRequest.swift in Sources */,
+				F351E12C242CE093000485B1 /* String+Extensions.swift in Sources */,
 				F3044010241A8C850018A34D /* Data+Extensions.swift in Sources */,
 				594C21BA203D9F9B00FFE7A6 /* FoodCategory.swift in Sources */,
 				F304400A241A8C850018A34D /* TNRouteProtocol.swift in Sources */,
@@ -529,7 +546,6 @@
 				F3044012241A8C850018A34D /* TNLog.swift in Sources */,
 				F3044015241A8C850018A34D /* TNEnvironment.swift in Sources */,
 				F3044013241A8C850018A34D /* TNQueue.swift in Sources */,
-				F351E122242CBABA000485B1 /* TNConfiguration.swift in Sources */,
 				F304400C241A8C850018A34D /* TNErrors.swift in Sources */,
 				F304400F241A8C850018A34D /* Request+Extensions.swift in Sources */,
 				594C21B9203D9F9B00FFE7A6 /* Environment.swift in Sources */,

@@ -41,6 +41,7 @@
 		EEAA1518C49804736C3F40117D064CBE /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */; };
 		F3043EF3241A84650018A34D /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043EEF241A835B0018A34D /* TNSession.swift */; };
 		F3116ADF242CBA1D00E11A4D /* TNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116ADE242CBA1D00E11A4D /* TNConfiguration.swift */; };
+		F351E12A242CDFF5000485B1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351E129242CDFF4000485B1 /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		F3043EEF241A835B0018A34D /* TNSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TNSession.swift; path = TermiNetwork/Classes/TNSession.swift; sourceTree = "<group>"; };
 		F3116ADE242CBA1D00E11A4D /* TNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNConfiguration.swift; sourceTree = "<group>"; };
 		F3248F7C44DBEB262DFFCFDE05DDA76E /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		F351E129242CDFF4000485B1 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
 		F87E01423D61B8CDD7003CD68E8DD738 /* Pods-TermiNetwork_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TermiNetwork_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		FBD1272355855BB5CB2D7EEFF6EFD62E /* TNQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNQueue.swift; path = TermiNetwork/Classes/TNQueue.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		EA3E4E7DDA2927E01639A07673180E06 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F351E129242CDFF4000485B1 /* String+Extensions.swift */,
 				381A391CBCEA380FBDA0F4B9333E58A7 /* Data+Extensions.swift */,
 				0671AED63A66F9E9B12EF7C2BCE3D0E7 /* Dictionary+Extensions.swift */,
 				D85F71B570C4D692BBBF480DC1EA65C5 /* Request+Extensions.swift */,
@@ -497,6 +500,7 @@
 				3694A9891F65CBCDA9B1886A0CB6A0FD /* TNPath.swift in Sources */,
 				F3116ADF242CBA1D00E11A4D /* TNConfiguration.swift in Sources */,
 				730C89B858893301C51DE616BF5F7E6E /* TNQueue.swift in Sources */,
+				F351E12A242CDFF5000485B1 /* String+Extensions.swift in Sources */,
 				3E6F01BD2DE92F309FD6D9087FABC98F /* TNRequest.swift in Sources */,
 				3AECF6054D58C71B37D8E6302578B14B /* TNRouteProtocol.swift in Sources */,
 				1846F14602D448EFCFAE424CDC6A5F1E /* TNRouter.swift in Sources */,

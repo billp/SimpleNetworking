@@ -298,4 +298,28 @@ class TestTNErrors: XCTestCase {
 
         XCTAssert(!failed)
     }
+
+    func testValidCertificate() {
+        let expectation = XCTestExpectation(description: "Test Not Success")
+        var failed = true
+
+        let request = TNRequest(route: APIRouter.testPinning(certName: "forums.swift.org.cer"))
+        request.start(responseType: String.self, onSuccess: { _ in
+            expectation.fulfill()
+        }, onFailure: { error, _ in
+            switch error {
+            case .cancelled:
+                failed = false
+            default:
+                failed = true
+            }
+            expectation.fulfill()
+        })
+
+        request.cancel()
+
+        wait(for: [expectation], timeout: 10)
+
+        XCTAssert(!failed)
+    }
 }
