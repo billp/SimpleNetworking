@@ -20,11 +20,17 @@
 import UIKit
 
 class TNSession: NSObject, URLSessionDelegate {
-    static let shared = TNSession()
+    weak var request: TNRequest!
+
+    init(withTNRequest request: TNRequest) {
+        self.request = request
+    }
 
     func urlSession(_ session: URLSession,
                     didReceive challenge: URLAuthenticationChallenge,
                     completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+      //  if let certData = request.
+
         completionHandler(.performDefaultHandling, nil)
     }
 }

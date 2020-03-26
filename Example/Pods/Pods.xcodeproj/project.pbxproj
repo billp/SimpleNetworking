@@ -40,6 +40,7 @@
 		EA50D9B8D9C5E625FD4B1A55C5F4A992 /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85F71B570C4D692BBBF480DC1EA65C5 /* Request+Extensions.swift */; };
 		EEAA1518C49804736C3F40117D064CBE /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */; };
 		F3043EF3241A84650018A34D /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043EEF241A835B0018A34D /* TNSession.swift */; };
+		F3116ADF242CBA1D00E11A4D /* TNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116ADE242CBA1D00E11A4D /* TNConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		EB0F1732A2D4DBA41714F9E205837D34 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F0D1219DAB6941A0AA2777D180B36AAD /* TNErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TNErrors.swift; path = TermiNetwork/Classes/TNErrors.swift; sourceTree = "<group>"; };
 		F3043EEF241A835B0018A34D /* TNSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TNSession.swift; path = TermiNetwork/Classes/TNSession.swift; sourceTree = "<group>"; };
+		F3116ADE242CBA1D00E11A4D /* TNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNConfiguration.swift; sourceTree = "<group>"; };
 		F3248F7C44DBEB262DFFCFDE05DDA76E /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		F3DCF879A3F71CD43B7705E20AA42349 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
 		F87E01423D61B8CDD7003CD68E8DD738 /* Pods-TermiNetwork_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TermiNetwork_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		8C3A14862E49C412CFF45F3CD44238A4 /* TermiNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				F3116ADE242CBA1D00E11A4D /* TNConfiguration.swift */,
 				35CCF23510696ED0B838B47DF17E9155 /* TNEnvironment.swift */,
 				F3043EEF241A835B0018A34D /* TNSession.swift */,
 				CF8B3C20ECFE1823FAC743BDDFE0542A /* TNRequest.swift */,
@@ -492,6 +495,7 @@
 				9468BC53C802DA9F335414C20D5C466D /* TNLog.swift in Sources */,
 				0CABA62E5C1CBD9A5B6E0A1D22D5FB57 /* TNOperation.swift in Sources */,
 				3694A9891F65CBCDA9B1886A0CB6A0FD /* TNPath.swift in Sources */,
+				F3116ADF242CBA1D00E11A4D /* TNConfiguration.swift in Sources */,
 				730C89B858893301C51DE616BF5F7E6E /* TNQueue.swift in Sources */,
 				3E6F01BD2DE92F309FD6D9087FABC98F /* TNRequest.swift in Sources */,
 				3AECF6054D58C71B37D8E6302578B14B /* TNRouteProtocol.swift in Sources */,

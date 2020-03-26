@@ -30,7 +30,7 @@ public struct TNRouteConfiguration {
     public init(method: TNMethod,
                 path: TNPath, params: [String: Any?]? = nil,
                 headers: [String: String]? = nil,
-                requestConfiguration: TNRequestConfiguration? = TNRequestConfiguration.default) {
+                requestConfiguration: TNRequestConfiguration? = nil) {
         self.method = method
         self.path = path
         self.params = params

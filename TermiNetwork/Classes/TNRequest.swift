@@ -57,36 +57,6 @@ public enum TNRequestBodyType: String {
     case JSON = "application/json"
 }
 
-public struct TNRequestConfiguration {
-    public var cachePolicy: URLRequest.CachePolicy?
-    public var timeoutInterval: TimeInterval?
-    public var requestBodyType: TNRequestBodyType?
-
-    public static let `default` = TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
-                                                             timeoutInterval: 60,
-                                                             requestBodyType: .xWWWFormURLEncoded)
-
-    public init() { }
-
-    public init(cachePolicy: URLRequest.CachePolicy?,
-                timeoutInterval: TimeInterval?,
-                requestBodyType: TNRequestBodyType?) {
-        self.cachePolicy = cachePolicy ?? TNRequestConfiguration.default.cachePolicy
-        self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.default.timeoutInterval
-        self.requestBodyType = requestBodyType ?? TNRequestConfiguration.default.requestBodyType
-    }
-
-    public init(cachePolicy: URLRequest.CachePolicy?) {
-        self.init(cachePolicy: cachePolicy, timeoutInterval: nil, requestBodyType: nil)
-    }
-    public init(timeoutInterval: TimeInterval?) {
-        self.init(cachePolicy: nil, timeoutInterval: timeoutInterval, requestBodyType: nil)
-    }
-    public init(requestBodyType: TNRequestBodyType?) {
-        self.init(cachePolicy: nil, timeoutInterval: nil, requestBodyType: requestBodyType)
-    }
-}
-
 open class TNRequest: TNOperation {
     // MARK: - Static properties
     public static var fixedHeaders = [String: String]()
@@ -104,12 +74,10 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .normal
 
     // MARK: - Private properties
-    private var headers: [String: String]?
-    private var timeoutInterval: TimeInterval?
+    public var configuration: TNRequestConfiguration = TNRequestConfiguration()
 
-    // MARK: - Public properties
-    public var cachePolicy: URLRequest.CachePolicy
-    public var requestBodyType: TNRequestBodyType = .xWWWFormURLEncoded
+    // MARK: - Private properties
+    private var headers: [String: String]?
 
     // MARK: - Initializers
     /**
@@ -133,9 +101,7 @@ open class TNRequest: TNOperation {
         self.params = params
         self.pathType = .full
         self.path = url
-        self.cachePolicy = configuration?.cachePolicy ?? TNRequestConfiguration.default.cachePolicy!
-        self.timeoutInterval = configuration?.timeoutInterval ?? TNRequestConfiguration.default.timeoutInterval!
-        self.requestBodyType = configuration?.requestBodyType ?? TNRequestConfiguration.default.requestBodyType!
+        self.configuration = configuration ?? TNRequestConfiguration.default
     }
 
     /**
@@ -191,12 +157,9 @@ open class TNRequest: TNOperation {
         self.params = route.params
         self.path = route.path.convertedPath()
 
-        self.cachePolicy = TNEnvironment.current?.requestConfiguration?.cachePolicy
-            ?? route.requestConfiguration!.cachePolicy!
-        self.timeoutInterval = TNEnvironment.current?.requestConfiguration?.timeoutInterval
-            ?? route.requestConfiguration!.timeoutInterval!
-        self.requestBodyType = TNEnvironment.current?.requestConfiguration?.requestBodyType
-            ?? route.requestConfiguration!.requestBodyType!
+        self.configuration = route.requestConfiguration ??
+            TNEnvironment.current?.requestConfiguration ??
+            TNRequestConfiguration.default
     }
 
     // MARK: - Create request
@@ -233,7 +196,7 @@ open class TNRequest: TNOperation {
             throw TNError.invalidURL
         }
 
-        var request = URLRequest(url: url, cachePolicy: cachePolicy)
+        var request = URLRequest(url: url, cachePolicy: configuration.cachePolicy ?? URLRequest.CachePolicy.useProtocolCachePolicy)
 
         // Add headers
         if headers == nil && TNRequest.fixedHeaders.keys.count > 0 {
@@ -241,7 +204,7 @@ open class TNRequest: TNOperation {
         }
         headers?.merge(TNRequest.fixedHeaders, uniquingKeysWith: { (_, new) in new })
 
-        if let timeoutInterval = self.timeoutInterval {
+        if let timeoutInterval = self.configuration.timeoutInterval {
             request.timeoutInterval = timeoutInterval
         }
 
@@ -277,6 +240,8 @@ open class TNRequest: TNOperation {
                                    queryString: String?) throws {
         // Set body params if method is not get
         if method != TNMethod.get {
+            let requestBodyType = configuration.requestBodyType ?? .xWWWFormURLEncoded
+
             request.addValue(requestBodyType.rawValue, forHTTPHeaderField: "Content-Type")
 
             if requestBodyType == .xWWWFormURLEncoded {
@@ -295,7 +260,7 @@ open class TNRequest: TNOperation {
     internal func sessionDataTask(request: URLRequest, completionHandler: ((Data) -> Void)?,
                                   onFailure: TNFailureCallback?) -> URLSessionDataTask {
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                    delegate: TNSession.shared,
+                                    delegate: TNSession(withTNRequest: self),
                                     delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: request) { data, urlResponse, error in

@@ -218,7 +218,7 @@ class TestTNRequest: XCTestCase {
                                                                 value3: 5.13453124189,
                                                                 value4: "test",
                                                                 value5: nil))
-        request.requestBodyType = .JSON
+        request.configuration.requestBodyType = .JSON
         request.start(responseType: String.self, onSuccess: { _ in
             failed = false
             expectation.fulfill()
@@ -232,22 +232,22 @@ class TestTNRequest: XCTestCase {
         var request = TNRequest(route: APIRouter.testInvalidParams(value1: "a", value2: "b"))
         var urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 60)
-        XCTAssert(request.cachePolicy == .useProtocolCachePolicy)
-        XCTAssert(request.requestBodyType == .xWWWFormURLEncoded)
+        XCTAssert(request.configuration.cachePolicy == .useProtocolCachePolicy)
+        XCTAssert(request.configuration.requestBodyType == .xWWWFormURLEncoded)
 
         TNEnvironment.set(Environment.termiNetworkLocal)
-        request = TNRequest(route: APIRouter.testConfiguration)
+        request = TNRequest(route: APIRouter.testHeaders)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 32)
-        XCTAssert(request.cachePolicy == .returnCacheDataElseLoad)
-        XCTAssert(request.requestBodyType == .JSON)
+        XCTAssert(request.configuration.cachePolicy == .returnCacheDataElseLoad)
+        XCTAssert(request.configuration.requestBodyType == .JSON)
 
         TNEnvironment.set(Environment.termiNetworkRemote)
         request = TNRequest(route: APIRouter.testConfiguration)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 12)
-        XCTAssert(request.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData)
-        XCTAssert(request.requestBodyType == .JSON)
+        XCTAssert(request.configuration.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData)
+        XCTAssert(request.configuration.requestBodyType == .JSON)
     }
 
     func sampleRequest(queue: TNQueue? = TNQueue.shared, onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
@@ -256,7 +256,7 @@ class TestTNRequest: XCTestCase {
                                                              value3: 5.13453124189,
                                                              value4: "test",
                                                              value5: nil))
-        call.requestBodyType = .JSON
+        call.configuration.requestBodyType = .JSON
 
         call.start(queue: queue, responseType: TestJSONParams.self, onSuccess: onSuccess, onFailure: nil)
     }

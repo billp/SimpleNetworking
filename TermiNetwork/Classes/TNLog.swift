@@ -37,7 +37,7 @@ internal class TNLog {
         if let params = request.params as [String: AnyObject]?,
             params.keys.count > 0,
             request.method != .get {
-            if request.requestBodyType == .JSON {
+            if request.configuration.requestBodyType == .JSON {
                 print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
             } else {
                 print("🗃️ Request Body: " + params.description)
