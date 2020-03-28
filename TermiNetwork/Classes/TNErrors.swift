@@ -26,7 +26,6 @@ public enum TNError: Error {
     case invalidURL
     case environmentNotSet
     case invalidParams
-    case responseDataIsEmpty
     case responseInvalidImageData
     case cannotDeserialize(Error)
     case cannotConvertToString
@@ -44,8 +43,6 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Environment not set, use TNEnvironment.set(YOUR_ENVIRONMENT)", comment: "TNError")
         case .invalidParams:
             return NSLocalizedString("The parameters are not valid", comment: "TNError")
-        case .responseDataIsEmpty:
-            return NSLocalizedString("The response data is empty. Set TNRequest.allowEmptyResponseBody to true get rid of this error", comment: "TNError")
         case .responseInvalidImageData:
             return NSLocalizedString("The response data is not a valid image", comment: "TNError")
         case .cannotDeserialize(let error):

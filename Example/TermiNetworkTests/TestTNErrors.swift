@@ -19,7 +19,6 @@ class TestTNErrors: XCTestCase {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
         TNEnvironment.set(Environment.termiNetworkRemote)
-        TNRequest.allowEmptyResponseBody = false
     }
 
     override func tearDown() {
@@ -93,33 +92,7 @@ class TestTNErrors: XCTestCase {
         }
     }
 
-    func testResponseDataIsEmpty() {
-        TNRequest.allowEmptyResponseBody = false
-
-        let expectation = XCTestExpectation(description: "Test Empty Response Body")
-        var failed = true
-
-        router.start(.testEmptyBody, onSuccess: { _ in
-            expectation.fulfill()
-            failed = true
-        }, onFailure: { error, _ in
-            expectation.fulfill()
-            switch error {
-            case .responseDataIsEmpty:
-                failed = false
-            default:
-                failed = true
-            }
-        })
-
-        wait(for: [expectation], timeout: 10)
-
-        XCTAssert(!failed)
-    }
-
     func testResponseDataIsNotEmpty() {
-        TNRequest.allowEmptyResponseBody = true
-
         let expectation = XCTestExpectation(description: "Test Not Empty Response Body")
         var failed = true
 
@@ -303,22 +276,34 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Not Success")
         var failed = true
 
-        let request = TNRequest(route: APIRouter.testPinning(certName: "forums.swift.org.cer"))
+        let request = TNRequest(route: APIRouter.testPinning(certName: "herokuapp.com.cer"))
         request.start(responseType: String.self, onSuccess: { _ in
+            failed = false
             expectation.fulfill()
-        }, onFailure: { error, _ in
-            switch error {
-            case .cancelled:
-                failed = false
-            default:
-                failed = true
-            }
+        }, onFailure: { _, _ in
+            failed = true
             expectation.fulfill()
         })
 
-        request.cancel()
+        wait(for: [expectation], timeout: 100)
 
-        wait(for: [expectation], timeout: 10)
+        XCTAssert(!failed)
+    }
+
+    func testInvalidCertificate() {
+        let expectation = XCTestExpectation(description: "Test Not Success")
+        var failed = true
+
+        let request = TNRequest(route: APIRouter.testPinning(certName: "forums.swift.org.cer"))
+        request.start(responseType: String.self, onSuccess: { _ in
+            failed = true
+            expectation.fulfill()
+        }, onFailure: { _, _ in
+            failed = false
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 100)
 
         XCTAssert(!failed)
     }

@@ -60,7 +60,6 @@ public enum TNRequestBodyType: String {
 open class TNRequest: TNOperation {
     // MARK: - Static properties
     public static var fixedHeaders = [String: String]()
-    public static var allowEmptyResponseBody = false
 
     // MARK: - Internal properties
     internal var method: TNMethod!
@@ -280,8 +279,6 @@ open class TNRequest: TNOperation {
 
                 if statusCode != nil && statusCode! / 100 != 2 {
                     self.customError = TNError.notSuccess(statusCode!)
-                } else if (data == nil || data!.isEmpty) && !TNRequest.allowEmptyResponseBody {
-                    self.customError = TNError.responseDataIsEmpty
                 }
             }
 

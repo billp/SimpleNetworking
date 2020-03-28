@@ -45,7 +45,8 @@ class TNSession: NSObject, URLSessionDelegate {
             // Evaluate server certificate
             var result: SecTrustResultType = SecTrustResultType(rawValue: 0)!
             SecTrustEvaluate(serverTrust, &result)
-            let isServerTrusted = result ==  SecTrustResultType.proceed
+            let isServerTrusted =  [SecTrustResultType.proceed,
+                                    SecTrustResultType.unspecified].contains(result)
 
             let remoteCertificateData: NSData = SecCertificateCopyData(remoteCert)
             if isServerTrusted && remoteCertificateData.isEqual(to: certData as Data) {
@@ -55,7 +56,6 @@ class TNSession: NSObject, URLSessionDelegate {
             challengeDisposition = .performDefaultHandling
         }
 
-        completionHandler(challengeDisposition, URLCredential(trust: serverTrust)
-)
+        completionHandler(challengeDisposition, URLCredential(trust: serverTrust))
     }
 }
