@@ -1,6 +1,0 @@
-framework module Pods_TermiNetwork_Example {
-  umbrella header "Pods-TermiNetwork_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
