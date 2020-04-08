@@ -77,6 +77,7 @@ open class TNRequest: TNOperation {
 
     // MARK: - Private properties
     private var headers: [String: String]?
+    private var environment: TNEnvironment?
 
     // MARK: - Initializers
     /**
@@ -149,15 +150,17 @@ open class TNRequest: TNOperation {
      - parameters:
          - route: a TNRouteProtocol enum value
      */
-    public init(route: TNRouterProtocol) {
+    public init(route: TNRouterProtocol,
+                environment: TNEnvironment? = TNEnvironment.current) {
         let route = route.configure()
         self.method = route.method
         self.headers = route.headers
         self.params = route.params
         self.path = route.path.convertedPath()
+        self.environment = environment
 
         self.configuration = route.requestConfiguration ??
-            TNEnvironment.current?.requestConfiguration ??
+            environment?.requestConfiguration ??
             TNRequestConfiguration.default
     }
 
@@ -170,7 +173,7 @@ open class TNRequest: TNOperation {
         let urlString = NSMutableString()
 
         if pathType == .normal {
-            guard let currentEnvironment = TNEnvironment.current else { throw TNError.environmentNotSet }
+            guard let currentEnvironment = environment else { throw TNError.environmentNotSet }
             urlString.setString(currentEnvironment.description + "/" + path)
         } else {
             urlString.setString(path)

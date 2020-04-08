@@ -17,6 +17,7 @@ enum Environment: TNEnvironmentProtocol {
     case termiNetworkLocal
     case termiNetworkRemote
     case invalidHost
+    case google
 
     func configure() -> TNEnvironment {
         let requestConfiguration = TNRequestConfiguration(cachePolicy: .returnCacheDataElseLoad,
@@ -56,6 +57,8 @@ enum Environment: TNEnvironmentProtocol {
                                  host: "localhostt",
                                  suffix: nil,
                                  port: 1234)
+        case .google:
+            return TNEnvironment(scheme: .https, host: "google.com")
         }
     }
 }

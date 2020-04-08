@@ -16,7 +16,7 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// swiftlint:disable cyclomatic_complexity
 import Foundation
 
 internal class TNLog {
@@ -31,6 +31,11 @@ internal class TNLog {
         print("🌎 URL: " + url)
         print("🎛️ Method: " + request.method.rawValue.uppercased())
         print("🔮 CURL Command: " + urlRequest.curlString)
+
+        if request.configuration.certificateData != nil {
+            print("🔒 Pinning Enabled")
+        }
+
         if let headers = headers, headers.keys.count > 0 {
             print("📃 Request Headers: " + headers.description)
         }

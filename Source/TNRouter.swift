@@ -21,8 +21,15 @@ import Foundation
 import UIKit
 
 open class TNRouter<Route: TNRouterProtocol> {
-    /// Add a default constructor just to be able to create instances.
-    public init() { }
+    // MARK: Properties
+    fileprivate var environment: TNEnvironment?
+
+    /**
+     Init with environment that overrides the one set by TNEnvironment.set(_).
+    */
+    public init(environment: TNEnvironmentProtocol? = nil) {
+        self.environment = environment?.configure() ?? TNEnvironment.current
+    }
 
     /**
      Starts a requess. The response object in success callback is of type Decodable.
@@ -40,7 +47,8 @@ open class TNRouter<Route: TNRouterProtocol> {
                          responseType: T.Type,
                          onSuccess: @escaping TNSuccessCallback<T>,
                          onFailure: @escaping TNFailureCallback) where T: Decodable {
-        let call = TNRequest(route: route)
+        let call = TNRequest(route: route,
+                             environment: environment)
 
         call.start(queue: queue,
                    responseType: responseType,
@@ -64,7 +72,8 @@ open class TNRouter<Route: TNRouterProtocol> {
                                   responseType: T.Type,
                                   onSuccess: @escaping TNSuccessCallback<T>,
                                   onFailure: @escaping TNFailureCallback) {
-        let call = TNRequest(route: route)
+        let call = TNRequest(route: route,
+                             environment: environment)
         call.start(queue: queue,
                    responseType: responseType,
                    onSuccess: onSuccess,
@@ -86,7 +95,8 @@ open class TNRouter<Route: TNRouterProtocol> {
                       _ route: Route,
                       onSuccess: @escaping TNSuccessCallback<Data>,
                       onFailure: @escaping TNFailureCallback) {
-        let call = TNRequest(route: route)
+        let call = TNRequest(route: route,
+                             environment: environment)
         call.start(queue: queue,
                    responseType: Data.self,
                    onSuccess: onSuccess,

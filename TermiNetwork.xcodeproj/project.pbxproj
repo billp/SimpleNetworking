@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
 		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
 		F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7B243D103700F7CC13 /* TestTNQueue.swift */; };
@@ -54,6 +55,7 @@
 		F3196830243D01E1008725CE /* TermiNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermiNetwork.h; sourceTree = "<group>"; };
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F3850C7B243D103700F7CC13 /* TestTNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNQueue.swift; sourceTree = "<group>"; };
@@ -140,20 +142,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F32C3D14243E49D0004497BC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F3850C85243D103700F7CC13 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F3850C78243D103700F7CC13 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				F3850C79243D103700F7CC13 /* TestExtensions.swift */,
+				F32C3D14243E49D0004497BC /* Supporting Files */,
+				F3850CB7243DAD2300F7CC13 /* Certificates */,
+				F3850C7E243D103700F7CC13 /* Models */,
 				F3850C7A243D103700F7CC13 /* Environment.swift */,
+				F3850C79243D103700F7CC13 /* TestExtensions.swift */,
 				F3850C7B243D103700F7CC13 /* TestTNQueue.swift */,
 				F3850C7C243D103700F7CC13 /* TestTNEnvironment.swift */,
-				F3850C7D243D103700F7CC13 /* APIRouter.swift */,
-				F3850C7E243D103700F7CC13 /* Models */,
-				F3850C82243D103700F7CC13 /* herokuapp.com.cer */,
-				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
 				F3850C84243D103700F7CC13 /* TestTNRequest.swift */,
-				F3850C85243D103700F7CC13 /* Info.plist */,
 				F3850C86243D103700F7CC13 /* TestTNErrors.swift */,
+				F32C3D12243E499E004497BC /* TestPinning.swift */,
+				F3850C7D243D103700F7CC13 /* APIRouter.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -197,6 +207,15 @@
 				F3850CA4243D104900F7CC13 /* Data+Extensions.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F3850CB7243DAD2300F7CC13 /* Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				F3850C82243D103700F7CC13 /* herokuapp.com.cer */,
+				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
+			);
+			name = Certificates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +400,7 @@
 				F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */,
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,
 				F3850C88243D103700F7CC13 /* Environment.swift in Sources */,
+				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
 				F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */,
 				F3850C91243D103700F7CC13 /* TestTNRequest.swift in Sources */,
 				F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */,

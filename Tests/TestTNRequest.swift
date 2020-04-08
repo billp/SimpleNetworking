@@ -9,9 +9,15 @@
 import XCTest
 import TermiNetwork
 
+// swiftlint:disable type_body_length
+
 class TestTNRequest: XCTestCase {
     lazy var router: TNRouter<APIRouter> = {
        return TNRouter<APIRouter>()
+    }()
+
+    lazy var router2: TNRouter<APIRouter> = {
+        return TNRouter<APIRouter>(environment: Environment.google)
     }()
 
     override func setUp() {
@@ -46,7 +52,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
 
-        router.start(APIRouter.testGetParams(value1: true,
+        router.start(.testGetParams(value1: true,
                                              value2: 3,
                                              value3: 5.13453124189,
                                              value4: "test",
@@ -71,7 +77,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
 
-        router.start(APIRouter.testGetParams(value1: true,
+        router.start(.testGetParams(value1: true,
                                              value2: 3,
                                              value3: 5.13453124189,
                                              value4: "τεστ",
@@ -98,7 +104,7 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test post params")
         var failed = true
 
-        router.start(APIRouter.testPostParamsxWWWFormURLEncoded(value1: true,
+        router.start(.testPostParamsxWWWFormURLEncoded(value1: true,
                                                                 value2: 3,
                                                                 value3: 5.13453124189,
                                                                 value4: "test",
@@ -250,6 +256,52 @@ class TestTNRequest: XCTestCase {
         XCTAssert(request.configuration.requestBodyType == .JSON)
     }
 
+    func testOverrideEnvironment() {
+        TNEnvironment.set(Environment.termiNetworkRemote)
+
+        let expectation1 = XCTestExpectation(description: "Test testOverrideEnvironment")
+        let expectation2 = XCTestExpectation(description: "Test testOverrideEnvironment")
+
+        var failed = true
+
+        router.start(.testGetParams(value1: false,
+                                     value2: 2,
+                                     value3: 3,
+                                     value4: "1",
+                                     value5: nil),
+                      onSuccess: { _ in
+            failed = false
+            expectation1.fulfill()
+        }, onFailure: { (_, _) in
+            failed = true
+            expectation1.fulfill()
+        })
+
+        wait(for: [expectation1], timeout: 10)
+
+        XCTAssert(!failed)
+
+        failed = true
+
+        router2.start(.testGetParams(value1: false,
+                                     value2: 2,
+                                     value3: 3,
+                                     value4: "1",
+                                     value5: nil),
+                      onSuccess: { _ in
+            expectation2.fulfill()
+        }, onFailure: { (error, _) in
+            if case .notSuccess(404) = error {
+                failed = false
+            }
+            expectation2.fulfill()
+
+            XCTAssert(!failed)
+        })
+
+        wait(for: [expectation2], timeout: 10)
+    }
+
     func sampleRequest(queue: TNQueue? = TNQueue.shared, onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
         let call = TNRequest(route: APIRouter.testPostParams(value1: true,
                                                              value2: 3,
@@ -258,6 +310,8 @@ class TestTNRequest: XCTestCase {
                                                              value5: nil))
         call.configuration.requestBodyType = .JSON
 
-        call.start(queue: queue, responseType: TestJSONParams.self, onSuccess: onSuccess, onFailure: nil)
+        call.start(queue: queue,
+                   responseType: TestJSONParams.self,
+                   onSuccess: onSuccess, onFailure: nil)
     }
 }

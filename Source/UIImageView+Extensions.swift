@@ -47,11 +47,11 @@ extension UIImageView {
          - onFinish: a block of code executed after the completion of the download image request.
                 It may fail so error will be returned in that case (optional)
      */
-    public func setRemoteImage(url: String,
-                               defaultImage: UIImage? = nil,
-                               beforeStart: (() -> Void)? = nil,
-                               preprocessImage: ((UIImage) -> (UIImage))? = nil,
-                               onFinish: ((UIImage?, Error?) -> Void)? = nil) throws {
+    public func tn_setRemoteImage(url: String,
+                                  defaultImage: UIImage? = nil,
+                                  beforeStart: (() -> Void)? = nil,
+                                  preprocessImage: ((UIImage) -> (UIImage))? = nil,
+                                  onFinish: ((UIImage?, Error?) -> Void)? = nil) throws {
 
         self.image = defaultImage
 
