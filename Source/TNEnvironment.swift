@@ -34,7 +34,7 @@ open class TNEnvironment {
     var host: String
     var port: Int?
     var suffix: TNPath?
-    var requestConfiguration: TNRequestConfiguration?
+    var configuration: TNRequestConfiguration?
 
     // MARK: - Static members
     public static var current: TNEnvironment!
@@ -50,12 +50,12 @@ open class TNEnvironment {
                 host: String,
                 suffix: TNPath?,
                 port: Int?,
-                requestConfiguration: TNRequestConfiguration? = nil) {
+                configuration: TNRequestConfiguration? = nil) {
         self.scheme = scheme
         self.host = host
         self.suffix = suffix
         self.port = port
-        self.requestConfiguration = requestConfiguration
+        self.configuration = configuration
     }
 
     public convenience init(scheme: TNURLScheme,
@@ -64,17 +64,17 @@ open class TNEnvironment {
                   host: host,
                   suffix: nil,
                   port: nil,
-                  requestConfiguration: nil)
+                  configuration: nil)
     }
 
     public convenience init(scheme: TNURLScheme,
                             host: String,
-                            requestConfiguration: TNRequestConfiguration) {
+                            configuration: TNRequestConfiguration) {
         self.init(scheme: scheme,
                   host: host,
                   suffix: nil,
                   port: nil,
-                  requestConfiguration: requestConfiguration)
+                  configuration: configuration)
     }
 
     public convenience init(scheme: TNURLScheme,
@@ -84,18 +84,18 @@ open class TNEnvironment {
                   host: host,
                   suffix: nil,
                   port: port,
-                  requestConfiguration: nil)
+                  configuration: nil)
     }
 
     public convenience init(scheme: TNURLScheme,
                             host: String,
                             port: Int,
-                            requestConfiguration: TNRequestConfiguration = TNRequestConfiguration()) {
+                            configuration: TNRequestConfiguration = TNRequestConfiguration()) {
         self.init(scheme: scheme,
                   host: host,
                   suffix: nil,
                   port: port,
-                  requestConfiguration: requestConfiguration)
+                  configuration: configuration)
     }
 
     public convenience init(scheme: TNURLScheme, host: String, suffix: TNPath) {
@@ -103,16 +103,16 @@ open class TNEnvironment {
                   host: host,
                   suffix: suffix,
                   port: nil,
-                  requestConfiguration: nil)
+                  configuration: nil)
     }
     public convenience init(scheme: TNURLScheme,
                             host: String, suffix: TNPath,
-                            requestConfiguration: TNRequestConfiguration = TNRequestConfiguration()) {
+                            configuration: TNRequestConfiguration = TNRequestConfiguration()) {
         self.init(scheme: scheme,
                   host: host,
                   suffix: suffix,
                   port: nil,
-                  requestConfiguration: requestConfiguration)
+                  configuration: configuration)
     }
 }
 

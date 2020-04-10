@@ -48,6 +48,27 @@ class TestTNRequest: XCTestCase {
         XCTAssert(!failed)
     }
 
+    func testOverrideHeaders() {
+        let expectation = XCTestExpectation(description: "Test headers")
+        var failed = true
+
+        TNEnvironment.verbose = true
+
+        router.start(.testOverrideHeaders,
+                     responseType: TestHeaders.self,
+                     onSuccess: { object in
+            failed = !(object.authorization == "0" &&
+                        object.customHeader == "0" &&
+                         object.userAgent == "ios")
+            expectation.fulfill()
+        }, onFailure: { (_, _) in
+            expectation.fulfill()
+        })
+        wait(for: [expectation], timeout: 10)
+
+        XCTAssert(!failed)
+    }
+
     func testGetParams() {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true

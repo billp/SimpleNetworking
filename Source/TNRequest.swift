@@ -58,9 +58,6 @@ public enum TNRequestBodyType: String {
 }
 
 open class TNRequest: TNOperation {
-    // MARK: - Static properties
-    public static var fixedHeaders = [String: String]()
-
     // MARK: - Internal properties
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
@@ -73,7 +70,7 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .normal
 
     // MARK: - Private properties
-    public var configuration: TNRequestConfiguration = TNRequestConfiguration()
+    public var configuration: TNRequestConfiguration = TNRequestConfiguration.default
 
     // MARK: - Private properties
     private var headers: [String: String]?
@@ -112,7 +109,8 @@ open class TNRequest: TNOperation {
          - url: The URL of the request
          - configuration: A TNRequestConfiguration object
      */
-    convenience init(method: TNMethod, url: String, configuration: TNRequestConfiguration = TNRequestConfiguration()) {
+    convenience init(method: TNMethod, url: String,
+                     configuration: TNRequestConfiguration = TNRequestConfiguration.default) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
@@ -140,7 +138,7 @@ open class TNRequest: TNOperation {
     convenience init(method: TNMethod,
                      url: String,
                      headers: [String: String]? = nil,
-                     configuration: TNRequestConfiguration = TNRequestConfiguration()) {
+                     configuration: TNRequestConfiguration = TNRequestConfiguration.default) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
@@ -159,9 +157,14 @@ open class TNRequest: TNOperation {
         self.path = route.path.convertedPath()
         self.environment = environment
 
-        self.configuration = route.requestConfiguration ??
-            environment?.requestConfiguration ??
-            TNRequestConfiguration.default
+        if let environmentConfiguration = environment?.configuration {
+            self.configuration = TNRequestConfiguration.override(configuration: self.configuration,
+                                                                 with: environmentConfiguration)
+        }
+        if let routeConfiguration = route.configuration {
+            self.configuration = TNRequestConfiguration.override(configuration: self.configuration,
+                                                                 with: routeConfiguration)
+        }
     }
 
     // MARK: - Create request
@@ -202,11 +205,7 @@ open class TNRequest: TNOperation {
         var request = URLRequest(url: url,
                                  cachePolicy: configuration.cachePolicy ?? defaultCachePolicy)
 
-        // Add headers
-        if headers == nil && TNRequest.fixedHeaders.keys.count > 0 {
-            headers = [:]
-        }
-        headers?.merge(TNRequest.fixedHeaders, uniquingKeysWith: { (_, new) in new })
+        setHeaders()
 
         if let timeoutInterval = self.configuration.timeoutInterval {
             request.timeoutInterval = timeoutInterval
@@ -282,8 +281,8 @@ open class TNRequest: TNOperation {
             } else if let response = urlResponse as? HTTPURLResponse {
                 statusCode = response.statusCode as Int?
 
-                if statusCode != nil && statusCode! / 100 != 2 {
-                    self.customError = TNError.notSuccess(statusCode!)
+                if let statusCode = statusCode, statusCode / 100 != 2 {
+                    self.customError = TNError.notSuccess(statusCode)
                 }
             }
 
@@ -301,7 +300,13 @@ open class TNRequest: TNOperation {
         return dataTask
     }
 
-    func callBeforeRequestHoooks() {
+    fileprivate func setHeaders() {
+        // Merge headers with the following order environment > route > request
+        if headers == nil {
+            headers = [:]
+        }
+
+        headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
     }
 
     // MARK: - Operation

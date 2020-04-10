@@ -9,6 +9,8 @@
 import Foundation
 import TermiNetwork
 
+// swiftlint:disable function_body_length
+
 enum Environment: TNEnvironmentProtocol {
     case httpHost
     case httpHostWithPort
@@ -23,6 +25,12 @@ enum Environment: TNEnvironmentProtocol {
         let requestConfiguration = TNRequestConfiguration(cachePolicy: .returnCacheDataElseLoad,
                                                           timeoutInterval: 32,
                                                           requestBodyType: .JSON)
+
+        let requestConfiguration2: TNRequestConfiguration = {
+            let config = TNRequestConfiguration.default
+            config.headers = ["Custom-Header": "dsadas"]
+            return config
+        }()
 
         switch self {
         case .httpHost:
@@ -48,10 +56,11 @@ enum Environment: TNEnvironmentProtocol {
                                  host: "localhost",
                                  suffix: nil,
                                  port: 3000,
-                                 requestConfiguration: requestConfiguration)
+                                 configuration: requestConfiguration)
         case .termiNetworkRemote:
             return TNEnvironment(scheme: .https,
-                                 host: "terminetwork-rails-app.herokuapp.com")
+                                 host: "terminetwork-rails-app.herokuapp.com",
+                                 configuration: requestConfiguration2)
         case .invalidHost:
             return TNEnvironment(scheme: .http,
                                  host: "localhostt",

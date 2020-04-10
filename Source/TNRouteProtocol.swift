@@ -25,17 +25,17 @@ public struct TNRouteConfiguration {
     var path: TNPath
     var params: [String: Any?]?
     var headers: [String: String]?
-    var requestConfiguration: TNRequestConfiguration?
+    var configuration: TNRequestConfiguration?
 
     public init(method: TNMethod,
                 path: TNPath, params: [String: Any?]? = nil,
                 headers: [String: String]? = nil,
-                requestConfiguration: TNRequestConfiguration? = nil) {
+                configuration: TNRequestConfiguration? = nil) {
         self.method = method
         self.path = path
         self.params = params
         self.headers = headers
-        self.requestConfiguration = requestConfiguration
+        self.configuration = configuration
     }
 }
 

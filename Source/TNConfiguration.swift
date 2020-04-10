@@ -19,12 +19,14 @@
 
 import Foundation
 
-public struct TNRequestConfiguration {
+public class TNRequestConfiguration {
     public var cachePolicy: URLRequest.CachePolicy?
     public var timeoutInterval: TimeInterval?
     public var requestBodyType: TNRequestBodyType?
     public var certificateData: NSData?
     public var bundle: Bundle = Bundle.main
+    public var verbose: Bool = false
+    public var headers: [String: String] = [:]
 
     public static let `default` = TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
                                                              timeoutInterval: 60,
@@ -35,41 +37,46 @@ public struct TNRequestConfiguration {
     public init(cachePolicy: URLRequest.CachePolicy?,
                 timeoutInterval: TimeInterval?,
                 requestBodyType: TNRequestBodyType?,
-                certificateName: String? = nil) {
+                certificateName: String? = nil,
+                verbose: Bool = false,
+                headers: [String: String] = [:]) {
         self.cachePolicy = cachePolicy ?? TNRequestConfiguration.default.cachePolicy
         self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.default.timeoutInterval
         self.requestBodyType = requestBodyType ?? TNRequestConfiguration.default.requestBodyType
+        self.verbose = verbose
+        self.headers = headers
+
         if let certName = certificateName {
             setCertificateData(withName: certName)
         }
     }
 
-    public init(cachePolicy: URLRequest.CachePolicy?) {
+    public convenience init(cachePolicy: URLRequest.CachePolicy?) {
         self.init(cachePolicy: cachePolicy,
                   timeoutInterval: nil,
                   requestBodyType: nil)
     }
 
-    public init(timeoutInterval: TimeInterval?) {
+    public convenience init(timeoutInterval: TimeInterval?) {
         self.init(cachePolicy: nil,
                   timeoutInterval: timeoutInterval,
                   requestBodyType: nil)
     }
 
-    public init(requestBodyType: TNRequestBodyType?) {
+    public convenience init(requestBodyType: TNRequestBodyType?) {
         self.init(cachePolicy: nil,
                   timeoutInterval: nil,
                   requestBodyType: requestBodyType)
     }
 
-    public init(certificateName name: String) {
+    public convenience init(certificateName name: String) {
         self.init(cachePolicy: nil,
                   timeoutInterval: nil,
                   requestBodyType: nil,
                   certificateName: name)
     }
 
-    public mutating func setCertificateData(withName certName: String) {
+    public func setCertificateData(withName certName: String) {
         if let certPath = bundle.path(forResource: certName.fileName,
                                            ofType: certName.fileExtension),
            let certData = NSData(contentsOfFile: certPath) {
@@ -77,5 +84,36 @@ public struct TNRequestConfiguration {
         } else {
             assertionFailure(String(format: "Certificate %@ not found!", certName))
         }
+    }
+}
+
+extension TNRequestConfiguration: NSCopying {
+    public func copy(with zone: NSZone? = nil) -> Any {
+        let configuration = TNRequestConfiguration()
+        configuration.cachePolicy = cachePolicy
+        configuration.timeoutInterval = timeoutInterval
+        configuration.requestBodyType = requestBodyType
+        configuration.certificateData = certificateData
+        configuration.bundle = bundle
+        configuration.verbose = verbose
+        configuration.headers = headers
+        return configuration
+    }
+}
+
+public extension TNRequestConfiguration {
+    static func override(configuration: TNRequestConfiguration,
+                         with overrideConfiguration: TNRequestConfiguration)
+                -> TNRequestConfiguration {
+
+        let clone = configuration.copy() as? TNRequestConfiguration ?? TNRequestConfiguration()
+        clone.cachePolicy = overrideConfiguration.cachePolicy
+        clone.timeoutInterval = overrideConfiguration.timeoutInterval
+        clone.requestBodyType = overrideConfiguration.requestBodyType
+        clone.certificateData = overrideConfiguration.certificateData
+        clone.bundle = overrideConfiguration.bundle
+        clone.verbose = overrideConfiguration.verbose
+        clone.headers.merge(overrideConfiguration.headers, uniquingKeysWith: { (_, new) in new })
+        return clone
     }
 }
