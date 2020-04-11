@@ -21,7 +21,7 @@ import Foundation
 
 internal class TNLog {
      static func logRequest(request: TNRequest) {
-        guard TNEnvironment.verbose else { return }
+        guard request.configuration.verbose else { return }
         guard let urlRequest = try? request.asRequest() else { return }
 
         let url = urlRequest.url?.absoluteString ?? "n/a"

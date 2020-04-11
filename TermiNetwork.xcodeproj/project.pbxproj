@@ -10,6 +10,7 @@
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
+		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
 		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
 		F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7B243D103700F7CC13 /* TestTNQueue.swift */; };
@@ -56,6 +57,7 @@
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
+		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F3850C7B243D103700F7CC13 /* TestTNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNQueue.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				F3850C7C243D103700F7CC13 /* TestTNEnvironment.swift */,
 				F3850C84243D103700F7CC13 /* TestTNRequest.swift */,
 				F3850C86243D103700F7CC13 /* TestTNErrors.swift */,
+				F35B533924422FAE00C1853A /* TestTNConfiguration.swift */,
 				F32C3D12243E499E004497BC /* TestPinning.swift */,
 				F3850C7D243D103700F7CC13 /* APIRouter.swift */,
 			);
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */,
 				F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */,
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,

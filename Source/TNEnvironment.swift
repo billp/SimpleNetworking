@@ -43,8 +43,6 @@ open class TNEnvironment {
         current = environment.configure()
     }
 
-    public static var verbose = false
-
     // MARK: - Initializers
     public init(scheme: TNURLScheme,
                 host: String,

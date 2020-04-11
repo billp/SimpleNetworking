@@ -102,4 +102,12 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onSuccess: onSuccess,
                    onFailure: onFailure)
     }
+
+    /**
+     Returns a TNRequest for later use.
+     */
+    public func request(forRoute route: Route) -> TNRequest {
+        return TNRequest(route: route,
+                         environment: environment)
+    }
 }
