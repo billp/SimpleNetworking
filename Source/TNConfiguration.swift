@@ -28,10 +28,6 @@ public class TNRequestConfiguration {
     public var verbose: Bool = false
     public var headers: [String: String] = [:]
 
-    public static let `default` = TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
-                                                             timeoutInterval: 60,
-                                                             requestBodyType: .xWWWFormURLEncoded)
-
     public init() { }
 
     public init(cachePolicy: URLRequest.CachePolicy?,
@@ -40,9 +36,12 @@ public class TNRequestConfiguration {
                 certificateName: String? = nil,
                 verbose: Bool = false,
                 headers: [String: String] = [:]) {
-        self.cachePolicy = cachePolicy ?? TNRequestConfiguration.default.cachePolicy
-        self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.default.timeoutInterval
-        self.requestBodyType = requestBodyType ?? TNRequestConfiguration.default.requestBodyType
+        self.cachePolicy = cachePolicy ?? TNRequestConfiguration.createDefaultConfiguration()
+                            .cachePolicy
+        self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.createDefaultConfiguration()
+                            .timeoutInterval
+        self.requestBodyType = requestBodyType ?? TNRequestConfiguration.createDefaultConfiguration()
+                            .requestBodyType
         self.verbose = verbose
         self.headers = headers
 
@@ -102,6 +101,12 @@ extension TNRequestConfiguration: NSCopying {
 }
 
 public extension TNRequestConfiguration {
+    static func createDefaultConfiguration() -> TNRequestConfiguration {
+        return TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
+                                      timeoutInterval: 60,
+                                      requestBodyType: .xWWWFormURLEncoded)
+    }
+
     static func override(configuration: TNRequestConfiguration,
                          with overrideConfiguration: TNRequestConfiguration)
                 -> TNRequestConfiguration {

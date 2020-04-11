@@ -70,7 +70,8 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .normal
 
     // MARK: - Private properties
-    public var configuration: TNRequestConfiguration = TNRequestConfiguration.default
+    public var configuration: TNRequestConfiguration = TNRequestConfiguration
+                                                            .createDefaultConfiguration()
 
     // MARK: - Private properties
     private var headers: [String: String]?
@@ -98,7 +99,7 @@ open class TNRequest: TNOperation {
         self.params = params
         self.pathType = .full
         self.path = url
-        self.configuration = configuration ?? TNRequestConfiguration.default
+        self.configuration = configuration ?? TNRequestConfiguration.createDefaultConfiguration()
     }
 
     /**
@@ -110,7 +111,7 @@ open class TNRequest: TNOperation {
          - configuration: A TNRequestConfiguration object
      */
     convenience init(method: TNMethod, url: String,
-                     configuration: TNRequestConfiguration = TNRequestConfiguration.default) {
+                     configuration: TNRequestConfiguration = TNRequestConfiguration.createDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
@@ -138,7 +139,7 @@ open class TNRequest: TNOperation {
     convenience init(method: TNMethod,
                      url: String,
                      headers: [String: String]? = nil,
-                     configuration: TNRequestConfiguration = TNRequestConfiguration.default) {
+                     configuration: TNRequestConfiguration = TNRequestConfiguration.createDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
