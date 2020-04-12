@@ -16,33 +16,30 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// swiftlint:disable discouraged_direct_init
 
 import XCTest
 import TermiNetwork
 
 class TestTNConfiguration: XCTestCase {
-    static var envConfiguration: TNRequestConfiguration = {
-        let conf = TNRequestConfiguration()
+    static var envConfiguration: TNConfiguration = {
+        let conf = TNConfiguration()
         conf.verbose = true
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
         conf.requestBodyType = .JSON
         conf.certificateData = "test".data(using: .utf8) as NSData?
-        conf.bundle = Bundle()
         conf.headers = ["test": "123", "test2": "abcdefg"]
 
         return conf
     }()
 
-    static var routeConfiguration: TNRequestConfiguration = {
-        let conf = TNRequestConfiguration()
+    static var routeConfiguration: TNConfiguration = {
+        let conf = TNConfiguration()
         conf.verbose = false
         conf.cachePolicy = .returnCacheDataDontLoad
         conf.timeoutInterval = 231
         conf.requestBodyType = .xWWWFormURLEncoded
         conf.certificateData = "hi".data(using: .utf8) as NSData?
-        conf.bundle = Bundle()
         conf.headers = ["test": "test", "afb": "fff"]
 
         return conf
@@ -87,7 +84,6 @@ class TestTNConfiguration: XCTestCase {
         XCTAssert(reqConf.timeoutInterval == envConf.timeoutInterval)
         XCTAssert(reqConf.requestBodyType == envConf.requestBodyType)
         XCTAssert(reqConf.certificateData == envConf.certificateData)
-        XCTAssert(reqConf.bundle == envConf.bundle)
         XCTAssert(reqConf.verbose == envConf.verbose)
         XCTAssert(reqConf.headers == envConf.headers)
     }
@@ -107,7 +103,6 @@ class TestTNConfiguration: XCTestCase {
         XCTAssert(reqConf.timeoutInterval == routeConf.timeoutInterval)
         XCTAssert(reqConf.requestBodyType == routeConf.requestBodyType)
         XCTAssert(reqConf.certificateData == routeConf.certificateData)
-        XCTAssert(reqConf.bundle == routeConf.bundle)
         XCTAssert(reqConf.verbose == routeConf.verbose)
         XCTAssert(reqConf.headers == allHeaders)
     }

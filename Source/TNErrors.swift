@@ -32,6 +32,7 @@ public enum TNError: Error {
     case networkError(Error)
     case notSuccess(Int)
     case cancelled(Error)
+    case invalidMockData(String)
 }
 
 extension TNError: LocalizedError {
@@ -63,6 +64,8 @@ extension TNError: LocalizedError {
             return String(format: NSLocalizedString("The request didn't return 2xx status code but %i instead", comment: "TNError"), code)
         case .cancelled(let error):
             return NSLocalizedString("The request has been cancelled: ", comment: "TNError") + error.localizedDescription
+        case .invalidMockData(let path):
+            return String(format: NSLocalizedString("Invalid mock data file for: %@", comment: "TNError"), path)
         }
     }
 }

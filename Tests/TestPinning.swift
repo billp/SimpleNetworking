@@ -22,6 +22,24 @@ import TermiNetwork
 
 class TestPinning: XCTestCase {
 
+    var bundle: Bundle = {
+        return Bundle(for: TestPinning.self)
+    }()
+
+    var invalidCertPath: String {
+        return bundle.path(forResource: "forums.swift.org",
+                           ofType: "cer",
+                           inDirectory: nil,
+                           forLocalization: nil) ?? ""
+    }
+
+    var validCertPath: String {
+        return bundle.path(forResource: "herokuapp.com",
+                           ofType: "cer",
+                           inDirectory: nil,
+                           forLocalization: nil) ?? ""
+    }
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -37,7 +55,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "Test Not Success")
            var failed = true
 
-           let request = TNRequest(route: APIRouter.testPinning(certName: "herokuapp.com.cer"))
+           let request = TNRequest(route: APIRouter.testPinning(certPath: validCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                failed = false
                expectation.fulfill()
@@ -55,7 +73,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "Test Not Success")
            var failed = true
 
-           let request = TNRequest(route: APIRouter.testPinning(certName: "forums.swift.org.cer"))
+           let request = TNRequest(route: APIRouter.testPinning(certPath: invalidCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                failed = true
                expectation.fulfill()

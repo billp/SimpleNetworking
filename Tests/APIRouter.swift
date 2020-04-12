@@ -33,14 +33,13 @@ enum APIRouter: TNRouterProtocol {
     case testStatusCode(code: Int)
     case testEmptyBody
     case testConfiguration
-    case testConfigurationParameterized(conf: TNRequestConfiguration)
+    case testConfigurationParameterized(conf: TNConfiguration)
     case testImage(imageName: String)
-    case testPinning(certName: String)
+    case testPinning(certPath: String)
 
-    func testPinningConfiguration(withCertName certName: String) -> TNRequestConfiguration {
-        let configuration = TNRequestConfiguration()
-        configuration.bundle = Bundle.init(for: TestTNEnvironment.self)
-        configuration.setCertificateData(withName: certName)
+    func testPinningConfiguration(withcertPath certPath: String) -> TNConfiguration {
+        let configuration = TNConfiguration()
+        configuration.setCertificateData(with: certPath)
         configuration.headers = ["Custom-Header": "1"]
         return configuration
     }
@@ -73,13 +72,13 @@ enum APIRouter: TNRouterProtocol {
                 method: .post,
                 path: .path(["test_params"]),
                 params: ["key1": value1, "key2": value2, "key3": value3, "key4": value4, "key5": value5],
-                configuration: TNRequestConfiguration(requestBodyType: .xWWWFormURLEncoded)
+                configuration: TNConfiguration(requestBodyType: .xWWWFormURLEncoded)
             )
         case .testConfiguration:
             return TNRouteConfiguration(
                 method: .post,
                 path: .path(["test_params"]),
-                configuration: TNRequestConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                configuration: TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                                              timeoutInterval: 12,
                                                              requestBodyType: .JSON)
             )
@@ -94,7 +93,7 @@ enum APIRouter: TNRouterProtocol {
                 method: .post,
                 path: .path(["test_params"]),
                 params: ["key1": value1, "key2": value2, "key3": value3, "key4": value4, "key5": value5],
-                configuration: TNRequestConfiguration(requestBodyType: .JSON)
+                configuration: TNConfiguration(requestBodyType: .JSON)
             )
         case let .testInvalidParams(value1, value2):
             return TNRouteConfiguration(
@@ -118,11 +117,11 @@ enum APIRouter: TNRouterProtocol {
                 method: .get,
                 path: .path([imageName])
             )
-        case .testPinning(let certName):
+        case .testPinning(let certPath):
             return TNRouteConfiguration(
                 method: .get,
                 path: .path(["test_empty_response"]),
-                configuration: testPinningConfiguration(withCertName: certName)
+                configuration: testPinningConfiguration(withcertPath: certPath)
             )
         }
     }

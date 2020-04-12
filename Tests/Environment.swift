@@ -33,12 +33,12 @@ enum Environment: TNEnvironmentProtocol {
     case google
 
     func configure() -> TNEnvironment {
-        let requestConfiguration = TNRequestConfiguration(cachePolicy: .returnCacheDataElseLoad,
+        let requestConfiguration = TNConfiguration(cachePolicy: .returnCacheDataElseLoad,
                                                           timeoutInterval: 32,
                                                           requestBodyType: .JSON)
 
-        let requestConfiguration2: TNRequestConfiguration = {
-            let config = TNRequestConfiguration.createDefaultConfiguration()
+        let requestConfiguration2: TNConfiguration = {
+            let config = TNConfiguration.makeDefaultConfiguration()
             config.verbose = true
             config.headers = ["Custom-Header": "dsadas"]
             return config

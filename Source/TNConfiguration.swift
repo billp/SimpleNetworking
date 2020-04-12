@@ -19,34 +19,39 @@
 
 import Foundation
 
-public class TNRequestConfiguration {
+public class TNConfiguration {
     public var cachePolicy: URLRequest.CachePolicy?
     public var timeoutInterval: TimeInterval?
     public var requestBodyType: TNRequestBodyType?
     public var certificateData: NSData?
-    public var bundle: Bundle = Bundle.main
     public var verbose: Bool = false
     public var headers: [String: String] = [:]
+    public var mockDataBundle: Bundle?
+    public var useMockData: Bool = false
 
     public init() { }
 
     public init(cachePolicy: URLRequest.CachePolicy?,
                 timeoutInterval: TimeInterval?,
                 requestBodyType: TNRequestBodyType?,
-                certificateName: String? = nil,
+                certificatePath: String? = nil,
                 verbose: Bool = false,
-                headers: [String: String] = [:]) {
-        self.cachePolicy = cachePolicy ?? TNRequestConfiguration.createDefaultConfiguration()
+                headers: [String: String] = [:],
+                mockDataBundle: Bundle? = nil,
+                useMockData: Bool = false) {
+        self.cachePolicy = cachePolicy ?? TNConfiguration.makeDefaultConfiguration()
                             .cachePolicy
-        self.timeoutInterval = timeoutInterval ?? TNRequestConfiguration.createDefaultConfiguration()
+        self.timeoutInterval = timeoutInterval ?? TNConfiguration.makeDefaultConfiguration()
                             .timeoutInterval
-        self.requestBodyType = requestBodyType ?? TNRequestConfiguration.createDefaultConfiguration()
+        self.requestBodyType = requestBodyType ?? TNConfiguration.makeDefaultConfiguration()
                             .requestBodyType
         self.verbose = verbose
         self.headers = headers
+        self.mockDataBundle = mockDataBundle
+        self.useMockData = useMockData
 
-        if let certName = certificateName {
-            setCertificateData(withName: certName)
+        if let certPath = certificatePath {
+            setCertificateData(with: certPath)
         }
     }
 
@@ -68,55 +73,51 @@ public class TNRequestConfiguration {
                   requestBodyType: requestBodyType)
     }
 
-    public convenience init(certificateName name: String) {
+    public convenience init(certificatePath name: String) {
         self.init(cachePolicy: nil,
                   timeoutInterval: nil,
                   requestBodyType: nil,
-                  certificateName: name)
+                  certificatePath: name)
     }
 
-    public func setCertificateData(withName certName: String) {
-        if let certPath = bundle.path(forResource: certName.fileName,
-                                           ofType: certName.fileExtension),
-           let certData = NSData(contentsOfFile: certPath) {
+    public func setCertificateData(with path: String) {
+        if let certData = NSData(contentsOfFile: path) {
             self.certificateData = certData
         } else {
-            assertionFailure(String(format: "Certificate %@ not found!", certName))
+            assertionFailure(String(format: "Certificate not found in %@!", path))
         }
     }
 }
 
-extension TNRequestConfiguration: NSCopying {
+extension TNConfiguration: NSCopying {
     public func copy(with zone: NSZone? = nil) -> Any {
-        let configuration = TNRequestConfiguration()
+        let configuration = TNConfiguration()
         configuration.cachePolicy = cachePolicy
         configuration.timeoutInterval = timeoutInterval
         configuration.requestBodyType = requestBodyType
         configuration.certificateData = certificateData
-        configuration.bundle = bundle
         configuration.verbose = verbose
         configuration.headers = headers
         return configuration
     }
 }
 
-public extension TNRequestConfiguration {
-    static func createDefaultConfiguration() -> TNRequestConfiguration {
-        return TNRequestConfiguration(cachePolicy: .useProtocolCachePolicy,
+public extension TNConfiguration {
+    static func makeDefaultConfiguration() -> TNConfiguration {
+        return TNConfiguration(cachePolicy: .useProtocolCachePolicy,
                                       timeoutInterval: 60,
                                       requestBodyType: .xWWWFormURLEncoded)
     }
 
-    static func override(configuration: TNRequestConfiguration,
-                         with overrideConfiguration: TNRequestConfiguration)
-                -> TNRequestConfiguration {
+    static func override(configuration: TNConfiguration,
+                         with overrideConfiguration: TNConfiguration)
+                -> TNConfiguration {
 
-        let clone = configuration.copy() as? TNRequestConfiguration ?? TNRequestConfiguration()
+        let clone = configuration.copy() as? TNConfiguration ?? TNConfiguration()
         clone.cachePolicy = overrideConfiguration.cachePolicy
         clone.timeoutInterval = overrideConfiguration.timeoutInterval
         clone.requestBodyType = overrideConfiguration.requestBodyType
         clone.certificateData = overrideConfiguration.certificateData
-        clone.bundle = overrideConfiguration.bundle
         clone.verbose = overrideConfiguration.verbose
         clone.headers.merge(overrideConfiguration.headers, uniquingKeysWith: { (_, new) in new })
         return clone

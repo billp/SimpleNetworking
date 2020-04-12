@@ -68,10 +68,11 @@ open class TNRequest: TNOperation {
     internal var params: [String: Any?]?
     internal var path: String
     internal var pathType: SNPathType = .normal
+    internal var mockFilePath: TNPath?
 
     // MARK: - Private properties
-    public var configuration: TNRequestConfiguration = TNRequestConfiguration
-                                                            .createDefaultConfiguration()
+    public var configuration: TNConfiguration = TNConfiguration
+                                                            .makeDefaultConfiguration()
 
     // MARK: - Private properties
     private var headers: [String: String]?
@@ -87,19 +88,19 @@ open class TNRequest: TNOperation {
          - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
          - params: A Dictionary as request params. If method is .get it automatically appends
             them to url, otherwise it sets them as request body.
-         - configuration: A TNRequestConfiguration object
+         - configuration: A TNConfiguration object
      */
     public init(method: TNMethod,
                 url: String,
                 headers: [String: String]? = nil,
                 params: [String: Any?]? = nil,
-                configuration: TNRequestConfiguration? = nil) {
+                configuration: TNConfiguration? = nil) {
         self.method = method
         self.headers = headers
         self.params = params
         self.pathType = .full
         self.path = url
-        self.configuration = configuration ?? TNRequestConfiguration.createDefaultConfiguration()
+        self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
     /**
@@ -108,10 +109,10 @@ open class TNRequest: TNOperation {
      - parameters:
          - method: The http method of request, e.g. .get, .post, .head, etc.
          - url: The URL of the request
-         - configuration: A TNRequestConfiguration object
+         - configuration: A TNConfiguration object
      */
     convenience init(method: TNMethod, url: String,
-                     configuration: TNRequestConfiguration = TNRequestConfiguration.createDefaultConfiguration()) {
+                     configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
@@ -134,12 +135,12 @@ open class TNRequest: TNOperation {
          - method: The http method of request, e.g. .get, .post, .head, etc.
          - url: The URL of the request
          - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-         - configuration: A TNRequestConfiguration object
+         - configuration: A TNConfiguration object
      */
     convenience init(method: TNMethod,
                      url: String,
                      headers: [String: String]? = nil,
-                     configuration: TNRequestConfiguration = TNRequestConfiguration.createDefaultConfiguration()) {
+                     configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
@@ -157,13 +158,14 @@ open class TNRequest: TNOperation {
         self.params = route.params
         self.path = route.path.convertedPath()
         self.environment = environment
+        self.mockFilePath = route.mockFilePath
 
         if let environmentConfiguration = environment?.configuration {
-            self.configuration = TNRequestConfiguration.override(configuration: self.configuration,
+            self.configuration = TNConfiguration.override(configuration: self.configuration,
                                                                  with: environmentConfiguration)
         }
         if let routeConfiguration = route.configuration {
-            self.configuration = TNRequestConfiguration.override(configuration: self.configuration,
+            self.configuration = TNConfiguration.override(configuration: self.configuration,
                                                                  with: routeConfiguration)
         }
     }
@@ -263,9 +265,17 @@ open class TNRequest: TNOperation {
 
     internal func sessionDataTask(request: URLRequest, completionHandler: ((Data) -> Void)?,
                                   onFailure: TNFailureCallback?) -> URLSessionDataTask {
+
+        /// Create mock request if needed
+        if shouldMockRequest() {
+            return createMockRequest(request: request,
+                                     completionHandler:
+                completionHandler, onFailure: onFailure)
+        }
+
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                    delegate: TNSession(withTNRequest: self),
-                                    delegateQueue: OperationQueue.current)
+                                 delegate: TNSession(withTNRequest: self),
+                                 delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: request) { data, urlResponse, error in
             var statusCode: Int?
@@ -308,6 +318,34 @@ open class TNRequest: TNOperation {
         }
 
         headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
+    }
+
+    fileprivate func shouldMockRequest() -> Bool {
+        return self.configuration.useMockData
+    }
+
+    fileprivate func createMockRequest(request: URLRequest,
+                                       completionHandler: ((Data) -> Void)?,
+                                       onFailure: TNFailureCallback?) -> URLSessionDataTask {
+        let fakeSession = URLSession(configuration: URLSession.shared.configuration)
+                            .dataTask(with: request)
+
+        guard let filePath = mockFilePath?.convertedPath() else {
+            onFailure?(.invalidMockData(path), nil)
+            return fakeSession
+        }
+
+        if let url = configuration.mockDataBundle?.url(forResource: filePath.fileName,
+                                                       withExtension: filePath.fileExtension,
+                                                       subdirectory: nil,
+                                                       localization: nil),
+            let data = try? Data(contentsOf: url) {
+            completionHandler?(data)
+        } else {
+            onFailure?(.invalidMockData(path), nil)
+        }
+
+        return fakeSession
     }
 
     // MARK: - Operation

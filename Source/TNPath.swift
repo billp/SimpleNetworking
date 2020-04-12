@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// URL path representation used in routes
 public enum TNPath {
     case path(_ components: [String])
 

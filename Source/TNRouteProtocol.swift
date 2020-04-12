@@ -19,23 +19,26 @@
 
 import Foundation
 
-// MARK: - Custom types
+/// Used to setup a route
 public struct TNRouteConfiguration {
     var method: TNMethod
     var path: TNPath
     var params: [String: Any?]?
     var headers: [String: String]?
-    var configuration: TNRequestConfiguration?
+    var configuration: TNConfiguration?
+    var mockFilePath: TNPath?
 
     public init(method: TNMethod,
                 path: TNPath, params: [String: Any?]? = nil,
                 headers: [String: String]? = nil,
-                configuration: TNRequestConfiguration? = nil) {
+                configuration: TNConfiguration? = nil,
+                mockFilePath: TNPath? = nil) {
         self.method = method
         self.path = path
         self.params = params
         self.headers = headers
         self.configuration = configuration
+        self.mockFilePath = mockFilePath
     }
 }
 
