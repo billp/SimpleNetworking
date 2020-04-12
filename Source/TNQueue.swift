@@ -83,4 +83,14 @@ open class TNQueue: OperationQueue {
 
         afterEachRequestCallback?(request, data, response, error)
     }
+
+    override open func addOperation(_ operation: Operation) {
+        if let request = operation as? TNRequest {
+            guard !request.shouldMockRequest() else {
+                return
+            }
+        }
+
+        super.addOperation(operation)
+    }
 }

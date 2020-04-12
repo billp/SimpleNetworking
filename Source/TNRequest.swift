@@ -320,7 +320,7 @@ open class TNRequest: TNOperation {
         headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
     }
 
-    fileprivate func shouldMockRequest() -> Bool {
+    internal func shouldMockRequest() -> Bool {
         return self.configuration.useMockData
     }
 
@@ -335,11 +335,16 @@ open class TNRequest: TNOperation {
             return fakeSession
         }
 
-        if let url = configuration.mockDataBundle?.url(forResource: filePath.fileName,
-                                                       withExtension: filePath.fileExtension,
-                                                       subdirectory: nil,
-                                                       localization: nil),
+        if  let filenameWithExt = filePath.components(separatedBy: "/").last,
+            let subdirectory = filePath.components(separatedBy: "/").first,
+            let filename = filenameWithExt.components(separatedBy: ".").first,
+            let url = configuration.mockDataBundle?.url(forResource: filename,
+                                                        withExtension: filenameWithExt
+                                                            .components(separatedBy: ".").last,
+                                                        subdirectory: subdirectory,
+                                                        localization: nil),
             let data = try? Data(contentsOf: url) {
+            self.data = data
             completionHandler?(data)
         } else {
             onFailure?(.invalidMockData(path), nil)

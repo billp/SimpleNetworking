@@ -1,0 +1,19 @@
+{
+  "HTTP_CUSTOM_HEADER" : "yo man!!!!",
+  "HTTP_ACCEPT" : "*\/*",
+  "HTTP_USER_AGENT" : "xctest\/15702 CFNetwork\/1121.2.1 Darwin\/19.2.0",
+  "HTTP_VERSION" : "HTTP\/1.1",
+  "HTTP_AUTHORIZATION" : "XKJajkBXAUIbakbxjkasbxjkas",
+  "HTTP_X_FORWARDED_PROTO" : "https",
+  "HTTP_CONNECT_TIME" : "1",
+  "HTTP_X_FORWARDED_FOR" : "176.58.225.54",
+  "HTTP_CONNECTION" : "close",
+  "HTTP_X_REQUEST_ID" : "c98e4f03-6b36-40a8-bcf2-74891c9f3631",
+  "HTTP_X_REQUEST_START" : "1586719366619",
+  "HTTP_X_FORWARDED_PORT" : "443",
+  "HTTP_TOTAL_ROUTE_TIME" : "0",
+  "HTTP_ACCEPT_ENCODING" : "gzip, deflate, br",
+  "HTTP_ACCEPT_LANGUAGE" : "en-us",
+  "HTTP_VIA" : "1.1 vegur",
+  "HTTP_HOST" : "terminetwork-rails-app.herokuapp.com"
+}

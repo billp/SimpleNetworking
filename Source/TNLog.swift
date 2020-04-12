@@ -29,6 +29,9 @@ internal class TNLog {
 
         print("--------------------------------")
         print("🌎 URL: " + url)
+        if request.configuration.useMockData {
+            print("🗂 Uses mock data")
+        }
         print("🎛️ Method: " + request.method.rawValue.uppercased())
         print("🔮 CURL Command: " + urlRequest.curlString)
 

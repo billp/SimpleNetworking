@@ -51,7 +51,8 @@ enum APIRouter: TNRouterProtocol {
             return TNRouteConfiguration(
                 method: .get,
                 path: .path(["test_headers"]),
-                headers: ["Authorization": "XKJajkBXAUIbakbxjkasbxjkas", "Custom-Header": "test!!!!"]
+                headers: ["Authorization": "XKJajkBXAUIbakbxjkasbxjkas", "Custom-Header": "test!!!!"],
+                mockFilePath: .path(["main-router", "headers.json"])
             )
         case .testOverrideHeaders:
             return TNRouteConfiguration(

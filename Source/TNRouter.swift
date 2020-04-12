@@ -46,7 +46,7 @@ open class TNRouter<Route: TNRouterProtocol> {
                          _ route: Route,
                          responseType: T.Type,
                          onSuccess: @escaping TNSuccessCallback<T>,
-                         onFailure: @escaping TNFailureCallback) where T: Decodable {
+                         onFailure: TNFailureCallback?) where T: Decodable {
         let call = TNRequest(route: route,
                              environment: environment)
 

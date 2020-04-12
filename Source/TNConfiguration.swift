@@ -120,6 +120,9 @@ public extension TNConfiguration {
         clone.certificateData = overrideConfiguration.certificateData
         clone.verbose = overrideConfiguration.verbose
         clone.headers.merge(overrideConfiguration.headers, uniquingKeysWith: { (_, new) in new })
+        clone.mockDataBundle = overrideConfiguration.mockDataBundle
+        clone.useMockData = overrideConfiguration.useMockData
+
         return clone
     }
 }
