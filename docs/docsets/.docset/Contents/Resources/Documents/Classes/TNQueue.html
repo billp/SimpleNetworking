@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TNQueue Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/TNQueue" class="dashAnchor"></a>
+    <a title="TNQueue Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (23% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TNQueue Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TNConfiguration.html">TNConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNEnvironment.html">TNEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNOperation.html">TNOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNQueue.html">TNQueue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNRequest.html">TNRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNRouteConfiguration.html">TNRouteConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TNRouter.html">TNRouter</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/TNError.html">TNError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TNMethod.html">TNMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TNPath.html">TNPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TNQueueFailureMode.html">TNQueueFailureMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TNRequestBodyType.html">TNRequestBodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/TNURLScheme.html">TNURLScheme</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIImageView.html">UIImageView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/TNEnvironmentProtocol.html">TNEnvironmentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TNRequestMiddlewareProtocol.html">TNRequestMiddlewareProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/TNRouterProtocol.html">TNRouterProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork26TNAfterAllRequestsCallbacka">TNAfterAllRequestsCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork30TNAfterAllRequestsCallbackTypea">TNAfterAllRequestsCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork26TNAfterEachRequestCallbacka">TNAfterEachRequestCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork30TNAfterEachRequestCallbackTypea">TNAfterEachRequestCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork27TNBeforeAllRequestsCallbacka">TNBeforeAllRequestsCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork31TNBeforeAllRequestsCallbackTypea">TNBeforeAllRequestsCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork27TNBeforeEachRequestCallbacka">TNBeforeEachRequestCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork31TNBeforeEachRequestCallbackTypea">TNBeforeEachRequestCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TNQueue</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">TNQueue</span> <span class="p">:</span> <span class="kt">OperationQueue</span></code></pre>
+
+                </div>
+              </div>
+            <p>Undocumented</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Static%20variables"></a>
+                <a name="//apple_ref/swift/Section/Static variables" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Static%20variables"></a>
+                  <h3 class="section-name"><p>Static variables</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC6sharedACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC6sharedACvpZ">shared</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">TNQueue</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Pulblic%20variables"></a>
+                <a name="//apple_ref/swift/Section/Pulblic variables" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Pulblic%20variables"></a>
+                  <h3 class="section-name"><p>Pulblic variables</p>
+</h3>
+                </div>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC25beforeAllRequestsCallbackyycSgvp"></a>
+                    <a name="//apple_ref/swift/Property/beforeAllRequestsCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC25beforeAllRequestsCallbackyycSgvp">beforeAllRequestsCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">beforeAllRequestsCallback</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork31TNBeforeAllRequestsCallbackTypea">TNBeforeAllRequestsCallbackType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC24afterAllRequestsCallbackySbcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/afterAllRequestsCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC24afterAllRequestsCallbackySbcSgvp">afterAllRequestsCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">afterAllRequestsCallback</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork30TNAfterAllRequestsCallbackTypea">TNAfterAllRequestsCallbackType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC25beforeEachRequestCallbackyAA9TNRequestCcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/beforeEachRequestCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC25beforeEachRequestCallbackyAA9TNRequestCcSgvp">beforeEachRequestCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">beforeEachRequestCallback</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork31TNBeforeEachRequestCallbackTypea">TNBeforeEachRequestCallbackType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC24afterEachRequestCallbackyAA9TNRequestC_10Foundation4DataVSgSo13NSURLResponseCSgs5Error_pSgtcSgvp"></a>
+                    <a name="//apple_ref/swift/Property/afterEachRequestCallback" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC24afterEachRequestCallbackyAA9TNRequestC_10Foundation4DataVSgSo13NSURLResponseCSgs5Error_pSgtcSgvp">afterEachRequestCallback</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">afterEachRequestCallback</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork30TNAfterEachRequestCallbackTypea">TNAfterEachRequestCallbackType</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7TNQueueC11failureModeAcA0c7FailureE0O_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(failureMode:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNQueueC11failureModeAcA0c7FailureE0O_tcfc">init(failureMode:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a new queue.</p>
+
+<p>parameters:
+ failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
+     this is the default) and .cancelAll (cancels all the remaining requests in queue)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">failureMode</span><span class="p">:</span> <span class="kt"><a href="../Enums/TNQueueFailureMode.html">TNQueueFailureMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">continue</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@TermiNetwork@objc(cs)TNQueue(im)addOperation:"></a>
+                    <a name="//apple_ref/swift/Method/addOperation(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@TermiNetwork@objc(cs)TNQueue(im)addOperation:">addOperation(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">override</span> <span class="kd">open</span> <span class="kd">func</span> <span class="nf">addOperation</span><span class="p">(</span><span class="n">_</span> <span class="nv">operation</span><span class="p">:</span> <span class="kt">Operation</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2020-04-19)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
