@@ -35,18 +35,17 @@ extension UIImageView {
         return request
     }
 
-    /**
-     Sets a remote image from url
-     
-     - parameters:
-         - url: The url of the remote image
-         - defaultImage: the UIImage showed while the image url is downloading (optional)
-         - beforeStart: a block of code executed before image download (optional)
-         - preprocessImage: a block of code that preprocess the image before showing. It should
-                return the new image. This block will run in the background thread (optional)
-         - onFinish: a block of code executed after the completion of the download image request.
-                It may fail so error will be returned in that case (optional)
-     */
+    ///
+    /// Sets a remote image from url
+    ///
+    /// - parameters:
+    ///     - url: The url of the remote image
+    ///     - defaultImage: the UIImage showed while the image url is downloading (optional)
+    ///     - beforeStart: a block of code executed before image download (optional)
+    ///     - preprocessImage: a block of code that preprocess the image before showing. It should
+    ///            return the new image. This block will run in the background thread (optional)
+    ///     - onFinish: a block of code executed after the completion of the download image request.
+    ///            It may fail so error will be returned in that case (optional)
     public func tn_setRemoteImage(url: String,
                                   defaultImage: UIImage? = nil,
                                   beforeStart: (() -> Void)? = nil,

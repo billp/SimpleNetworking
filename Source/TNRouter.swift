@@ -24,24 +24,24 @@ open class TNRouter<Route: TNRouterProtocol> {
     // MARK: Properties
     fileprivate var environment: TNEnvironment?
 
-    /**
-     Init with environment that overrides the one set by TNEnvironment.set(_).
-    */
+    ///
+    /// Init with environment that overrides the one set by TNEnvironment.set(_).
+    ///
     public init(environment: TNEnvironmentProtocol? = nil) {
         self.environment = environment?.configure() ?? TNEnvironment.current
     }
 
-    /**
-     Starts a requess. The response object in success callback is of type Decodable.
-     
-     - parameters:
-     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-     - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes
-        part to beforeAllRequests/afterAllRequests. Default value is true (optional)
-     - route: a TNRouteProtocol enum value
-     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    ///
+    /// Starts a requess. The response object in success callback is of type Decodable.
+    ///
+    ///    - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///    - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes
+    ///    part to beforeAllRequests/afterAllRequests. Default value is true (optional)
+    ///    - route: a TNRouteProtocol enum value
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+
     public func start<T>(queue: TNQueue? = TNQueue.shared,
                          _ route: Route,
                          responseType: T.Type,
@@ -56,17 +56,17 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /**
-     Starts a  requess. The response object in success callback is of type UIImage.
-     
-     - parameters:
-     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-     - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes part to
-        beforeAllRequests/afterAllRequests. Default value is true (optional)
-     - route: a TNRouteProtocol enum value
-     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    ///
+    /// Starts a  requess. The response object in success callback is of type UIImage.
+
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///    - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes part to
+    ///    beforeAllRequests/afterAllRequests. Default value is true (optional)
+    ///    - route: a TNRouteProtocol enum value
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   _ route: Route,
                                   responseType: T.Type,
@@ -80,17 +80,17 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /**
-     Starts a requess. The response object in success callback is of type Data.
-     
-     - parameters:
-     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-     - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes part to
-        beforeAllRequests/afterAllRequests. Default value is true (optional)
-     - route: a TNRouteProtocol enum value
-     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    ///
+    /// Starts a requess. The response object in success callback is of type Data.
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///    - skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes part to
+    ///       beforeAllRequests/afterAllRequests. Default value is true (optional)
+    ///    - route: a TNRouteProtocol enum value
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+
     public func start(queue: TNQueue? = TNQueue.shared,
                       _ route: Route,
                       onSuccess: @escaping TNSuccessCallback<Data>,
@@ -103,9 +103,7 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /**
-     Returns a TNRequest for later use.
-     */
+    /// Returns a TNRequest for later use.
     public func request(forRoute route: Route) -> TNRequest {
         return TNRequest(route: route,
                          environment: environment)

@@ -41,6 +41,8 @@
 		F3850CB2243D104900F7CC13 /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA2243D104900F7CC13 /* Request+Extensions.swift */; };
 		F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA3243D104900F7CC13 /* TNEnvironment.swift */; };
 		F3850CB4243D104900F7CC13 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA4243D104900F7CC13 /* Data+Extensions.swift */; };
+		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
+		F3F255EC244C345800517BF7 /* TNRequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		F3850CA2243D104900F7CC13 /* Request+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Extensions.swift"; sourceTree = "<group>"; };
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F3850CA4243D104900F7CC13 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
+		F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,10 +194,11 @@
 		F3850C94243D104900F7CC13 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				F3F255EA244C340C00517BF7 /* Protocols */,
 				F3850CB5243D105100F7CC13 /* Extensions */,
 				F3850C96243D104900F7CC13 /* TNRouter.swift */,
 				F3850C98243D104900F7CC13 /* TNSession.swift */,
-				F3850C99243D104900F7CC13 /* TNRouteProtocol.swift */,
+				F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */,
 				F3850C9A243D104900F7CC13 /* TNPath.swift */,
 				F3850C9B243D104900F7CC13 /* TNErrors.swift */,
 				F3850C9C243D104900F7CC13 /* TNOperation.swift */,
@@ -225,6 +230,15 @@
 				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
 			);
 			name = Certificates;
+			sourceTree = "<group>";
+		};
+		F3F255EA244C340C00517BF7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */,
+				F3850C99243D104900F7CC13 /* TNRouteProtocol.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,7 +368,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --path \"./Source\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		F3196885243D0904008725CE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -387,7 +401,9 @@
 				F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */,
 				F3850CB4243D104900F7CC13 /* Data+Extensions.swift in Sources */,
 				F3850CA7243D104900F7CC13 /* String+Extensions.swift in Sources */,
+				F3F255EC244C345800517BF7 /* TNRequestMiddlewareProtocol.swift in Sources */,
 				F3850CB2243D104900F7CC13 /* Request+Extensions.swift in Sources */,
+				F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */,
 				F3850CB0243D104900F7CC13 /* TNRequest.swift in Sources */,
 				F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */,
 				F3850CA9243D104900F7CC13 /* TNRouteProtocol.swift in Sources */,

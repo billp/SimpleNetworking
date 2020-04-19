@@ -21,10 +21,7 @@
 import Foundation
 
 extension URLRequest {
-
-    /**
-     Returns a cURL command representation of this URL request.
-     */
+    /// Returns a cURL command representation of this URL request.
     internal var curlString: String {
         guard let url = url else { return "" }
         var baseCommand = "curl \(url.absoluteString)"

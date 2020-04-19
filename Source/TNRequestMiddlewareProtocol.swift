@@ -1,4 +1,4 @@
-// TNPath.swift
+// TTNRequestMiddlewareProtocol.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -19,21 +19,11 @@
 
 import Foundation
 
-/// URL path representation used in routes
-public enum TNPath {
-    /// A path case that can be used whereverywhere needed by the Terminetwork, for
-    /// example: .path(["user", "1", "details"]) will produce "user/1/details"
-    case path(_ components: [String])
+/// This protocol is used to register a plugin that can be used by TNConfiguration to modify body and headers.
+/// For example it can be used with Crypt to encrypt / decrypt your data
+public protocol TNRequestMiddlewareProtocol {
+    func modifyBodyBeforeSend(with params: [String: Any?]?) -> [String: Any?]?
+    func modifyBodyAfterResponse(with data: Data) -> Data
 
-    func convertedPath() -> String {
-        switch self {
-        case .path(let components):
-            return components.joined(separator: "/")
-        }
-    }
-}
-
-internal enum SNPathType: Error {
-    case normal
-    case full
+    func modifyHeadersBeforeSend(with headers: [String: String]) -> [String: String]
 }

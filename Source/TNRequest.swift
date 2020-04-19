@@ -59,6 +59,7 @@ public enum TNRequestBodyType: String {
 
 open class TNRequest: TNOperation {
     // MARK: - Internal properties
+
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
     internal var dataTask: URLSessionDataTask?
@@ -71,25 +72,27 @@ open class TNRequest: TNOperation {
     internal var mockFilePath: TNPath?
 
     // MARK: - Private properties
+
     public var configuration: TNConfiguration = TNConfiguration
                                                             .makeDefaultConfiguration()
 
     // MARK: - Private properties
+
     private var headers: [String: String]?
     private var environment: TNEnvironment?
 
     // MARK: - Initializers
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - method: The http method of request, e.g. .get, .post, .head, etc.
-         - url: The URL of the request
-         - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-         - params: A Dictionary as request params. If method is .get it automatically appends
-            them to url, otherwise it sets them as request body.
-         - configuration: A TNConfiguration object
-     */
+
+    ///
+    /// Initializes a TNRequest request
+    ///
+    /// parameters:
+    ///  - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///  - url: The URL of the request
+    ///  - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
+    ///  - params: A Dictionary as request params. If method is .get it automatically appends
+    ///     them to url, otherwise it sets them as request body.
+    ///  - configuration: A TNConfiguration object
     public init(method: TNMethod,
                 url: String,
                 headers: [String: String]? = nil,
@@ -103,40 +106,35 @@ open class TNRequest: TNOperation {
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - method: The http method of request, e.g. .get, .post, .head, etc.
-         - url: The URL of the request
-         - configuration: A TNConfiguration object
-     */
+    ///
+    /// Initializes a TNRequest request
+    ///
+    /// parameters:
+    ///  - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///  - url: The URL of the request
+    ///  - configuration: A TNConfiguration object
     convenience init(method: TNMethod, url: String,
                      configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - method: The http method of request, e.g. .get, .post, .head, etc.
-         - url: The URL of the request
-         - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-     */
+    /// Initializes a TNRequest request
+    ///
+    /// - parameters:
+    ///     - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///     - url: The URL of the request
+    ///     - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
     convenience init(method: TNMethod, url: String, headers: [String: String]? = nil) {
         self.init(method: method, url: url, headers: nil, params: nil)
     }
 
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - method: The http method of request, e.g. .get, .post, .head, etc.
-         - url: The URL of the request
-         - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-         - configuration: A TNConfiguration object
-     */
+    /// Initializes a TNRequest request
+    ///
+    /// - parameters:
+    ///    - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///    - url: The URL of the request
+    ///    - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
+    ///    - configuration: A TNConfiguration object
     convenience init(method: TNMethod,
                      url: String,
                      headers: [String: String]? = nil,
@@ -144,12 +142,10 @@ open class TNRequest: TNOperation {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
-    /**
-     Initializes a TNRequest request
-     
-     - parameters:
-         - route: a TNRouteProtocol enum value
-     */
+    /// Initializes a TNRequest request
+    ///
+    /// - parameters:
+    ///   - route: a TNRouteProtocol enum value
     public init(route: TNRouterProtocol,
                 environment: TNEnvironment? = TNEnvironment.current) {
         let route = route.configure()
@@ -171,9 +167,8 @@ open class TNRequest: TNOperation {
     }
 
     // MARK: - Create request
-    /**
-     Converts a TNRequest instance to asRequest
-    */
+
+    /// Converts a TNRequest instance to asRequest
     public func asRequest() throws -> URLRequest {
 
         let urlString = NSMutableString()
@@ -233,9 +228,7 @@ open class TNRequest: TNOperation {
         return request
     }
 
-    /**
-     Cancels a TNRequest started request
-     */
+    /// Cancels a TNRequest started request
     open override func cancel() {
         super.cancel()
         dataTask?.cancel()
@@ -282,7 +275,7 @@ open class TNRequest: TNOperation {
             self.data = data
             self.urlResponse = urlResponse
 
-            // Error handling
+            /// Error handling
             if let error = error {
                 if (error as NSError).code == NSURLErrorCancelled {
                     self.customError = TNError.cancelled(error)
@@ -304,7 +297,7 @@ open class TNRequest: TNOperation {
                     self.handleDataTaskFailure()
                 }
             } else {
-                completionHandler?(data!)
+                completionHandler?(data ?? Data())
             }
         }
 
@@ -312,7 +305,7 @@ open class TNRequest: TNOperation {
     }
 
     fileprivate func setHeaders() {
-        // Merge headers with the following order environment > route > request
+        /// Merge headers with the following order environment > route > request
         if headers == nil {
             headers = [:]
         }
@@ -383,14 +376,13 @@ open class TNRequest: TNOperation {
         currentQueue.afterOperationFinished(request: self, data: data, response: urlResponse, error: customError)
     }
 
-    /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type Decodable
-     
-     - parameters:
-        - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-        - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-        - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    /// Adds a request to a queue and starts it's execution. The response object in success callback is of
+    /// type Decodable
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
     public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                     responseType: T.Type,
                                     onSuccess: TNSuccessCallback<T>?,
@@ -433,14 +425,12 @@ open class TNRequest: TNOperation {
         currentQueue.addOperation(self)
     }
 
-    /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type UIImage
-     
-     - parameters:
-         - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-         - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-         - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type UIImage
+    ///
+    /// - parameters:
+    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,
                                   onSuccess: TNSuccessCallback<T>?,
@@ -481,14 +471,12 @@ open class TNRequest: TNOperation {
         currentQueue.addOperation(self)
     }
 
-    /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type String
-     
-     - parameters:
-     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type String
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: String.Type,
                       onSuccess: TNSuccessCallback<String>?,
@@ -529,15 +517,12 @@ open class TNRequest: TNOperation {
         currentQueue.addOperation(self)
     }
 
-    // For any other object
-    /**
-     Adds a request to a queue and starts it's execution. The response object in success callback is of type Data
-     
-     - parameters:
-         - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-         - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-         - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-     */
+    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type Data
+    ///
+    /// - parameters:
+    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
+    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
+    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: Data.Type,
                       onSuccess: TNSuccessCallback<Data>?,
