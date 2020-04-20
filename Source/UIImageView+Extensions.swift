@@ -75,7 +75,7 @@ extension UIImageView {
         }))
     }
 
-    // MARK: - Helpers
+    // MARK: Helpers
     private func getAddress() -> String {
         return String(describing: Unmanaged.passUnretained(self).toOpaque())
     }

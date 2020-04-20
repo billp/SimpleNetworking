@@ -19,15 +19,28 @@
 
 import Foundation
 
+/// A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
+/// If a TNConfiguration is passed to an TNEnvironment, then each TNRequest will inherit this configuration.
+/// Also, each request can have its own TNConfiguration whose settings will override those from environment.
 public class TNConfiguration {
+    /// The cache policy of the request.
     public var cachePolicy: URLRequest.CachePolicy?
+    /// The timeout interval of the request
     public var timeoutInterval: TimeInterval?
+    /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON
     public var requestBodyType: TNRequestBodyType?
+    /// The certificate data when certificate pining is enabled
     public var certificateData: NSData?
+    /// Enables or disables debug mode
     public var verbose: Bool = false
+    /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration
     public var headers: [String: String] = [:]
+    /// The Bundle object of mock data used when useMockData is true
     public var mockDataBundle: Bundle?
+    /// Enables or disables  request mocking
     public var useMockData: Bool = false
+    /// Request middlewares
+    public var requestMiddlewares: [TNRequestMiddlewareProtocol] = []
 
     public init() { }
 
@@ -109,8 +122,8 @@ public extension TNConfiguration {
                                       requestBodyType: .xWWWFormURLEncoded)
     }
 
-    static func override(configuration: TNConfiguration,
-                         with overrideConfiguration: TNConfiguration)
+    internal static func override(configuration: TNConfiguration,
+                                  with overrideConfiguration: TNConfiguration)
                 -> TNConfiguration {
 
         let clone = configuration.copy() as? TNConfiguration ?? TNConfiguration()
@@ -122,6 +135,7 @@ public extension TNConfiguration {
         clone.headers.merge(overrideConfiguration.headers, uniquingKeysWith: { (_, new) in new })
         clone.mockDataBundle = overrideConfiguration.mockDataBundle
         clone.useMockData = overrideConfiguration.useMockData
+        clone.requestMiddlewares = overrideConfiguration.requestMiddlewares
 
         return clone
     }

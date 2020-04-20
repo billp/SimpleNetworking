@@ -29,21 +29,21 @@ public enum TNURLScheme: String {
 }
 
 open class TNEnvironment {
-    // MARK: - Properties
+    // MARK: Properties
     var scheme: TNURLScheme
     var host: String
     var port: Int?
     var suffix: TNPath?
     var configuration: TNConfiguration?
 
-    // MARK: - Static members
+    // MARK: Static members
     public static var current: TNEnvironment!
 
     public static func set(_ environment: TNEnvironmentProtocol) {
         current = environment.configure()
     }
 
-    // MARK: - Initializers
+    // MARK: Initializers
     public init(scheme: TNURLScheme,
                 host: String,
                 suffix: TNPath?,
@@ -114,7 +114,7 @@ open class TNEnvironment {
     }
 }
 
-// MARK: - CustomStringConvertible
+// MARK: CustomStringConvertible
 extension TNEnvironment: CustomStringConvertible {
     public var description: String {
         var urlComponents = [String]()

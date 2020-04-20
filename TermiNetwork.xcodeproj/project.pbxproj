@@ -43,6 +43,7 @@
 		F3850CB4243D104900F7CC13 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA4243D104900F7CC13 /* Data+Extensions.swift */; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F255EC244C345800517BF7 /* TNRequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */; };
+		F3F255EE244DF9F800517BF7 /* TNRequest+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		F3850CA4243D104900F7CC13 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
+		F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+Middleware.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				F3850CA1243D104900F7CC13 /* Dictionary+Extensions.swift */,
 				F3850CA2243D104900F7CC13 /* Request+Extensions.swift */,
 				F3850CA4243D104900F7CC13 /* Data+Extensions.swift */,
+				F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				F3850CB1243D104900F7CC13 /* Dictionary+Extensions.swift in Sources */,
 				F3850CA5243D104900F7CC13 /* UIImageView+Extensions.swift in Sources */,
 				F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */,
+				F3F255EE244DF9F800517BF7 /* TNRequest+Middleware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

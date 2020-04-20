@@ -39,13 +39,13 @@ public typealias TNAfterEachRequestCallbackType = (
     _ error: Error?) -> Void
 
 open class TNQueue: OperationQueue {
-    // MARK: - Static variables
+    // MARK: Static variables
     public static var shared = TNQueue()
 
-    // MARK: - Private variables
+    // MARK: Private variables
     private var completedWithError = false
 
-    // MARK: - Pulblic variables
+    // MARK: Pulblic variables
     public var beforeAllRequestsCallback: TNBeforeAllRequestsCallbackType?
     public var afterAllRequestsCallback: TNAfterAllRequestsCallbackType?
     public var beforeEachRequestCallback: TNBeforeEachRequestCallbackType?
@@ -56,8 +56,8 @@ open class TNQueue: OperationQueue {
     ///
     /// Initializes a new queue.
     ///
-    /// parameters:
-    ///  failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
+    /// - parameters:
+    ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
     ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
     ///
     public init(failureMode: TNQueueFailureMode = .continue) {

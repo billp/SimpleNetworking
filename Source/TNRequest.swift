@@ -21,22 +21,11 @@
 import Foundation
 import UIKit
 
-// MARK: - Custom types
+// MARK: Custom types
 public typealias TNSuccessCallback<T> = (T) -> Void
 public typealias TNFailureCallback = (_ error: TNError, _ data: Data?) -> Void
 
-// MARK: - DEPRECATED TYPES
-public typealias TNBeforeAllRequestsCallback = () -> Void
-public typealias TNAfterAllRequestsCallback = () -> Void
-public typealias TNBeforeEachRequestCallback = (
-    _ call: TNRequest) -> Void
-public typealias TNAfterEachRequestCallback = (
-    _ call: TNRequest,
-    _ data: Data?,
-    _ response: URLResponse?,
-    _ error: Error?) -> Void
-
-// MARK: - Enums
+// MARK: Enums
 public enum TNMethod: String {
     case get
     case head
@@ -58,7 +47,7 @@ public enum TNRequestBodyType: String {
 }
 
 open class TNRequest: TNOperation {
-    // MARK: - Internal properties
+    // MARK: Internal properties
 
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
@@ -71,19 +60,16 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .normal
     internal var mockFilePath: TNPath?
 
-    // MARK: - Private properties
+    // MARK: Private properties
 
-    public var configuration: TNConfiguration = TNConfiguration
-                                                            .makeDefaultConfiguration()
+    public var configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()
 
-    // MARK: - Private properties
-
+    // MARK: Private properties
     private var headers: [String: String]?
     private var environment: TNEnvironment?
 
-    // MARK: - Initializers
+    // MARK: Initializers
 
-    ///
     /// Initializes a TNRequest request
     ///
     /// parameters:
@@ -106,7 +92,6 @@ open class TNRequest: TNOperation {
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
-    ///
     /// Initializes a TNRequest request
     ///
     /// parameters:
@@ -166,7 +151,7 @@ open class TNRequest: TNOperation {
         }
     }
 
-    // MARK: - Create request
+    // MARK: Create request
 
     /// Converts a TNRequest instance to asRequest
     public func asRequest() throws -> URLRequest {
@@ -234,7 +219,8 @@ open class TNRequest: TNOperation {
         dataTask?.cancel()
     }
 
-    // MARK: - Helper methods
+    // MARK: Helper methods
+
     fileprivate func addBodyParams(withRequest request: inout URLRequest,
                                    queryString: String?) throws {
         // Set body params if method is not get
@@ -247,7 +233,7 @@ open class TNRequest: TNOperation {
                 request.httpBody = queryString?.data(using: .utf8)
             } else {
                 do {
-                    let jsonData = try params?.toJSONData()
+                    let jsonData = try  handleMiddlewareBodyBeforeSendIfNeeded(params: params)?.toJSONData()
                     request.httpBody = jsonData
                 } catch {
                     throw TNError.invalidParams
@@ -311,6 +297,8 @@ open class TNRequest: TNOperation {
         }
 
         headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
+
+        headers = handleMiddlewareHeadersBeforeSendIfNeeded(headers: headers)
     }
 
     internal func shouldMockRequest() -> Bool {
@@ -346,7 +334,7 @@ open class TNRequest: TNOperation {
         return fakeSession
     }
 
-    // MARK: - Operation
+    // MARK: Operation
     open override func start() {
         _executing = true
         _finished = false
