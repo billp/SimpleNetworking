@@ -19,9 +19,7 @@
 
 import Foundation
 
-///
 /// Type that specifies the behavior of the queue when a request fails
-///
 public enum TNQueueFailureMode {
     /// Cancels the execution of the queue after a request (operation) fails
     case cancelAll
@@ -38,8 +36,10 @@ public typealias TNAfterEachRequestCallbackType = (
     _ response: URLResponse?,
     _ error: Error?) -> Void
 
+/// This class can be used to create custom queues
 open class TNQueue: OperationQueue {
     // MARK: Static variables
+    /// The global queue of TermiNetwork. All requests are added to this queue instance.
     public static var shared = TNQueue()
 
     // MARK: Private variables
@@ -53,13 +53,11 @@ open class TNQueue: OperationQueue {
 
     var failureMode: TNQueueFailureMode!
 
-    ///
     /// Initializes a new queue.
     ///
     /// - parameters:
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
     ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
-    ///
     public init(failureMode: TNQueueFailureMode = .continue) {
         super.init()
 
@@ -84,6 +82,11 @@ open class TNQueue: OperationQueue {
         afterEachRequestCallback?(request, data, response, error)
     }
 
+    /// Adds a TNRequest into queue.
+    ///
+    /// - parameters:
+    ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
+    ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
     override open func addOperation(_ operation: Operation) {
         if let request = operation as? TNRequest {
             guard !request.shouldMockRequest() else {

@@ -18,8 +18,15 @@ extension TNRequest {
         configuration.requestMiddlewares.forEach { middleware in
             newParams = middleware.modifyBodyBeforeSend(with: newParams)
         }
-
         return newParams
+    }
+
+    func handleMiddlewareBodyAfterReceiveIfNeeded(responseData: Data?) -> Data? {
+        var newResponseData = responseData
+        configuration.requestMiddlewares.forEach { middleware in
+            newResponseData = middleware.modifyBodyAfterReceive(with: newResponseData)
+        }
+        return newResponseData
     }
 
     func handleMiddlewareHeadersBeforeSendIfNeeded(headers: [String: String]?) -> [String: String]? {
@@ -29,5 +36,4 @@ extension TNRequest {
         }
         return newHeaders
     }
-
 }

@@ -20,6 +20,7 @@
 import Foundation
 import UIKit
 
+/// This class is used to create custom routers in your application.
 open class TNRouter<Route: TNRouterProtocol> {
     // MARK: Properties
     fileprivate var environment: TNEnvironment?
@@ -29,7 +30,7 @@ open class TNRouter<Route: TNRouterProtocol> {
         self.environment = environment?.configure() ?? TNEnvironment.current
     }
 
-    /// Starts a requess. The response object in success callback is of type Decodable.
+    /// Starts a request. The response object in success callback is of type Decodable.
     ///
     ///  - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -52,7 +53,7 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /// Starts a  requess. The response object in success callback is of type UIImage.
+    /// Starts a  request. The response object in success callback is of type UIImage.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -74,7 +75,7 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /// Starts a requess. The response object in success callback is of type Data.
+    /// Starts a request. The response object in success callback is of type Data.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
@@ -95,8 +96,7 @@ open class TNRouter<Route: TNRouterProtocol> {
                    onFailure: onFailure)
     }
 
-    /// Returns a TNRequest that can be used later, e.g. for starting the request in a later time or canceling
-    /// a request.
+    /// Returns a TNRequest that can be used later, e.g. for starting the request in a later time or canceling it.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)

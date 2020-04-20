@@ -20,7 +20,7 @@
 import Foundation
 
 extension Data {
-    public func deserializeJSONData<T>() throws -> T where T: Decodable {
+    internal func deserializeJSONData<T>() throws -> T where T: Decodable {
         let jsonDecoder = JSONDecoder()
         return try jsonDecoder.decode(T.self, from: self)
     }

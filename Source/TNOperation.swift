@@ -21,6 +21,7 @@
 
 import Foundation
 
+/// This class is inherited by TNRequest to control the execution of the request.
 open class TNOperation: Operation {
     internal var _executing = false {
         willSet {

@@ -36,7 +36,7 @@ extension UIImageView {
     }
 
     ///
-    /// Sets a remote image from url
+    /// Set a remote image from url.
     ///
     /// - parameters:
     ///     - url: The url of the remote image

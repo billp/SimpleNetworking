@@ -19,7 +19,7 @@
 
 import Foundation
 
-/// This protocol is used to register a plugin that can be used by TNConfiguration to modify body and headers.
+/// This protocol is used to register a middleware that can be used by TNConfiguration to modify body and headers.
 /// For example it can be used with Crypt to encrypt / decrypt your data
 public protocol TNRequestMiddlewareProtocol {
     /// Modifies body params before they are sent to server
@@ -34,7 +34,7 @@ public protocol TNRequestMiddlewareProtocol {
     ///     - data: The data
     ///   - returns:
     ///     - the new modified data
-    func modifyBodyAfterResponse(with data: Data) -> Data
+    func modifyBodyAfterReceive(with data: Data?) -> Data?
 
     /// Modifies the headers of the response before they are sent to server
     ///   - parameters:
@@ -42,11 +42,4 @@ public protocol TNRequestMiddlewareProtocol {
     ///   - returns:
     ///     - the new modified headers
     func modifyHeadersBeforeSend(with headers: [String: String]?) -> [String: String]?
-
-    /// Modifies the headers of the response after they are recieved from server
-    ///   - parameters:
-    ///     - headers: the headers cosntructed by initializers and configuration
-    ///   - returns:
-    ///     - the new modified headers
-    func modifyHeadersAfterSend(with headers: [String: String]?) -> [String: String]?
 }

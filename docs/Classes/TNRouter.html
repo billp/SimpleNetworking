@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork Docs
         </a>
-         (23% documented)
+         (66% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -97,9 +97,6 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/Data.html">Data</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
               </li>
             </ul>
@@ -122,25 +119,13 @@
             <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork26TNAfterAllRequestsCallbacka">TNAfterAllRequestsCallback</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork30TNAfterAllRequestsCallbackTypea">TNAfterAllRequestsCallbackType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork26TNAfterEachRequestCallbacka">TNAfterEachRequestCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork30TNAfterEachRequestCallbackTypea">TNAfterEachRequestCallbackType</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork27TNBeforeAllRequestsCallbacka">TNBeforeAllRequestsCallback</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork31TNBeforeAllRequestsCallbackTypea">TNBeforeAllRequestsCallbackType</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork27TNBeforeEachRequestCallbacka">TNBeforeEachRequestCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork31TNBeforeEachRequestCallbackTypea">TNBeforeEachRequestCallbackType</a>
@@ -166,7 +151,7 @@
 
                 </div>
               </div>
-            <p>Undocumented</p>
+            <p>This class is used to create custom routers in your application.</p>
 
           </div>
         </section>
@@ -197,7 +182,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Init with environment that overrides the one set by TNEnvironment.set(_).</p>
+                        <p>Initialize with environment that overrides the one set by TNEnvironment.set(_).</p>
 
                       </div>
                       <div class="declaration">
@@ -224,16 +209,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Starts a requess. The response object in success callback is of type Decodable.</p>
-
-<ul>
-<li>queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)</li>
-<li>skipBeforeAfterAllRequestsHooks: A boolean that indicates if the request takes
-part to beforeAllRequests/afterAllRequests. Default value is true (optional)</li>
-<li>route: a TNRouteProtocol enum value</li>
-<li>onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)</li>
-<li>onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)</li>
-</ul>
+                        <p>Starts a request. The response object in success callback is of type Decodable.</p>
 
                       </div>
                       <div class="declaration">
@@ -247,6 +223,78 @@ part to beforeAllRequests/afterAllRequests. Default value is true (optional)</li
                      <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>skipBeforeAfterAllRequestsHooks</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A boolean that indicates if the request takes
+part to beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>route</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a TNRouteProtocol enum value
+
+<ul>
+<li>onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -264,7 +312,7 @@ part to beforeAllRequests/afterAllRequests. Default value is true (optional)</li
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Starts a  requess. The response object in success callback is of type UIImage.</p>
+                        <p>Starts a  request. The response object in success callback is of type UIImage.</p>
 
                       </div>
                       <div class="declaration">
@@ -363,7 +411,7 @@ beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Starts a requess. The response object in success callback is of type Data.</p>
+                        <p>Starts a request. The response object in success callback is of type Data.</p>
 
                       </div>
                       <div class="declaration">
@@ -461,7 +509,7 @@ beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Returns a TNRequest for later use.</p>
+                        <p>Returns a TNRequest that can be used later, e.g. for starting the request in a later time or canceling it.</p>
 
                       </div>
                       <div class="declaration">
@@ -471,6 +519,74 @@ beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="n">forRoute</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TNRequest.html">TNRequest</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>skipBeforeAfterAllRequestsHooks</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A boolean that indicates if the request takes part to
+beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>route</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a TNRouteProtocol enum value</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -483,7 +599,7 @@ beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-04-19)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-04-20)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -20,7 +20,7 @@
 import Foundation
 
 /// A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
-/// If a TNConfiguration is passed to an TNEnvironment, then each TNRequest will inherit this configuration.
+/// If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
 /// Also, each request can have its own TNConfiguration whose settings will override those from environment.
 public class TNConfiguration {
     /// The cache policy of the request.
@@ -29,7 +29,7 @@ public class TNConfiguration {
     public var timeoutInterval: TimeInterval?
     /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON
     public var requestBodyType: TNRequestBodyType?
-    /// The certificate data when certificate pining is enabled
+    /// The certificate data when certificate pinning is enabled
     public var certificateData: NSData?
     /// Enables or disables debug mode
     public var verbose: Bool = false

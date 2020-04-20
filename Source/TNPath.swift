@@ -19,7 +19,7 @@
 
 import Foundation
 
-/// URL path representation used in routes
+/// URL path representation used in routes.
 public enum TNPath {
     /// A path case that can be used whereverywhere needed by the Terminetwork, for
     /// example: .path(["user", "1", "details"]) will produce "user/1/details"

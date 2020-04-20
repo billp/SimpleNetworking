@@ -21,17 +21,28 @@
 
 import Foundation
 
-// Errors before execution of a request
+/// Custom error definition.
 public enum TNError: Error {
+    /// Thrown when the url is not valid.
     case invalidURL
+    /// Thrown when the environment is not set.
     case environmentNotSet
+    /// Thrown when the params contain invalid characters.
     case invalidParams
+    /// Thrown when the response object is expected to be a UIImage but it's not.
     case responseInvalidImageData
+    /// Thrown when cannot deserialize the given model with Codable. It contains the error with information about what
+    /// was went wrong in parsing.
     case cannotDeserialize(Error)
+    /// Thrown when the response object is expected to be a String but it's not.
     case cannotConvertToString
+    /// Thrown when a network error occured. It contains the NSURLError.
     case networkError(Error)
+    /// Thrown when a request is not succeeded (it's not 2xx). It contains the HTTP Status Code.
     case notSuccess(Int)
+    /// Thrown when a request is cancelled.
     case cancelled(Error)
+    /// Thrown when a request is mocked but the data are invalid.
     case invalidMockData(String)
 }
 

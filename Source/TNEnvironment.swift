@@ -19,15 +19,21 @@
 
 import Foundation
 
+/// This protocol should be inhereted by the Environment enum.
 public protocol TNEnvironmentProtocol {
+    /// Thus is required in order to construct the url of the request.
     func configure() -> TNEnvironment
 }
 
+/// The url scheme that will be used in an environment
 public enum TNURLScheme: String {
+    /// HTTP Schema
     case http
+    /// HTTPS Schema
     case https
 }
 
+/// The TNEnvironment contains information about host, port, configuration and it's used in TNRequest instances.
 open class TNEnvironment {
     // MARK: Properties
     var scheme: TNURLScheme
@@ -39,11 +45,21 @@ open class TNEnvironment {
     // MARK: Static members
     public static var current: TNEnvironment!
 
+    /// Set a global environment for all TNRequest instances.
     public static func set(_ environment: TNEnvironmentProtocol) {
         current = environment.configure()
     }
 
     // MARK: Initializers
+
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - suffix: The path after the host name, e.g. .path["api","v1"]
+    ///     - port: The port the environment is using, e.g. 8080
+    ///     - configuration: A configuration instance that will be inherited by each request and route
     public init(scheme: TNURLScheme,
                 host: String,
                 suffix: TNPath?,
@@ -56,6 +72,11 @@ open class TNEnvironment {
         self.configuration = configuration
     }
 
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
     public convenience init(scheme: TNURLScheme,
                             host: String) {
         self.init(scheme: scheme,
@@ -65,6 +86,12 @@ open class TNEnvironment {
                   configuration: nil)
     }
 
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - configuration: A configuration instance that will be inherited by each request and route
     public convenience init(scheme: TNURLScheme,
                             host: String,
                             configuration: TNConfiguration) {
@@ -75,6 +102,12 @@ open class TNEnvironment {
                   configuration: configuration)
     }
 
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - port: The port the environment is using, e.g. 8080
     public convenience init(scheme: TNURLScheme,
                             host: String,
                             port: Int) {
@@ -85,6 +118,13 @@ open class TNEnvironment {
                   configuration: nil)
     }
 
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - port: The port the environment is using, e.g. 8080
+    ///     - configuration: A configuration instance that will be inherited by each request and route
     public convenience init(scheme: TNURLScheme,
                             host: String,
                             port: Int,
@@ -96,6 +136,12 @@ open class TNEnvironment {
                   configuration: configuration)
     }
 
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - suffix: The path after the host name, e.g. .path["api","v1"]
     public convenience init(scheme: TNURLScheme, host: String, suffix: TNPath) {
         self.init(scheme: scheme,
                   host: host,
@@ -103,6 +149,13 @@ open class TNEnvironment {
                   port: nil,
                   configuration: nil)
     }
+
+    /// Instantiates an environment
+    ///
+    /// - parameters:
+    ///     - scheme: The scheme of the host (.http or .https)
+    ///     - host: The actual host, e.g. s1.example.com
+    ///     - configuration: A configuration instance that will be inherited by each request and route
     public convenience init(scheme: TNURLScheme,
                             host: String, suffix: TNPath,
                             configuration: TNConfiguration = TNConfiguration()) {

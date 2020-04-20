@@ -26,6 +26,7 @@ public typealias TNSuccessCallback<T> = (T) -> Void
 public typealias TNFailureCallback = (_ error: TNError, _ data: Data?) -> Void
 
 // MARK: Enums
+/// The HTTP request method based on specification of https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html.
 public enum TNMethod: String {
     case get
     case head
@@ -38,7 +39,7 @@ public enum TNMethod: String {
     case patch
 }
 
-/// The the body type of the request
+/// The body type of the request
 public enum TNRequestBodyType: String {
     /// The request params are sent as application/x-www-form-urlencoded mime type
     case xWWWFormURLEncoded = "application/x-www-form-urlencoded"
@@ -70,15 +71,15 @@ open class TNRequest: TNOperation {
 
     // MARK: Initializers
 
-    /// Initializes a TNRequest request
+    /// Initializes a TNRequest request.
     ///
     /// parameters:
     ///  - method: The http method of request, e.g. .get, .post, .head, etc.
-    ///  - url: The URL of the request
+    ///  - url: The URL of the request.
     ///  - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-    ///  - params: A Dictionary as request params. If method is .get it automatically appends
-    ///     them to url, otherwise it sets them as request body.
-    ///  - configuration: A TNConfiguration object
+    ///  - params: A Dictionary as request params. If method is .get, it automatically appends
+    ///     them to url, otherwise it is seting them as request body.
+    ///  - configuration: A TNConfiguration object.
     public init(method: TNMethod,
                 url: String,
                 headers: [String: String]? = nil,
@@ -92,12 +93,12 @@ open class TNRequest: TNOperation {
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
-    /// Initializes a TNRequest request
+    /// Initializes a TNRequest request.
     ///
     /// parameters:
     ///  - method: The http method of request, e.g. .get, .post, .head, etc.
-    ///  - url: The URL of the request
-    ///  - configuration: A TNConfiguration object
+    ///  - url: The URL of the request.
+    ///  - configuration: A TNConfiguration object.
     convenience init(method: TNMethod, url: String,
                      configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()) {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
@@ -279,10 +280,11 @@ open class TNRequest: TNOperation {
             if let customError = self.customError {
                 DispatchQueue.main.async {
                     TNLog.logRequest(request: self)
-                    onFailure?(customError, data)
+                    onFailure?(customError, self.data)
                     self.handleDataTaskFailure()
                 }
             } else {
+                self.data = self.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: self.data)
                 completionHandler?(data ?? Data())
             }
         }
