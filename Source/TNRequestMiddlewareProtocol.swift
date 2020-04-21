@@ -27,19 +27,19 @@ public protocol TNRequestMiddlewareProtocol {
     ///     - params:  The body params that are constructed by TNRequest initializers
     ///   - returns:
     ///     - the new modified params
-    func modifyBodyBeforeSend(with params: [String: Any?]?) -> [String: Any?]?
+    func modifyBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]?
 
     /// Modifies data response before they are sent to callbacks
     ///   - parameters:
     ///     - data: The data
     ///   - returns:
     ///     - the new modified data
-    func modifyBodyAfterReceive(with data: Data?) -> Data?
+    func modifyBodyAfterReceive(with data: Data?) throws -> Data?
 
     /// Modifies the headers of the response before they are sent to server
     ///   - parameters:
     ///     - headers: the headers cosntructed by initializers and configuration
     ///   - returns:
     ///     - the new modified headers
-    func modifyHeadersBeforeSend(with headers: [String: String]?) -> [String: String]?
+    func modifyHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]?
 }

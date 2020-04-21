@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,6 +41,9 @@
 		F3850CB2243D104900F7CC13 /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA2243D104900F7CC13 /* Request+Extensions.swift */; };
 		F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA3243D104900F7CC13 /* TNEnvironment.swift */; };
 		F3850CB4243D104900F7CC13 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA4243D104900F7CC13 /* Data+Extensions.swift */; };
+		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
+		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
+		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F255EC244C345800517BF7 /* TNRequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */; };
 		F3F255EE244DF9F800517BF7 /* TNRequest+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */; };
@@ -94,6 +97,8 @@
 		F3850CA2243D104900F7CC13 /* Request+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Extensions.swift"; sourceTree = "<group>"; };
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F3850CA4243D104900F7CC13 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
+		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F255EB244C345800517BF7 /* TNRequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
 		F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+Middleware.swift"; sourceTree = "<group>"; };
@@ -104,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +171,7 @@
 		F3850C78243D103700F7CC13 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F397EC97244F60E10082E12D /* Middlewares */,
 				F32C3D14243E49D0004497BC /* Supporting Files */,
 				F3850CB7243DAD2300F7CC13 /* Certificates */,
 				F3850C7E243D103700F7CC13 /* Models */,
@@ -189,6 +196,7 @@
 				F3850C7F243D103700F7CC13 /* TestParams.swift */,
 				F3850C80243D103700F7CC13 /* TestJSONParams.swift */,
 				F3850C81243D103700F7CC13 /* TestHeaders.swift */,
+				F397ECA0244F76300082E12D /* EncryptedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,6 +243,14 @@
 			name = Certificates;
 			sourceTree = "<group>";
 		};
+		F397EC97244F60E10082E12D /* Middlewares */ = {
+			isa = PBXGroup;
+			children = (
+				F397EC9D244F65730082E12D /* CryptoMiddleware.swift */,
+			);
+			name = Middlewares;
+			sourceTree = "<group>";
+		};
 		F3F255EA244C340C00517BF7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +289,9 @@
 			dependencies = (
 			);
 			name = TermiNetwork;
+			packageProductDependencies = (
+				F397EC9B244F64BA0082E12D /* CryptoSwift */,
+			);
 			productName = TermiNetwork;
 			productReference = F319682D243D01E1008725CE /* TermiNetwork.framework */;
 			productType = "com.apple.product-type.framework";
@@ -325,6 +344,9 @@
 				Base,
 			);
 			mainGroup = F3196823243D01E1008725CE;
+			packageReferences = (
+				F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+			);
 			productRefGroup = F319682E243D01E1008725CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -428,6 +450,7 @@
 				F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */,
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,
+				F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */,
 				F3850C8B243D103700F7CC13 /* APIRouter.swift in Sources */,
 				F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */,
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,
@@ -435,6 +458,7 @@
 				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
 				F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */,
 				F3850C91243D103700F7CC13 /* TestTNRequest.swift in Sources */,
+				F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */,
 				F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,6 +713,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F397EC9B244F64BA0082E12D /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3196824243D01E1008725CE /* Project object */;
 }

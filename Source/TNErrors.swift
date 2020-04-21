@@ -44,6 +44,8 @@ public enum TNError: Error {
     case cancelled(Error)
     /// Thrown when a request is mocked but the data are invalid.
     case invalidMockData(String)
+    /// Thrown when a middleware reports an error. It contains a custom type
+    case middlewareError(Any)
 }
 
 extension TNError: LocalizedError {
@@ -77,6 +79,8 @@ extension TNError: LocalizedError {
             return NSLocalizedString("The request has been cancelled: ", comment: "TNError") + error.localizedDescription
         case .invalidMockData(let path):
             return String(format: NSLocalizedString("Invalid mock data file for: %@", comment: "TNError"), path)
+        case .middlewareError(let error):
+            return String(format: NSLocalizedString("Middleware error: %@", comment: "TNError"), String(describing: error))
         }
     }
 }

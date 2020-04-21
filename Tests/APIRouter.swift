@@ -36,6 +36,7 @@ enum APIRouter: TNRouterProtocol {
     case testConfigurationParameterized(conf: TNConfiguration)
     case testImage(imageName: String)
     case testPinning(certPath: String)
+    case testEncryptParams(value: String?)
 
     func testPinningConfiguration(withcertPath certPath: String) -> TNConfiguration {
         let configuration = TNConfiguration()
@@ -123,6 +124,12 @@ enum APIRouter: TNRouterProtocol {
                 method: .get,
                 path: .path(["test_empty_response"]),
                 configuration: testPinningConfiguration(withcertPath: certPath)
+            )
+        case .testEncryptParams(let value):
+            return TNRouteConfiguration(
+                method: .post,
+                path: .path(["test_encrypt_params"]),
+                params: ["value": value]
             )
         }
     }

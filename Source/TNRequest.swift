@@ -132,8 +132,9 @@ open class TNRequest: TNOperation {
     ///
     /// - parameters:
     ///   - route: a TNRouteProtocol enum value
-    public init(route: TNRouterProtocol,
-                environment: TNEnvironment? = TNEnvironment.current) {
+    internal init(route: TNRouterProtocol,
+                     environment: TNEnvironment? = TNEnvironment.current,
+                     configuration: TNConfiguration? = nil) {
         let route = route.configure()
         self.method = route.method
         self.headers = route.headers
@@ -146,10 +147,21 @@ open class TNRequest: TNOperation {
             self.configuration = TNConfiguration.override(configuration: self.configuration,
                                                                  with: environmentConfiguration)
         }
+        if let routerConfiguration = configuration {
+            self.configuration = TNConfiguration.override(configuration: self.configuration,
+                                                                 with: routerConfiguration)
+        }
         if let routeConfiguration = route.configuration {
             self.configuration = TNConfiguration.override(configuration: self.configuration,
                                                                  with: routeConfiguration)
         }
+    }
+
+    public convenience init(route: TNRouterProtocol,
+                            environment: TNEnvironment? = TNEnvironment.current) {
+        self.init(route: route,
+                  environment: environment,
+                  configuration: nil)
     }
 
     // MARK: Create request
@@ -189,7 +201,7 @@ open class TNRequest: TNOperation {
         var request = URLRequest(url: url,
                                  cachePolicy: configuration.cachePolicy ?? defaultCachePolicy)
 
-        setHeaders()
+        try setHeaders()
 
         if let timeoutInterval = self.configuration.timeoutInterval {
             request.timeoutInterval = timeoutInterval
@@ -284,15 +296,23 @@ open class TNRequest: TNOperation {
                     self.handleDataTaskFailure()
                 }
             } else {
-                self.data = self.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: self.data)
-                completionHandler?(data ?? Data())
+                do {
+                    self.data = try self.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: self.data)
+                    completionHandler?(data ?? Data())
+                } catch {
+                    if let customError = error as? TNError {
+                        self.customError = customError
+                        TNLog.logRequest(request: self)
+                        onFailure?(customError, nil)
+                    }
+                }
             }
         }
 
         return dataTask
     }
 
-    fileprivate func setHeaders() {
+    fileprivate func setHeaders() throws {
         /// Merge headers with the following order environment > route > request
         if headers == nil {
             headers = [:]
@@ -300,7 +320,7 @@ open class TNRequest: TNOperation {
 
         headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
 
-        headers = handleMiddlewareHeadersBeforeSendIfNeeded(headers: headers)
+        headers = try handleMiddlewareHeadersBeforeSendIfNeeded(headers: headers)
     }
 
     internal func shouldMockRequest() -> Bool {

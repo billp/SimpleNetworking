@@ -24,10 +24,13 @@ import UIKit
 open class TNRouter<Route: TNRouterProtocol> {
     // MARK: Properties
     fileprivate var environment: TNEnvironment?
+    fileprivate var configuration: TNConfiguration?
 
     /// Initialize with environment that overrides the one set by TNEnvironment.set(_).
-    public init(environment: TNEnvironmentProtocol? = nil) {
+    public init(environment: TNEnvironmentProtocol? = nil,
+                configuration: TNConfiguration? = nil) {
         self.environment = environment?.configure() ?? TNEnvironment.current
+        self.configuration = configuration
     }
 
     /// Starts a request. The response object in success callback is of type Decodable.
@@ -45,7 +48,8 @@ open class TNRouter<Route: TNRouterProtocol> {
                          onSuccess: @escaping TNSuccessCallback<T>,
                          onFailure: TNFailureCallback?) where T: Decodable {
         let call = TNRequest(route: route,
-                             environment: environment)
+                             environment: environment,
+                             configuration: configuration)
 
         call.start(queue: queue,
                    responseType: responseType,
@@ -68,7 +72,8 @@ open class TNRouter<Route: TNRouterProtocol> {
                                   onSuccess: @escaping TNSuccessCallback<T>,
                                   onFailure: @escaping TNFailureCallback) {
         let call = TNRequest(route: route,
-                             environment: environment)
+                             environment: environment,
+                             configuration: configuration)
         call.start(queue: queue,
                    responseType: responseType,
                    onSuccess: onSuccess,
@@ -107,6 +112,7 @@ open class TNRouter<Route: TNRouterProtocol> {
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
     public func request(forRoute route: Route) -> TNRequest {
         return TNRequest(route: route,
-                         environment: environment)
+                         environment: environment,
+                         configuration: configuration)
     }
 }

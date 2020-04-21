@@ -13,26 +13,26 @@ extension TNRequest {
         return configuration.requestMiddlewares.count > 0
     }
 
-    func handleMiddlewareBodyBeforeSendIfNeeded(params: [String: Any?]?) -> [String: Any?]? {
+    func handleMiddlewareBodyBeforeSendIfNeeded(params: [String: Any?]?) throws -> [String: Any?]? {
         var newParams = params
-        configuration.requestMiddlewares.forEach { middleware in
-            newParams = middleware.modifyBodyBeforeSend(with: newParams)
+        try configuration.requestMiddlewares.forEach { middleware in
+            newParams = try middleware.modifyBodyBeforeSend(with: newParams)
         }
         return newParams
     }
 
-    func handleMiddlewareBodyAfterReceiveIfNeeded(responseData: Data?) -> Data? {
+    func handleMiddlewareBodyAfterReceiveIfNeeded(responseData: Data?) throws -> Data? {
         var newResponseData = responseData
-        configuration.requestMiddlewares.forEach { middleware in
-            newResponseData = middleware.modifyBodyAfterReceive(with: newResponseData)
+        try configuration.requestMiddlewares.forEach { middleware in
+            newResponseData = try middleware.modifyBodyAfterReceive(with: newResponseData)
         }
         return newResponseData
     }
 
-    func handleMiddlewareHeadersBeforeSendIfNeeded(headers: [String: String]?) -> [String: String]? {
+    func handleMiddlewareHeadersBeforeSendIfNeeded(headers: [String: String]?) throws -> [String: String]? {
         var newHeaders = headers
-        configuration.requestMiddlewares.forEach { middleware in
-            newHeaders = middleware.modifyHeadersBeforeSend(with: newHeaders)
+        try configuration.requestMiddlewares.forEach { middleware in
+            newHeaders = try middleware.modifyHeadersBeforeSend(with: newHeaders)
         }
         return newHeaders
     }

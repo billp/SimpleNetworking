@@ -31,6 +31,17 @@ class TestTNRequest: XCTestCase {
         return TNRouter<APIRouter>(environment: Environment.google)
     }()
 
+    lazy var routerWithMiddleware: TNRouter<APIRouter> = {
+        let configuration = TNConfiguration()
+        configuration.requestMiddlewares = [CryptoMiddleware()]
+        configuration.verbose = true
+
+        let router = TNRouter<APIRouter>(environment: Environment.termiNetworkRemote,
+                                         configuration: configuration)
+
+        return router
+    }()
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -332,7 +343,27 @@ class TestTNRequest: XCTestCase {
         wait(for: [expectation2], timeout: 10)
     }
 
-    func sampleRequest(queue: TNQueue? = TNQueue.shared, onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
+    func testMiddleware() {
+        var failed = true
+
+        let expectation = XCTestExpectation(description: "Test encrypted request")
+
+        routerWithMiddleware.start(.testEncryptParams(value: "Yoooo"),
+                                   responseType: EncryptedModel.self,
+                                   onSuccess: { model in
+            failed = model.value == "Yoooo"
+            expectation.fulfill()
+        }, onFailure: { (_, _) in
+            failed = true
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 10)
+        XCTAssert(!failed)
+    }
+
+    fileprivate func sampleRequest(queue: TNQueue? = TNQueue.shared,
+                                   onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
         let call = TNRequest(route: APIRouter.testPostParams(value1: true,
                                                              value2: 3,
                                                              value3: 5.13453124189,
