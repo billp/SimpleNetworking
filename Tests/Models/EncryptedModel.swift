@@ -6,7 +6,7 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class EncryptedModel: Codable {
     let value: String

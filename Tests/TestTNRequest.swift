@@ -349,8 +349,8 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test encrypted request")
 
         routerWithMiddleware.start(.testEncryptParams(value: "Yoooo"),
-                                   responseType: EncryptedModel.self,
-                                   onSuccess: { model in
+                                    responseType: EncryptedModel.self,
+                                    onSuccess: { model in
             failed = model.value == "Yoooo"
             expectation.fulfill()
         }, onFailure: { (_, _) in

@@ -35,9 +35,8 @@ class CryptoMiddleware: TNRequestMiddlewareProtocol {
         }
 
         do {
-            let aes = try AES.init(key: CryptoMiddleware.key.bytes, blockMode: CBC(iv: <#Array<UInt8>#>))
+            let aes = try AES.init(key: CryptoMiddleware.key.bytes, blockMode: ECB())
             let data = Data(try aes.decrypt(base64Data.bytes))
-            print(String(data: data, encoding: .utf8))
             return data
         } catch {
             throw TNError.middlewareError("Cannot decrypt")
