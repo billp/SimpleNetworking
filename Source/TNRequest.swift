@@ -133,8 +133,8 @@ open class TNRequest: TNOperation {
     /// - parameters:
     ///   - route: a TNRouteProtocol enum value
     internal init(route: TNRouterProtocol,
-                     environment: TNEnvironment? = TNEnvironment.current,
-                     configuration: TNConfiguration? = nil) {
+                  environment: TNEnvironment? = TNEnvironment.current,
+                  configuration: TNConfiguration? = nil) {
         let route = route.configure()
         self.method = route.method
         self.headers = route.headers
@@ -168,7 +168,7 @@ open class TNRequest: TNOperation {
 
     /// Converts a TNRequest instance to asRequest
     public func asRequest() throws -> URLRequest {
-
+        let params = try handleMiddlewareBodyBeforeSendIfNeeded(params: self.params)
         let urlString = NSMutableString()
 
         if pathType == .normal {
@@ -215,6 +215,7 @@ open class TNRequest: TNOperation {
 
         do {
             try addBodyParams(withRequest: &request,
+                              params: params,
                           queryString: queryString)
         } catch {
             throw TNError.invalidParams
@@ -235,6 +236,7 @@ open class TNRequest: TNOperation {
     // MARK: Helper methods
 
     fileprivate func addBodyParams(withRequest request: inout URLRequest,
+                                   params: [String: Any?]?,
                                    queryString: String?) throws {
         // Set body params if method is not get
         if method != TNMethod.get {
@@ -246,7 +248,7 @@ open class TNRequest: TNOperation {
                 request.httpBody = queryString?.data(using: .utf8)
             } else {
                 do {
-                    let jsonData = try  handleMiddlewareBodyBeforeSendIfNeeded(params: params)?.toJSONData()
+                    let jsonData = try params?.toJSONData()
                     request.httpBody = jsonData
                 } catch {
                     throw TNError.invalidParams
@@ -298,7 +300,7 @@ open class TNRequest: TNOperation {
             } else {
                 do {
                     self.data = try self.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: self.data)
-                    completionHandler?(data ?? Data())
+                    completionHandler?(self.data ?? Data())
                 } catch {
                     if let customError = error as? TNError {
                         self.customError = customError

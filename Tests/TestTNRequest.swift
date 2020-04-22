@@ -35,6 +35,7 @@ class TestTNRequest: XCTestCase {
         let configuration = TNConfiguration()
         configuration.requestMiddlewares = [CryptoMiddleware()]
         configuration.verbose = true
+        configuration.requestBodyType = .JSON
 
         let router = TNRouter<APIRouter>(environment: Environment.termiNetworkRemote,
                                          configuration: configuration)
@@ -351,7 +352,7 @@ class TestTNRequest: XCTestCase {
         routerWithMiddleware.start(.testEncryptParams(value: "Yoooo"),
                                     responseType: EncryptedModel.self,
                                     onSuccess: { model in
-            failed = model.value == "Yoooo"
+            failed = model.value != "Yoooo"
             expectation.fulfill()
         }, onFailure: { (_, _) in
             failed = true
