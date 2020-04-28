@@ -16,7 +16,6 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// swiftlint:disable type_body_length file_length
 
 import Foundation
 import UIKit
@@ -52,7 +51,7 @@ open class TNRequest: TNOperation {
 
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
-    internal var dataTask: URLSessionDataTask?
+    internal var dataTask: URLSessionTask?
     internal var customError: TNError?
     internal var data: Data?
     internal var urlResponse: URLResponse?
@@ -257,63 +256,6 @@ open class TNRequest: TNOperation {
         }
     }
 
-    internal func sessionDataTask(request: URLRequest, completionHandler: ((Data) -> Void)?,
-                                  onFailure: TNFailureCallback?) -> URLSessionDataTask {
-
-        /// Create mock request if needed
-        if shouldMockRequest() {
-            return createMockRequest(request: request,
-                                     completionHandler:
-                completionHandler, onFailure: onFailure)
-        }
-
-        let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(withTNRequest: self),
-                                 delegateQueue: OperationQueue.current)
-
-        let dataTask = session.dataTask(with: request) { data, urlResponse, error in
-            var statusCode: Int?
-            self.data = data
-            self.urlResponse = urlResponse
-
-            /// Error handling
-            if let error = error {
-                if (error as NSError).code == NSURLErrorCancelled {
-                    self.customError = TNError.cancelled(error)
-                } else {
-                    self.customError = TNError.networkError(error)
-                }
-            } else if let response = urlResponse as? HTTPURLResponse {
-                statusCode = response.statusCode as Int?
-
-                if let statusCode = statusCode, statusCode / 100 != 2 {
-                    self.customError = TNError.notSuccess(statusCode)
-                }
-            }
-
-            if let customError = self.customError {
-                DispatchQueue.main.async {
-                    TNLog.logRequest(request: self)
-                    onFailure?(customError, self.data)
-                    self.handleDataTaskFailure()
-                }
-            } else {
-                do {
-                    self.data = try self.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: self.data)
-                    completionHandler?(self.data ?? Data())
-                } catch {
-                    if let customError = error as? TNError {
-                        self.customError = customError
-                        TNLog.logRequest(request: self)
-                        onFailure?(customError, nil)
-                    }
-                }
-            }
-        }
-
-        return dataTask
-    }
-
     fileprivate func setHeaders() throws {
         /// Merge headers with the following order environment > route > request
         if headers == nil {
@@ -329,9 +271,9 @@ open class TNRequest: TNOperation {
         return self.configuration.useMockData
     }
 
-    fileprivate func createMockRequest(request: URLRequest,
-                                       completionHandler: ((Data) -> Void)?,
-                                       onFailure: TNFailureCallback?) -> URLSessionDataTask {
+    internal func createMockRequest(request: URLRequest,
+                                    completionHandler: ((Data) -> Void)?,
+                                    onFailure: TNFailureCallback?) -> URLSessionDataTask {
         let fakeSession = URLSession(configuration: URLSession.shared.configuration)
                             .dataTask(with: request)
 
@@ -386,184 +328,5 @@ open class TNRequest: TNOperation {
         _finished = true
 
         currentQueue.afterOperationFinished(request: self, data: data, response: urlResponse, error: customError)
-    }
-
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of
-    /// type Decodable
-    ///
-    /// - parameters:
-    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-    public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
-                                    responseType: T.Type,
-                                    onSuccess: TNSuccessCallback<T>?,
-                                    onFailure: TNFailureCallback?) {
-        currentQueue = queue ?? TNQueue.shared
-        currentQueue.beforeOperationStart(request: self)
-
-        let request: URLRequest!
-        do {
-            request = try asRequest()
-        } catch let error {
-            if let error = error as? TNError {
-                onFailure?(error, nil)
-            }
-            self.handleDataTaskFailure()
-            return
-        }
-
-        dataTask = sessionDataTask(request: request, completionHandler: { data in
-            let object: T!
-
-            do {
-                object = try data.deserializeJSONData() as T
-            } catch let error {
-                self.customError = .cannotDeserialize(error)
-                TNLog.logRequest(request: self)
-                onFailure?(.cannotDeserialize(error), data)
-                self.handleDataTaskFailure()
-                return
-            }
-
-            TNLog.logRequest(request: self)
-            onSuccess?(object)
-            self.handleDataTaskCompleted()
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
-        })
-
-        currentQueue.addOperation(self)
-    }
-
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type UIImage
-    ///
-    /// - parameters:
-    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-    public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
-                                  responseType: T.Type,
-                                  onSuccess: TNSuccessCallback<T>?,
-                                  onFailure: TNFailureCallback?) {
-        currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
-
-        let request: URLRequest!
-        do {
-            request = try asRequest()
-        } catch let error {
-            if let error = error as? TNError {
-                onFailure?(error, nil)
-            }
-            self.handleDataTaskFailure()
-            return
-        }
-
-        dataTask = sessionDataTask(request: request, completionHandler: { data in
-            let image = T(data: data)
-
-            if image == nil {
-                self.customError = .responseInvalidImageData
-                TNLog.logRequest(request: self)
-
-                onFailure?(.responseInvalidImageData, data)
-                self.handleDataTaskFailure()
-            } else {
-                TNLog.logRequest(request: self)
-                onSuccess?(image!)
-                self.handleDataTaskCompleted()
-            }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
-        })
-
-        currentQueue.addOperation(self)
-    }
-
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type String
-    ///
-    /// - parameters:
-    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-    public func start(queue: TNQueue? = TNQueue.shared,
-                      responseType: String.Type,
-                      onSuccess: TNSuccessCallback<String>?,
-                      onFailure: TNFailureCallback?) {
-        currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
-
-        let request: URLRequest!
-        do {
-            request = try asRequest()
-        } catch let error {
-            if let error = error as? TNError {
-                onFailure?(error, nil)
-            }
-            self.handleDataTaskFailure()
-            return
-        }
-
-        dataTask = sessionDataTask(request: request, completionHandler: { data in
-            DispatchQueue.main.async {
-                TNLog.logRequest(request: self)
-
-                if let string = String(data: data, encoding: .utf8) {
-                    onSuccess?(string)
-                    self.handleDataTaskCompleted()
-                } else {
-                    let error = TNError.cannotConvertToString
-                    onFailure?(error, data)
-                    self.handleDataTaskFailure()
-                }
-
-            }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
-        })
-
-        currentQueue.addOperation(self)
-    }
-
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type Data
-    ///
-    /// - parameters:
-    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
-    public func start(queue: TNQueue? = TNQueue.shared,
-                      responseType: Data.Type,
-                      onSuccess: TNSuccessCallback<Data>?,
-                      onFailure: TNFailureCallback?) {
-        currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
-
-        let request: URLRequest!
-        do {
-            request = try asRequest()
-        } catch let error {
-            if let error = error as? TNError {
-                onFailure?(error, nil)
-            }
-            self.handleDataTaskCompleted()
-            return
-        }
-
-        dataTask = sessionDataTask(request: request, completionHandler: { data in
-            DispatchQueue.main.async {
-                TNLog.logRequest(request: self)
-                onSuccess?(data)
-                self.handleDataTaskCompleted()
-            }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
-        })
-
-        currentQueue.addOperation(self)
     }
 }

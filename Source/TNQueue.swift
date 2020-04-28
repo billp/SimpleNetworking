@@ -92,6 +92,9 @@ open class TNQueue: OperationQueue {
             guard !request.shouldMockRequest() else {
                 return
             }
+            guard request.dataTask != nil else {
+                return
+            }
         }
 
         super.addOperation(operation)

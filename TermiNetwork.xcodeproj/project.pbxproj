@@ -13,6 +13,8 @@
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
+		F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */; };
+		F37C5F662458A5C3005BF48B /* TNRequest+DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F652458A5C3005BF48B /* TNRequest+DataOperations.swift */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
 		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
 		F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7B243D103700F7CC13 /* TestTNQueue.swift */; };
@@ -28,7 +30,7 @@
 		F3850CA5243D104900F7CC13 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C95243D104900F7CC13 /* UIImageView+Extensions.swift */; };
 		F3850CA6243D104900F7CC13 /* TNRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C96243D104900F7CC13 /* TNRouter.swift */; };
 		F3850CA7243D104900F7CC13 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C97243D104900F7CC13 /* String+Extensions.swift */; };
-		F3850CA8243D104900F7CC13 /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C98243D104900F7CC13 /* TNSession.swift */; };
+		F3850CA8243D104900F7CC13 /* TNSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C98243D104900F7CC13 /* TNSessionDelegate.swift */; };
 		F3850CA9243D104900F7CC13 /* TNRouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C99243D104900F7CC13 /* TNRouteProtocol.swift */; };
 		F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9A243D104900F7CC13 /* TNPath.swift */; };
 		F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9B243D104900F7CC13 /* TNErrors.swift */; };
@@ -68,6 +70,8 @@
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
+		F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNSessionTaskFactory.swift; sourceTree = "<group>"; };
+		F37C5F652458A5C3005BF48B /* TNRequest+DataOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+DataOperations.swift"; sourceTree = "<group>"; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F3850C7B243D103700F7CC13 /* TestTNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNQueue.swift; sourceTree = "<group>"; };
@@ -84,7 +88,7 @@
 		F3850C95243D104900F7CC13 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		F3850C96243D104900F7CC13 /* TNRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouter.swift; sourceTree = "<group>"; };
 		F3850C97243D104900F7CC13 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		F3850C98243D104900F7CC13 /* TNSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSession.swift; sourceTree = "<group>"; };
+		F3850C98243D104900F7CC13 /* TNSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSessionDelegate.swift; sourceTree = "<group>"; };
 		F3850C99243D104900F7CC13 /* TNRouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouteProtocol.swift; sourceTree = "<group>"; };
 		F3850C9A243D104900F7CC13 /* TNPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNPath.swift; sourceTree = "<group>"; };
 		F3850C9B243D104900F7CC13 /* TNErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNErrors.swift; sourceTree = "<group>"; };
@@ -168,6 +172,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F37C5F642458A592005BF48B /* TNRequest Operations */ = {
+			isa = PBXGroup;
+			children = (
+				F37C5F652458A5C3005BF48B /* TNRequest+DataOperations.swift */,
+			);
+			name = "TNRequest Operations";
+			sourceTree = "<group>";
+		};
 		F3850C78243D103700F7CC13 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +219,7 @@
 				F3F255EA244C340C00517BF7 /* Protocols */,
 				F3850CB5243D105100F7CC13 /* Extensions */,
 				F3850C96243D104900F7CC13 /* TNRouter.swift */,
-				F3850C98243D104900F7CC13 /* TNSession.swift */,
+				F3850C98243D104900F7CC13 /* TNSessionDelegate.swift */,
 				F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */,
 				F3850C9A243D104900F7CC13 /* TNPath.swift */,
 				F3850C9B243D104900F7CC13 /* TNErrors.swift */,
@@ -217,6 +229,7 @@
 				F3850C9F243D104900F7CC13 /* TNQueue.swift */,
 				F3850CA0243D104900F7CC13 /* TNRequest.swift */,
 				F3850CA3243D104900F7CC13 /* TNEnvironment.swift */,
+				F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -224,6 +237,7 @@
 		F3850CB5243D105100F7CC13 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F37C5F642458A592005BF48B /* TNRequest Operations */,
 				F3850C95243D104900F7CC13 /* UIImageView+Extensions.swift */,
 				F3850C97243D104900F7CC13 /* String+Extensions.swift */,
 				F3850CA1243D104900F7CC13 /* Dictionary+Extensions.swift */,
@@ -419,8 +433,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3850CA8243D104900F7CC13 /* TNSession.swift in Sources */,
+				F3850CA8243D104900F7CC13 /* TNSessionDelegate.swift in Sources */,
 				F3850CAD243D104900F7CC13 /* TNLog.swift in Sources */,
+				F37C5F662458A5C3005BF48B /* TNRequest+DataOperations.swift in Sources */,
 				F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */,
 				F3850CA6243D104900F7CC13 /* TNRouter.swift in Sources */,
 				F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */,
@@ -437,6 +452,7 @@
 				F3850CB1243D104900F7CC13 /* Dictionary+Extensions.swift in Sources */,
 				F3850CA5243D104900F7CC13 /* UIImageView+Extensions.swift in Sources */,
 				F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */,
+				F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */,
 				F3F255EE244DF9F800517BF7 /* TNRequest+Middleware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
