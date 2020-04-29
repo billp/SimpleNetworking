@@ -52,8 +52,6 @@ open class TNRequest: TNOperation {
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
     internal var dataTask: URLSessionTask?
-    internal var customError: TNError?
-    internal var data: Data?
     internal var urlResponse: URLResponse?
     internal var params: [String: Any?]?
     internal var path: String
@@ -291,7 +289,6 @@ open class TNRequest: TNOperation {
                                                         subdirectory: subdirectory,
                                                         localization: nil),
             let data = try? Data(contentsOf: url) {
-            self.data = data
             completionHandler?(data)
         } else {
             onFailure?(.invalidMockData(path), nil)
@@ -307,14 +304,19 @@ open class TNRequest: TNOperation {
         dataTask?.resume()
     }
 
-    func handleDataTaskCompleted() {
+    func handleDataTaskCompleted(withData data: Data?,
+                                 tnError: TNError?) {
         _executing = false
         _finished = true
 
-        currentQueue.afterOperationFinished(request: self, data: data, response: urlResponse, error: customError)
+        currentQueue.afterOperationFinished(request: self,
+                                            data: data,
+                                            response: urlResponse,
+                                            tnError: tnError)
     }
 
-    func handleDataTaskFailure() {
+    func handleDataTaskFailure(withData data: Data?,
+                               tnError: TNError?) {
         switch currentQueue.failureMode {
         case .continue?:
             break
@@ -327,6 +329,9 @@ open class TNRequest: TNOperation {
         _executing = false
         _finished = true
 
-        currentQueue.afterOperationFinished(request: self, data: data, response: urlResponse, error: customError)
+        currentQueue.afterOperationFinished(request: self,
+                                            data: data,
+                                            response: urlResponse,
+                                            tnError: tnError)
     }
 }

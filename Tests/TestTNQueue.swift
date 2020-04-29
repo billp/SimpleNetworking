@@ -140,8 +140,8 @@ class TestTNQueue: XCTestCase {
         var numberOfRequests = urls.count
         var completedWithError = false
 
-        queue.afterAllRequestsCallback = { error in
-            completedWithError = error
+        queue.afterAllRequestsCallback = { hasError in
+            completedWithError = hasError
             expectation.fulfill()
         }
 

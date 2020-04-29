@@ -71,15 +71,18 @@ open class TNQueue: OperationQueue {
         beforeEachRequestCallback?(request)
     }
 
-    internal func afterOperationFinished(request: TNRequest, data: Data?, response: URLResponse?, error: Error?) {
-        self.completedWithError = error != nil ? true : self.completedWithError
+    internal func afterOperationFinished(request: TNRequest,
+                                         data: Data?,
+                                         response: URLResponse?,
+                                         tnError: Error?) {
+        self.completedWithError = tnError != nil ? true : self.completedWithError
 
         if self.operationCount == 0 {
             afterAllRequestsCallback?(self.completedWithError)
             self.completedWithError = false
         }
 
-        afterEachRequestCallback?(request, data, response, error)
+        afterEachRequestCallback?(request, data, response, tnError)
     }
 
     /// Adds a TNRequest into queue.

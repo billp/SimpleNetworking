@@ -24,25 +24,32 @@ extension TNRequest {
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
-                                                       completionHandler: { data in
+                                                     completionHandler: { data in
             let object: T!
 
             do {
                 object = try data.deserializeJSONData() as T
             } catch let error {
-                self.customError = .cannotDeserialize(error)
-                TNLog.logRequest(request: self)
-                onFailure?(.cannotDeserialize(error), data)
-                self.handleDataTaskFailure()
+                let tnError = TNError.cannotDeserialize(error)
+                TNLog.logRequest(request: self,
+                                 data: data,
+                                 tnError: tnError)
+                onFailure?(tnError, data)
+                self.handleDataTaskFailure(withData: data,
+                                           tnError: tnError)
                 return
             }
 
-            TNLog.logRequest(request: self)
+            TNLog.logRequest(request: self,
+                             data: data,
+                             tnError: nil)
             onSuccess?(object)
-            self.handleDataTaskCompleted()
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
+            self.handleDataTaskCompleted(withData: data,
+                                         tnError: nil)
+        }, onFailure: { tnError, data in
+            onFailure?(tnError, data)
+            self.handleDataTaskFailure(withData: data,
+                                       tnError: tnError)
         })
 
         currentQueue.addOperation(self)
@@ -66,19 +73,26 @@ extension TNRequest {
             let image = T(data: data)
 
             if image == nil {
-                self.customError = .responseInvalidImageData
-                TNLog.logRequest(request: self)
+                let tnError = TNError.responseInvalidImageData
+                TNLog.logRequest(request: self,
+                                 data: data,
+                                 tnError: tnError)
 
                 onFailure?(.responseInvalidImageData, data)
-                self.handleDataTaskFailure()
+                self.handleDataTaskFailure(withData: data,
+                                           tnError: tnError)
             } else {
-                TNLog.logRequest(request: self)
-                onSuccess?(image!)
-                self.handleDataTaskCompleted()
+                TNLog.logRequest(request: self,
+                                 data: data,
+                                 tnError: nil)
+                onSuccess?(image ?? T())
+                self.handleDataTaskCompleted(withData: data,
+                                             tnError: nil)
             }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
+        }, onFailure: { tnError, data in
+            onFailure?(tnError, data)
+            self.handleDataTaskFailure(withData: data,
+                                       tnError: tnError)
         })
 
         currentQueue.addOperation(self)
@@ -100,21 +114,29 @@ extension TNRequest {
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data in
             DispatchQueue.main.async {
-                TNLog.logRequest(request: self)
-
                 if let string = String(data: data, encoding: .utf8) {
+                    TNLog.logRequest(request: self,
+                                     data: data,
+                                     tnError: nil)
+
                     onSuccess?(string)
-                    self.handleDataTaskCompleted()
+                    self.handleDataTaskCompleted(withData: data,
+                                                 tnError: nil)
                 } else {
-                    let error = TNError.cannotConvertToString
-                    onFailure?(error, data)
-                    self.handleDataTaskFailure()
+                    let tnError = TNError.cannotConvertToString
+                    TNLog.logRequest(request: self,
+                                     data: data,
+                                     tnError: tnError)
+                    onFailure?(tnError, data)
+                    self.handleDataTaskFailure(withData: data,
+                                               tnError: tnError)
                 }
 
             }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
+        }, onFailure: { tnError, data in
+            onFailure?(tnError, data)
+            self.handleDataTaskFailure(withData: data,
+                                       tnError: tnError)
         })
 
         currentQueue.addOperation(self)
@@ -136,13 +158,16 @@ extension TNRequest {
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data in
             DispatchQueue.main.async {
-                TNLog.logRequest(request: self)
+                TNLog.logRequest(request: self, data: data,
+                                 tnError: nil)
                 onSuccess?(data)
-                self.handleDataTaskCompleted()
+                self.handleDataTaskCompleted(withData: data,
+                                             tnError: nil)
             }
-        }, onFailure: { error, data in
-            onFailure?(error, data)
-            self.handleDataTaskFailure()
+        }, onFailure: { tnError, data in
+            onFailure?(tnError, data)
+            self.handleDataTaskFailure(withData: data,
+                                       tnError: tnError)
         })
 
         currentQueue.addOperation(self)
