@@ -318,12 +318,10 @@ open class TNRequest: TNOperation {
     func handleDataTaskFailure(withData data: Data?,
                                tnError: TNError?) {
         switch currentQueue.failureMode {
-        case .continue?:
+        case .continue:
             break
-        case .cancelAll?:
+        case .cancelAll:
             currentQueue.cancelAllOperations()
-        default:
-            break
         }
 
         _executing = false

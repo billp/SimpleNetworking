@@ -27,9 +27,22 @@ public enum TNQueueFailureMode {
     case `continue`
 }
 
-public typealias TNBeforeAllRequestsCallbackType = () -> Void
-public typealias TNAfterAllRequestsCallbackType = (_ error: Bool) -> Void
+/// Hook with a block of code to run before the queue is started
+public typealias TNBeforeStartQueueCallbackType = () -> Void
+/// Hook with a block of code to run after the queue is finished
+/// - Parameters:
+///   - hasError:Passes a Boolean value which indicates if any of the request in queue has completed with error.
+public typealias TNAfterAllRequestsCallbackType = (_ hasError: Bool) -> Void
+/// Hook with a block of code to run before each request execution in the queue
+/// - Parameters:
+///   - request:The actual TNRequest instance.
 public typealias TNBeforeEachRequestCallbackType = (_ request: TNRequest) -> Void
+/// Hook with a block of code to run after the completion of request execution in the queue
+/// - Parameters:
+///   - request:The actual TNRequest instance.
+///   - data: The response data
+///   - response: The URLResponse
+///   - error:The network error (if any)
 public typealias TNAfterEachRequestCallbackType = (
     _ request: TNRequest,
     _ data: Data?,
@@ -46,12 +59,12 @@ open class TNQueue: OperationQueue {
     private var completedWithError = false
 
     // MARK: Pulblic variables
-    public var beforeAllRequestsCallback: TNBeforeAllRequestsCallbackType?
+    public var beforeAllRequestsCallback: TNBeforeStartQueueCallbackType?
     public var afterAllRequestsCallback: TNAfterAllRequestsCallbackType?
     public var beforeEachRequestCallback: TNBeforeEachRequestCallbackType?
     public var afterEachRequestCallback: TNAfterEachRequestCallbackType?
 
-    var failureMode: TNQueueFailureMode!
+    internal var failureMode: TNQueueFailureMode = .continue
 
     /// Initializes a new queue.
     ///

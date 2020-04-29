@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           TermiNetwork Docs
         </a>
-         (66% documented)
+         (69% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -124,10 +124,10 @@
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork30TNAfterEachRequestCallbackTypea">TNAfterEachRequestCallbackType</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork31TNBeforeAllRequestsCallbackTypea">TNBeforeAllRequestsCallbackType</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork31TNBeforeEachRequestCallbackTypea">TNBeforeEachRequestCallbackType</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork31TNBeforeEachRequestCallbackTypea">TNBeforeEachRequestCallbackType</a>
+                <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork30TNBeforeStartQueueCallbackTypea">TNBeforeStartQueueCallbackType</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a>
@@ -144,7 +144,292 @@
         <section class="section">
           <div class="section-content top-matter">
             
-            <p>Test</p>
+            <p><a href="https://twitter.com/home?status=https%3A%2F%2Fgithub.com%2Fbillp%2FTermiNetwork%20TermiNetwork%20is%20a%20networking%20abstraction%20layer%20written%20on%20top%20of%20Swift%27s%20URLRequest%20that%20supports%20multi-environment%20configuration%2C%20routing%20and%20automatic%20deserialization."><img src="https://img.shields.io/twitter/url/https/github.com/billp/TermiNetwork.svg?style=social" alt="Tweet"></a></p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="600" />
+</p>
+
+<p><a href="https://travis-ci.org/billp/TermiNetwork"><img src="https://travis-ci.org/billp/TermiNetwork.svg?branch=master" alt="Build Status"></a>
+<a href="https://cocoapods.org/pods/terminetwork"><img src="https://img.shields.io/cocoapods/v/TermiNetwork.svg?style=flat" alt="Pod"></a></p>
+
+<p>TermiNetwork is a networking abstraction layer written on top of Swift&rsquo;s URLRequest which is designed to work with Codables.</p>
+<h1 id='features' class='heading'>Features</h1>
+
+<ul>
+<li>Automatic model deserialization with Codable</li>
+<li>Multi-environment configuration</li>
+<li>Ability to convert responses automatically to the wanted type (Codable model, UIImage, Data or String)</li>
+<li>Routing</li>
+<li>Error handling</li>
+<li>Mock requests</li>
+<li>Certificate Pinning</li>
+<li>Flexible configuration</li>
+<li>Middleware support (e.g. to add an extra layer of encryption to your requests)</li>
+<li>File upload and download support</li>
+<li>Clean debug information in the console</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>TermiNetwork is available via <a href="http://cocoapods.org">CocoaPods</a>.  Simply add the following lines to your Podfile and run <strong>pod install</strong> from your terminal:</p>
+<pre class="highlight ruby"><code><span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'9.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'YourTarget'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'TermiNetwork'</span><span class="p">,</span> <span class="s1">'~&gt; 0.3'</span>
+<span class="k">end</span>
+</code></pre>
+<h2 id='usage' class='heading'>Usage</h2>
+<h3 id='simple-usage' class='heading'>Simple usage</h3>
+
+<p>Imagine that you have the following Codable model</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Todo</span><span class="p">:</span> <span class="kt">Codable</span> <span class="p">{</span>
+   <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span>
+   <span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>You can call the <strong>TNRequest(&hellip;).start(&hellip;)</strong> to add a new Todo with the title &ldquo;Go shopping.&rdquo; like this:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
+
+<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span>
+<span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>If the request completes successfully (2xx), a new instance of Todo is being created and passed in onSuccess callback. If the deserialization fails for any reason, the onFailure callback is being called with the appropriate error. See more information about errors in <em>Error Handling</em> section.</p>
+
+<p>The JSON response of the service is the following:</p>
+<pre class="highlight swift"><code><span class="p">{</span>
+   <span class="s">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+   <span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span>
+<span class="p">}</span>
+</code></pre>
+<h4 id='parameters' class='heading'>Parameters</h4>
+
+<p><strong>method</strong>: one of the following supported HTTP methods</p>
+<pre class="highlight plaintext"><code>.get, .head, .post, .put, .delete, .connect, .options, .trace or .patch
+</code></pre>
+
+<p><strong>responseType</strong>: one of the following supported response types</p>
+<pre class="highlight plaintext"><code>JSON.self, Codable.self, UIImage.self, Data.self or String.self
+</code></pre>
+
+<p><strong>onSuccess</strong>: a callback returning an object with the data type specified by</p>
+
+<p><strong>onFailure</strong>: a callback returning an error+data on failure. There are two cases when this callback being called: the first is that the http status code is different than 2xx and the second is that there is an error with data conversion, e.g. it fails on deserialization of the <em>responseType</em>.</p>
+<h3 id='advanced-usage-with-configuration-and-custom-queue' class='heading'>Advanced usage with configuration and custom queue</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myQueue</span> <span class="o">=</span> <span class="kt">TNQueue</span><span class="p">(</span><span class="nv">failureMode</span><span class="p">:</span> <span class="o">.</span><span class="k">continue</span><span class="p">)</span>
+<span class="n">myQueue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNRequestConfiguration</span><span class="p">(</span>
+    <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
+    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span>
+<span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
+
+<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
+          <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">,</span>
+          <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+          <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+          <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">myQueue</span><span class="p">,</span> <span class="nv">responseType</span><span class="p">:</span> <span class="kt">JSON</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">json</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+<span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The request above uses a custom queue <em>myQueue</em> with a failure mode of value <em>.continue</em> (default), which means that the queue continues its execution even if a request fails, and also sets the maximum concurrent operation count to 2. Finally, it uses a TNRequestConfiguration object to provide some additional settings.</p>
+<h4 id='additional-parameters' class='heading'>Additional parameters</h4>
+
+<p><strong>configuration (optional)</strong>: The configuration object to use. The available configuration properties are:</p>
+
+<ul>
+<li><em>cachePolicy</em>: The NSURLRequest.CachePolicy used by NSURLRequest internally. Default value: <em>.useProtocolCachePolicy</em> (see apple docs for available values)</li>
+<li><em>timeoutInterval</em>: The timeout interval used by NSURLRequest internally. Default value: 60 (see apple docs for more info)</li>
+<li><em>requestBodyType</em>: It specifies the content type of request params. Available values:
+
+<ul>
+<li>.xWWWFormURLEncoded (default): The params are being sent with &lsquo;application/x-www-form-urlencoded&rsquo; content type.</li>
+<li>.JSON: The params are being sent with &lsquo;application/json&rsquo; content type.</li>
+</ul></li>
+</ul>
+
+<p><strong>queue (optional):</strong> Specify the queue in which the request will be  added. If you omit this argument, the request will be added to a shared queue (TNQueue.shared).</p>
+<h2 id='router' class='heading'>Router</h2>
+
+<p>You can organize your requests by creating an Environment (class) and a Router (enum) that conform TNEnvironmentProtocol and TNRouterProtocol respectively. To do so, create an environment enum and at least one router class as shown bellow:</p>
+<h4 id='environment-swift' class='heading'>Environment.swift</h4>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">TNEnvironmentProtocol</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">localhost</span>
+    <span class="k">case</span> <span class="n">dev</span>
+    <span class="k">case</span> <span class="n">production</span>
+
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">TNEnvironment</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">requestConfiguration</span> <span class="o">=</span> <span class="kt">TNRequestConfiguration</span><span class="p">(</span><span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
+                                                          <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                                                          <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span>
+        <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">localhost</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
+                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"localhost"</span><span class="p">,</span>
+                                 <span class="nv">port</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+                                 <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">requestConfiguration</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">dev</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
+                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"mydevserver.com"</span><span class="p">,</span>
+                                 <span class="nv">suffix</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"v1"</span><span class="p">),</span>
+                                 <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">requestConfiguration</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">production</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">http</span><span class="p">,</span>
+                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"myprodserver.com"</span><span class="p">,</span>
+                                 <span class="nv">suffix</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"v1"</span><span class="p">),</span>
+                                 <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">requestConfiguration</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>You can optionally pass a requestConfiguration object to make all requests inherit the specified settings. (see &lsquo;Advanced usage with configuration and custom queue&rsquo; above for how to create a configuration object.)</p>
+<h4 id='todosrouter-swift' class='heading'>TodosRouter.swift</h4>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TodosRouter</span><span class="p">:</span> <span class="kt">TNRouterProtocol</span> <span class="p">{</span>
+    <span class="c1">// Define your routes</span>
+    <span class="k">case</span> <span class="n">list</span>
+    <span class="k">case</span> <span class="nf">show</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">remove</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">setCompleted</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">completed</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
+
+    <span class="c1">// Set method, path, params, headers for each route</span>
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">TNRouteConfiguration</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
+        <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNRequestConfiguration</span><span class="p">(</span><span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span>
+
+        <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"todos"</span><span class="p">),</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span> <span class="c1">// GET /todos</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">show</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span> <span class="c1">// GET /todos/[id]</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="k">let</span> <span class="nv">title</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"todos"</span><span class="p">),</span> <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="n">title</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span> <span class="c1">// POST /todos</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">delete</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span> <span class="c1">// DELETE /todo/[id]</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">setCompleted</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">,</span> <span class="k">let</span> <span class="nv">completed</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">patch</span><span class="p">,</span> <span class="nv">path</span><span class="p">:</span> <span class="nf">path</span><span class="p">(</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)),</span> <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"completed"</span><span class="p">:</span> <span class="n">completed</span><span class="p">],</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">requestConfiguration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span> <span class="c1">// PATCH /todo/[id]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>You can optionally pass a requestConfiguration object to specify settings for each route. (see &lsquo;Advanced usage with configuration and custom queue&rsquo; above for instructions of how to create a configuration object.)</p>
+<h4 id='finally-use-the-tnrouter-to-start-a-request' class='heading'>Finally use the TNRouter to start a request</h4>
+<pre class="highlight swift"><code><span class="kt">TNRouter</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="kt">TodosRouter</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Go shopping!"</span><span class="p">),</span> <span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
+    <span class="c1">// do something with todo</span>
+<span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
+    <span class="c1">// show error</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='tnqueue-hooks' class='heading'>TNQueue Hooks</h2>
+
+<p>Hooks run before and/or after a request execution in a queue. The following hooks are executed in the default queue:</p>
+<pre class="highlight swift"><code><span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// e.g. show progress loader</span>
+<span class="p">}</span>
+
+<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">completedWithError</span> <span class="k">in</span> <span class="c1">// Bool</span>
+    <span class="c1">// e.g. hide progress loader</span>
+<span class="p">}</span>
+
+<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span> <span class="k">in</span> <span class="c1">// TNRequest</span>
+    <span class="c1">// e.g. print log</span>
+<span class="p">}</span>
+
+<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">urlResponse</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span> <span class="c1">// request: TNRequest, data: Data, urlResponse: URLResponse, error: Error</span>
+    <span class="c1">// e.g. print log</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='error-handling' class='heading'>Error Handling</h2>
+
+<p>Available error cases (TNError) passed in <em>onFailure</em> callback of a TNRequest:</p>
+
+<ul>
+<li><em>.environmentNotSet</em>: You didn&rsquo;t set the Environment.</li>
+<li><em>.invalidURL</em>: The url cannot be parsed, e.g. it contains invalid characters.</li>
+<li><em>.responseDataIsEmpty</em>: the server response body is empty. You can avoid this error by setting <em>TNRequest.allowEmptyResponseBody</em> to <em>true</em>.</li>
+<li><em>.responseInvalidImageData</em>: failed to convert response Data to UIImage.</li>
+<li><em>.cannotDeserialize(Error)</em>: e.g. your model&rsquo;s structure and types doesn&rsquo;t match with the server&rsquo;s response. It carries the the error thrown by deserializer (DecodingError.dataCorrupted),</li>
+<li><em>.cannotConvertToJSON</em>: cannot convert the response Data to JSON object (SwiftyJSON).</li>
+<li><em>.networkError(Error)</em>: e.g. timeout error. It carries the error from URLSessionDataTask.</li>
+<li><em>.notSuccess(Int)</em>: The http status code is different from <em>2xx</em>. It carries the actual status code of the completed request.</li>
+<li><em>.cancelled(Error)</em>: The request is cancelled. It carries the error from URLSessionDataTask.</li>
+</ul>
+
+<p>In any case you can use the <strong>error.localizedDescription</strong> method to get a readable error message in onFailure callback.</p>
+<h4 id='example' class='heading'>Example</h4>
+<pre class="highlight swift"><code><span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">JSON</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">json</span> <span class="k">in</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+        <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
+            <span class="k">switch</span> <span class="n">error</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">notSuccess</span><span class="p">(</span><span class="k">let</span> <span class="nv">statusCode</span><span class="p">):</span>
+                <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Status code "</span> <span class="o">+</span> <span class="kt">String</span><span class="p">(</span><span class="n">statusCode</span><span class="p">))</span>
+                <span class="k">break</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">networkError</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+                <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Network error: "</span> <span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">cancelled</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+                <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Request cancelled with error: "</span> <span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">default</span><span class="p">:</span>
+                <span class="nf">debugPrint</span><span class="p">(</span><span class="s">"Error: "</span> <span class="o">+</span> <span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+</code></pre>
+<h2 id='uiimageview-extension' class='heading'>UIImageView Extension</h2>
+
+<p>You can use the <em>setRemoteImage</em> method of UIImageView to download an image from a remote server</p>
+
+<p>Example:</p>
+<pre class="highlight swift"><code><span class="n">imageView</span><span class="o">.</span><span class="nf">setRemoteImage</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"http://www.website.com/image.jpg"</span><span class="p">,</span> <span class="n">defaultImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"DefaultImage"</span><span class="p">),</span> <span class="nv">beforeStart</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">imageView</span><span class="o">.</span><span class="n">activityIndicator</span><span class="o">.</span><span class="nf">startAnimating</span><span class="p">()</span>
+<span class="p">},</span> <span class="nv">preprocessImage</span><span class="p">:</span> <span class="p">{</span> <span class="n">image</span> <span class="k">in</span> <span class="c1">// This block will run in background</span>
+    <span class="k">let</span> <span class="nv">newImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">newImage</span>
+<span class="p">})</span> <span class="p">{</span> <span class="n">image</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="n">imageView</span><span class="o">.</span><span class="n">activityIndicator</span><span class="o">.</span><span class="nf">stopAnimating</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+<h2 id='logging' class='heading'>Logging</h2>
+
+<p>You can turn on verbose mode to see what&rsquo;s going on in terminal for each request by setting the <strong>TNEnvironment.verbose</strong> to <strong>true</strong></p>
+<h2 id='tests' class='heading'>Tests</h2>
+
+<p>To run the tests open the Sample project, select Product -&gt; Test or simply press ⌘U on keyboard.</p>
+<h2 id='todo' class='heading'>TODO</h2>
+
+<ul>
+<li>[x] Write test cases</li>
+<li>[x] Add support for request cancelation</li>
+<li>[x] Error handling</li>
+<li>[ ] Add support for downloading/uploading files</li>
+</ul>
+<h2 id='contribution' class='heading'>Contribution</h2>
+
+<p>Feel free to contribute to the project by creating a pull request and/or by reporting any issue(s) you find</p>
+<h2 id='author' class='heading'>Author</h2>
+
+<p>Bill Panagiotopoulos, <a href="mailto:billp.dev@gmail.com">billp.dev@gmail.com</a></p>
+<h2 id='contributors' class='heading'>Contributors</h2>
+
+<p>Alex Athanasiadis, <a href="mailto:alexanderathan@gmail.com">alexanderathan@gmail.com</a></p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>TermiNetwork is available under the MIT license. See the LICENSE file for more info.</p>
 
           </div>
         </section>
@@ -153,7 +438,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-04-20)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-04-29)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

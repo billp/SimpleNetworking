@@ -72,7 +72,7 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNErrors.swift",
-      "line": 50,
+      "line": 52,
       "symbol": "TNError.localizedDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -93,154 +93,140 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 30,
-      "symbol": "TNBeforeAllRequestsCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 31,
-      "symbol": "TNAfterAllRequestsCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 32,
-      "symbol": "TNBeforeEachRequestCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 33,
-      "symbol": "TNAfterEachRequestCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 49,
+      "line": 62,
       "symbol": "TNQueue.beforeAllRequestsCallback",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 50,
+      "line": 63,
       "symbol": "TNQueue.afterAllRequestsCallback",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 51,
+      "line": 64,
       "symbol": "TNQueue.beforeEachRequestCallback",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNQueue.swift",
-      "line": 52,
+      "line": 65,
       "symbol": "TNQueue.afterEachRequestCallback",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 25,
+      "line": 11,
+      "symbol": "TNRequest",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
+      "line": 24,
       "symbol": "TNSuccessCallback",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 26,
+      "line": 25,
       "symbol": "TNFailureCallback",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 31,
+      "line": 30,
       "symbol": "TNMethod.get",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 32,
+      "line": 31,
       "symbol": "TNMethod.head",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 33,
+      "line": 32,
       "symbol": "TNMethod.post",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 34,
+      "line": 33,
       "symbol": "TNMethod.put",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 35,
+      "line": 34,
       "symbol": "TNMethod.delete",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 36,
+      "line": 35,
       "symbol": "TNMethod.connect",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 37,
+      "line": 36,
       "symbol": "TNMethod.options",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 38,
+      "line": 37,
       "symbol": "TNMethod.trace",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 39,
+      "line": 38,
       "symbol": "TNMethod.patch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 50,
+      "line": 49,
       "symbol": "TNRequest",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 66,
+      "line": 63,
       "symbol": "TNRequest.configuration",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 340,
+      "line": 157,
+      "symbol": "TNRequest.init(route:environment:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
+      "line": 301,
       "symbol": "TNRequest.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
