@@ -23,6 +23,8 @@ import Foundation
 /// If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
 /// Also, each request can have its own TNConfiguration whose settings will override those from environment.
 public class TNConfiguration {
+    // MARK: Public properties
+
     /// The cache policy of the request.
     public var cachePolicy: URLRequest.CachePolicy?
     /// The timeout interval of the request
@@ -42,6 +44,8 @@ public class TNConfiguration {
     /// Request middlewares
     public var requestMiddlewares: [TNRequestMiddlewareProtocol] = []
 
+    // MARK: Initializers
+
     public init() { }
 
     public init(cachePolicy: URLRequest.CachePolicy?,
@@ -52,12 +56,10 @@ public class TNConfiguration {
                 headers: [String: String] = [:],
                 mockDataBundle: Bundle? = nil,
                 useMockData: Bool = false) {
-        self.cachePolicy = cachePolicy ?? TNConfiguration.makeDefaultConfiguration()
-                            .cachePolicy
-        self.timeoutInterval = timeoutInterval ?? TNConfiguration.makeDefaultConfiguration()
-                            .timeoutInterval
-        self.requestBodyType = requestBodyType ?? TNConfiguration.makeDefaultConfiguration()
-                            .requestBodyType
+
+        self.cachePolicy = cachePolicy ?? TNConfiguration.makeDefaultConfiguration().cachePolicy
+        self.timeoutInterval = timeoutInterval ?? TNConfiguration.makeDefaultConfiguration().timeoutInterval
+        self.requestBodyType = requestBodyType ?? TNConfiguration.makeDefaultConfiguration().requestBodyType
         self.verbose = verbose
         self.headers = headers
         self.mockDataBundle = mockDataBundle
@@ -93,7 +95,18 @@ public class TNConfiguration {
                   certificatePath: name)
     }
 
-    public func setCertificateData(with path: String) {
+    // MARK: Public properties
+
+    /// Set a certificate path used for pinning
+    /// - Parameters:
+    ///    - path: The path of the certificate
+    public func setCertificatePath(_ path: String) {
+        setCertificateData(with: path)
+    }
+
+    // MARK: Internal properties
+
+    internal func setCertificateData(with path: String) {
         if let certData = NSData(contentsOfFile: path) {
             self.certificateData = certData
         } else {
@@ -115,15 +128,15 @@ extension TNConfiguration: NSCopying {
     }
 }
 
-public extension TNConfiguration {
+extension TNConfiguration {
     static func makeDefaultConfiguration() -> TNConfiguration {
         return TNConfiguration(cachePolicy: .useProtocolCachePolicy,
-                                      timeoutInterval: 60,
-                                      requestBodyType: .xWWWFormURLEncoded)
+                               timeoutInterval: 60,
+                               requestBodyType: .xWWWFormURLEncoded)
     }
 
-    internal static func override(configuration: TNConfiguration,
-                                  with overrideConfiguration: TNConfiguration)
+    static func override(configuration: TNConfiguration,
+                         with overrideConfiguration: TNConfiguration)
                 -> TNConfiguration {
 
         let clone = configuration.copy() as? TNConfiguration ?? TNConfiguration()

@@ -27,17 +27,17 @@ public enum TNQueueFailureMode {
     case `continue`
 }
 
-/// Hook with a block of code to run before the queue is started
-public typealias TNBeforeStartQueueCallbackType = () -> Void
-/// Hook with a block of code to run after the queue is finished
+/// Hook type for beforeAllRequestsCallback queue property
+public typealias TNBeforeQueueStartCallbackType = () -> Void
+/// Hook type for afterAllRequestsCallback queue property
 /// - Parameters:
 ///   - hasError:Passes a Boolean value which indicates if any of the request in queue has completed with error.
 public typealias TNAfterAllRequestsCallbackType = (_ hasError: Bool) -> Void
-/// Hook with a block of code to run before each request execution in the queue
+/// Hook type for beforeEachRequestCallback queue property
 /// - Parameters:
 ///   - request:The actual TNRequest instance.
 public typealias TNBeforeEachRequestCallbackType = (_ request: TNRequest) -> Void
-/// Hook with a block of code to run after the completion of request execution in the queue
+/// Hook type for afterEachRequestCallback queue property
 /// - Parameters:
 ///   - request:The actual TNRequest instance.
 ///   - data: The response data
@@ -52,19 +52,28 @@ public typealias TNAfterEachRequestCallbackType = (
 /// This class can be used to create custom queues
 open class TNQueue: OperationQueue {
     // MARK: Static variables
-    /// The global queue of TermiNetwork. All requests are added to this queue instance.
+
+    /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances, they are added to this instance.
     public static var shared = TNQueue()
 
     // MARK: Private variables
+
     private var completedWithError = false
 
-    // MARK: Pulblic variables
-    public var beforeAllRequestsCallback: TNBeforeStartQueueCallbackType?
+    // MARK: Hooks
+
+    /// Hooks  with a block of code to run before the queue is started.
+    public var beforeAllRequestsCallback: TNBeforeQueueStartCallbackType?
+    /// Hooks with a block of code to run after the queue is finished.
     public var afterAllRequestsCallback: TNAfterAllRequestsCallbackType?
+    /// Hooks with a block of code to run before each request execution in the queue.
     public var beforeEachRequestCallback: TNBeforeEachRequestCallbackType?
+    /// Hooks with a block of code to run after the completion of request execution in the queue
     public var afterEachRequestCallback: TNAfterEachRequestCallbackType?
 
     internal var failureMode: TNQueueFailureMode = .continue
+
+    // MARK: Initializers
 
     /// Initializes a new queue.
     ///
@@ -98,7 +107,9 @@ open class TNQueue: OperationQueue {
         afterEachRequestCallback?(request, data, response, tnError)
     }
 
-    /// Adds a TNRequest into queue.
+    // MARK: Public methods
+
+    /// Adds a TNRequest instane into queue.
     ///
     /// - parameters:
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,

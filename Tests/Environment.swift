@@ -38,7 +38,9 @@ enum Environment: TNEnvironmentProtocol {
                                                           requestBodyType: .JSON)
 
         let requestConfiguration2: TNConfiguration = {
-            let config = TNConfiguration.makeDefaultConfiguration()
+            let config = TNConfiguration(cachePolicy: .useProtocolCachePolicy,
+                                         timeoutInterval: 60,
+                                         requestBodyType: .xWWWFormURLEncoded)
             config.verbose = true
             config.headers = ["Custom-Header": "dsadas"]
             return config

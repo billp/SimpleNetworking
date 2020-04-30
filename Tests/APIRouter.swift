@@ -40,7 +40,7 @@ enum APIRouter: TNRouterProtocol {
 
     func testPinningConfiguration(withcertPath certPath: String) -> TNConfiguration {
         let configuration = TNConfiguration()
-        configuration.setCertificateData(with: certPath)
+        configuration.setCertificatePath(certPath)
         configuration.headers = ["Custom-Header": "1"]
         return configuration
     }
