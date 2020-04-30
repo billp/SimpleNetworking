@@ -25,7 +25,27 @@ extension TNRequest {
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data in
+            let object: T!
 
+            do {
+                object = try data.deserializeJSONData() as T
+            } catch let error {
+                let tnError = TNError.cannotDeserialize(error)
+                TNLog.logRequest(request: self,
+                                 data: data,
+                                 tnError: tnError)
+                onFailure?(tnError, data)
+                self.handleDataTaskFailure(withData: data,
+                                           tnError: tnError)
+                return
+            }
+
+            TNLog.logRequest(request: self,
+                             data: data,
+                             tnError: nil)
+            onSuccess?(object)
+            self.handleDataTaskCompleted(withData: data,
+                                         tnError: nil)
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
             self.handleDataTaskFailure(withData: data,
