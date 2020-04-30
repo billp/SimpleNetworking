@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork Docs
         </a>
-         (74% documented)
+         (75% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -160,11 +160,11 @@
           <div class="section-content">
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Private%20properties"></a>
-                <a name="//apple_ref/swift/Section/Private properties" class="dashAnchor"></a>
+                <a name="/Public%20properties"></a>
+                <a name="//apple_ref/swift/Section/Public properties" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Private%20properties"></a>
-                  <h3 class="section-name"><p>Private properties</p>
+                  <a class="section-name-link" href="#/Public%20properties"></a>
+                  <h3 class="section-name"><p>Public properties</p>
 </h3>
                 </div>
               </div>
@@ -182,7 +182,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The configuration of the request. This will be merged with  environment configuration and will override values if needed.</p>
 
                       </div>
                       <div class="declaration">
@@ -283,11 +283,11 @@ them to url, otherwise it is seting them as request body.</li>
             </div>
             <div class="task-group">
               <div class="task-name-container">
-                <a name="/Create%20request"></a>
-                <a name="//apple_ref/swift/Section/Create request" class="dashAnchor"></a>
+                <a name="/Public%20methods"></a>
+                <a name="//apple_ref/swift/Section/Public methods" class="dashAnchor"></a>
                 <div class="section-name-container">
-                  <a class="section-name-link" href="#/Create%20request"></a>
-                  <h3 class="section-name"><p>Create request</p>
+                  <a class="section-name-link" href="#/Public%20methods"></a>
+                  <h3 class="section-name"><p>Public methods</p>
 </h3>
                 </div>
               </div>
@@ -332,7 +332,7 @@ them to url, otherwise it is seting them as request body.</li>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Cancels a TNRequest started request</p>
+                        <p>Cancels a request</p>
 
                       </div>
                       <div class="declaration">
@@ -399,8 +399,7 @@ them to url, otherwise it is seting them as request body.</li>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a request to a queue and starts it&rsquo;s execution. The response object in success callback is of
-type Decodable</p>
+                        <p>Adds a request to a queue and starts its execution for Decodable types.</p>
 
                       </div>
                       <div class="declaration">
@@ -426,7 +425,19 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the model that will be deserialized and will be passed to the success block.</p>
                                 </div>
                               </td>
                             </tr>
@@ -438,7 +449,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                  <p>specifies a success callback of type TNSuccessCallback<T>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -450,7 +461,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                  <p>specifies a failure callback of type TNFailureCallback<T>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -473,7 +484,7 @@ type Decodable</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a request to a queue and starts it&rsquo;s execution. The response object in success callback is of type UIImage</p>
+                        <p>Adds a request to a queue and starts its execution for UIImage responses.</p>
 
                       </div>
                       <div class="declaration">
@@ -499,7 +510,19 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is UIImage.self.</p>
                                 </div>
                               </td>
                             </tr>
@@ -511,7 +534,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                  <p>specifies a success callback of type TNSuccessCallback<T>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -523,7 +546,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                  <p>specifies a failure callback of type TNFailureCallback<T>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -546,7 +569,7 @@ type Decodable</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a request to a queue and starts it&rsquo;s execution. The response object in success callback is of type String</p>
+                        <p>Adds a request to a queue and starts its execution for String responses.</p>
 
                       </div>
                       <div class="declaration">
@@ -572,7 +595,19 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is String.self.</p>
                                 </div>
                               </td>
                             </tr>
@@ -584,7 +619,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                  <p>specifies a success callback of type TNSuccessCallback<T></p>
                                 </div>
                               </td>
                             </tr>
@@ -596,7 +631,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                  <p>specifies a failure callback of type TNFailureCallback<T></p>
                                 </div>
                               </td>
                             </tr>
@@ -619,7 +654,7 @@ type Decodable</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Adds a request to a queue and starts it&rsquo;s execution. The response object in success callback is of type Data</p>
+                        <p>Adds a request to a queue and starts its execution for Data responses.</p>
 
                       </div>
                       <div class="declaration">
@@ -645,7 +680,19 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is Data.self.</p>
                                 </div>
                               </td>
                             </tr>
@@ -657,7 +704,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
+                                  <p>specifies a success callback of type TNSuccessCallback<T></p>
                                 </div>
                               </td>
                             </tr>
@@ -669,7 +716,7 @@ type Decodable</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
+                                  <p>specifies a failure callback of type TNFailureCallback<T></p>
                                 </div>
                               </td>
                             </tr>

@@ -68,15 +68,20 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Empty Response Body")
         var failed = true
 
-        router.start(.testPostParams(value1: true, value2: 1, value3: 2, value4: "Dsa", value5: "A"),
-                     onSuccess: { _ in
-            expectation.fulfill()
-        }, onFailure: { error, _ in
-            if case TNError.environmentNotSet = error {
-                failed = false
-            }
-            expectation.fulfill()
-        })
+        router.request(for: .testPostParams(value1: true,
+                                            value2: 1,
+                                            value3: 2,
+                                            value4: "Dsa",
+                                            value5: "A"))
+                    .start(responseType: Data.self,
+                           onSuccess: { _ in
+                                expectation.fulfill()
+                    }, onFailure: { error, _ in
+                        if case TNError.environmentNotSet = error {
+                            failed = false
+                        }
+                        expectation.fulfill()
+                    })
 
         wait(for: [expectation], timeout: 10)
 
@@ -107,13 +112,14 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Not Empty Response Body")
         var failed = true
 
-        router.start(.testEmptyBody, onSuccess: { _ in
-            expectation.fulfill()
-            failed = false
-        }, onFailure: { _, _ in
-            expectation.fulfill()
-            failed = true
-        })
+        router.request(for: .testEmptyBody).start(responseType: Data.self,
+                                                    onSuccess: { _ in
+                                                        expectation.fulfill()
+                                                        failed = false
+                                                    }, onFailure: { _, _ in
+                                                        expectation.fulfill()
+                                                        failed = true
+                                                    })
 
         wait(for: [expectation], timeout: 10)
 
@@ -124,11 +130,12 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Empty Response Body")
         var failed = true
 
-        router.start(.testPostParams(value1: false,
-                                     value2: 1,
-                                     value3: 2,
-                                     value4: "",
-                                     value5: nil), responseType: UIImage.self, onSuccess: { _ in
+        router.request(for: .testPostParams(value1: false,
+                                            value2: 1,
+                                            value3: 2,
+                                            value4: "",
+                                            value5: nil)).start(responseType: UIImage.self,
+                                                                onSuccess: { _ in
             expectation.fulfill()
             failed = true
         }, onFailure: { error, _ in
@@ -150,7 +157,8 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Empty Response Body")
         var failed = true
 
-        router.start(.testImage(imageName: "sample.jpeg"), responseType: UIImage.self, onSuccess: { _ in
+        router.request(for: .testImage(imageName: "sample.jpeg")).start(responseType: UIImage.self,
+                                                                        onSuccess: { _ in
             expectation.fulfill()
             failed = false
         }, onFailure: { _, _ in
@@ -167,7 +175,8 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Response Cannot Deserialize")
         var failed = true
 
-        router.start(.testInvalidParams(value1: "a", value2: "b"), responseType: TestParam.self, onSuccess: { _ in
+        router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: TestParam.self,
+                                                                                onSuccess: { _ in
             failed = true
             expectation.fulfill()
         }, onFailure: { error, _ in
@@ -191,11 +200,11 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Response Can Deserialize")
         var failed = true
 
-        router.start(.testGetParams(value1: false,
-                                    value2: 3,
-                                    value3: 1.32,
-                                    value4: "Test",
-                                    value5: nil), responseType: TestParam.self, onSuccess: { _ in
+        router.request(for: .testGetParams(value1: false,
+                                           value2: 3,
+                                           value3: 1.32,
+                                           value4: "Test",
+                                           value5: nil)).start(responseType: TestParam.self, onSuccess: { _ in
             failed = false
             expectation.fulfill()
         }, onFailure: { error, _ in
@@ -215,7 +224,8 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Response Network Error")
         var failed = true
 
-        router.start(.testInvalidParams(value1: "a", value2: "b"), onSuccess: { _ in
+        router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: Data.self,
+                                                                                onSuccess: { _ in
             failed = true
             expectation.fulfill()
         }, onFailure: { error, _ in
@@ -239,17 +249,19 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Not Success")
         var failed = true
 
-        router.start(.testStatusCode(code: 404), onSuccess: { _ in
-            expectation.fulfill()
-            failed = true
+        router.request(for: .testStatusCode(code: 404))
+            .start(responseType: String.self,
+                        onSuccess: { _ in
+                                    expectation.fulfill()
+                                    failed = true
 
-        }, onFailure: { error, _ in
-            switch error {
-            case .notSuccess(let code):
-                failed = code != 404
-            default:
-                failed = true
-            }
+                        }, onFailure: { error, _ in
+                                    switch error {
+                                    case .notSuccess(let code):
+                                        failed = code != 404
+                                    default:
+                                        failed = true
+                        }
 
             expectation.fulfill()
         })

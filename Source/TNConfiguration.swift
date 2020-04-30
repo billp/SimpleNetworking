@@ -95,7 +95,7 @@ public class TNConfiguration {
                   certificatePath: name)
     }
 
-    // MARK: Public properties
+    // MARK: Public Methods
 
     /// Set a certificate path used for pinning
     /// - Parameters:

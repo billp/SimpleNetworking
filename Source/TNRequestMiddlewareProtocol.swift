@@ -19,8 +19,8 @@
 
 import Foundation
 
-/// This protocol is used to register a middleware that can be used by TNConfiguration to modify body and headers.
-/// For example it can be used with Crypt to encrypt / decrypt your data
+/// This protocol is used to register a middleware in order to modify body and headers of a request. (e.g.  it can be
+/// used with  Crypto Swift library to encrypt or decrypt the data.
 public protocol TNRequestMiddlewareProtocol {
     /// Modifies body params before they are sent to server
     ///   - parameters:

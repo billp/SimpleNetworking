@@ -9,13 +9,13 @@
 import UIKit
 
 extension TNRequest {
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of
-    /// type Decodable
+    /// Adds a request to a queue and starts its execution for Decodable types.
     ///
     /// - parameters:
-    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
     public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                     responseType: T.Type,
                                     onSuccess: TNSuccessCallback<T>?,
@@ -25,27 +25,7 @@ extension TNRequest {
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data in
-            let object: T!
 
-            do {
-                object = try data.deserializeJSONData() as T
-            } catch let error {
-                let tnError = TNError.cannotDeserialize(error)
-                TNLog.logRequest(request: self,
-                                 data: data,
-                                 tnError: tnError)
-                onFailure?(tnError, data)
-                self.handleDataTaskFailure(withData: data,
-                                           tnError: tnError)
-                return
-            }
-
-            TNLog.logRequest(request: self,
-                             data: data,
-                             tnError: nil)
-            onSuccess?(object)
-            self.handleDataTaskCompleted(withData: data,
-                                         tnError: nil)
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
             self.handleDataTaskFailure(withData: data,
@@ -55,12 +35,13 @@ extension TNRequest {
         currentQueue.addOperation(self)
     }
 
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type UIImage
+    /// Adds a request to a queue and starts its execution for UIImage responses.
     ///
     /// - parameters:
-    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///     - responseType: The response type is UIImage.self.
+    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
+    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>.
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,
                                   onSuccess: TNSuccessCallback<T>?,
@@ -98,12 +79,13 @@ extension TNRequest {
         currentQueue.addOperation(self)
     }
 
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type String
+    /// Adds a request to a queue and starts its execution for String responses.
     ///
     /// - parameters:
-    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///    - responseType: The response type is String.self.
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: String.Type,
                       onSuccess: TNSuccessCallback<String>?,
@@ -142,12 +124,13 @@ extension TNRequest {
         currentQueue.addOperation(self)
     }
 
-    /// Adds a request to a queue and starts it's execution. The response object in success callback is of type Data
+    /// Adds a request to a queue and starts its execution for Data responses.
     ///
     /// - parameters:
-    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one. (optional)
-    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)
-    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T> (optional)
+    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///     - responseType: The response type is Data.self.
+    ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>
+    ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: Data.Type,
                       onSuccess: TNSuccessCallback<Data>?,

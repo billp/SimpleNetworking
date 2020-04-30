@@ -75,7 +75,7 @@ class TestTNConfiguration: XCTestCase {
     }
 
     func testEnvConfiguration() {
-        let request = router.request(forRoute: .testHeaders)
+        let request = router.request(for: .testHeaders)
         let reqConf = request.configuration
         let envConf = request.configuration
 
@@ -89,7 +89,7 @@ class TestTNConfiguration: XCTestCase {
     }
 
     func testRouteConfiguration() {
-        let request = router.request(forRoute:
+        let request = router.request(for:
             .testConfigurationParameterized(conf: TestTNConfiguration.routeConfiguration))
         let reqConf = request.configuration
         let routeConf = TestTNConfiguration.routeConfiguration

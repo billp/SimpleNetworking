@@ -58,9 +58,9 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test headers")
         var failed = true
 
-        router.start(APIRouter.testHeaders,
-                     responseType: TestHeaders.self,
-                     onSuccess: { object in
+        router.request(for: .testHeaders)
+                     .start(responseType: TestHeaders.self,
+                            onSuccess: { object in
             failed = !(object.authorization == "XKJajkBXAUIbakbxjkasbxjkas" && object.customHeader == "test!!!!")
             expectation.fulfill()
         }, onFailure: { _, _ in
@@ -75,8 +75,8 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test headers")
         var failed = true
 
-        router.start(.testOverrideHeaders,
-                     responseType: TestHeaders.self,
+        router.request(for: .testOverrideHeaders)
+                    .start(responseType: TestHeaders.self,
                      onSuccess: { object in
             failed = !(object.authorization == "0" &&
                         object.customHeader == "0" &&
@@ -94,11 +94,11 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
 
-        router.start(.testGetParams(value1: true,
-                                             value2: 3,
-                                             value3: 5.13453124189,
-                                             value4: "test",
-                                             value5: nil), responseType: TestParam.self, onSuccess: { object in
+        router.request(for: .testGetParams(value1: true,
+                                           value2: 3,
+                                           value3: 5.13453124189,
+                                           value4: "test",
+                                           value5: nil)).start(responseType: TestParam.self, onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&
                 object.param3 == "5.13453124189" &&
@@ -119,13 +119,13 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
 
-        router.start(.testGetParams(value1: true,
-                                             value2: 3,
-                                             value3: 5.13453124189,
-                                             value4: "τεστ",
-                                             value5: nil),
-                     responseType: TestParam.self,
-                     onSuccess: { object in
+        router.request(for: .testGetParams(value1: true,
+                                           value2: 3,
+                                           value3: 5.13453124189,
+                                           value4: "τεστ",
+                                           value5: nil))
+            .start(responseType: TestParam.self,
+                   onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&
                 object.param3 == "5.13453124189" &&
@@ -146,12 +146,13 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test post params")
         var failed = true
 
-        router.start(.testPostParamsxWWWFormURLEncoded(value1: true,
-                                                                value2: 3,
-                                                                value3: 5.13453124189,
-                                                                value4: "test",
-                                                                value5: nil), responseType: TestParam.self,
-                                                                              onSuccess: { object in
+        router.request(for: .testPostParamsxWWWFormURLEncoded(value1: true,
+                                                              value2: 3,
+                                                              value3: 5.13453124189,
+                                                              value4: "test",
+                                                              value5: nil))
+            .start(responseType: TestParam.self,
+                   onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&
                 object.param3 == "5.13453124189" &&
@@ -171,11 +172,12 @@ class TestTNRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test JSON post params")
         var failed = true
 
-        router.start(APIRouter.testPostParams(value1: true,
-                                              value2: 3,
-                                              value3: 5.13453124189,
-                                              value4: "test",
-                                              value5: nil), responseType: TestJSONParams.self, onSuccess: { object in
+        router.request(for: .testPostParams(value1: true,
+                                            value2: 3,
+                                            value3: 5.13453124189,
+                                            value4: "test",
+                                            value5: nil)).start(responseType: TestJSONParams.self,
+                                                                onSuccess: { object in
             failed = !(object.param1 == true &&
                 object.param2 == 3 &&
                 object.param3 == 5.13453124189 &&
@@ -306,12 +308,12 @@ class TestTNRequest: XCTestCase {
 
         var failed = true
 
-        router.start(.testGetParams(value1: false,
-                                     value2: 2,
-                                     value3: 3,
-                                     value4: "1",
-                                     value5: nil),
-                      onSuccess: { _ in
+        router.request(for: .testGetParams(value1: false,
+                                           value2: 2,
+                                           value3: 3,
+                                           value4: "1",
+                                           value5: nil)).start(responseType: Data.self,
+        onSuccess: { _ in
             failed = false
             expectation1.fulfill()
         }, onFailure: { (_, _) in
@@ -325,11 +327,12 @@ class TestTNRequest: XCTestCase {
 
         failed = true
 
-        router2.start(.testGetParams(value1: false,
-                                     value2: 2,
-                                     value3: 3,
-                                     value4: "1",
-                                     value5: nil),
+        router2.request(for: .testGetParams(value1: false,
+                                            value2: 2,
+                                            value3: 3,
+                                            value4: "1",
+                                            value5: nil))
+            .start(responseType: String.self,
                       onSuccess: { _ in
             expectation2.fulfill()
         }, onFailure: { (error, _) in
@@ -349,15 +352,15 @@ class TestTNRequest: XCTestCase {
 
         let expectation = XCTestExpectation(description: "Test encrypted request")
 
-        routerWithMiddleware.start(.testEncryptParams(value: "Yoooo"),
-                                    responseType: EncryptedModel.self,
-                                    onSuccess: { model in
-            failed = model.value != "Yoooo"
-            expectation.fulfill()
-        }, onFailure: { (_, _) in
-            failed = true
-            expectation.fulfill()
-        })
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+            .start(responseType: EncryptedModel.self,
+                   onSuccess: { model in
+                        failed = model.value != "Yoooo"
+                        expectation.fulfill()
+                   }, onFailure: { (_, _) in
+                        failed = true
+                        expectation.fulfill()
+                   })
 
         wait(for: [expectation], timeout: 10)
         XCTAssert(!failed)

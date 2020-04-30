@@ -70,12 +70,11 @@ class TestMockRequest: XCTestCase {
         let expectation = XCTestExpectation(description: "Test testEnvConfiguration")
         var failed = true
 
-        router.start(.testHeaders,
-                     responseType: TestHeaders.self,
-                     onSuccess: { response in
-                        failed = !(response.customHeader == "yo man!!!!")
-                        expectation.fulfill()
-        }, onFailure: nil)
+        router.request(for: .testHeaders).start(responseType: TestHeaders.self,
+                                                onSuccess: { response in
+                                                    failed = !(response.customHeader == "yo man!!!!")
+                                                    expectation.fulfill()
+                                                }, onFailure: nil)
 
         wait(for: [expectation], timeout: 10)
 

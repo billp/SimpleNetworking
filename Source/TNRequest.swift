@@ -58,8 +58,8 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .normal
     internal var mockFilePath: TNPath?
 
-    // MARK: Private properties
-
+    // MARK: Public properties
+    /// The configuration of the request. This will be merged with  environment configuration and will override values if needed.
     public var configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()
 
     // MARK: Private properties
@@ -161,7 +161,7 @@ open class TNRequest: TNOperation {
                   configuration: nil)
     }
 
-    // MARK: Create request
+    // MARK: Public methods
 
     /// Converts a TNRequest instance to asRequest
     public func asRequest() throws -> URLRequest {
@@ -224,7 +224,7 @@ open class TNRequest: TNOperation {
         return request
     }
 
-    /// Cancels a TNRequest started request
+    /// Cancels a request
     open override func cancel() {
         super.cancel()
         dataTask?.cancel()
