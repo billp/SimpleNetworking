@@ -19,6 +19,6 @@
 
 import Foundation
 
-public protocol TNRouterProtocol {
+public protocol TNRouteProtocol {
     func configure() -> TNRouteConfiguration
 }

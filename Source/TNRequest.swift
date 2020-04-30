@@ -129,7 +129,7 @@ open class TNRequest: TNOperation {
     ///
     /// - parameters:
     ///   - route: a TNRouteProtocol enum value
-    internal init(route: TNRouterProtocol,
+    internal init(route: TNRouteProtocol,
                   environment: TNEnvironment? = TNEnvironment.current,
                   configuration: TNConfiguration? = nil) {
         let route = route.configure()
@@ -154,7 +154,7 @@ open class TNRequest: TNOperation {
         }
     }
 
-    public convenience init(route: TNRouterProtocol,
+    public convenience init(route: TNRouteProtocol,
                             environment: TNEnvironment? = TNEnvironment.current) {
         self.init(route: route,
                   environment: environment,

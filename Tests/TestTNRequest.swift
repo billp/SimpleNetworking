@@ -23,22 +23,22 @@ import TermiNetwork
 // swiftlint:disable type_body_length
 
 class TestTNRequest: XCTestCase {
-    lazy var router: TNRouter<APIRouter> = {
-       return TNRouter<APIRouter>()
+    lazy var router: TNRouter<APIRoute> = {
+       return TNRouter<APIRoute>()
     }()
 
-    lazy var router2: TNRouter<APIRouter> = {
-        return TNRouter<APIRouter>(environment: Environment.google)
+    lazy var router2: TNRouter<APIRoute> = {
+        return TNRouter<APIRoute>(environment: Environment.google)
     }()
 
-    lazy var routerWithMiddleware: TNRouter<APIRouter> = {
+    lazy var routerWithMiddleware: TNRouter<APIRoute> = {
         let configuration = TNConfiguration()
         configuration.requestMiddlewares = [CryptoMiddleware()]
         configuration.verbose = true
         configuration.requestBodyType = .JSON
 
-        let router = TNRouter<APIRouter>(environment: Environment.termiNetworkRemote,
-                                         configuration: configuration)
+        let router = TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
+                                        configuration: configuration)
 
         return router
     }()
@@ -263,11 +263,11 @@ class TestTNRequest: XCTestCase {
         var failed = true
         TNQueue.shared.cancelAllOperations()
 
-        let request = TNRequest(route: APIRouter.testPostParams(value1: true,
-                                                                value2: 3,
-                                                                value3: 5.13453124189,
-                                                                value4: "test",
-                                                                value5: nil))
+        let request = TNRequest(route: APIRoute.testPostParams(value1: true,
+                                                               value2: 3,
+                                                               value3: 5.13453124189,
+                                                               value4: "test",
+                                                               value5: nil))
         request.configuration.requestBodyType = .JSON
         request.start(responseType: String.self, onSuccess: { _ in
             failed = false
@@ -279,21 +279,21 @@ class TestTNRequest: XCTestCase {
     }
 
     func testConfiguration() {
-        var request = TNRequest(route: APIRouter.testInvalidParams(value1: "a", value2: "b"))
+        var request = TNRequest(route: APIRoute.testInvalidParams(value1: "a", value2: "b"))
         var urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 60)
         XCTAssert(request.configuration.cachePolicy == .useProtocolCachePolicy)
         XCTAssert(request.configuration.requestBodyType == .xWWWFormURLEncoded)
 
         TNEnvironment.set(Environment.termiNetworkLocal)
-        request = TNRequest(route: APIRouter.testHeaders)
+        request = TNRequest(route: APIRoute.testHeaders)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 32)
         XCTAssert(request.configuration.cachePolicy == .returnCacheDataElseLoad)
         XCTAssert(request.configuration.requestBodyType == .JSON)
 
         TNEnvironment.set(Environment.termiNetworkRemote)
-        request = TNRequest(route: APIRouter.testConfiguration)
+        request = TNRequest(route: APIRoute.testConfiguration)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 12)
         XCTAssert(request.configuration.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData)
@@ -368,11 +368,11 @@ class TestTNRequest: XCTestCase {
 
     fileprivate func sampleRequest(queue: TNQueue? = TNQueue.shared,
                                    onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
-        let call = TNRequest(route: APIRouter.testPostParams(value1: true,
-                                                             value2: 3,
-                                                             value3: 5.13453124189,
-                                                             value4: "test",
-                                                             value5: nil))
+        let call = TNRequest(route: APIRoute.testPostParams(value1: true,
+                                                            value2: 3,
+                                                            value3: 5.13453124189,
+                                                            value4: "test",
+                                                            value5: nil))
         call.configuration.requestBodyType = .JSON
 
         call.start(queue: queue,

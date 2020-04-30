@@ -55,7 +55,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "Test Not Success")
            var failed = true
 
-           let request = TNRequest(route: APIRouter.testPinning(certPath: validCertPath))
+            let request = TNRequest(route: APIRoute.testPinning(certPath: validCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                failed = false
                expectation.fulfill()
@@ -73,7 +73,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "Test Not Success")
            var failed = true
 
-           let request = TNRequest(route: APIRouter.testPinning(certPath: invalidCertPath))
+           let request = TNRequest(route: APIRoute.testPinning(certPath: invalidCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                failed = true
                expectation.fulfill()

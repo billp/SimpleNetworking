@@ -21,7 +21,7 @@ import Foundation
 import UIKit
 
 /// This class is used to create custom routers in your application.
-open class TNRouter<Route: TNRouterProtocol> {
+open class TNRouter<Route: TNRouteProtocol> {
     // MARK: Properties
     fileprivate var environment: TNEnvironment?
     fileprivate var configuration: TNConfiguration?

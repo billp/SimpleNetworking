@@ -22,8 +22,8 @@ import TermiNetwork
 
 class TestTNErrors: XCTestCase {
 
-    var router: TNRouter<APIRouter> {
-       return TNRouter<APIRouter>()
+    var router: TNRouter<APIRoute> {
+       return TNRouter<APIRoute>()
     }
 
     override func setUp() {
@@ -275,7 +275,7 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Not Success")
         var failed = true
 
-        let request = TNRequest(route: APIRouter.testStatusCode(code: 404))
+        let request = TNRequest(route: APIRoute.testStatusCode(code: 404))
         request.start(responseType: Data.self, onSuccess: { _ in
             expectation.fulfill()
         }, onFailure: { error, _ in

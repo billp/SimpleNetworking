@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork Docs
         </a>
-         (75% documented)
+         (74% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -111,7 +111,7 @@
                 <a class="nav-group-task-link" href="../Protocols/TNRequestMiddlewareProtocol.html">TNRequestMiddlewareProtocol</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Protocols/TNRouterProtocol.html">TNRouterProtocol</a>
+                <a class="nav-group-task-link" href="../Protocols/TNRouteProtocol.html">TNRouteProtocol</a>
               </li>
             </ul>
           </li>
@@ -147,7 +147,7 @@
             <h1>TNRouter</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">TNRouter</span><span class="o">&lt;</span><span class="kt">Route</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Route</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/TNRouterProtocol.html">TNRouterProtocol</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">TNRouter</span><span class="o">&lt;</span><span class="kt">Route</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Route</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/TNRouteProtocol.html">TNRouteProtocol</a></span></code></pre>
 
                 </div>
               </div>
@@ -200,309 +200,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork8TNRouterC5start5queue_12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xqd__myqd__cyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRd__lF"></a>
-                    <a name="//apple_ref/swift/Method/start(queue:_:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork8TNRouterC5start5queue_12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xqd__myqd__cyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRd__lF">start(queue:<wbr>_:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Starts a request. The response object in success callback is of type Decodable.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
-                     <span class="n">_</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">,</span>
-                     <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
-                     <span class="nv">onSuccess</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
-                     <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="k">where</span> <span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>queue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>skipBeforeAfterAllRequestsHooks</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A boolean that indicates if the request takes
-part to beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>route</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>a TNRouteProtocol enum value
-
-<ul>
-<li>onSuccess: specifies a success callback of type TNSuccessCallback<T> (optional)</li>
-</ul></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onSuccess</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onFailure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork8TNRouterC5start5queue_12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xqd__myqd__cyAA7TNErrorO_10Foundation4DataVSgtctSo7UIImageCRbd__lF"></a>
-                    <a name="//apple_ref/swift/Method/start(queue:_:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork8TNRouterC5start5queue_12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xqd__myqd__cyAA7TNErrorO_10Foundation4DataVSgtctSo7UIImageCRbd__lF">start(queue:<wbr>_:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Starts a  request. The response object in success callback is of type UIImage.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">UIImage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
-                              <span class="n">_</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">,</span>
-                              <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
-                              <span class="nv">onSuccess</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">,</span>
-                              <span class="nv">onFailure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>queue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>skipBeforeAfterAllRequestsHooks</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A boolean that indicates if the request takes part to
-beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>route</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>a TNRouteProtocol enum value</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onSuccess</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onFailure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork8TNRouterC5start5queue_9onSuccess0F7FailureyAA7TNQueueCSg_xy10Foundation4DataVcyAA7TNErrorO_AMSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/start(queue:_:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork8TNRouterC5start5queue_9onSuccess0F7FailureyAA7TNQueueCSg_xy10Foundation4DataVcyAA7TNErrorO_AMSgtctF">start(queue:<wbr>_:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Starts a request. The response object in success callback is of type Data.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
-                  <span class="n">_</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">,</span>
-                  <span class="nv">onSuccess</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">,</span>
-                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>queue</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A TNQueue instance. If no queue is specified it uses the default one. (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>skipBeforeAfterAllRequestsHooks</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A boolean that indicates if the request takes part to
-beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>route</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>a TNRouteProtocol enum value</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onSuccess</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a success callback of type TNSuccessCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>onFailure</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>specifies a failure callback of type TNFailureCallback<T> (optional)</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork8TNRouterC7request8forRouteAA9TNRequestCx_tF"></a>
-                    <a name="//apple_ref/swift/Method/request(forRoute:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork8TNRouterC7request8forRouteAA9TNRequestCx_tF">request(forRoute:<wbr>)</a>
+                    <a name="/s:12TermiNetwork8TNRouterC7request3forAA9TNRequestCx_tF"></a>
+                    <a name="//apple_ref/swift/Method/request(for:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork8TNRouterC7request3forAA9TNRequestCx_tF">request(for:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -517,7 +217,7 @@ beforeAllRequests/afterAllRequests. Default value is true (optional)</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="n">forRoute</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TNRequest.html">TNRequest</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">request</span><span class="p">(</span><span class="k">for</span> <span class="nv">route</span><span class="p">:</span> <span class="kt">Route</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/TNRequest.html">TNRequest</a></span></code></pre>
 
                         </div>
                       </div>

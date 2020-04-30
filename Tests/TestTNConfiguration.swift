@@ -58,8 +58,8 @@ class TestTNConfiguration: XCTestCase {
         }
     }
 
-    var router: TNRouter<APIRouter> {
-       return TNRouter<APIRouter>()
+    var router: TNRouter<APIRoute> {
+       return TNRouter<APIRoute>()
     }
 
     override func setUp() {

@@ -22,7 +22,7 @@ import TermiNetwork
 
 // swiftlint:disable function_body_length cyclomatic_complexity
 
-enum APIRouter: TNRouterProtocol {
+enum APIRoute: TNRouteProtocol {
     // Define your routes
     case testHeaders
     case testOverrideHeaders
