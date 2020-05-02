@@ -62,108 +62,14 @@ open class TNEnvironment {
     ///     - configuration: A configuration instance that will be inherited by each request and route
     public init(scheme: TNURLScheme,
                 host: String,
-                suffix: TNPath?,
-                port: Int?,
+                suffix: TNPath? = nil,
+                port: Int? = nil,
                 configuration: TNConfiguration? = nil) {
         self.scheme = scheme
         self.host = host
         self.suffix = suffix
         self.port = port
         self.configuration = configuration
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    public convenience init(scheme: TNURLScheme,
-                            host: String) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: nil,
-                  port: nil,
-                  configuration: nil)
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    ///     - configuration: A configuration instance that will be inherited by each request and route
-    public convenience init(scheme: TNURLScheme,
-                            host: String,
-                            configuration: TNConfiguration) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: nil,
-                  port: nil,
-                  configuration: configuration)
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    ///     - port: The port the environment is using, e.g. 8080
-    public convenience init(scheme: TNURLScheme,
-                            host: String,
-                            port: Int) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: nil,
-                  port: port,
-                  configuration: nil)
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    ///     - port: The port the environment is using, e.g. 8080
-    ///     - configuration: A configuration instance that will be inherited by each request and route
-    public convenience init(scheme: TNURLScheme,
-                            host: String,
-                            port: Int,
-                            configuration: TNConfiguration = TNConfiguration()) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: nil,
-                  port: port,
-                  configuration: configuration)
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    ///     - suffix: The path after the host name, e.g. .path["api","v1"]
-    public convenience init(scheme: TNURLScheme, host: String, suffix: TNPath) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: suffix,
-                  port: nil,
-                  configuration: nil)
-    }
-
-    /// Instantiates an environment
-    ///
-    /// - parameters:
-    ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
-    ///     - configuration: A configuration instance that will be inherited by each request and route
-    public convenience init(scheme: TNURLScheme,
-                            host: String, suffix: TNPath,
-                            configuration: TNConfiguration = TNConfiguration()) {
-        self.init(scheme: scheme,
-                  host: host,
-                  suffix: suffix,
-                  port: nil,
-                  configuration: configuration)
     }
 }
 
