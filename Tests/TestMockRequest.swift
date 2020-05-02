@@ -38,6 +38,24 @@ class TestMockRequest: XCTestCase {
         return conf
     }()
 
+    static var mockDelayConfiguration: TNConfiguration = {
+        let conf = TNConfiguration()
+        conf.verbose = true
+        conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        conf.timeoutInterval = 111
+        conf.requestBodyType = .JSON
+        conf.headers = ["test": "123", "test2": "abcdefg"]
+        conf.verbose = true
+
+        if let bundlePath = Bundle(for: TestTNConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
+            conf.mockDataBundle = Bundle(path: bundlePath)
+            conf.useMockData = true
+            conf.mockDelay = TNMockDelayType(min: 0.3, max: 2.05)
+        }
+
+        return conf
+    }()
+
     enum Env: TNEnvironmentProtocol {
         case test
 
@@ -53,6 +71,10 @@ class TestMockRequest: XCTestCase {
 
     var router: TNRouter<APIRoute> {
        return TNRouter<APIRoute>()
+    }
+
+    var router2: TNRouter<APIRoute> {
+        return TNRouter<APIRoute>(configuration: TestMockRequest.mockDelayConfiguration)
     }
 
     override func setUp() {
@@ -75,6 +97,27 @@ class TestMockRequest: XCTestCase {
                                                     failed = !(response.customHeader == "yo man!!!!")
                                                     expectation.fulfill()
                                                 }, onFailure: nil)
+
+        wait(for: [expectation], timeout: 10)
+
+        XCTAssert(!failed)
+
+    }
+
+    func testMockDelay() {
+        let expectation = XCTestExpectation(description: "Test testEnvConfiguration")
+        var failed = true
+        let now = Date().timeIntervalSince1970
+        router2.request(for: .testHeaders).start(responseType: TestHeaders.self,
+                                                 onSuccess: { response in
+                                                        let res = now.distance(to: Date().timeIntervalSince1970)
+                                                        let timeCheck = res >= TestMockRequest
+                                                            .mockDelayConfiguration.mockDelay!.min
+                                                            && res <= TestMockRequest
+                                                                .mockDelayConfiguration.mockDelay!.max
+                                                    failed = !(response.customHeader == "yo man!!!!" && timeCheck)
+                                                        expectation.fulfill()
+                                                    }, onFailure: nil)
 
         wait(for: [expectation], timeout: 10)
 

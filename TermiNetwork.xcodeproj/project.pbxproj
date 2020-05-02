@@ -44,6 +44,7 @@
 		F3850CB2243D104900F7CC13 /* Request+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA2243D104900F7CC13 /* Request+Extensions.swift */; };
 		F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA3243D104900F7CC13 /* TNEnvironment.swift */; };
 		F3850CB4243D104900F7CC13 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA4243D104900F7CC13 /* Data+Extensions.swift */; };
+		F39140B5245D7BB100099DD0 /* TNRequest+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39140B4245D7BB100099DD0 /* TNRequest+Mock.swift */; };
 		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
@@ -103,6 +104,7 @@
 		F3850CA2243D104900F7CC13 /* Request+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Extensions.swift"; sourceTree = "<group>"; };
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F3850CA4243D104900F7CC13 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		F39140B4245D7BB100099DD0 /* TNRequest+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+Mock.swift"; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				F3850CA2243D104900F7CC13 /* Request+Extensions.swift */,
 				F3850CA4243D104900F7CC13 /* Data+Extensions.swift */,
 				F3F255ED244DF9F800517BF7 /* TNRequest+Middleware.swift */,
+				F39140B4245D7BB100099DD0 /* TNRequest+Mock.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 				F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */,
 				F3850CB0243D104900F7CC13 /* TNRequest.swift in Sources */,
 				F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */,
+				F39140B5245D7BB100099DD0 /* TNRequest+Mock.swift in Sources */,
 				F3850CA9243D104900F7CC13 /* TNRouteProtocol.swift in Sources */,
 				F3850CAE243D104900F7CC13 /* TNConfiguration.swift in Sources */,
 				F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */,

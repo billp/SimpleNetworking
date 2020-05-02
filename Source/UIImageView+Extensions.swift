@@ -20,7 +20,7 @@
 import UIKit
 
 extension UIImageView {
-    private static var activeRequestsHashMap: [String: TNRequest] = [:]
+    private static var activeRequestsDictionary: [String: TNRequest] = [:]
     private static var imageViewQueue: TNQueue = TNQueue()
 
     fileprivate static func downloadImage(url: String,
@@ -81,10 +81,10 @@ extension UIImageView {
     }
 
     private func cancelActiveCallInImageView() {
-        UIImageView.activeRequestsHashMap[getAddress()]?.cancel()
+        UIImageView.activeRequestsDictionary[getAddress()]?.cancel()
     }
 
     private func setActiveCallInImageView(_ call: TNRequest) {
-        UIImageView.activeRequestsHashMap[getAddress()] = call
+        UIImageView.activeRequestsDictionary[getAddress()] = call
     }
 }

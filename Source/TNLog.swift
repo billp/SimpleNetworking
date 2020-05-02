@@ -23,7 +23,7 @@ internal class TNLog {
     static func logRequest(request: TNRequest,
                            data: Data?,
                            tnError: TNError?) {
-        guard request.configuration.verbose else { return }
+        guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else { return }
 
         let url = urlRequest.url?.absoluteString ?? "n/a"
@@ -31,7 +31,7 @@ internal class TNLog {
 
         print("--------------------------------")
         print("🌎 URL: " + url)
-        if request.configuration.useMockData {
+        if request.configuration.useMockData == true {
             print("🗂 Uses mock data")
         }
         print("🎛️ Method: " + request.method.rawValue.uppercased())

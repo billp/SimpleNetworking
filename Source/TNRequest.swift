@@ -59,7 +59,9 @@ open class TNRequest: TNOperation {
     internal var mockFilePath: TNPath?
 
     // MARK: Public properties
-    /// The configuration of the request. This will be merged with  environment configuration and will override values if needed.
+
+    /// The configuration of the request. This will be merged with  environment configuration and will override
+    /// values if needed.
     public var configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()
 
     // MARK: Private properties
@@ -260,41 +262,9 @@ open class TNRequest: TNOperation {
             headers = [:]
         }
 
-        headers?.merge(configuration.headers, uniquingKeysWith: { (old, _) in old })
+        headers?.merge(configuration.headers ?? [:], uniquingKeysWith: { (old, _) in old })
 
         headers = try handleMiddlewareHeadersBeforeSendIfNeeded(headers: headers)
-    }
-
-    internal func shouldMockRequest() -> Bool {
-        return self.configuration.useMockData
-    }
-
-    internal func createMockRequest(request: URLRequest,
-                                    completionHandler: ((Data) -> Void)?,
-                                    onFailure: TNFailureCallback?) -> URLSessionDataTask {
-        let fakeSession = URLSession(configuration: URLSession.shared.configuration)
-                            .dataTask(with: request)
-
-        guard let filePath = mockFilePath?.convertedPath() else {
-            onFailure?(.invalidMockData(path), nil)
-            return fakeSession
-        }
-
-        if  let filenameWithExt = filePath.components(separatedBy: "/").last,
-            let subdirectory = filePath.components(separatedBy: "/").first,
-            let filename = filenameWithExt.components(separatedBy: ".").first,
-            let url = configuration.mockDataBundle?.url(forResource: filename,
-                                                        withExtension: filenameWithExt
-                                                            .components(separatedBy: ".").last,
-                                                        subdirectory: subdirectory,
-                                                        localization: nil),
-            let data = try? Data(contentsOf: url) {
-            completionHandler?(data)
-        } else {
-            onFailure?(.invalidMockData(path), nil)
-        }
-
-        return fakeSession
     }
 
     // MARK: Operation

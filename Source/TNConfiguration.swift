@@ -19,6 +19,9 @@
 
 import Foundation
 
+/// Type for mock delay randomizer
+public typealias TNMockDelayType = (min: TimeInterval, max: TimeInterval)
+
 /// A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
 /// If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
 /// Also, each request can have its own TNConfiguration whose settings will override those from environment.
@@ -27,43 +30,48 @@ public class TNConfiguration {
 
     /// The cache policy of the request.
     public var cachePolicy: URLRequest.CachePolicy?
-    /// The timeout interval of the request
+    /// The timeout interval of the request.
     public var timeoutInterval: TimeInterval?
-    /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON
+    /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.
     public var requestBodyType: TNRequestBodyType?
-    /// The certificate data when certificate pinning is enabled
+    /// The certificate data when certificate pinning is enabled.
     public var certificateData: NSData?
-    /// Enables or disables debug mode
-    public var verbose: Bool = false
-    /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration
-    public var headers: [String: String] = [:]
-    /// The Bundle object of mock data used when useMockData is true
+    /// Enables or disables debug mode.
+    public var verbose: Bool?
+    /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration.
+    public var headers: [String: String]?
+    /// The Bundle object of mock data used when useMockData is true.
     public var mockDataBundle: Bundle?
-    /// Enables or disables  request mocking
-    public var useMockData: Bool = false
+    /// Enables or disables  request mocking.
+    public var useMockData: Bool?
+    /// Specifies a delay when mock data is used.
+    public var mockDelay: TNMockDelayType?
+
     /// Request middlewares
-    public var requestMiddlewares: [TNRequestMiddlewareProtocol] = []
+    public var requestMiddlewares: [TNRequestMiddlewareProtocol]?
 
     // MARK: Initializers
 
     public init() { }
 
-    public init(cachePolicy: URLRequest.CachePolicy?,
-                timeoutInterval: TimeInterval?,
-                requestBodyType: TNRequestBodyType?,
+    public init(cachePolicy: URLRequest.CachePolicy? = nil,
+                timeoutInterval: TimeInterval? = nil,
+                requestBodyType: TNRequestBodyType? = nil,
                 certificatePath: String? = nil,
-                verbose: Bool = false,
-                headers: [String: String] = [:],
+                verbose: Bool? = nil,
+                headers: [String: String]? = nil,
                 mockDataBundle: Bundle? = nil,
-                useMockData: Bool = false) {
+                useMockData: Bool? = nil,
+                mockDelay: TNMockDelayType? = nil) {
 
-        self.cachePolicy = cachePolicy ?? TNConfiguration.makeDefaultConfiguration().cachePolicy
-        self.timeoutInterval = timeoutInterval ?? TNConfiguration.makeDefaultConfiguration().timeoutInterval
-        self.requestBodyType = requestBodyType ?? TNConfiguration.makeDefaultConfiguration().requestBodyType
+        self.cachePolicy = cachePolicy
+        self.timeoutInterval = timeoutInterval
+        self.requestBodyType = requestBodyType
         self.verbose = verbose
         self.headers = headers
         self.mockDataBundle = mockDataBundle
         self.useMockData = useMockData
+        self.mockDelay = mockDelay
 
         if let certPath = certificatePath {
             setCertificateData(with: certPath)
@@ -132,7 +140,12 @@ extension TNConfiguration {
     static func makeDefaultConfiguration() -> TNConfiguration {
         return TNConfiguration(cachePolicy: .useProtocolCachePolicy,
                                timeoutInterval: 60,
-                               requestBodyType: .xWWWFormURLEncoded)
+                               requestBodyType: .xWWWFormURLEncoded,
+                               verbose: false,
+                               headers: [:],
+                               mockDataBundle: nil,
+                               useMockData: false,
+                               mockDelay: TNMockDelayType(min: 0.01, max: 0.07))
     }
 
     static func override(configuration: TNConfiguration,
@@ -140,15 +153,41 @@ extension TNConfiguration {
                 -> TNConfiguration {
 
         let clone = configuration.copy() as? TNConfiguration ?? TNConfiguration()
-        clone.cachePolicy = overrideConfiguration.cachePolicy
-        clone.timeoutInterval = overrideConfiguration.timeoutInterval
-        clone.requestBodyType = overrideConfiguration.requestBodyType
-        clone.certificateData = overrideConfiguration.certificateData
-        clone.verbose = overrideConfiguration.verbose
-        clone.headers.merge(overrideConfiguration.headers, uniquingKeysWith: { (_, new) in new })
-        clone.mockDataBundle = overrideConfiguration.mockDataBundle
-        clone.useMockData = overrideConfiguration.useMockData
-        clone.requestMiddlewares = overrideConfiguration.requestMiddlewares
+
+        if let cachePolicy = overrideConfiguration.cachePolicy {
+            clone.cachePolicy = cachePolicy
+        }
+        if let timeoutInterval = overrideConfiguration.timeoutInterval {
+            clone.timeoutInterval = timeoutInterval
+        }
+        if let requestBodyType = overrideConfiguration.requestBodyType {
+            clone.requestBodyType = requestBodyType
+        }
+        if let certificateData = overrideConfiguration.certificateData {
+            clone.certificateData = certificateData
+        }
+        if let verbose = overrideConfiguration.verbose {
+            clone.verbose = verbose
+        }
+        if var cloneHeaders = clone.headers,
+            let headers = overrideConfiguration.headers {
+            cloneHeaders.merge(headers, uniquingKeysWith: { (_, new) in new })
+            clone.headers = cloneHeaders
+        } else {
+            clone.headers = overrideConfiguration.headers
+        }
+        if let mockDataBundle = overrideConfiguration.mockDataBundle {
+            clone.mockDataBundle = mockDataBundle
+        }
+        if let useMockData = overrideConfiguration.useMockData {
+            clone.useMockData = useMockData
+        }
+        if let mockDelay = overrideConfiguration.mockDelay {
+            clone.mockDelay = mockDelay
+        }
+        if let requestMiddlewares = overrideConfiguration.requestMiddlewares {
+            clone.requestMiddlewares = requestMiddlewares
+        }
 
         return clone
     }

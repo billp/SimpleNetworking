@@ -94,9 +94,10 @@ class TestTNConfiguration: XCTestCase {
         let reqConf = request.configuration
         let routeConf = TestTNConfiguration.routeConfiguration
 
-        var allHeaders = TestTNConfiguration.envConfiguration.headers
-
-        allHeaders.merge(routeConf.headers, uniquingKeysWith: { _, new in new})
+        var allHeaders = TestTNConfiguration.envConfiguration.headers ?? [:]
+        let routeHeaders = routeConf.headers ?? [:]
+        
+        allHeaders.merge(routeHeaders, uniquingKeysWith: { _, new in new})
 
         XCTAssert(reqConf.verbose == routeConf.verbose)
         XCTAssert(reqConf.cachePolicy == routeConf.cachePolicy)

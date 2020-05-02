@@ -24,7 +24,7 @@ import TermiNetwork
 
 class TestTNRequest: XCTestCase {
     lazy var router: TNRouter<APIRoute> = {
-       return TNRouter<APIRoute>()
+        return TNRouter<APIRoute>(configuration: TNConfiguration(verbose: true))
     }()
 
     lazy var router2: TNRouter<APIRoute> = {
