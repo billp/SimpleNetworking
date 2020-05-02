@@ -10,7 +10,10 @@ import UIKit
 
 extension TNRequest {
     func shouldHandleMiddlewares() -> Bool {
-        return configuration.requestMiddlewares != nil
+        guard let middlewares = configuration.requestMiddlewares else {
+            return false
+        }
+        return middlewares.count > 0
     }
 
     func handleMiddlewareBodyBeforeSendIfNeeded(params: [String: Any?]?) throws -> [String: Any?]? {

@@ -14,7 +14,7 @@ extension TNRequest {
     }
 
     internal func createMockRequest(request: URLRequest,
-                                    completionHandler: ((Data) -> Void)?,
+                                    completionHandler: ((Data, URLResponse?) -> Void)?,
                                     onFailure: TNFailureCallback?) -> URLSessionDataTask {
         let fakeSession = URLSession(configuration: URLSession.shared.configuration)
                             .dataTask(with: request)
@@ -34,7 +34,7 @@ extension TNRequest {
                                                         localization: nil),
             let data = try? Data(contentsOf: url) {
             randomizeResponse {
-                completionHandler?(data)
+                completionHandler?(data, nil)
             }
         } else {
             randomizeResponse {

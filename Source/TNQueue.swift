@@ -53,7 +53,8 @@ public typealias TNAfterEachRequestCallbackType = (
 open class TNQueue: OperationQueue {
     // MARK: Static variables
 
-    /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances, they are added to this instance.
+    /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances,
+    /// they are added to this instance.
     public static var shared = TNQueue()
 
     // MARK: Private variables

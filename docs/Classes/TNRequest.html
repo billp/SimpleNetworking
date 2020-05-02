@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork Docs
         </a>
-         (74% documented)
+         (78% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -134,6 +134,12 @@
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork15TNMockDelayTypea">TNMockDelayType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork22TNProgressCallbackTypea">TNProgressCallbackType</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a>
               </li>
             </ul>
@@ -182,7 +188,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The configuration of the request. This will be merged with  environment configuration and will override values if needed.</p>
+                        <p>The configuration of the request. This will be merged with  environment configuration and will override
+values if needed.</p>
 
                       </div>
                       <div class="declaration">
@@ -726,6 +733,117 @@ them to url, otherwise it is seting them as request body.</li>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork9TNRequestC15startDataUpload5queue4data12responseType14progressUpdate9onSuccess0M7FailureyAA7TNQueueCSg_10Foundation0E0VxmySfcSgyxcSgyAA7TNErrorO_APSgtcSgtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/startDataUpload(queue:data:responseType:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC15startDataUpload5queue4data12responseType14progressUpdate9onSuccess0M7FailureyAA7TNQueueCSg_10Foundation0E0VxmySfcSgyxcSgyAA7TNErrorO_APSgtcSgtSeRzlF">startDataUpload(queue:<wbr>data:<wbr>responseType:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Decodable types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">startDataUpload</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                          <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+                                          <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                                          <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork22TNProgressCallbackTypea">TNProgressCallbackType</a></span><span class="p">?,</span>
+                                          <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
+                                          <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The data to upload</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the model that will be deserialized and will be passed to the success block.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a progress callback to get upload progress updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type TNSuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type TNFailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -734,7 +852,7 @@ them to url, otherwise it is seting them as request body.</li>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-04-30)</p>
+      <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">TermiNetwork</a>. All rights reserved. (Last updated: 2020-05-02)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

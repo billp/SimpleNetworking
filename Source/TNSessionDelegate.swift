@@ -23,8 +23,12 @@ import UIKit
 class TNSession: NSObject, URLSessionDelegate {
     weak var request: TNRequest!
 
-    init(withTNRequest request: TNRequest) {
+    var uploadProgressCallback: TNProgressCallbackType?
+
+    init(with request: TNRequest,
+         uploadProgressCallback: TNProgressCallbackType? = nil) {
         self.request = request
+        self.uploadProgressCallback = uploadProgressCallback
     }
 
     func urlSession(_ session: URLSession,
@@ -56,5 +60,14 @@ class TNSession: NSObject, URLSessionDelegate {
         }
 
         completionHandler(challengeDisposition, URLCredential(trust: serverTrust))
+    }
+}
+
+extension TNSession: URLSessionTaskDelegate {
+    func urlSession(_ session: URLSession, task: URLSessionTask,
+                    didSendBodyData bytesSent: Int64, totalBytesSent: Int64,
+                    totalBytesExpectedToSend: Int64) {
+        let uploadProgress = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
+        uploadProgressCallback?(uploadProgress)
     }
 }

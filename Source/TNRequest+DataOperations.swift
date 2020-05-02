@@ -1,10 +1,21 @@
+// TNRequest+DataOperations.swift
 //
-//  TNRequest+DataOperations.swift
-//  TermiNetwork
+// Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
-//  Created by Vasilis Panagiotopoulos on 28/4/20.
-//  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
@@ -24,7 +35,7 @@ extension TNRequest {
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
-                                                     completionHandler: { data in
+                                                     completionHandler: { data, urlResponse in
             let object: T!
 
             do {
@@ -33,22 +44,27 @@ extension TNRequest {
                 let tnError = TNError.cannotDeserialize(error)
                 TNLog.logRequest(request: self,
                                  data: data,
+                                 urlResponse: nil,
                                  tnError: tnError)
                 onFailure?(tnError, data)
-                self.handleDataTaskFailure(withData: data,
+                self.handleDataTaskFailure(with: data,
+                                           urlResponse: urlResponse,
                                            tnError: tnError)
                 return
             }
 
             TNLog.logRequest(request: self,
                              data: data,
+                             urlResponse: urlResponse,
                              tnError: nil)
             onSuccess?(object)
-            self.handleDataTaskCompleted(withData: data,
+            self.handleDataTaskCompleted(with: data,
+                                         urlResponse: urlResponse,
                                          tnError: nil)
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
-            self.handleDataTaskFailure(withData: data,
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
                                        tnError: tnError)
         })
 
@@ -70,29 +86,34 @@ extension TNRequest {
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
-                                                     completionHandler: { data in
+                                                     completionHandler: { data, urlResponse in
             let image = T(data: data)
 
             if image == nil {
                 let tnError = TNError.responseInvalidImageData
                 TNLog.logRequest(request: self,
                                  data: data,
+                                 urlResponse: urlResponse,
                                  tnError: tnError)
 
                 onFailure?(.responseInvalidImageData, data)
-                self.handleDataTaskFailure(withData: data,
+                self.handleDataTaskFailure(with: data,
+                                           urlResponse: nil,
                                            tnError: tnError)
             } else {
                 TNLog.logRequest(request: self,
                                  data: data,
+                                 urlResponse: urlResponse,
                                  tnError: nil)
                 onSuccess?(image ?? T())
-                self.handleDataTaskCompleted(withData: data,
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: nil,
                                              tnError: nil)
             }
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
-            self.handleDataTaskFailure(withData: data,
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
                                        tnError: tnError)
         })
 
@@ -114,30 +135,35 @@ extension TNRequest {
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
-                                                     completionHandler: { data in
+                                                     completionHandler: { data, urlResponse in
             DispatchQueue.main.async {
                 if let string = String(data: data, encoding: .utf8) {
                     TNLog.logRequest(request: self,
                                      data: data,
+                                     urlResponse: urlResponse,
                                      tnError: nil)
 
                     onSuccess?(string)
-                    self.handleDataTaskCompleted(withData: data,
+                    self.handleDataTaskCompleted(with: data,
+                                                 urlResponse: urlResponse,
                                                  tnError: nil)
                 } else {
                     let tnError = TNError.cannotConvertToString
                     TNLog.logRequest(request: self,
                                      data: data,
+                                     urlResponse: urlResponse,
                                      tnError: tnError)
                     onFailure?(tnError, data)
-                    self.handleDataTaskFailure(withData: data,
+                    self.handleDataTaskFailure(with: data,
+                                               urlResponse: nil,
                                                tnError: tnError)
                 }
 
             }
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
-            self.handleDataTaskFailure(withData: data,
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
                                        tnError: tnError)
         })
 
@@ -159,17 +185,21 @@ extension TNRequest {
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
-                                                     completionHandler: { data in
+                                                     completionHandler: { data, urlResponse in
             DispatchQueue.main.async {
-                TNLog.logRequest(request: self, data: data,
+                TNLog.logRequest(request: self,
+                                 data: data,
+                                 urlResponse: urlResponse,
                                  tnError: nil)
                 onSuccess?(data)
-                self.handleDataTaskCompleted(withData: data,
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: urlResponse,
                                              tnError: nil)
             }
         }, onFailure: { tnError, data in
             onFailure?(tnError, data)
-            self.handleDataTaskFailure(withData: data,
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
                                        tnError: tnError)
         })
 

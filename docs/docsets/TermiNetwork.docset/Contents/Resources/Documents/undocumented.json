@@ -185,14 +185,14 @@
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRouteProtocol.swift",
       "line": 22,
-      "symbol": "TNRouterProtocol",
+      "symbol": "TNRouteProtocol",
       "symbol_kind": "source.lang.swift.decl.protocol",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRouteProtocol.swift",
       "line": 23,
-      "symbol": "TNRouterProtocol.configure()",
+      "symbol": "TNRouteProtocol.configure()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }

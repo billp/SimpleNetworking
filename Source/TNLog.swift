@@ -22,6 +22,7 @@ import Foundation
 internal class TNLog {
     static func logRequest(request: TNRequest,
                            data: Data?,
+                           urlResponse: URLResponse?,
                            tnError: TNError?) {
         guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else { return }
@@ -56,7 +57,7 @@ internal class TNLog {
 
         if let customError = tnError {
             print("❌ Error: " + (customError.localizedDescription ?? ""))
-        } else if let response = request.urlResponse as? HTTPURLResponse {
+        } else if let response = urlResponse as? HTTPURLResponse {
             print("✅ Status: " + String(response.statusCode))
         }
 

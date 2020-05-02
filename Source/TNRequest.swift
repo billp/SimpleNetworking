@@ -20,8 +20,9 @@
 import Foundation
 import UIKit
 
-// MARK: Custom types
+/// Custom type for success data task.
 public typealias TNSuccessCallback<T> = (T) -> Void
+/// Custom type for failure data task.
 public typealias TNFailureCallback = (_ error: TNError, _ data: Data?) -> Void
 
 // MARK: Enums
@@ -52,7 +53,7 @@ open class TNRequest: TNOperation {
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
     internal var dataTask: URLSessionTask?
-    internal var urlResponse: URLResponse?
+    //internal var urlResponse: URLResponse?
     internal var params: [String: Any?]?
     internal var path: String
     internal var pathType: SNPathType = .normal
@@ -274,7 +275,8 @@ open class TNRequest: TNOperation {
         dataTask?.resume()
     }
 
-    func handleDataTaskCompleted(withData data: Data?,
+    func handleDataTaskCompleted(with data: Data?,
+                                 urlResponse: URLResponse?,
                                  tnError: TNError?) {
         _executing = false
         _finished = true
@@ -285,7 +287,8 @@ open class TNRequest: TNOperation {
                                             tnError: tnError)
     }
 
-    func handleDataTaskFailure(withData data: Data?,
+    func handleDataTaskFailure(with data: Data?,
+                               urlResponse: URLResponse?,
                                tnError: TNError?) {
         switch currentQueue.failureMode {
         case .continue:

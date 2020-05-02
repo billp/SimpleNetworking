@@ -26,7 +26,7 @@ class TNSessionTaskFactory {
     ///     - completionHandler: A completion handler for success
     ///     - onFailure: A completion handler for failures
     static func makeDataTask(with tnRequest: TNRequest,
-                             completionHandler: ((Data) -> Void)?,
+                             completionHandler: ((Data, URLResponse?) -> Void)?,
                              onFailure: TNFailureCallback?) -> URLSessionDataTask? {
 
         let request: URLRequest!
@@ -38,7 +38,8 @@ class TNSessionTaskFactory {
             }
 
             onFailure?(tnError, nil)
-            tnRequest.handleDataTaskFailure(withData: nil,
+            tnRequest.handleDataTaskFailure(with: nil,
+                                            urlResponse: nil,
                                             tnError: tnError)
             return nil
         }
@@ -51,12 +52,10 @@ class TNSessionTaskFactory {
         }
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(withTNRequest: tnRequest),
+                                 delegate: TNSession(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: request) { data, urlResponse, error in
-            tnRequest.urlResponse = urlResponse
-
             let dataResult = TNRequestHelpers.processData(with: tnRequest,
                                                           data: data,
                                                           urlResponse: urlResponse,
@@ -65,26 +64,29 @@ class TNSessionTaskFactory {
             if let tnError = dataResult.tnError {
                 TNLog.logRequest(request: tnRequest,
                                  data: dataResult.data,
+                                 urlResponse: urlResponse,
                                  tnError: tnError)
                 onFailure?(tnError, dataResult.data)
-                tnRequest.handleDataTaskFailure(withData: dataResult.data,
+                tnRequest.handleDataTaskFailure(with: dataResult.data,
+                                                urlResponse: nil,
                                                 tnError: tnError)
             } else {
-                completionHandler?(dataResult.data ?? Data())
+                completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
         }
 
         return dataTask
     }
 
-    /// Creates a data task request.
+    /// Creates an upload task request.
     /// - Parameters:
     ///     - tnRequest: A TNRequest instance
     ///     - completionHandler: A completion handler for success
     ///     - onFailure: A completion handler for failures
     static func makeUploadTask(with tnRequest: TNRequest,
                                from: Data,
-                               completionHandler: ((Data) -> Void)?,
+                               progressUpdate: TNProgressCallbackType?,
+                               completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: TNFailureCallback?) -> URLSessionUploadTask? {
 
         let request: URLRequest!
@@ -95,17 +97,34 @@ class TNSessionTaskFactory {
                 return nil
             }
             onFailure?(tnError, nil)
-            tnRequest.handleDataTaskFailure(withData: nil,
+            tnRequest.handleDataTaskFailure(with: nil,
+                                            urlResponse: nil,
                                             tnError: tnError)
             return nil
         }
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(withTNRequest: tnRequest),
+                                 delegate: TNSession(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
         let uploadTask = session.uploadTask(with: request,
-                                            from: from) { (data, response, error) in
+                                            from: from) { (data, urlResponse, error) in
+            let dataResult = TNRequestHelpers.processData(with: tnRequest,
+                                                          data: data,
+                                                          urlResponse: urlResponse,
+                                                          serverError: error)
 
+            if let tnError = dataResult.tnError {
+                TNLog.logRequest(request: tnRequest,
+                                 data: dataResult.data,
+                                 urlResponse: urlResponse,
+                                 tnError: tnError)
+                onFailure?(tnError, dataResult.data)
+                tnRequest.handleDataTaskFailure(with: dataResult.data,
+                                                urlResponse: nil,
+                                                tnError: tnError)
+            } else {
+                completionHandler?(dataResult.data ?? Data(), urlResponse)
+            }
         }
 
         return uploadTask

@@ -96,7 +96,7 @@ class TestTNConfiguration: XCTestCase {
 
         var allHeaders = TestTNConfiguration.envConfiguration.headers ?? [:]
         let routeHeaders = routeConf.headers ?? [:]
-        
+
         allHeaders.merge(routeHeaders, uniquingKeysWith: { _, new in new})
 
         XCTAssert(reqConf.verbose == routeConf.verbose)

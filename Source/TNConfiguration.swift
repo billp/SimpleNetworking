@@ -76,16 +76,7 @@ public class TNConfiguration {
         }
     }
 
-    // MARK: Public Methods
-
-    /// Set a certificate path used for pinning
-    /// - Parameters:
-    ///    - path: The path of the certificate
-    public func setCertificatePath(_ path: String) {
-        setCertificateData(with: path)
-    }
-
-    // MARK: Internal properties
+    // MARK: Internal methods
 
     internal func setCertificateData(with path: String) {
         if let certData = NSData(contentsOfFile: path) {
