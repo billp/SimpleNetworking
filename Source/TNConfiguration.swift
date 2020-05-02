@@ -52,8 +52,6 @@ public class TNConfiguration {
 
     // MARK: Initializers
 
-    public init() { }
-
     public init(cachePolicy: URLRequest.CachePolicy? = nil,
                 timeoutInterval: TimeInterval? = nil,
                 requestBodyType: TNRequestBodyType? = nil,
@@ -76,31 +74,6 @@ public class TNConfiguration {
         if let certPath = certificatePath {
             setCertificateData(with: certPath)
         }
-    }
-
-    public convenience init(cachePolicy: URLRequest.CachePolicy?) {
-        self.init(cachePolicy: cachePolicy,
-                  timeoutInterval: nil,
-                  requestBodyType: nil)
-    }
-
-    public convenience init(timeoutInterval: TimeInterval?) {
-        self.init(cachePolicy: nil,
-                  timeoutInterval: timeoutInterval,
-                  requestBodyType: nil)
-    }
-
-    public convenience init(requestBodyType: TNRequestBodyType?) {
-        self.init(cachePolicy: nil,
-                  timeoutInterval: nil,
-                  requestBodyType: requestBodyType)
-    }
-
-    public convenience init(certificatePath name: String) {
-        self.init(cachePolicy: nil,
-                  timeoutInterval: nil,
-                  requestBodyType: nil,
-                  certificatePath: name)
     }
 
     // MARK: Public Methods
