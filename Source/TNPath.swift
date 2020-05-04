@@ -25,7 +25,7 @@ public enum TNPath {
     /// example: .path(["user", "1", "details"]) will produce "user/1/details"
     case path(_ components: [String])
 
-    func convertedPath() -> String {
+    public var convertedPath: String {
         switch self {
         case .path(let components):
             return components.joined(separator: "/")

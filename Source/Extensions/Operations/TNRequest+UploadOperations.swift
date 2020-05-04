@@ -31,17 +31,15 @@ extension TNRequest {
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
-    public func startDataUpload<T: Decodable>(queue: TNQueue? = TNQueue.shared,
-                                              data: Data,
-                                              responseType: T.Type,
-                                              progressUpdate: TNProgressCallbackType?,
-                                              onSuccess: TNSuccessCallback<T>?,
-                                              onFailure: TNFailureCallback?) {
+    public func startUpload<T: Decodable>(queue: TNQueue? = TNQueue.shared,
+                                          responseType: T.Type,
+                                          progressUpdate: TNProgressCallbackType?,
+                                          onSuccess: TNSuccessCallback<T>?,
+                                          onFailure: TNFailureCallback?) {
         currentQueue = queue ?? TNQueue.shared
         currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
-                                                       from: data,
                                                        progressUpdate: progressUpdate,
                                                        completionHandler: { data, urlResponse in
             let object: T!

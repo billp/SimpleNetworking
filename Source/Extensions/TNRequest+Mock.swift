@@ -19,7 +19,7 @@ extension TNRequest {
         let fakeSession = URLSession(configuration: URLSession.shared.configuration)
                             .dataTask(with: request)
 
-        guard let filePath = mockFilePath?.convertedPath() else {
+        guard let filePath = mockFilePath?.convertedPath else {
             onFailure?(.invalidMockData(path), nil)
             return fakeSession
         }

@@ -39,14 +39,7 @@ public enum TNMethod: String {
     case patch
 }
 
-/// The body type of the request
-public enum TNRequestBodyType: String {
-    /// The request params are sent as application/x-www-form-urlencoded mime type
-    case xWWWFormURLEncoded = "application/x-www-form-urlencoded"
-    /// The request params are sent as application/json mime type
-    case JSON = "application/json"
-}
-
+/// The core class of TermiNetwork. It uses all
 open class TNRequest: TNOperation {
     // MARK: Internal properties
 
@@ -58,6 +51,7 @@ open class TNRequest: TNOperation {
     internal var path: String
     internal var pathType: SNPathType = .normal
     internal var mockFilePath: TNPath?
+    internal var multipartBoundary: String?
 
     // MARK: Public properties
 
@@ -139,7 +133,7 @@ open class TNRequest: TNOperation {
         self.method = route.method
         self.headers = route.headers
         self.params = route.params
-        self.path = route.path.convertedPath()
+        self.path = route.path.convertedPath
         self.environment = environment
         self.mockFilePath = route.mockFilePath
 
@@ -178,19 +172,9 @@ open class TNRequest: TNOperation {
             urlString.setString(path)
         }
 
-        // Create query string from the given params
-        let queryString = try params?.filter({ $0.value != nil }).map { param -> String in
-            if let value = String(describing: param.value!)
-                .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
-                return param.key + "=" + value
-            } else {
-                throw TNError.invalidParams
-            }
-        }.joined(separator: "&")
-
         // Append query string to url in case of .get method
-        if method == .get && queryString != nil {
-            urlString.append("?" + queryString!)
+        if let params = params, method == .get {
+            try urlString.append("?" + TNRequestBodyGenerators.generateUrlEncodedString(with: params))
         }
 
         guard let url = URL(string: urlString as String) else {
@@ -213,13 +197,8 @@ open class TNRequest: TNOperation {
             }
         }
 
-        do {
-            try addBodyParams(withRequest: &request,
-                              params: params,
-                          queryString: queryString)
-        } catch {
-            throw TNError.invalidParams
-        }
+        try addBodyParamsIfNeeded(withRequest: &request,
+                                  params: params)
 
         // Set http method
         request.httpMethod = method.rawValue
@@ -235,24 +214,35 @@ open class TNRequest: TNOperation {
 
     // MARK: Helper methods
 
-    fileprivate func addBodyParams(withRequest request: inout URLRequest,
-                                   params: [String: Any?]?,
-                                   queryString: String?) throws {
+    fileprivate func addBodyParamsIfNeeded(withRequest request: inout URLRequest,
+                                           params: [String: Any?]?) throws {
+
+        guard let params = params else {
+            return
+        }
+
         // Set body params if method is not get
         if method != TNMethod.get {
-            let requestBodyType = configuration.requestBodyType ?? .xWWWFormURLEncoded
+            let requestBodyType = configuration.requestBodyType ??
+                TNConfiguration.makeDefaultConfiguration().requestBodyType!
 
-            request.addValue(requestBodyType.rawValue, forHTTPHeaderField: "Content-Type")
+            /// Add header for coresponding body type
+            request.addValue(requestBodyType.value(), forHTTPHeaderField: "Content-Type")
 
-            if requestBodyType == .xWWWFormURLEncoded {
-                request.httpBody = queryString?.data(using: .utf8)
-            } else {
-                do {
-                    let jsonData = try params?.toJSONData()
-                    request.httpBody = jsonData
-                } catch {
-                    throw TNError.invalidParams
-                }
+            if case .multipartFormData = requestBodyType, let boundary = self.multipartBoundary {
+                let contentLength = String(TNMultipartFormDataHelpers.contentLength(forParams: params,
+                                                                                    boundary: boundary))
+                request.addValue(contentLength, forHTTPHeaderField: "Content-Length")
+            }
+
+            switch requestBodyType {
+            case .xWWWFormURLEncoded:
+                request.httpBody = try TNRequestBodyGenerators.generateUrlEncodedString(with: params)
+                                        .data(using: .utf8)
+            case .JSON:
+                request.httpBody = try TNRequestBodyGenerators.generateJSONBodyData(with: params)
+            default:
+                break
             }
         }
     }

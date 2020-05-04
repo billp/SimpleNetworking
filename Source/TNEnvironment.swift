@@ -80,7 +80,7 @@ extension TNEnvironment: CustomStringConvertible {
         urlComponents.append(scheme.rawValue + ":/")
         urlComponents.append(port != nil ? host + ":" + String(describing: port!) : host)
         if let suffix = suffix {
-            urlComponents.append(suffix.convertedPath())
+            urlComponents.append(suffix.convertedPath)
         }
 
         return urlComponents.joined(separator: "/")

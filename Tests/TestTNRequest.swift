@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TNRequest.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //

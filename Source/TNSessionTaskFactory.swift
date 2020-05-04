@@ -16,6 +16,7 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 import Foundation
 
 /// Factory class that creates Session task for each specific case
@@ -84,12 +85,14 @@ class TNSessionTaskFactory {
     ///     - completionHandler: A completion handler for success
     ///     - onFailure: A completion handler for failures
     static func makeUploadTask(with tnRequest: TNRequest,
-                               from: Data,
                                progressUpdate: TNProgressCallbackType?,
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: TNFailureCallback?) -> URLSessionUploadTask? {
+        let boundary = TNMultipartFormDataHelpers.generateBoundary()
+        tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
+        tnRequest.multipartBoundary = boundary
 
-        let request: URLRequest!
+        var request: URLRequest!
         do {
             request = try tnRequest.asRequest()
         } catch let error {
@@ -103,11 +106,15 @@ class TNSessionTaskFactory {
             return nil
         }
 
+
         let session = URLSession(configuration: URLSessionConfiguration.default,
                                  delegate: TNSession(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
-        let uploadTask = session.uploadTask(with: request,
-                                            from: from) { (data, urlResponse, error) in
+        request.httpBodyStream = TNUploadTaskInputStream(withParams: tnRequest.params ?? [:],
+                                                         boundary: "yo")
+        let uploadTask = session.uploadTask(withStreamedRequest: request)
+
+       /* { (data, urlResponse, error) in
             let dataResult = TNRequestHelpers.processData(with: tnRequest,
                                                           data: data,
                                                           urlResponse: urlResponse,
@@ -125,7 +132,7 @@ class TNSessionTaskFactory {
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
-        }
+        }*/
 
         return uploadTask
     }

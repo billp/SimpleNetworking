@@ -20,7 +20,7 @@
 import XCTest
 import TermiNetwork
 
-class TestMockRequest: XCTestCase {
+class TestMockRequests: XCTestCase {
     static var envConfiguration: TNConfiguration = {
         let conf = TNConfiguration()
         conf.verbose = true
@@ -74,7 +74,7 @@ class TestMockRequest: XCTestCase {
     }
 
     var router2: TNRouter<APIRoute> {
-        return TNRouter<APIRoute>(configuration: TestMockRequest.mockDelayConfiguration)
+        return TNRouter<APIRoute>(configuration: TestMockRequests.mockDelayConfiguration)
     }
 
     override func setUp() {
@@ -111,9 +111,9 @@ class TestMockRequest: XCTestCase {
         router2.request(for: .testHeaders).start(responseType: TestHeaders.self,
                                                  onSuccess: { response in
                                                         let res = now.distance(to: Date().timeIntervalSince1970)
-                                                        let timeCheck = res >= TestMockRequest
+                                                        let timeCheck = res >= TestMockRequests
                                                             .mockDelayConfiguration.mockDelay!.min
-                                                            && res <= TestMockRequest
+                                                            && res <= TestMockRequests
                                                                 .mockDelayConfiguration.mockDelay!.max
                                                     failed = !(response.customHeader == "yo man!!!!" && timeCheck)
                                                         expectation.fulfill()
