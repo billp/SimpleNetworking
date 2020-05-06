@@ -51,13 +51,13 @@ public typealias TNAfterEachRequestCallbackType = (
 
 /// This class can be used to create custom queues
 open class TNQueue: OperationQueue {
-    // MARK: Static variables
+    // MARK: Static properties
 
     /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances,
     /// they are added to this instance.
     public static var shared = TNQueue()
 
-    // MARK: Private variables
+    // MARK: Private properties
 
     private var completedWithError = false
 

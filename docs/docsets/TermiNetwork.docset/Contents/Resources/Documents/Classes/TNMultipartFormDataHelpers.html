@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TNRequestMiddlewareProtocol Protocol Reference</title>
+    <title>TNMultipartFormDataHelpers Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Protocol/TNRequestMiddlewareProtocol" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Class/TNMultipartFormDataHelpers" class="dashAnchor"></a>
 
-    <a title="TNRequestMiddlewareProtocol Protocol Reference"></a>
+    <a title="TNMultipartFormDataHelpers Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">TermiNetwork Reference</a>
       <img class="carat" src="../img/carat.png" />
-      TNRequestMiddlewareProtocol Protocol Reference
+      TNMultipartFormDataHelpers Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -153,15 +153,14 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>TNRequestMiddlewareProtocol</h1>
+            <h1>TNMultipartFormDataHelpers</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">TNRequestMiddlewareProtocol</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TNMultipartFormDataHelpers</span></code></pre>
 
                 </div>
               </div>
-            <p>This protocol is used to register a middleware in order to modify body and headers of a request. (e.g.  it can be
-used with  Crypto Swift library to encrypt or decrypt the data.</p>
+            <p>Undocumented</p>
 
           </div>
         </section>
@@ -173,9 +172,9 @@ used with  Crypto Swift library to encrypt or decrypt the data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork27TNRequestMiddlewareProtocolP20modifyBodyBeforeSend4withSDySSypSgGSgAH_tKF"></a>
-                    <a name="//apple_ref/swift/Method/modifyBodyBeforeSend(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork27TNRequestMiddlewareProtocolP20modifyBodyBeforeSend4withSDySSypSgGSgAH_tKF">modifyBodyBeforeSend(with:<wbr>)</a>
+                    <a name="/s:12TermiNetwork26TNMultipartFormDataHelpersC16generateBoundarySSyFZ"></a>
+                    <a name="//apple_ref/swift/Method/generateBoundary()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork26TNMultipartFormDataHelpersC16generateBoundarySSyFZ">generateBoundary()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -183,41 +182,16 @@ used with  Crypto Swift library to encrypt or decrypt the data.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Modifies body params before they are sent to server</p>
+                        <p>Generates a random string that will be used as multipart boundary.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">modifyBodyBeforeSend</span><span class="p">(</span><span class="n">with</span> <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">?]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">?]?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">generateBoundary</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>params</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The body params that are constructed by TNRequest initializers</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><ul>
-<li>the new modified params</li>
-</ul></p>
                       </div>
                     </section>
                   </div>
@@ -225,9 +199,9 @@ used with  Crypto Swift library to encrypt or decrypt the data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork27TNRequestMiddlewareProtocolP22modifyBodyAfterReceive4with10Foundation4DataVSgAI_tKF"></a>
-                    <a name="//apple_ref/swift/Method/modifyBodyAfterReceive(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork27TNRequestMiddlewareProtocolP22modifyBodyAfterReceive4with10Foundation4DataVSgAI_tKF">modifyBodyAfterReceive(with:<wbr>)</a>
+                    <a name="/s:12TermiNetwork26TNMultipartFormDataHelpersC13contentLength9forParams8boundarySiSDySSypSgG_SStFZ"></a>
+                    <a name="//apple_ref/swift/Method/contentLength(forParams:boundary:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork26TNMultipartFormDataHelpersC13contentLength9forParams8boundarySiSDySSypSgG_SStFZ">contentLength(forParams:<wbr>boundary:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -235,93 +209,17 @@ used with  Crypto Swift library to encrypt or decrypt the data.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Modifies data response before they are sent to callbacks</p>
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">modifyBodyAfterReceive</span><span class="p">(</span><span class="n">with</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Data</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">contentLength</span><span class="p">(</span><span class="n">forParams</span> <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?],</span>
+                                 <span class="nv">boundary</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>data</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The data</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><ul>
-<li>the new modified data</li>
-</ul></p>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork27TNRequestMiddlewareProtocolP23modifyHeadersBeforeSend4withSDyS2SGSgAG_tKF"></a>
-                    <a name="//apple_ref/swift/Method/modifyHeadersBeforeSend(with:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork27TNRequestMiddlewareProtocolP23modifyHeadersBeforeSend4withSDyS2SGSgAG_tKF">modifyHeadersBeforeSend(with:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Modifies the headers of the response before they are sent to server</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">modifyHeadersBeforeSend</span><span class="p">(</span><span class="n">with</span> <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>the headers cosntructed by initializers and configuration</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><ul>
-<li>the new modified headers</li>
-</ul></p>
                       </div>
                     </section>
                   </div>

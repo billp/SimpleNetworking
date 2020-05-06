@@ -1,26 +1,25 @@
-[![Tweet](https://img.shields.io/twitter/url/https/github.com/billp/TermiNetwork.svg?style=social)](https://twitter.com/home?status=https%3A%2F%2Fgithub.com%2Fbillp%2FTermiNetwork%20TermiNetwork%20is%20a%20networking%20abstraction%20layer%20written%20on%20top%20of%20Swift%27s%20URLRequest%20that%20supports%20multi-environment%20configuration%2C%20routing%20and%20automatic%20deserialization.)
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="600" />
+  <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
 
 [![Build Status](https://travis-ci.org/billp/TermiNetwork.svg?branch=master)](https://travis-ci.org/billp/TermiNetwork)
 [![Pod](https://img.shields.io/cocoapods/v/TermiNetwork.svg?style=flat)](https://cocoapods.org/pods/terminetwork)
+[![Tweet](https://img.shields.io/twitter/url/https/github.com/billp/TermiNetwork.svg?style=social)](https://twitter.com/home?status=https%3A%2F%2Fgithub.com%2Fbillp%2FTermiNetwork%20TermiNetwork%20is%20a%20networking%20abstraction%20layer%20written%20on%20top%20of%20Swift%27s%20URLRequest%20that%20supports%20multi-environment%20configuration%2C%20routing%20and%20automatic%20deserialization.)
 
-TermiNetwork is a networking abstraction layer written on top of Swift's URLRequest which is designed to work with Codables.
+TermiNetwork is a networking abstraction layer written on top of Swift's URLRequest and it is designed to work with Codables.
 
 # Features
 - Automatic model deserialization with Codable
 - Multi-environment configuration
-- Ability to convert responses automatically to the wanted type (Codable model, UIImage, Data or String)
-- Routing
+- Convert responses to the wanted type (Codable model, UIImage, Data or String)
+- Request fragmentation with Routes (perfect for modular environments)
 - Error handling
 - Mock requests
-- Certificate Pinning
+- Certificate pinning
 - Flexible configuration
-- Middleware support (e.g. to add an extra layer of encryption to your requests)
-- Supports File upload and download
-- Clean debug information in the console
+- Middlewares (e.g. you can add an extra layer of encryption to your requests)
+- File upload and download (with files or raw data)
+- Descriptive debug information right in the console
 
 ## Installation
 

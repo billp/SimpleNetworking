@@ -19,21 +19,27 @@
 
 import Foundation
 
-/// URL path representation used in routes.
+/// URL path representation based on String components.
 public enum TNPath {
-    /// A path case that can be used whereverywhere needed by the Terminetwork, for
-    /// example: .path(["user", "1", "details"]) will produce "user/1/details"
-    case path(_ components: [String])
+    // MARK: Public properties
 
+    /// Returns the constructed path as String based on .path components.
     public var convertedPath: String {
         switch self {
         case .path(let components):
             return components.joined(separator: "/")
         }
     }
+
+    // MARK: Public methods
+
+    /// An enum case that can be used where path is needed. For example: .path(["user", "1", "details"]).
+    /// Later you can call covertedPath to construct the path as String (e.g. /user/1/details)
+    case path(_ components: [String])
 }
 
+/// The type of the path specified in request construction methods.
 internal enum SNPathType: Error {
-    case normal
-    case full
+    case relative
+    case absolute
 }

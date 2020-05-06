@@ -1,6 +1,41 @@
 {
   "warnings": [
     {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/Operations/TNRequest+UploadOperations.swift",
+      "line": 22,
+      "symbol": "TNProgressCallbackType",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Helpers/TNMultipartFormDataHelpers.swift",
+      "line": 11,
+      "symbol": "TNMultipartFormDataHelpers",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Helpers/TNMultipartFormDataHelpers.swift",
+      "line": 32,
+      "symbol": "TNMultipartFormDataHelpers.contentLength(forParams:boundary:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Protocols/TNRouteProtocol.swift",
+      "line": 22,
+      "symbol": "TNRouteProtocol",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Protocols/TNRouteProtocol.swift",
+      "line": 23,
+      "symbol": "TNRouteProtocol.configure()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift",
       "line": 55,
       "symbol": "TNConfiguration.init(cachePolicy:timeoutInterval:requestBodyType:certificatePath:verbose:headers:mockDataBundle:useMockData:mockDelay:)",
@@ -40,27 +75,6 @@
       "line": 49,
       "symbol": "TNOperation.isFinished",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest+UploadOperations.swift",
-      "line": 22,
-      "symbol": "TNProgressCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 22,
-      "symbol": "TNRequest",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 24,
-      "symbol": "TNRequest",
-      "symbol_kind": "source.lang.swift.decl.extension",
       "warning": "undocumented"
     },
     {
@@ -128,36 +142,15 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 50,
-      "symbol": "TNRequest",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 160,
+      "line": 154,
       "symbol": "TNRequest.init(route:environment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 272,
+      "line": 262,
       "symbol": "TNRequest.start()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRouteProtocol.swift",
-      "line": 22,
-      "symbol": "TNRouteProtocol",
-      "symbol_kind": "source.lang.swift.decl.protocol",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRouteProtocol.swift",
-      "line": 23,
-      "symbol": "TNRouteProtocol.configure()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }

@@ -49,7 +49,7 @@ open class TNRequest: TNOperation {
     //internal var urlResponse: URLResponse?
     internal var params: [String: Any?]?
     internal var path: String
-    internal var pathType: SNPathType = .normal
+    internal var pathType: SNPathType = .relative
     internal var mockFilePath: TNPath?
     internal var multipartBoundary: String?
 
@@ -82,7 +82,7 @@ open class TNRequest: TNOperation {
         self.method = method
         self.headers = headers
         self.params = params
-        self.pathType = .full
+        self.pathType = .absolute
         self.path = url
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
@@ -165,7 +165,7 @@ open class TNRequest: TNOperation {
         let params = try handleMiddlewareBodyBeforeSendIfNeeded(params: self.params)
         let urlString = NSMutableString()
 
-        if pathType == .normal {
+        if pathType == .relative {
             guard let currentEnvironment = environment else { throw TNError.environmentNotSet }
             urlString.setString(currentEnvironment.description + "/" + path)
         } else {
