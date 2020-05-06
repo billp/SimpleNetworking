@@ -53,7 +53,7 @@ class TNSessionTaskFactory {
         }
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(with: tnRequest),
+                                 delegate: TNSessionDelegate(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: request) { data, urlResponse, error in
@@ -88,6 +88,12 @@ class TNSessionTaskFactory {
                                progressUpdate: TNProgressCallbackType?,
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: TNFailureCallback?) -> URLSessionUploadTask? {
+
+        guard let params = tnRequest.params else {
+            onFailure?(.invalidParams, nil)
+            return nil
+        }
+
         let boundary = TNMultipartFormDataHelpers.generateBoundary()
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
@@ -106,12 +112,10 @@ class TNSessionTaskFactory {
             return nil
         }
 
-
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(with: tnRequest),
+                                 delegate: TNSessionDelegate(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
-        request.httpBodyStream = TNUploadTaskInputStream(withParams: tnRequest.params ?? [:],
-                                                         boundary: "yo")
+        request.httpBodyStream = TNMultipartFormDataStream(params: params).boundStreams.input
         let uploadTask = session.uploadTask(withStreamedRequest: request)
 
        /* { (data, urlResponse, error) in

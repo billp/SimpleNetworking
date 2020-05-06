@@ -10,7 +10,7 @@ import UIKit
 
 public class TNMultipartFormDataHelpers {
     fileprivate struct Constants {
-        static let CRLF = "\r\n"
+        static let crlf = "\r\n"
     }
     /// Generates a random string that will be used as multipart boundary.
     public static func generateBoundary() -> String {
@@ -26,7 +26,7 @@ public class TNMultipartFormDataHelpers {
         if let filename = filename {
             rawString += "; filename=\"\(filename)\""
         }
-        return rawString + Constants.CRLF + Constants.CRLF
+        return rawString + Constants.crlf + Constants.crlf
     }
 
     public static func contentLength(forParams params: [String: Any?],
@@ -37,14 +37,14 @@ public class TNMultipartFormDataHelpers {
             if let value = params[key] as? String {
                 let disposition = generateContentDisposition(boundary: boundary,
                                                              name: key) +
-                                                                Constants.CRLF +
+                                                                Constants.crlf +
                                                                 boundary
                 contentLength += disposition.count + value.count
             }
             if let data = params[key] as? Data {
                 let disposition = generateContentDisposition(boundary: boundary,
                                                              name: key) +
-                                                                Constants.CRLF +
+                                                                Constants.crlf +
                                                                 boundary
                 contentLength += disposition.count + data.count
             }
