@@ -26,17 +26,24 @@ class TNSessionDelegate: NSObject, URLSessionDataDelegate {
     var receivedData: Data?
 
     var uploadProgressCallback: TNProgressCallbackType?
-    var successCallback: TNSuccessCallback<Data?>?
+    var completedCallback: ((Data?, URLResponse?, Error?) -> Void)?
     var failureCallback: TNFailureCallback?
+    var inputStream: InputStream?
 
     init(with request: TNRequest,
          uploadProgressCallback: TNProgressCallbackType? = nil,
-         successCallback: TNSuccessCallback<Data?>? = nil,
-         failureCallback: TNFailureCallback? = nil) {
+         completedCallback: ((Data?, URLResponse?, Error?) -> Void)? = nil,
+         failureCallback: TNFailureCallback? = nil,
+         inputStream: InputStream? = nil) {
         self.request = request
         self.uploadProgressCallback = uploadProgressCallback
-        self.successCallback = successCallback
+        self.completedCallback = completedCallback
         self.failureCallback = failureCallback
+        self.inputStream = inputStream
+
+        if uploadProgressCallback != nil {
+            receivedData = Data()
+        }
     }
 
     func urlSession(_ session: URLSession,
@@ -74,7 +81,7 @@ class TNSessionDelegate: NSObject, URLSessionDataDelegate {
         if let error = error {
             failureCallback?(.networkError(error), receivedData)
         } else {
-            successCallback?(receivedData)
+            completedCallback?(receivedData, task.response, error)
         }
     }
 
@@ -85,6 +92,6 @@ class TNSessionDelegate: NSObject, URLSessionDataDelegate {
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     needNewBodyStream completionHandler: @escaping (InputStream?) -> Void) {
-
+        completionHandler(inputStream)
     }
 }
