@@ -16,7 +16,7 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+// swiftlint:disable function_body_length
 import Foundation
 
 /// Factory class that creates Session task for each specific case
@@ -97,7 +97,10 @@ class TNSessionTaskFactory {
         let boundary = TNMultipartFormDataHelpers.generateBoundary()
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
+        tnRequest.multipartFormDataStream = TNMultipartFormDataStream(params: params,
+                                                                      boundary: boundary)
 
+        let inputStream = tnRequest.multipartFormDataStream?.boundStreams.input ?? InputStream()
         var request: URLRequest!
         do {
             request = try tnRequest.asRequest()
@@ -133,17 +136,15 @@ class TNSessionTaskFactory {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
         }, failureCallback: onFailure,
-           inputStream: TNMultipartFormDataStream(params: params).boundStreams.input)
+           inputStream: inputStream)
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
                                  delegate: sessionDelegate,
                                  delegateQueue: OperationQueue.current)
-        request.httpBodyStream = TNMultipartFormDataStream(params: params).boundStreams.input
         let uploadTask = session.uploadTask(withStreamedRequest: request)
 
-       /* { (data, urlResponse, error) in
-
-        }*/
+        tnRequest.multipartFormDataStream?.processNextBodyPart()
+        uploadTask.resume()
 
         return uploadTask
     }

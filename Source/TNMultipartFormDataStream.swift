@@ -48,8 +48,68 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         return Streams(input: input, output: output)
     }()
 
-    init(params: [String: Any?]) {
+    var bodyParts: [TNMultipartBodyPart] = []
 
+    init(params: [String: Any?],
+         boundary: String) {
+        super.init()
+        createBodyParts(with: params,
+                        boundary: boundary)
+    }
 
+    func processNextBodyPart() {
+        guard bodyParts.count > 0 else {
+            return
+        }
+
+        let part = bodyParts.removeFirst()
+
+        switch part {
+        case .data(let data):
+            _ = data.withUnsafeBytes { buffer in
+                boundStreams.output.write(buffer.bindMemory(to: UInt8.self).baseAddress!,
+                                          maxLength: data.count)
+            }
+        default:
+            break
+        }
+
+        processNextBodyPart()
+    }
+
+    fileprivate func generatePart(withData data: Data,
+                                  boundary: String,
+                                  param: String) -> Data {
+        let finalData = NSMutableData()
+        finalData.append(TNMultipartFormDataHelpers.openBodyPart(boundary: boundary).data(using: .utf8) ?? Data())
+        finalData.append(TNMultipartFormDataHelpers.generateContentDisposition(boundary: boundary,
+                                                                               name: param)
+                            .data(using: .utf8) ?? Data())
+        finalData.append(data)
+        finalData.append(TNMultipartFormDataHelpers.closeBodyPart(boundary: boundary)
+            .data(using: .utf8) ?? Data())
+
+        return finalData as Data
+    }
+
+    fileprivate func createBodyParts(with params: [String: Any?],
+                                     boundary: String) {
+        params.forEach { (key, value) in
+            if let data = value as? Data {
+                let finalData = generatePart(withData: data,
+                                             boundary: boundary,
+                                             param: key)
+                print(String(data: finalData, encoding: .utf8)!)
+
+                bodyParts.append(.data(finalData as Data))
+            } else if let value = value as? String {
+                let finalData = generatePart(withData: value.data(using: .utf8) ?? Data(),
+                                             boundary: boundary,
+                                             param: key)
+                bodyParts.append(.data(finalData as Data))
+            } else if let url = value as? URL, let stream = InputStream(url: url) {
+                bodyParts.append(.stream(stream))
+            }
+        }
     }
 }

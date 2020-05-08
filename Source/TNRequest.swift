@@ -52,6 +52,7 @@ open class TNRequest: TNOperation {
     internal var pathType: SNPathType = .relative
     internal var mockFilePath: TNPath?
     internal var multipartBoundary: String?
+    internal var multipartFormDataStream: TNMultipartFormDataStream?
 
     // MARK: Public properties
 

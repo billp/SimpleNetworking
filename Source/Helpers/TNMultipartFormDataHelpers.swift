@@ -15,7 +15,7 @@ public class TNMultipartFormDataHelpers {
     /// Generates a random string that will be used as multipart boundary.
     public static func generateBoundary() -> String {
         let randomString = String(Double.random(in: 0..<65535)).replacingOccurrences(of: ".", with: "")
-        return String(format: "--------------------------\(randomString)")
+        return randomString
     }
 
     /// Generates a Content-Disposition raw string to be added to multipart stream body.
@@ -29,24 +29,32 @@ public class TNMultipartFormDataHelpers {
         return rawString + Constants.crlf + Constants.crlf
     }
 
+    /// Opens a multipart stream body.
+    static func openBodyPart(boundary: String) -> String {
+        "--" + boundary + Constants.crlf
+    }
+
+    /// Closes a multipart stream body.
+    static func closeBodyPart(boundary: String) -> String {
+        return Constants.crlf + "--" + boundary + "--"
+    }
+
     public static func contentLength(forParams params: [String: Any?],
                                      boundary: String) -> Int {
-        var contentLength = 0
+        let stringOpenBodyCount = openBodyPart(boundary: boundary).data(using: .utf8)?.count ?? 0
+        let stringCloseBodyCount = closeBodyPart(boundary: boundary).data(using: .utf8)?.count ?? 0
+
+        var contentLength = stringOpenBodyCount + stringCloseBodyCount
 
         params.keys.forEach { key in
+            let dispositionCount = generateContentDisposition(boundary: boundary,
+                                                         name: key).data(using: .utf8)?.count ?? 0
+
             if let value = params[key] as? String {
-                let disposition = generateContentDisposition(boundary: boundary,
-                                                             name: key) +
-                                                                Constants.crlf +
-                                                                boundary
-                contentLength += disposition.count + value.count
+                contentLength += dispositionCount + (value.data(using: .utf8)?.count ?? 0)
             }
             if let data = params[key] as? Data {
-                let disposition = generateContentDisposition(boundary: boundary,
-                                                             name: key) +
-                                                                Constants.crlf +
-                                                                boundary
-                contentLength += disposition.count + data.count
+                contentLength += dispositionCount + data.count
             }
         }
 
