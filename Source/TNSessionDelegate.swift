@@ -33,13 +33,11 @@ class TNSessionDelegate: NSObject, URLSessionDataDelegate {
     init(with request: TNRequest,
          uploadProgressCallback: TNProgressCallbackType? = nil,
          completedCallback: ((Data?, URLResponse?, Error?) -> Void)? = nil,
-         failureCallback: TNFailureCallback? = nil,
-         inputStream: InputStream? = nil) {
+         failureCallback: TNFailureCallback? = nil) {
         self.request = request
         self.uploadProgressCallback = uploadProgressCallback
         self.completedCallback = completedCallback
         self.failureCallback = failureCallback
-        self.inputStream = inputStream
 
         if uploadProgressCallback != nil {
             receivedData = Data()
@@ -92,6 +90,9 @@ class TNSessionDelegate: NSObject, URLSessionDataDelegate {
     func urlSession(_ session: URLSession,
                     task: URLSessionTask,
                     needNewBodyStream completionHandler: @escaping (InputStream?) -> Void) {
-        completionHandler(inputStream)
-    }
+        guard let streamDelegate = request?.multipartFormDataStream else {
+            return
+        }
+        completionHandler(streamDelegate.boundStreams.input)
+   }
 }

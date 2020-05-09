@@ -98,7 +98,7 @@ class TNSessionTaskFactory {
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
         tnRequest.multipartFormDataStream = TNMultipartFormDataStream(params: params,
-                                                                      boundary: boundary)
+                                                                                      boundary: boundary)
 
         let inputStream = tnRequest.multipartFormDataStream?.boundStreams.input ?? InputStream()
         var request: URLRequest!
@@ -135,15 +135,13 @@ class TNSessionTaskFactory {
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
-        }, failureCallback: onFailure,
-           inputStream: inputStream)
+        }, failureCallback: onFailure)
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
                                  delegate: sessionDelegate,
                                  delegateQueue: OperationQueue.current)
         let uploadTask = session.uploadTask(withStreamedRequest: request)
 
-        tnRequest.multipartFormDataStream?.processNextBodyPart()
         uploadTask.resume()
 
         return uploadTask

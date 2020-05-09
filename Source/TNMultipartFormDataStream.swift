@@ -30,10 +30,15 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         let output: OutputStream
     }
 
+    struct Constants {
+        static var bufferSize = 4096
+    }
+
     lazy var boundStreams: Streams = {
         var inputOrNil: InputStream?
         var outputOrNil: OutputStream?
-        Stream.getBoundStreams(withBufferSize: 4096,
+
+        Stream.getBoundStreams(withBufferSize: Constants.bufferSize,
                                inputStream: &inputOrNil,
                                outputStream: &outputOrNil)
         guard let input = inputOrNil, let output = outputOrNil else {
@@ -48,32 +53,55 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }()
 
     var bodyParts: [TNMultipartBodyPart] = []
+    var currentBodyPart: TNMultipartBodyPart?
+    var bytesLeft = 0
 
     init(params: [String: Any?],
          boundary: String) {
         super.init()
+
         createBodyParts(with: params,
                         boundary: boundary)
+        processNextBodyPart()
     }
 
-    func processNextBodyPart() {
-        guard bodyParts.count > 0 else {
-            return
+    func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
+        if bytesLeft > 0 && boundStreams.output.hasSpaceAvailable {
+            processData()
         }
+    }
 
-        let part = bodyParts.removeFirst()
-
-        switch part {
+    func processData() {
+        switch currentBodyPart {
         case .data(let data):
             _ = data.withUnsafeBytes { buffer in
-                boundStreams.output.write(buffer.bindMemory(to: UInt8.self).baseAddress!,
-                                          maxLength: data.count)
+                let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
+                                    + (data.count - bytesLeft)
+
+                let maxLength = bytesLeft >= Constants.bufferSize ? Constants.bufferSize : bytesLeft
+                let bytesWritten = boundStreams.output.write(memoryOffset,
+                                                             maxLength: maxLength)
+                bytesLeft -= bytesWritten
+
+                if bytesLeft == 0 {
+                    processNextBodyPart()
+                }
             }
         default:
             break
         }
 
-        processNextBodyPart()
+    }
+
+    fileprivate func processNextBodyPart() {
+        guard bodyParts.count > 0 else {
+            return
+        }
+        currentBodyPart = bodyParts.removeFirst()
+
+        if case .data(let data) = currentBodyPart {
+            bytesLeft = data.count
+        }
     }
 
     fileprivate func generatePart(withData data: Data,

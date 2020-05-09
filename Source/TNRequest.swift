@@ -234,6 +234,7 @@ open class TNRequest: TNOperation {
                 let contentLength = String(TNMultipartFormDataHelpers.contentLength(forParams: params,
                                                                                     boundary: boundary))
                 request.addValue(contentLength, forHTTPHeaderField: "Content-Length")
+                request.addValue("gzip, deflate, br", forHTTPHeaderField: "Accept-Encoding")
             }
 
             switch requestBodyType {

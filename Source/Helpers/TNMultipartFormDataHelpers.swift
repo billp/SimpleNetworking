@@ -26,8 +26,8 @@ public class TNMultipartFormDataHelpers {
         if let filename = filename {
             raw += "; filename=\"\(filename)\""
         }
-
         raw += Constants.crlf + Constants.crlf
+
         return raw.data(using: .utf8) ?? Data()
     }
 
@@ -40,8 +40,7 @@ public class TNMultipartFormDataHelpers {
     /// Closes a multipart stream body.
     static func closeBodyPart(boundary: String,
                               isLastPart: Bool) -> Data {
-        var raw = Constants.crlf + "--"
-        raw += boundary
+        var raw = Constants.crlf + "--" + boundary
         if isLastPart {
             raw += "--"
         }
@@ -58,8 +57,7 @@ public class TNMultipartFormDataHelpers {
             let closeBodyCount = closeBodyPart(boundary: boundary,
                                                isLastPart: isLastPart).count
 
-            var fileName: String? = nil
-
+            var fileName: String?
             if let value = params[key] as? String {
                 contentLength += (value.data(using: .utf8)?.count ?? 0)
             }
@@ -67,13 +65,9 @@ public class TNMultipartFormDataHelpers {
                 contentLength += data.count
                 fileName = key
             }
-
             contentLength += closeBodyCount + generateContentDisposition(boundary: boundary,
                                                                          name: key,
                                                                          filename: fileName).count
-
-
-
         }
 
         return contentLength
