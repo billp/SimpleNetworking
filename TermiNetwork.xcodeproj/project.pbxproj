@@ -25,7 +25,6 @@
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
-		F33684D82466C10100C64471 /* file.txt in Resources */ = {isa = PBXBuildFile; fileRef = F33684D62466C0D200C64471 /* file.txt */; };
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
@@ -430,7 +429,6 @@
 				F35B533E2443325400C1853A /* MockData.bundle in Resources */,
 				F33684D52466939200C64471 /* photo.jpg in Resources */,
 				F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */,
-				F33684D82466C10100C64471 /* file.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
