@@ -21,41 +21,59 @@ public class TNMultipartFormDataHelpers {
     /// Generates a Content-Disposition raw string to be added to multipart stream body.
     static func generateContentDisposition(boundary: String,
                                            name: String,
-                                           filename: String? = nil) -> String {
-        var rawString = "Content-Disposition: form-data; name=\"" + name + "\""
+                                           filename: String? = nil) -> Data {
+        var raw = "Content-Disposition: form-data; name=\"" + name + "\""
         if let filename = filename {
-            rawString += "; filename=\"\(filename)\""
+            raw += "; filename=\"\(filename)\""
         }
-        return rawString + Constants.crlf + Constants.crlf
+
+        raw += Constants.crlf + Constants.crlf
+        return raw.data(using: .utf8) ?? Data()
     }
 
     /// Opens a multipart stream body.
-    static func openBodyPart(boundary: String) -> String {
-        "--" + boundary + Constants.crlf
+    static func openBodyPart(boundary: String) -> Data {
+        let raw = "--" + boundary + Constants.crlf
+        return raw.data(using: .utf8) ?? Data()
     }
 
     /// Closes a multipart stream body.
-    static func closeBodyPart(boundary: String) -> String {
-        return Constants.crlf + "--" + boundary + "--"
+    static func closeBodyPart(boundary: String,
+                              isLastPart: Bool) -> Data {
+        var raw = Constants.crlf + "--"
+        raw += boundary
+        if isLastPart {
+            raw += "--"
+        }
+        raw += Constants.crlf
+        return raw.data(using: .utf8) ?? Data()
     }
 
     public static func contentLength(forParams params: [String: Any?],
                                      boundary: String) -> Int {
-        let stringOpenBodyCount = openBodyPart(boundary: boundary).data(using: .utf8)?.count ?? 0
-        let stringCloseBodyCount = closeBodyPart(boundary: boundary).data(using: .utf8)?.count ?? 0
+        var contentLength = openBodyPart(boundary: boundary).count
 
-        var contentLength = stringOpenBodyCount + stringCloseBodyCount
+        params.keys.enumerated().forEach { (index, key) in
+            let isLastPart = index == params.keys.count-1
+            let closeBodyCount = closeBodyPart(boundary: boundary,
+                                               isLastPart: isLastPart).count
 
-        params.keys.forEach { key in
-            let dispositionCount = generateContentDisposition(boundary: boundary,
-                                                         name: key).data(using: .utf8)?.count ?? 0
+            var fileName: String? = nil
 
             if let value = params[key] as? String {
-                contentLength += dispositionCount + (value.data(using: .utf8)?.count ?? 0)
+                contentLength += (value.data(using: .utf8)?.count ?? 0)
             }
             if let data = params[key] as? Data {
-                contentLength += dispositionCount + data.count
+                contentLength += data.count
+                fileName = key
             }
+
+            contentLength += closeBodyCount + generateContentDisposition(boundary: boundary,
+                                                                         name: key,
+                                                                         filename: fileName).count
+
+
+
         }
 
         return contentLength

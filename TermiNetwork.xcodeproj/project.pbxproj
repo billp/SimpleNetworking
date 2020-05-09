@@ -24,6 +24,7 @@
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
+		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
@@ -55,7 +56,6 @@
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
-		F3F48289245EC13C00656449 /* dummyfile in Resources */ = {isa = PBXBuildFile; fileRef = F3F48285245DFE6000656449 /* dummyfile */; };
 		F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +89,7 @@
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
+		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
-		F3F48285245DFE6000656449 /* dummyfile */ = {isa = PBXFileReference; lastKnownFileType = file; path = dummyfile; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
 		F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataStream.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,7 +291,7 @@
 		F3850CB7243DAD2300F7CC13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F3F48285245DFE6000656449 /* dummyfile */,
+				F33684D3246692E400C64471 /* photo.jpg */,
 				F3850C82243D103700F7CC13 /* herokuapp.com.cer */,
 				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
 			);
@@ -424,8 +424,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3850C8F243D103700F7CC13 /* herokuapp.com.cer in Resources */,
-				F3F48289245EC13C00656449 /* dummyfile in Resources */,
 				F35B533E2443325400C1853A /* MockData.bundle in Resources */,
+				F33684D52466939200C64471 /* photo.jpg in Resources */,
 				F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

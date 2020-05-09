@@ -20,7 +20,6 @@
 import Foundation
 
 enum TNMultipartBodyPart {
-    case value(String)
     case data(Data)
     case stream(Stream)
 }
@@ -79,33 +78,47 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
     fileprivate func generatePart(withData data: Data,
                                   boundary: String,
-                                  param: String) -> Data {
+                                  param: String,
+                                  shouldOpenBody: Bool,
+                                  isLastPart: Bool,
+                                  fileName: String? = nil) -> Data {
         let finalData = NSMutableData()
-        finalData.append(TNMultipartFormDataHelpers.openBodyPart(boundary: boundary).data(using: .utf8) ?? Data())
+        if shouldOpenBody {
+            finalData.append(TNMultipartFormDataHelpers.openBodyPart(boundary: boundary))
+        }
         finalData.append(TNMultipartFormDataHelpers.generateContentDisposition(boundary: boundary,
-                                                                               name: param)
-                            .data(using: .utf8) ?? Data())
+                                                                               name: param,
+                                                                               filename: fileName))
         finalData.append(data)
-        finalData.append(TNMultipartFormDataHelpers.closeBodyPart(boundary: boundary)
-            .data(using: .utf8) ?? Data())
+        finalData.append(TNMultipartFormDataHelpers.closeBodyPart(boundary: boundary,
+                                                                  isLastPart: isLastPart))
 
         return finalData as Data
     }
 
     fileprivate func createBodyParts(with params: [String: Any?],
                                      boundary: String) {
-        params.forEach { (key, value) in
+        params.keys.enumerated().forEach { (index, key) in
+            let value = params[key]
+            let shouldOpenBody = index == 0
+            let isLastPart = index == params.keys.count - 1
+
             if let data = value as? Data {
                 let finalData = generatePart(withData: data,
                                              boundary: boundary,
-                                             param: key)
-                print(String(data: finalData, encoding: .utf8)!)
+                                             param: key,
+                                             shouldOpenBody: shouldOpenBody,
+                                             isLastPart: isLastPart,
+                                             fileName: key)
 
                 bodyParts.append(.data(finalData as Data))
             } else if let value = value as? String {
                 let finalData = generatePart(withData: value.data(using: .utf8) ?? Data(),
                                              boundary: boundary,
-                                             param: key)
+                                             param: key,
+                                             shouldOpenBody: shouldOpenBody,
+                                             isLastPart: isLastPart)
+
                 bodyParts.append(.data(finalData as Data))
             } else if let url = value as? URL, let stream = InputStream(url: url) {
                 bodyParts.append(.stream(stream))

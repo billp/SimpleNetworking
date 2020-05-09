@@ -55,7 +55,7 @@ class TestUploadOperations: XCTestCase {
         let expectation = XCTestExpectation(description: "testDataUpload")
         var failed = true
 
-        guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "dummyfile", ofType: ""),
+        guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "photo", ofType: "jpg"),
         let uploadData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
             assert(false)
         }
