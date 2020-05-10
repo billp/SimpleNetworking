@@ -97,7 +97,8 @@ class TNSessionTaskFactory {
         let boundary = TNMultipartFormDataHelpers.generateBoundary()
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
-        tnRequest.multipartFormDataStream = TNMultipartFormDataStream(params: params,
+        tnRequest.multipartFormDataStream = TNMultipartFormDataStream(request: tnRequest,
+                                                                      params: params,
                                                                       boundary: boundary,
                                                                       uploadProgressCallback: progressUpdate)
 

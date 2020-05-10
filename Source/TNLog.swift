@@ -29,6 +29,7 @@ internal class TNLog {
 
         let url = urlRequest.url?.absoluteString ?? "n/a"
         let headers = urlRequest.allHTTPHeaderFields
+        let isStream = request.multipartFormDataStream != nil
 
         print("--------------------------------")
         print("🌎 URL: " + url)
@@ -36,7 +37,9 @@ internal class TNLog {
             print("🗂 Uses mock data")
         }
         print("🎛️ Method: " + request.method.rawValue.uppercased())
-        print("🔮 CURL Command: " + urlRequest.curlString)
+        if !isStream {
+            print("🔮 CURL Command: " + urlRequest.curlString)
+        }
 
         if request.configuration.certificateData != nil {
             print("🔒 Pinning Enabled")
@@ -50,6 +53,8 @@ internal class TNLog {
             request.method != .get {
             if request.configuration.requestBodyType == .JSON {
                 print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
+            } else if request.multipartFormDataStream != nil {
+                print("🗃️ Request Body: <stream>")
             } else {
                 print("🗃️ Request Body: " + params.description)
             }
@@ -70,5 +75,17 @@ internal class TNLog {
                 print("📦 Response: [non-printable]")
             }
         }
+    }
+
+    static func logProgress(request: TNRequest?,
+                            bytesProcessed: Int,
+                            totalBytes: Int,
+                            progress: Float) {
+        guard request?.configuration.verbose == true else { return }
+
+        print(String(format: "⌛️ Bytes processed: %d of %d, Progress: %f",
+                     bytesProcessed,
+                     totalBytes,
+                     progress))
     }
 }

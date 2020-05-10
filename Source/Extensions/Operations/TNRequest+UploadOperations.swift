@@ -65,9 +65,9 @@ extension TNRequest {
             }
 
             TNLog.logRequest(request: self,
-                            data: data,
-                            urlResponse: urlResponse,
-                            tnError: nil)
+                             data: data,
+                             urlResponse: urlResponse,
+                             tnError: nil)
             onSuccess?(object)
             self.handleDataTaskCompleted(with: data,
                                         urlResponse: urlResponse,

@@ -26,7 +26,7 @@ class TestUploadOperations: XCTestCase {
     }()
 
     lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkLocal,
+        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
                                   configuration: configuration)
     }()
 
@@ -54,6 +54,7 @@ class TestUploadOperations: XCTestCase {
     func testDataUpload() {
         let expectation = XCTestExpectation(description: "testDataUpload")
         var failed = true
+        var completed = false
 
         guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "photo",
                                                                          ofType: "jpg"),
@@ -61,20 +62,19 @@ class TestUploadOperations: XCTestCase {
             assert(false)
         }
 
-        router.request(for: .fileUpload(data: uploadData, param: "yo"))
+        router.request(for: .fileUpload(data: uploadData, param: "bhbbrbrbrhbh"))
             .startUpload(responseType: FileResponse.self,
-                         progressUpdate: { _, _, progress in
-                            print(String(format: "Upload progress: %.0f%%", progress * 100))
+                         progressUpdate: { bytesSent, totalBytes, progress in
+                completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
                 failed = !response.success
                 expectation.fulfill()
-
             }, onFailure: { (_, _) in
                 expectation.fulfill()
         })
 
         wait(for: [expectation], timeout: 10)
 
-        XCTAssert(!failed)
+        XCTAssert(!failed && completed)
     }
 }

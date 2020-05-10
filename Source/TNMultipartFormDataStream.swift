@@ -58,11 +58,14 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     fileprivate var bytesSent: Int = 0
     fileprivate var totalBytes: Int = 0
     fileprivate var uploadProgressCallback: TNProgressCallbackType?
+    fileprivate weak var request: TNRequest?
 
-    init(params: [String: Any?],
+    init(request: TNRequest,
+         params: [String: Any?],
          boundary: String,
          uploadProgressCallback: TNProgressCallbackType?) {
         self.uploadProgressCallback = uploadProgressCallback
+        self.request = request
 
         super.init()
         createBodyParts(with: params,
@@ -93,6 +96,10 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
                 let progress = Float(bytesSent) / Float(totalBytes)
 
+                TNLog.logProgress(request: request,
+                                  bytesProcessed: self.bytesSent,
+                                  totalBytes: self.totalBytes,
+                                  progress: progress)
                 self.uploadProgressCallback?(self.bytesSent, self.totalBytes, progress)
 
                 if bytesLeft == 0 {
