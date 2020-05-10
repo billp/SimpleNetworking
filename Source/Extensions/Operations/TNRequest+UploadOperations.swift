@@ -19,7 +19,12 @@
 
 import UIKit
 
-public typealias TNProgressCallbackType = (Float) -> Void
+/// Progress callback type
+/// - parameters:
+///     - bytesSent: The total size of bytes sent to server.
+///     - totalBytes: The total size of upload data.
+///     - progress: Upload progress
+public typealias TNProgressCallbackType = (Int, Int, Float) -> Void
 
 extension TNRequest {
     /// Adds a request to a queue and starts its execution for Decodable types.

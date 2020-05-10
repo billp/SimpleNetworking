@@ -52,14 +52,19 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         return Streams(input: input, output: output)
     }()
 
-    var bodyParts: [TNMultipartBodyPart] = []
-    var currentBodyPart: TNMultipartBodyPart?
-    var bytesLeft = 0
+    fileprivate var bodyParts: [TNMultipartBodyPart] = []
+    fileprivate var currentBodyPart: TNMultipartBodyPart?
+    fileprivate var bytesLeft: Int = 0
+    fileprivate var bytesSent: Int = 0
+    fileprivate var totalBytes: Int = 0
+    fileprivate var uploadProgressCallback: TNProgressCallbackType?
 
     init(params: [String: Any?],
-         boundary: String) {
-        super.init()
+         boundary: String,
+         uploadProgressCallback: TNProgressCallbackType?) {
+        self.uploadProgressCallback = uploadProgressCallback
 
+        super.init()
         createBodyParts(with: params,
                         boundary: boundary)
         processNextBodyPart()
@@ -68,6 +73,8 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
         if bytesLeft > 0 && boundStreams.output.hasSpaceAvailable {
             processData()
+        } else if bodyParts.count == 0 {
+            aStream.close()
         }
     }
 
@@ -82,6 +89,11 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                 let bytesWritten = boundStreams.output.write(memoryOffset,
                                                              maxLength: maxLength)
                 bytesLeft -= bytesWritten
+                bytesSent += bytesWritten
+
+                let progress = Float(bytesSent) / Float(totalBytes)
+
+                self.uploadProgressCallback?(self.bytesSent, self.totalBytes, progress)
 
                 if bytesLeft == 0 {
                     processNextBodyPart()
@@ -126,6 +138,9 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
     fileprivate func createBodyParts(with params: [String: Any?],
                                      boundary: String) {
+
+        totalBytes = 0
+
         params.keys.enumerated().forEach { (index, key) in
             let value = params[key]
             let shouldOpenBody = index == 0
@@ -138,15 +153,17 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                                              shouldOpenBody: shouldOpenBody,
                                              isLastPart: isLastPart,
                                              fileName: key)
-
+                totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
-            } else if let value = value as? String {
-                let finalData = generatePart(withData: value.data(using: .utf8) ?? Data(),
+            } else if let value = value as? String,
+                let data = value.data(using: .utf8) {
+
+                let finalData = generatePart(withData: data,
                                              boundary: boundary,
                                              param: key,
                                              shouldOpenBody: shouldOpenBody,
                                              isLastPart: isLastPart)
-
+                totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
             } else if let url = value as? URL, let stream = InputStream(url: url) {
                 bodyParts.append(.stream(stream))

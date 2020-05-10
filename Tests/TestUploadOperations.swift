@@ -22,7 +22,7 @@ import TermiNetwork
 
 class TestUploadOperations: XCTestCase {
     lazy var configuration: TNConfiguration = {
-        return TNConfiguration(verbose: true)
+        return TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, verbose: true)
     }()
 
     lazy var router: TNRouter<APIRoute> = {
@@ -55,17 +55,18 @@ class TestUploadOperations: XCTestCase {
         let expectation = XCTestExpectation(description: "testDataUpload")
         var failed = true
 
-        guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "photo", ofType: "jpg"),
+        guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "photo",
+                                                                         ofType: "jpg"),
         let uploadData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
             assert(false)
         }
 
         router.request(for: .fileUpload(data: uploadData, param: "yo"))
             .startUpload(responseType: FileResponse.self,
-                         progressUpdate: { progress in
-                                debugPrint(progress)
+                         progressUpdate: { _, _, progress in
+                            print(String(format: "Upload progress: %.0f%%", progress * 100))
             }, onSuccess: { response in
-                failed = response.success
+                failed = !response.success
                 expectation.fulfill()
 
             }, onFailure: { (_, _) in

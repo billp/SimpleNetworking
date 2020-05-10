@@ -20,7 +20,7 @@
 import UIKit
 
 /// This is a custom implementation of URLSessionDelegate, used to handle certification pinning
-class TNSessionDelegate: NSObject, URLSessionDataDelegate {
+class TNSession: NSObject, URLSessionDataDelegate {
     weak var request: TNRequest?
 
     var receivedData: Data?
