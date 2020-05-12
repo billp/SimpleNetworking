@@ -46,6 +46,8 @@ public enum TNError: Error {
     case invalidMockData(String)
     /// Thrown when a middleware reports an error. It contains a custom type
     case middlewareError(Any)
+    /// Thrown when TNMultipartFormDataPartType param is expected but passed something else.
+    case invalidMultipartParams
 }
 
 extension TNError: LocalizedError {
@@ -74,13 +76,15 @@ extension TNError: LocalizedError {
         case .cannotConvertToString:
             return NSLocalizedString("Cannot convert to String", comment: "TNError")
         case .notSuccess(let code):
-            return String(format: NSLocalizedString("The request didn't return 2xx status code but %i instead", comment: "TNError"), code)
+            return String(format: NSLocalizedString("The request returned a not success status code: %i", comment: "TNError"), code)
         case .cancelled(let error):
             return NSLocalizedString("The request has been cancelled: ", comment: "TNError") + error.localizedDescription
         case .invalidMockData(let path):
             return String(format: NSLocalizedString("Invalid mock data file for: %@", comment: "TNError"), path)
         case .middlewareError(let error):
             return String(format: NSLocalizedString("Middleware error: %@", comment: "TNError"), String(describing: error))
+        case .invalidMultipartParams:
+            return NSLocalizedString("Parameters are invalid. Expected parameters of type TNMultipartFormDataPartType.", comment: "TNError")
         }
     }
 }

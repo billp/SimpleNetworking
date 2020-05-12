@@ -89,8 +89,8 @@ class TNSessionTaskFactory {
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: TNFailureCallback?) -> URLSessionUploadTask? {
 
-        guard let params = tnRequest.params else {
-            onFailure?(.invalidParams, nil)
+        guard let params = tnRequest.params as? [String: TNMultipartFormDataPartType] else {
+            onFailure?(.invalidMultipartParams, nil)
             return nil
         }
 

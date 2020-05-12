@@ -24,6 +24,7 @@
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
+		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
@@ -89,6 +90,7 @@
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
+		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				F3850CA3243D104900F7CC13 /* TNEnvironment.swift */,
 				F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */,
 				F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */,
+				F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -486,6 +489,7 @@
 				F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */,
 				F3116ABC2460A09E00DFE453 /* TNRequest+Middleware.swift in Sources */,
 				F3116AC32460A91B00DFE453 /* TNMultipartFormDataHelpers.swift in Sources */,
+				F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */,
 				F3116AAA2460A06600DFE453 /* TNRequestMiddlewareProtocol.swift in Sources */,
 				F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */,
 				F3850CB0243D104900F7CC13 /* TNRequest.swift in Sources */,

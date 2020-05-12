@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TNMultipartFormDataHelpers {
+class TNMultipartFormDataHelpers {
     fileprivate struct Constants {
         static let crlf = "\r\n"
     }
@@ -21,12 +21,19 @@ public class TNMultipartFormDataHelpers {
     /// Generates a Content-Disposition raw string to be added to multipart stream body.
     static func generateContentDisposition(boundary: String,
                                            name: String,
-                                           filename: String? = nil) -> Data {
+                                           filename: String? = nil,
+                                           contentType: String? = nil) -> Data {
         var raw = "Content-Disposition: form-data; name=\"" + name + "\""
         if let filename = filename {
             raw += "; filename=\"\(filename)\""
         }
-        raw += Constants.crlf + Constants.crlf
+        raw += Constants.crlf
+
+        if let contentType = contentType {
+            raw += "Content-Type: \(contentType)"
+        }
+
+        raw += Constants.crlf
 
         return raw.data(using: .utf8) ?? Data()
     }
@@ -48,26 +55,32 @@ public class TNMultipartFormDataHelpers {
         return raw.data(using: .utf8) ?? Data()
     }
 
-    public static func contentLength(forParams params: [String: Any?],
-                                     boundary: String) -> Int {
+    public static func contentLength(forParams params: [String: TNMultipartFormDataPartType],
+                                     boundary: String) throws -> Int {
         var contentLength = openBodyPart(boundary: boundary).count
 
-        params.keys.enumerated().forEach { (index, key) in
+        try params.keys.enumerated().forEach { (index, key) in
+            guard let value = params[key] else {
+                throw TNError.invalidMultipartParams
+            }
             let isLastPart = index == params.keys.count-1
             let closeBodyCount = closeBodyPart(boundary: boundary,
                                                isLastPart: isLastPart).count
 
-            var fileName: String?
-            if let value = params[key] as? String {
+            var filename: String?
+            var contentType: String?
+
+            if case .value(let value) = value {
                 contentLength += (value.data(using: .utf8)?.count ?? 0)
-            }
-            if let data = params[key] as? Data {
+            } else if case .data(let data, let fname, let ctype) = value {
                 contentLength += data.count
-                fileName = key
+                filename = fname
+                contentType = ctype
             }
             contentLength += closeBodyCount + generateContentDisposition(boundary: boundary,
                                                                          name: key,
-                                                                         filename: fileName).count
+                                                                         filename: filename ?? key,
+                                                                         contentType: contentType).count
         }
 
         return contentLength

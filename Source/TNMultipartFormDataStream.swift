@@ -61,7 +61,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     fileprivate weak var request: TNRequest?
 
     init(request: TNRequest,
-         params: [String: Any?],
+         params: [String: TNMultipartFormDataPartType],
          boundary: String,
          uploadProgressCallback: TNProgressCallbackType?) {
         self.uploadProgressCallback = uploadProgressCallback
@@ -128,14 +128,16 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                                   param: String,
                                   shouldOpenBody: Bool,
                                   isLastPart: Bool,
-                                  fileName: String? = nil) -> Data {
+                                  filename: String? = nil,
+                                  contentType: String? = nil) -> Data {
         let finalData = NSMutableData()
         if shouldOpenBody {
             finalData.append(TNMultipartFormDataHelpers.openBodyPart(boundary: boundary))
         }
         finalData.append(TNMultipartFormDataHelpers.generateContentDisposition(boundary: boundary,
                                                                                name: param,
-                                                                               filename: fileName))
+                                                                               filename: filename,
+                                                                               contentType: contentType))
         finalData.append(data)
         finalData.append(TNMultipartFormDataHelpers.closeBodyPart(boundary: boundary,
                                                                   isLastPart: isLastPart))
@@ -143,26 +145,19 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         return finalData as Data
     }
 
-    fileprivate func createBodyParts(with params: [String: Any?],
+    fileprivate func createBodyParts(with params: [String: TNMultipartFormDataPartType],
                                      boundary: String) {
 
         totalBytes = 0
 
         params.keys.enumerated().forEach { (index, key) in
-            let value = params[key]
+            guard let value = params[key] else {
+                return
+            }
             let shouldOpenBody = index == 0
             let isLastPart = index == params.keys.count - 1
 
-            if let data = value as? Data {
-                let finalData = generatePart(withData: data,
-                                             boundary: boundary,
-                                             param: key,
-                                             shouldOpenBody: shouldOpenBody,
-                                             isLastPart: isLastPart,
-                                             fileName: key)
-                totalBytes += finalData.count
-                bodyParts.append(.data(finalData as Data))
-            } else if let value = value as? String,
+            if case .value(let value) = value,
                 let data = value.data(using: .utf8) {
 
                 let finalData = generatePart(withData: data,
@@ -172,7 +167,18 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                                              isLastPart: isLastPart)
                 totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
-            } else if let url = value as? URL, let stream = InputStream(url: url) {
+            } else if case .data(let data, let filename, let contentType) = value {
+                let finalData = generatePart(withData: data,
+                                             boundary: boundary,
+                                             param: key,
+                                             shouldOpenBody: shouldOpenBody,
+                                             isLastPart: isLastPart,
+                                             filename: filename ?? key,
+                                             contentType: contentType)
+                totalBytes += finalData.count
+                bodyParts.append(.data(finalData as Data))
+            } else if case .url(let url, let filename, let contentType) = value,
+                let stream = InputStream(url: url) {
                 bodyParts.append(.stream(stream))
             }
         }

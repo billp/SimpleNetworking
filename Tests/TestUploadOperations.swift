@@ -26,7 +26,7 @@ class TestUploadOperations: XCTestCase {
     }()
 
     lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
+        return TNRouter<APIRoute>(environment: Environment.termiNetworkLocal,
                                   configuration: configuration)
     }()
 
@@ -43,12 +43,6 @@ class TestUploadOperations: XCTestCase {
 
     class FileResponse: Decodable {
         var success: Bool
-    }
-
-    func testMultipartBoundary() {
-        let boundary1 = TNMultipartFormDataHelpers.generateBoundary()
-        let boundary2 = TNMultipartFormDataHelpers.generateBoundary()
-        XCTAssert(boundary1 != boundary2)
     }
 
     func testDataUpload() {
@@ -69,7 +63,8 @@ class TestUploadOperations: XCTestCase {
             }, onSuccess: { response in
                 failed = !response.success
                 expectation.fulfill()
-            }, onFailure: { (_, _) in
+            }, onFailure: { (error, _) in
+                print(String(describing: error.localizedDescription))
                 expectation.fulfill()
         })
 

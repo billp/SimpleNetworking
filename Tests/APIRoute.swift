@@ -37,7 +37,7 @@ enum APIRoute: TNRouteProtocol {
     case testImage(imageName: String)
     case testPinning(certPath: String)
     case testEncryptParams(value: String?)
-    case fileUpload(data: Data?, param: String)
+    case fileUpload(data: Data, param: String)
 
     func testPinningConfiguration(withcertPath certPath: String) -> TNConfiguration {
         let configuration = TNConfiguration(certificatePath: certPath)
@@ -135,7 +135,10 @@ enum APIRoute: TNRouteProtocol {
             return TNRouteConfiguration(
                 method: .post,
                 path: .path(["file_upload"]),
-                params: ["file": data, "test_param": param]
+                params: ["file": TNMultipartFormDataPartType.data(data: data,
+                                                                  filename: nil,
+                                                                  contentType: nil),
+                         "test_param": TNMultipartFormDataPartType.value(value: param)]
             )
         }
     }

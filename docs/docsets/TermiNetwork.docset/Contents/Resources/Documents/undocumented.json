@@ -1,13 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/Operations/TNRequest+UploadOperations.swift",
-      "line": 22,
-      "symbol": "TNProgressCallbackType",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Helpers/TNMultipartFormDataHelpers.swift",
       "line": 11,
       "symbol": "TNMultipartFormDataHelpers",
@@ -16,7 +9,7 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Helpers/TNMultipartFormDataHelpers.swift",
-      "line": 32,
+      "line": 58,
       "symbol": "TNMultipartFormDataHelpers.contentLength(forParams:boundary:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
@@ -58,7 +51,7 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNErrors.swift",
-      "line": 52,
+      "line": 54,
       "symbol": "TNError.localizedDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -142,14 +135,14 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 154,
+      "line": 155,
       "symbol": "TNRequest.init(route:environment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 262,
+      "line": 263,
       "symbol": "TNRequest.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

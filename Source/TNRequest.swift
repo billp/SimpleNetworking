@@ -230,9 +230,10 @@ open class TNRequest: TNOperation {
             /// Add header for coresponding body type
             request.addValue(requestBodyType.value(), forHTTPHeaderField: "Content-Type")
 
-            if case .multipartFormData = requestBodyType, let boundary = self.multipartBoundary {
-                let contentLength = String(TNMultipartFormDataHelpers.contentLength(forParams: params,
-                                                                                    boundary: boundary))
+            if case .multipartFormData = requestBodyType, let boundary = self.multipartBoundary,
+                let multipartParams = params as? [String: TNMultipartFormDataPartType] {
+                let contentLength = String(try TNMultipartFormDataHelpers.contentLength(forParams: multipartParams,
+                                                                                        boundary: boundary))
                 request.addValue(contentLength, forHTTPHeaderField: "Content-Length")
             }
 
