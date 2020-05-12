@@ -14,7 +14,8 @@ public enum TNRequestBodyType: Equatable {
     case xWWWFormURLEncoded
     /// The request params are sent as application/json mime type
     case JSON
-    /// Body type for upload requests
+    /// Type for multipart/form-data body by giving the boundary as String. Typically you don't have to set it manually
+    /// since it is set automatically by upload requests.
     case multipartFormData(boundary: String)
 
     func value() -> String {

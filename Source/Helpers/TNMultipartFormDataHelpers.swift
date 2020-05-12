@@ -30,7 +30,7 @@ class TNMultipartFormDataHelpers {
         raw += Constants.crlf
 
         if let contentType = contentType {
-            raw += "Content-Type: \(contentType)"
+            raw += "Content-Type: \(contentType)" + Constants.crlf
         }
 
         raw += Constants.crlf
@@ -74,12 +74,12 @@ class TNMultipartFormDataHelpers {
                 contentLength += (value.data(using: .utf8)?.count ?? 0)
             } else if case .data(let data, let fname, let ctype) = value {
                 contentLength += data.count
-                filename = fname
+                filename = fname ?? key
                 contentType = ctype
             }
             contentLength += closeBodyCount + generateContentDisposition(boundary: boundary,
                                                                          name: key,
-                                                                         filename: filename ?? key,
+                                                                         filename: filename,
                                                                          contentType: contentType).count
         }
 

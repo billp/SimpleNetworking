@@ -136,8 +136,8 @@ enum APIRoute: TNRouteProtocol {
                 method: .post,
                 path: .path(["file_upload"]),
                 params: ["file": TNMultipartFormDataPartType.data(data: data,
-                                                                  filename: nil,
-                                                                  contentType: nil),
+                                                                  filename: "test.jpg",
+                                                                  contentType: "image/jpeg"),
                          "test_param": TNMultipartFormDataPartType.value(value: param)]
             )
         }
