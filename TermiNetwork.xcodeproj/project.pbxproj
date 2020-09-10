@@ -38,7 +38,6 @@
 		F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7F243D103700F7CC13 /* TestParams.swift */; };
 		F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C80243D103700F7CC13 /* TestJSONParams.swift */; };
 		F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C81243D103700F7CC13 /* TestHeaders.swift */; };
-		F3850C8F243D103700F7CC13 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3850C82243D103700F7CC13 /* herokuapp.com.cer */; };
 		F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3850C83243D103700F7CC13 /* forums.swift.org.cer */; };
 		F3850C91243D103700F7CC13 /* TestTNRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C84243D103700F7CC13 /* TestTNRequest.swift */; };
 		F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C86243D103700F7CC13 /* TestTNErrors.swift */; };
@@ -55,6 +54,7 @@
 		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
+		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
 		F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */; };
@@ -104,7 +104,6 @@
 		F3850C7F243D103700F7CC13 /* TestParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestParams.swift; sourceTree = "<group>"; };
 		F3850C80243D103700F7CC13 /* TestJSONParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestJSONParams.swift; sourceTree = "<group>"; };
 		F3850C81243D103700F7CC13 /* TestHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHeaders.swift; sourceTree = "<group>"; };
-		F3850C82243D103700F7CC13 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
 		F3850C83243D103700F7CC13 /* forums.swift.org.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = forums.swift.org.cer; sourceTree = "<group>"; };
 		F3850C84243D103700F7CC13 /* TestTNRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNRequest.swift; sourceTree = "<group>"; };
 		F3850C85243D103700F7CC13 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
+		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
 		F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataStream.swift; sourceTree = "<group>"; };
@@ -294,8 +294,8 @@
 		F3850CB7243DAD2300F7CC13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */,
 				F33684D3246692E400C64471 /* photo.jpg */,
-				F3850C82243D103700F7CC13 /* herokuapp.com.cer */,
 				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
 			);
 			name = Resources;
@@ -426,8 +426,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3850C8F243D103700F7CC13 /* herokuapp.com.cer in Resources */,
 				F35B533E2443325400C1853A /* MockData.bundle in Resources */,
+				F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */,
 				F33684D52466939200C64471 /* photo.jpg in Resources */,
 				F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */,
 			);
