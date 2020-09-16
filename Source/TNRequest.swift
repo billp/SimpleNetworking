@@ -17,9 +17,6 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import Foundation
-import UIKit
-
 /// Custom type for success data task.
 public typealias TNSuccessCallback<T> = (T) -> Void
 /// Custom type for failure data task.

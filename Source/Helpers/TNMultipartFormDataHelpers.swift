@@ -6,8 +6,6 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
-
 class TNMultipartFormDataHelpers {
     fileprivate struct Constants {
         static let crlf = "\r\n"

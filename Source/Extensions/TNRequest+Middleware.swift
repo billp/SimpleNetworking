@@ -6,8 +6,6 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
-
 extension TNRequest {
     func shouldHandleMiddlewares() -> Bool {
         guard let middlewares = configuration.requestMiddlewares else {

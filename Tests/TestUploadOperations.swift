@@ -26,7 +26,7 @@ class TestUploadOperations: XCTestCase {
     }()
 
     lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkLocal,
+        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
                                   configuration: configuration)
     }()
 

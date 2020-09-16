@@ -6,8 +6,6 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
-
 extension TNRequest {
     internal func shouldMockRequest() -> Bool {
         return self.configuration.useMockData ?? false

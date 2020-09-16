@@ -96,6 +96,9 @@ extension TNConfiguration: NSCopying {
         configuration.certificateData = certificateData
         configuration.verbose = verbose
         configuration.headers = headers
+        configuration.mockDataBundle = mockDataBundle
+        configuration.mockDelay = mockDelay
+        configuration.useMockData = useMockData
         return configuration
     }
 }

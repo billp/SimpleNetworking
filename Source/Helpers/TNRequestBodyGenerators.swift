@@ -6,8 +6,6 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
-
 /// The body type of the request
 public enum TNRequestBodyType: Equatable {
     /// The request params are sent as application/x-www-form-urlencoded mime type

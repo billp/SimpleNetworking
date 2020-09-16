@@ -6,7 +6,6 @@
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
 
-import UIKit
 import TermiNetwork
 import CryptoSwift
 
