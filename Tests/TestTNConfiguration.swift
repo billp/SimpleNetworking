@@ -27,7 +27,7 @@ class TestTNConfiguration: XCTestCase {
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
         conf.requestBodyType = .JSON
-        conf.certificateData = "test".data(using: .utf8) as NSData?
+        conf.certificateData = [NSData()]
         conf.headers = ["test": "123", "test2": "abcdefg"]
 
         return conf
@@ -39,7 +39,7 @@ class TestTNConfiguration: XCTestCase {
         conf.cachePolicy = .returnCacheDataDontLoad
         conf.timeoutInterval = 231
         conf.requestBodyType = .xWWWFormURLEncoded
-        conf.certificateData = "hi".data(using: .utf8) as NSData?
+        conf.certificateData = [NSData()]
         conf.headers = ["test": "test", "afb": "fff"]
 
         return conf

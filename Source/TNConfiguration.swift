@@ -35,7 +35,7 @@ public class TNConfiguration {
     /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.
     public var requestBodyType: TNRequestBodyType?
     /// The certificate data when certificate pinning is enabled.
-    public var certificateData: NSData?
+    public var certificateData: [NSData]?
     /// Enables or disables debug mode.
     public var verbose: Bool?
     /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration.
@@ -55,7 +55,7 @@ public class TNConfiguration {
     public init(cachePolicy: URLRequest.CachePolicy? = nil,
                 timeoutInterval: TimeInterval? = nil,
                 requestBodyType: TNRequestBodyType? = nil,
-                certificatePath: String? = nil,
+                certificatePaths: [String]? = nil,
                 verbose: Bool? = nil,
                 headers: [String: String]? = nil,
                 mockDataBundle: Bundle? = nil,
@@ -71,18 +71,21 @@ public class TNConfiguration {
         self.useMockData = useMockData
         self.mockDelay = mockDelay
 
-        if let certPath = certificatePath {
-            setCertificateData(with: certPath)
+        if let certPaths = certificatePaths {
+            setCertificateData(with: certPaths)
         }
     }
 
     // MARK: Internal methods
 
-    internal func setCertificateData(with path: String) {
-        if let certData = NSData(contentsOfFile: path) {
-            self.certificateData = certData
-        } else {
-            assertionFailure(String(format: "Certificate not found in %@!", path))
+    internal func setCertificateData(with paths: [String]) {
+        self.certificateData = paths.count > 0 ? [] : nil
+        paths.forEach { path in
+            if let certData = NSData(contentsOfFile: path) {
+                self.certificateData?.append(certData)
+            } else {
+                assertionFailure(String(format: "Certificate not found in %@!", path))
+            }
         }
     }
 }

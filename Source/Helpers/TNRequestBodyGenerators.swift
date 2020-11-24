@@ -28,7 +28,7 @@ public enum TNRequestBodyType: Equatable {
     }
 }
 
-class TNRequestBodyGenerators {
+class TNRequestBodyGenerator {
     static func generateUrlEncodedString(with params: [String: Any?]) throws -> String {
         // Create query string from the given params
         let queryString = try params.filter({ $0.value != nil }).map { param -> String in

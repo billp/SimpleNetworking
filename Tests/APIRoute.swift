@@ -37,10 +37,11 @@ enum APIRoute: TNRouteProtocol {
     case testImage(imageName: String)
     case testPinning(certPath: String)
     case testEncryptParams(value: String?)
-    case fileUpload(data: Data, param: String)
+    case dataUpload(data: Data, param: String)
+    case fileUpload(url: URL, param: String)
 
-    func testPinningConfiguration(withcertPath certPath: String) -> TNConfiguration {
-        let configuration = TNConfiguration(certificatePath: certPath)
+    func testPinningConfiguration(withCertPaths certPaths: [String]) -> TNConfiguration {
+        let configuration = TNConfiguration(certificatePaths: certPaths)
         configuration.headers = ["Custom-Header": "1"]
         return configuration
     }
@@ -123,7 +124,7 @@ enum APIRoute: TNRouteProtocol {
             return TNRouteConfiguration(
                 method: .get,
                 path: .path(["test_empty_response"]),
-                configuration: testPinningConfiguration(withcertPath: certPath)
+                configuration: testPinningConfiguration(withCertPaths: [certPath])
             )
         case .testEncryptParams(let value):
             return TNRouteConfiguration(
@@ -131,13 +132,20 @@ enum APIRoute: TNRouteProtocol {
                 path: .path(["test_encrypt_params"]),
                 params: ["value": value]
             )
-        case .fileUpload(let data, let param):
+        case .dataUpload(let data, let param):
             return TNRouteConfiguration(
                 method: .post,
                 path: .path(["file_upload"]),
                 params: ["file": TNMultipartFormDataPartType.data(data: data,
                                                                   filename: "test.jpg",
                                                                   contentType: "image/jpeg"),
+                         "test_param": TNMultipartFormDataPartType.value(value: param)]
+            )
+        case .fileUpload(let url, let param):
+            return TNRouteConfiguration(
+                method: .post,
+                path: .path(["file_upload"]),
+                params: ["file": TNMultipartFormDataPartType.url(url: url),
                          "test_param": TNMultipartFormDataPartType.value(value: param)]
             )
         }

@@ -63,7 +63,7 @@ class TNSession: NSObject, URLSessionDataDelegate {
             let isServerTrusted = SecTrustEvaluateWithError(serverTrust, &error)
 
             let remoteCertificateData: NSData = SecCertificateCopyData(remoteCert)
-            if isServerTrusted && error == nil && remoteCertificateData.isEqual(to: certData as Data) {
+            if isServerTrusted && error == nil && certData.contains(remoteCertificateData) {
                 challengeDisposition = .useCredential
             }
         } else {
@@ -93,4 +93,5 @@ class TNSession: NSObject, URLSessionDataDelegate {
         }
         completionHandler(streamDelegate.boundStreams.input)
    }
+
 }

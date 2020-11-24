@@ -172,7 +172,7 @@ open class TNRequest: TNOperation {
 
         // Append query string to url in case of .get method
         if let params = params, method == .get {
-            try urlString.append("?" + TNRequestBodyGenerators.generateUrlEncodedString(with: params))
+            try urlString.append("?" + TNRequestBodyGenerator.generateUrlEncodedString(with: params))
         }
 
         guard let url = URL(string: urlString as String) else {
@@ -236,10 +236,10 @@ open class TNRequest: TNOperation {
 
             switch requestBodyType {
             case .xWWWFormURLEncoded:
-                request.httpBody = try TNRequestBodyGenerators.generateUrlEncodedString(with: params)
+                request.httpBody = try TNRequestBodyGenerator.generateUrlEncodedString(with: params)
                                         .data(using: .utf8)
             case .JSON:
-                request.httpBody = try TNRequestBodyGenerators.generateJSONBodyData(with: params)
+                request.httpBody = try TNRequestBodyGenerator.generateJSONBodyData(with: params)
             default:
                 break
             }

@@ -38,5 +38,5 @@ public enum TNMultipartFormDataPartType {
     ///   - file: The file URL that contains the data that will be uploaded.
     ///   - filename: The filename value of the multipart/form-data parameter.
     ///   - contentType: The Content-Type of the multipart/form-data parameter.
-    case url(url: URL, filename: String?, contentType: String?)
+    case url(url: URL)
 }

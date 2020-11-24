@@ -84,7 +84,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     func processData() {
         switch currentBodyPart {
         case .data(let data):
-            _ = data.withUnsafeBytes { buffer in
+            data.withUnsafeBytes { buffer in
                 let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
                                     + (data.count - bytesLeft)
 
@@ -177,9 +177,12 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                                              contentType: contentType)
                 totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
-            } else if case .url(let url, let filename, let contentType) = value,
-                let stream = InputStream(url: url) {
+            } else if case .url(let url) = value,
+                      let stream = InputStream(url: url),
+                      let resources = try? url.resourceValues(forKeys: [.fileSizeKey]),
+                      let fileSize = resources.fileSize {
                 bodyParts.append(.stream(stream))
+                totalBytes += fileSize
             }
         }
     }

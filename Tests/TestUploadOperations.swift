@@ -56,7 +56,35 @@ class TestUploadOperations: XCTestCase {
             assert(false)
         }
 
-        router.request(for: .fileUpload(data: uploadData, param: "bhbbrbrbrhbh"))
+        router.request(for: .dataUpload(data: uploadData, param: "bhbbrbrbrhbh"))
+            .startUpload(responseType: FileResponse.self,
+                         progressUpdate: { bytesSent, totalBytes, progress in
+                completed = bytesSent == totalBytes && progress == 1
+            }, onSuccess: { response in
+                failed = !response.success
+                expectation.fulfill()
+            }, onFailure: { (error, _) in
+                print(String(describing: error.localizedDescription))
+                expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 30)
+
+        XCTAssert(!failed && completed)
+    }
+
+    func testFileUpload() {
+        let expectation = XCTestExpectation(description: "testDataUpload")
+        var failed = true
+        var completed = false
+
+        guard let fileUrl = Bundle(for: TestUploadOperations.self).url(forResource: "photo",
+                                                                       withExtension: "jpg") else {
+            XCTAssert(false)
+            return
+        }
+
+        router.request(for: .fileUpload(url: fileUrl, param: "bhbbrbrbrhbh"))
             .startUpload(responseType: FileResponse.self,
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1

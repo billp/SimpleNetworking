@@ -5,6 +5,7 @@
 //  Created by Vasilis Panagiotopoulos on 4/5/20.
 //  Copyright © 2020 Bill Panagiotopoulos. All rights reserved.
 //
+import MobileCoreServices
 
 class TNMultipartFormDataHelpers {
     fileprivate struct Constants {
@@ -53,6 +54,18 @@ class TNMultipartFormDataHelpers {
         return raw.data(using: .utf8) ?? Data()
     }
 
+    static func mimeTypeForPath(path: String) -> String {
+        let url = NSURL(fileURLWithPath: path)
+        let pathExtension = url.pathExtension
+
+        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
+            if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
+                return mimetype as String
+            }
+        }
+        return "application/octet-stream"
+    }
+
     public static func contentLength(forParams params: [String: TNMultipartFormDataPartType],
                                      boundary: String) throws -> Int {
         var contentLength = openBodyPart(boundary: boundary).count
@@ -74,6 +87,12 @@ class TNMultipartFormDataHelpers {
                 contentLength += data.count
                 filename = fname ?? key
                 contentType = ctype
+            } else if case .url(let url) = value,
+                      let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
+                      let fileSize = resources.fileSize {
+                contentLength += fileSize
+                filename = url.lastPathComponent
+                contentType = TNMultipartFormDataHelpers.mimeTypeForPath(path: url.path)
             }
             contentLength += closeBodyCount + generateContentDisposition(boundary: boundary,
                                                                          name: key,
