@@ -26,14 +26,14 @@ class TestUploadOperations: XCTestCase {
     }()
 
     lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
+        return TNRouter<APIRoute>(environment: Environment.termiNetworkLocal,
                                   configuration: configuration)
     }()
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        TNEnvironment.set(Environment.termiNetworkLocal)
     }
 
     override func tearDown() {
@@ -43,6 +43,7 @@ class TestUploadOperations: XCTestCase {
 
     class FileResponse: Decodable {
         var success: Bool
+        var checksum: String
     }
 
     func testDataUpload() {
@@ -56,12 +57,14 @@ class TestUploadOperations: XCTestCase {
             assert(false)
         }
 
+        let checksum = TestHelpers.sha256(url: URL(fileURLWithPath: filePath))
+
         router.request(for: .dataUpload(data: uploadData, param: "bhbbrbrbrhbh"))
             .startUpload(responseType: FileResponse.self,
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
-                failed = !response.success
+                failed = !(response.success && response.checksum == checksum)
                 expectation.fulfill()
             }, onFailure: { (error, _) in
                 print(String(describing: error.localizedDescription))
@@ -78,25 +81,28 @@ class TestUploadOperations: XCTestCase {
         var failed = true
         var completed = false
 
-        guard let fileUrl = Bundle(for: TestUploadOperations.self).url(forResource: "photo",
-                                                                       withExtension: "jpg") else {
+        guard let url = TestHelpers.writeDummyFile() else {
             XCTAssert(false)
             return
         }
 
-        router.request(for: .fileUpload(url: fileUrl, param: "bhbbrbrbrhbh"))
+        let checksum = TestHelpers.sha256(url: url)
+
+        router.request(for: .fileUpload(url: url, param: "bhbbrbrbrhbh"))
             .startUpload(responseType: FileResponse.self,
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
-                failed = !response.success
+                failed = !(response.success && response.checksum == checksum)
                 expectation.fulfill()
             }, onFailure: { (error, _) in
                 print(String(describing: error.localizedDescription))
                 expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 30)
+        wait(for: [expectation], timeout: 9999999999)
+
+        try? FileManager.default.removeItem(at: url)
 
         XCTAssert(!failed && completed)
     }

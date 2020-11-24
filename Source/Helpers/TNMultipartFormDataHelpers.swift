@@ -58,12 +58,21 @@ class TNMultipartFormDataHelpers {
         let url = NSURL(fileURLWithPath: path)
         let pathExtension = url.pathExtension
 
-        if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
+        if let uti = UTTypeCreatePreferredIdentifierForTag(
+            kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
             if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
                 return mimetype as String
             }
         }
         return "application/octet-stream"
+    }
+
+    public static func fileSize(withURL url: URL) -> Int {
+        guard let resources = try? url.resourceValues(forKeys: [.fileSizeKey]),
+              let fileSize = resources.fileSize else {
+            return -1
+        }
+        return fileSize
     }
 
     public static func contentLength(forParams params: [String: TNMultipartFormDataPartType],
@@ -87,10 +96,8 @@ class TNMultipartFormDataHelpers {
                 contentLength += data.count
                 filename = fname ?? key
                 contentType = ctype
-            } else if case .url(let url) = value,
-                      let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
-                      let fileSize = resources.fileSize {
-                contentLength += fileSize
+            } else if case .url(let url) = value {
+                contentLength += TNMultipartFormDataHelpers.fileSize(withURL: url)
                 filename = url.lastPathComponent
                 contentType = TNMultipartFormDataHelpers.mimeTypeForPath(path: url.path)
             }

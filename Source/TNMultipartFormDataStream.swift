@@ -21,7 +21,7 @@ import Foundation
 
 enum TNMultipartBodyPart {
     case data(Data)
-    case stream(Stream)
+    case stream(stream: TNFileStreamer, fileURL: URL)
 }
 
 class TNMultipartFormDataStream: NSObject, StreamDelegate {
@@ -31,7 +31,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     struct Constants {
-        static var bufferSize = 4096
+        static var bufferSize = 1024 * 24
     }
 
     lazy var boundStreams: Streams = {
@@ -57,6 +57,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     fileprivate var bytesLeft: Int = 0
     fileprivate var bytesSent: Int = 0
     fileprivate var totalBytes: Int = 0
+    fileprivate var currentOffset: Int = 0
     fileprivate var uploadProgressCallback: TNProgressCallbackType?
     fileprivate weak var request: TNRequest?
 
@@ -74,42 +75,28 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     func stream(_ aStream: Stream, handle eventCode: Stream.Event) {
-        if bytesLeft > 0 && boundStreams.output.hasSpaceAvailable {
-            processData()
-        } else if bodyParts.count == 0 {
-            aStream.close()
+        if aStream == boundStreams.output {
+            if bytesLeft > 0 && boundStreams.output.hasSpaceAvailable {
+                try? processData()
+            } else if bodyParts.count == 0 {
+                aStream.close()
+            }
         }
     }
 
-    func processData() {
+    func processData() throws {
         switch currentBodyPart {
         case .data(let data):
-            data.withUnsafeBytes { buffer in
-                let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
-                                    + (data.count - bytesLeft)
-
-                let maxLength = bytesLeft >= Constants.bufferSize ? Constants.bufferSize : bytesLeft
-                let bytesWritten = boundStreams.output.write(memoryOffset,
-                                                             maxLength: maxLength)
-                bytesLeft -= bytesWritten
-                bytesSent += bytesWritten
-
-                let progress = Float(bytesSent) / Float(totalBytes)
-
-                TNLog.logProgress(request: request,
-                                  bytesProcessed: self.bytesSent,
-                                  totalBytes: self.totalBytes,
-                                  progress: progress)
-                self.uploadProgressCallback?(self.bytesSent, self.totalBytes, progress)
-
-                if bytesLeft == 0 {
-                    processNextBodyPart()
+            processNextDataChunk(data)
+        case .stream(let stream, _):
+            try stream.readNextChunk { [weak self] data in
+                if let data = data {
+                    self?.processNextDataChunk(data)
                 }
             }
         default:
             break
         }
-
     }
 
     fileprivate func processNextBodyPart() {
@@ -120,9 +107,14 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
         if case .data(let data) = currentBodyPart {
             bytesLeft = data.count
+        } else if case .stream(_,
+                               let url) = currentBodyPart {
+            bytesLeft = TNMultipartFormDataHelpers.fileSize(withURL: url)
+
         }
     }
 
+    // MARK: Helpers
     fileprivate func generatePart(withData data: Data,
                                   boundary: String,
                                   param: String,
@@ -147,7 +139,6 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
     fileprivate func createBodyParts(with params: [String: TNMultipartFormDataPartType],
                                      boundary: String) {
-
         totalBytes = 0
 
         params.keys.enumerated().forEach { (index, key) in
@@ -177,12 +168,76 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                                              contentType: contentType)
                 totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
-            } else if case .url(let url) = value,
-                      let stream = InputStream(url: url),
-                      let resources = try? url.resourceValues(forKeys: [.fileSizeKey]),
-                      let fileSize = resources.fileSize {
-                bodyParts.append(.stream(stream))
-                totalBytes += fileSize
+            } else if case .url(let url) = value {
+                totalBytes += createStreamBodyPart(withUrl: url,
+                                                   shouldOpenBody:
+                                                    shouldOpenBody,
+                                                   isLastPart: isLastPart,
+                                                   boundary: boundary,
+                                                   key: key)
+            }
+        }
+    }
+
+    fileprivate func createStreamBodyPart(withUrl url: URL,
+                                          shouldOpenBody: Bool,
+                                          isLastPart: Bool,
+                                          boundary: String,
+                                          key: String) -> Int {
+        var bytes = 0
+        let stream = TNFileStreamer(url: url, bufferSize: Constants.bufferSize)
+        if shouldOpenBody {
+            let openBodyData = TNMultipartFormDataHelpers.openBodyPart(boundary: boundary)
+            bodyParts.append(.data(openBodyData))
+            bytes += openBodyData.count
+        }
+        let formData = TNMultipartFormDataHelpers
+            .generateContentDisposition(
+                        boundary: boundary,
+                        name: key,
+                        filename: url.lastPathComponent,
+                        contentType: TNMultipartFormDataHelpers.mimeTypeForPath(path: url.path))
+        bodyParts.append(.data(formData))
+        bytes += formData.count
+
+        bodyParts.append(.stream(stream: stream, fileURL: url))
+        bytes += TNMultipartFormDataHelpers.fileSize(withURL: url)
+
+        let closeBodyData = TNMultipartFormDataHelpers.closeBodyPart(boundary: boundary,
+                                                                     isLastPart: isLastPart)
+        bodyParts.append(.data(closeBodyData))
+        bytes += closeBodyData.count
+
+        return bytes
+    }
+
+    fileprivate func processNextDataChunk(_ data: Data) {
+        data.withUnsafeBytes { buffer in
+            if case .stream(_, _) = currentBodyPart {
+                currentOffset = 0
+            }
+
+            let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
+                                + currentOffset
+
+            let maxLength = bytesLeft >= Constants.bufferSize ? Constants.bufferSize : bytesLeft
+            let bytesWritten = boundStreams.output.write(memoryOffset,
+                                                         maxLength: maxLength)
+            bytesLeft -= bytesWritten
+            bytesSent += bytesWritten
+            currentOffset += bytesWritten
+
+            let progress = Float(bytesSent) / Float(totalBytes)
+
+            TNLog.logProgress(request: request,
+                              bytesProcessed: self.bytesSent,
+                              totalBytes: self.totalBytes,
+                              progress: progress)
+            self.uploadProgressCallback?(self.bytesSent, self.totalBytes, progress)
+
+            if bytesLeft == 0 {
+                currentOffset = 0
+                processNextBodyPart()
             }
         }
     }

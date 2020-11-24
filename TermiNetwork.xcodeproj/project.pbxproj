@@ -54,6 +54,8 @@
 		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
+		F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */; };
+		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
@@ -120,6 +122,8 @@
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
+		F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNFileStreamer.swift; sourceTree = "<group>"; };
+		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				F32C3D12243E499E004497BC /* TestPinning.swift */,
 				F3850C7D243D103700F7CC13 /* APIRoute.swift */,
 				F35B533D2443325400C1853A /* MockData.bundle */,
+				F3AA5146256EF53000D64D31 /* TestHelpers.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -287,6 +292,7 @@
 				F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */,
 				F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */,
 				F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */,
+				F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -496,6 +502,7 @@
 				F3116AA42460A04B00DFE453 /* TNRequestBodyGenerators.swift in Sources */,
 				F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */,
 				F3116AB62460A09E00DFE453 /* UIImageView+Extensions.swift in Sources */,
+				F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */,
 				F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */,
 				F3850CAE243D104900F7CC13 /* TNConfiguration.swift in Sources */,
 				F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */,
@@ -523,6 +530,7 @@
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,
 				F3850C88243D103700F7CC13 /* Environment.swift in Sources */,
 				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
+				F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */,
 				F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */,
 				F3850C91243D103700F7CC13 /* TestTNRequest.swift in Sources */,
 				F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */,

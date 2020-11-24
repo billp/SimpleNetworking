@@ -117,8 +117,8 @@ class TNSessionTaskFactory {
         }
 
         let sessionDelegate = TNSession(with: tnRequest,
-                                                uploadProgressCallback: progressUpdate,
-                                                completedCallback: { (data, urlResponse, error) in
+                                        uploadProgressCallback: progressUpdate,
+                                        completedCallback: { (data, urlResponse, error) in
             let dataResult = TNRequestHelpers.processData(with: tnRequest,
                                                           data: data,
                                                           urlResponse: urlResponse,
