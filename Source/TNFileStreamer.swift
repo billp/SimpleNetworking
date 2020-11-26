@@ -21,41 +21,32 @@ import Foundation
 
 typealias ChunkType = (Data?) -> Void
 
-class TNFileStreamer: NSObject, StreamDelegate {
-
+class TNFileStreamer {
     var nextChunkClosure: ChunkType?
-    var inputStream: InputStream?
-    var bufferSize: Int = 1028
+    var bufferSize: Int = 1024
     var fileSize: Int = -1
+    var sizeRead: Int = 0
     var bytesRead: Int = 0
+    var fileHandle: FileHandle?
+    var url: URL
 
     lazy var buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
 
     init(url: URL, bufferSize: Int) {
-        super.init()
+        self.url = url
         self.bufferSize = bufferSize
         self.fileSize = TNMultipartFormDataHelpers.fileSize(withURL: url)
-
-        inputStream = InputStream(url: url)
-        inputStream?.schedule(in: .current, forMode: .default)
-        inputStream?.open()
+        self.fileHandle = FileHandle(forReadingAtPath: url.path)
     }
 
-    func readNextChunk(nextChunkClosure: ChunkType? = nil) throws {
-        if let inputStream = inputStream, inputStream.hasBytesAvailable {
-            if inputStream.hasBytesAvailable {
-                let bytesLeft = fileSize - bytesRead
-                let maxLength = bytesLeft >= bufferSize ? bufferSize : bytesLeft
-                let read = inputStream.read(buffer, maxLength: maxLength)
-                if read < 0 {
-                   throw inputStream.streamError!
-                } else if read > 0 {
-                    bytesRead += read
-                    nextChunkClosure?(Data(bytes: buffer, count: read))
-                } else {
-                    nextChunkClosure?(nil)
+    func readNextChunk(seekToOffset offset: Int = 0, nextChunkClosure: ChunkType? = nil) throws {
+        if let fileHandle = fileHandle {
+            autoreleasepool {
+                    try? fileHandle.seek(toOffset: UInt64(offset))
+                    self.sizeRead = offset + self.bufferSize
+                    let data = fileHandle.readData(ofLength: self.bufferSize)
+                        nextChunkClosure?(data)
                 }
-            }
         }
     }
 }

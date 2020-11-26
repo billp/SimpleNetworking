@@ -68,11 +68,16 @@ class TNMultipartFormDataHelpers {
     }
 
     public static func fileSize(withURL url: URL) -> Int {
-        guard let resources = try? url.resourceValues(forKeys: [.fileSizeKey]),
-              let fileSize = resources.fileSize else {
-            return -1
+        var attributes: [FileAttributeKey: Any]? {
+            do {
+                return try FileManager.default.attributesOfItem(atPath: url.path)
+            } catch let error as NSError {
+                print("FileAttribute error: \(error)")
+            }
+            return nil
         }
-        return fileSize
+
+        return attributes?[.size] as? Int ?? 0
     }
 
     public static func contentLength(forParams params: [String: TNMultipartFormDataPartType],

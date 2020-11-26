@@ -22,11 +22,12 @@ import TermiNetwork
 
 class TestUploadOperations: XCTestCase {
     lazy var configuration: TNConfiguration = {
-        return TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, verbose: true)
+        return TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                               verbose: true)
     }()
 
     lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkLocal,
+        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
                                   configuration: configuration)
     }()
 
@@ -78,32 +79,83 @@ class TestUploadOperations: XCTestCase {
 
     func testFileUpload() {
         let expectation = XCTestExpectation(description: "testDataUpload")
-        var failed = true
-        var completed = false
-
-        guard let url = TestHelpers.writeDummyFile() else {
+        guard let url = Bundle(for: TestUploadOperations.self).url(forResource: "photo",
+                                                                   withExtension: "jpg") else {
             XCTAssert(false)
             return
         }
 
         let checksum = TestHelpers.sha256(url: url)
+        var progressSuccessCount = 0
+        var successCount = 0
+        let iterations = 1
 
-        router.request(for: .fileUpload(url: url, param: "bhbbrbrbrhbh"))
-            .startUpload(responseType: FileResponse.self,
-                         progressUpdate: { bytesSent, totalBytes, progress in
-                completed = bytesSent == totalBytes && progress == 1
-            }, onSuccess: { response in
-                failed = !(response.success && response.checksum == checksum)
-                expectation.fulfill()
-            }, onFailure: { (error, _) in
-                print(String(describing: error.localizedDescription))
-                expectation.fulfill()
-        })
+        let queue = TNQueue(failureMode: .cancelAll)
+        queue.maxConcurrentOperationCount = 1
 
-        wait(for: [expectation], timeout: 9999999999)
+        for _ in 0..<iterations {
+            router.request(for: .fileUpload(url: url, param: "bhbbrbrbrhbh"))
+                .startUpload(queue: queue, responseType: FileResponse.self,
+                             progressUpdate: { bytesSent, totalBytes, progress in
+                    if bytesSent == totalBytes && progress == 1 {
+                        progressSuccessCount += 1
+                    }
+                }, onSuccess: { response in
+                    if response.success && response.checksum == checksum {
+                        successCount  += 1
+                    }
+                    if progressSuccessCount == iterations {
+                        expectation.fulfill()
+                    }
+                }, onFailure: { (error, _) in
+                    print(String(describing: error.localizedDescription))
+                    expectation.fulfill()
+            })
+        }
 
-        try? FileManager.default.removeItem(at: url)
+        wait(for: [expectation], timeout: 1030)
 
-        XCTAssert(!failed && completed)
+        XCTAssert(successCount == iterations && progressSuccessCount == iterations)
+    }
+
+    func testRandomFileUpload() {
+        let expectation = XCTestExpectation(description: "testDataUpload")
+
+        var progressSuccessCount = 0
+        var successCount = 0
+        let iterations = 12
+
+        let queue = TNQueue(failureMode: .cancelAll)
+        queue.maxConcurrentOperationCount = 1
+
+        let urls = (0..<iterations).map { TestHelpers.createDummyFile(String($0)) }
+        let checksums = urls.map { TestHelpers.sha256(url: $0!) }
+
+        for key in 0..<iterations {
+            router.request(for: .fileUpload(url: urls[key]!, param: "bhbbrbrbrhbh"))
+                .startUpload(queue: queue, responseType: FileResponse.self,
+                             progressUpdate: { bytesSent, totalBytes, progress in
+                    if bytesSent == totalBytes && progress == 1 {
+                        progressSuccessCount += 1
+                    }
+                }, onSuccess: { response in
+                    if response.success && response.checksum == checksums[key] {
+                        successCount  += 1
+                    }
+                    if progressSuccessCount == iterations {
+                        try? FileManager.default.removeItem(at: urls[key]!)
+                        expectation.fulfill()
+                    }
+                }, onFailure: { (error, _) in
+                    print(String(describing: error.localizedDescription))
+                    try? FileManager.default.removeItem(at: urls[key]!)
+                    expectation.fulfill()
+            })
+
+        }
+
+        wait(for: [expectation], timeout: 3 * 60)
+
+        XCTAssert(successCount == iterations && progressSuccessCount == iterations)
     }
 }

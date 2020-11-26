@@ -31,7 +31,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     struct Constants {
-        static var bufferSize = 1024 * 24
+        static var bufferSize = 1024 * 1024 //1bm
     }
 
     lazy var boundStreams: Streams = {
@@ -56,6 +56,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     fileprivate var currentBodyPart: TNMultipartBodyPart?
     fileprivate var bytesLeft: Int = 0
     fileprivate var bytesSent: Int = 0
+    fileprivate var currentBytesSent: Int = -1
     fileprivate var totalBytes: Int = 0
     fileprivate var currentOffset: Int = 0
     fileprivate var uploadProgressCallback: TNProgressCallbackType?
@@ -89,9 +90,11 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         case .data(let data):
             processNextDataChunk(data)
         case .stream(let stream, _):
-            try stream.readNextChunk { [weak self] data in
-                if let data = data {
+            try stream.readNextChunk(seekToOffset: currentBytesSent+1) { [weak self] data in
+                if let data = data, data.count > 0 {
                     self?.processNextDataChunk(data)
+                } else {
+                    self?.processNextBodyPart()
                 }
             }
         default:
@@ -212,19 +215,30 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     fileprivate func processNextDataChunk(_ data: Data) {
+        let count = data.count
+
         data.withUnsafeBytes { buffer in
+            var maxLength = 0
             if case .stream(_, _) = currentBodyPart {
                 currentOffset = 0
+                maxLength = count < Constants.bufferSize ? count : Constants.bufferSize
+            } else {
+                maxLength = bytesLeft >= Constants.bufferSize ? Constants.bufferSize : bytesLeft
             }
 
             let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
                                 + currentOffset
 
-            let maxLength = bytesLeft >= Constants.bufferSize ? Constants.bufferSize : bytesLeft
             let bytesWritten = boundStreams.output.write(memoryOffset,
                                                          maxLength: maxLength)
+
+            if bytesWritten == -1 {
+                return
+            }
+
             bytesLeft -= bytesWritten
             bytesSent += bytesWritten
+            currentBytesSent += bytesWritten
             currentOffset += bytesWritten
 
             let progress = Float(bytesSent) / Float(totalBytes)
@@ -237,6 +251,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
 
             if bytesLeft == 0 {
                 currentOffset = 0
+                currentBytesSent = -1
                 processNextBodyPart()
             }
         }

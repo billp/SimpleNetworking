@@ -10,27 +10,22 @@ import Foundation
 import CommonCrypto
 
 class TestHelpers {
-    static func writeDummyFile() -> URL? {
+    static func createDummyFile(_ prefix: String) -> URL? {
         guard let fileURL = try? FileManager.default.url(for: .documentDirectory,
-                                                   in: .userDomainMask,
-                                                   appropriateFor: nil,
-                                                   create: false).appendingPathComponent("dummy.txt") else {
+                                                         in: .userDomainMask,
+                                                         appropriateFor: nil,
+                                                         create: false)
+                    .appendingPathComponent(String(format: "%@_dummy.txt", prefix)) else {
             return nil
         }
 
-        if let outputStream = OutputStream(url: fileURL, append: true) {
-            outputStream.open()
-
-            for _ in 0..<10 {
-                let text = TestHelpers.randomString(length: 1024 * 20)
-                let bytesWritten = outputStream.write(text, maxLength: text.count)
-                if bytesWritten < 0 { print("write failure") }
-            }
-
-            outputStream.close()
-        } else {
-            print("Unable to open file")
+        let mutableData = NSMutableData()
+        for _ in 0..<210 {
+            let text = TestHelpers.randomString(length: 1024 * 10)
+            mutableData.append(text.data(using: .utf8)!)
         }
+
+        try? mutableData.write(to: fileURL, options: .atomic)
 
         return fileURL
     }
@@ -68,8 +63,9 @@ class TestHelpers {
                 // Read up to `bufferSize` bytes
                 let data = file.readData(ofLength: bufferSize)
                 if data.count > 0 {
-                    data.withUnsafeBytes {
-                        _ = CC_SHA256_Update(&context, $0, numericCast(data.count))
+                    data.withUnsafeBytes { buffer in
+                        let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
+                        CC_SHA256_Update(&context, memoryOffset, numericCast(data.count))
                     }
                     // Continue
                     return true
@@ -81,8 +77,9 @@ class TestHelpers {
 
             // Compute the SHA256 digest:
             var digest = Data(count: Int(CC_SHA256_DIGEST_LENGTH))
-            digest.withUnsafeMutableBytes {
-                _ = CC_SHA256_Final($0, &context)
+            digest.withUnsafeMutableBytes { buffer in
+                let memoryOffset = buffer.bindMemory(to: UInt8.self).baseAddress!
+                _ = CC_SHA256_Final(memoryOffset, &context)
             }
             return digest.map { String(format: "%02hhx", $0) }.joined()
         } catch {
@@ -90,6 +87,4 @@ class TestHelpers {
             return nil
         }
     }
-
 }
-
