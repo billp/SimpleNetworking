@@ -48,6 +48,8 @@ public enum TNError: Error {
     case middlewareError(Any)
     /// Thrown when TNMultipartFormDataPartType param is expected but passed something else.
     case invalidMultipartParams
+    /// Thrown when an invalid file path URL is passed on upload/download operations.
+    case invalidFileURL(String)
 }
 
 extension TNError: LocalizedError {
@@ -85,6 +87,8 @@ extension TNError: LocalizedError {
             return String(format: NSLocalizedString("Middleware error: %@", comment: "TNError"), String(describing: error))
         case .invalidMultipartParams:
             return NSLocalizedString("Parameters are invalid. Expected parameters of type TNMultipartFormDataPartType.", comment: "TNError")
+        case .invalidFileURL(let path):
+            return String(format: NSLocalizedString("File path %@ is not valid.", comment: "TNError"), path)
         }
     }
 }

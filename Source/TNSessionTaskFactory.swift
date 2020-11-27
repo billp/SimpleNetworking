@@ -97,10 +97,18 @@ class TNSessionTaskFactory {
         let boundary = TNMultipartFormDataHelpers.generateBoundary()
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
-        tnRequest.multipartFormDataStream = TNMultipartFormDataStream(request: tnRequest,
-                                                                      params: params,
-                                                                      boundary: boundary,
-                                                                      uploadProgressCallback: progressUpdate)
+        do {
+            tnRequest.multipartFormDataStream = try TNMultipartFormDataStream(request: tnRequest,
+                                                                              params: params,
+                                                                              boundary: boundary,
+                                                                              uploadProgressCallback: progressUpdate)
+        } catch let error {
+            guard let tnError = error as? TNError else {
+                return nil
+            }
+            onFailure?(tnError, nil)
+            return nil
+        }
 
         var request: URLRequest!
         do {

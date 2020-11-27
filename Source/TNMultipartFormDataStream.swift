@@ -65,13 +65,13 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     init(request: TNRequest,
          params: [String: TNMultipartFormDataPartType],
          boundary: String,
-         uploadProgressCallback: TNProgressCallbackType?) {
+         uploadProgressCallback: TNProgressCallbackType?) throws {
         self.uploadProgressCallback = uploadProgressCallback
         self.request = request
 
         super.init()
-        createBodyParts(with: params,
-                        boundary: boundary)
+        try createBodyParts(with: params,
+                            boundary: boundary)
         processNextBodyPart()
     }
 
@@ -141,10 +141,10 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     fileprivate func createBodyParts(with params: [String: TNMultipartFormDataPartType],
-                                     boundary: String) {
+                                     boundary: String) throws {
         totalBytes = 0
 
-        params.keys.enumerated().forEach { (index, key) in
+        try params.keys.enumerated().forEach { (index, key) in
             guard let value = params[key] else {
                 return
             }
@@ -172,6 +172,10 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
                 totalBytes += finalData.count
                 bodyParts.append(.data(finalData as Data))
             } else if case .url(let url) = value {
+                guard url.isFileURL else {
+                    throw TNError.invalidFileURL(url.absoluteString)
+                    return
+                }
                 totalBytes += createStreamBodyPart(withUrl: url,
                                                    shouldOpenBody:
                                                     shouldOpenBody,

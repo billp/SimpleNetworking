@@ -158,4 +158,29 @@ class TestUploadOperations: XCTestCase {
 
         XCTAssert(successCount == iterations && progressSuccessCount == iterations)
     }
+
+    func testIvalidFileUrlUpload() {
+        let expectation = XCTestExpectation(description: "testDataUpload")
+
+        var failed: Bool = false
+
+        let queue = TNQueue(failureMode: .cancelAll)
+        queue.maxConcurrentOperationCount = 1
+
+        router.request(for: .fileUpload(url: URL(string: "http://www.google.com")!,
+                                        param: "tsttt"))
+            .startUpload(queue: queue, responseType: FileResponse.self,
+                            progressUpdate: nil,
+                         onSuccess: { _ in
+                            expectation.fulfill()
+            }, onFailure: { (error, _) in
+                print(error.localizedDescription! as Any)
+                failed = true
+                expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 10)
+
+        XCTAssert(failed)
+    }
 }

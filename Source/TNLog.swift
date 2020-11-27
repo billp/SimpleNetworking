@@ -54,7 +54,7 @@ internal class TNLog {
             if request.configuration.requestBodyType == .JSON {
                 print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
             } else if request.multipartFormDataStream != nil {
-                print("🗃️ Request Body: <stream>")
+                print("🗃️ Request Body: [multipart/form-data]")
             } else {
                 print("🗃️ Request Body: " + params.description)
             }
