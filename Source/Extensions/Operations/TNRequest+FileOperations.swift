@@ -1,4 +1,4 @@
-// TNRequest+UploadOperations.swift
+// TNRequest+FileOperations.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -29,7 +29,6 @@ extension TNRequest {
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
-    ///    - data: The data to upload
     ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
@@ -67,6 +66,46 @@ extension TNRequest {
                              urlResponse: urlResponse,
                              tnError: nil)
             onSuccess?(object)
+            self.handleDataTaskCompleted(with: data,
+                                        urlResponse: urlResponse,
+                                        tnError: nil)
+        }, onFailure: { tnError, data in
+            onFailure?(tnError, data)
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
+                                       tnError: tnError)
+        })
+
+        currentQueue.addOperation(self)
+    }
+
+    /// Adds a request to a queue and starts its execution for Decodable types.
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///    - filePath: The destination file path to save the file.
+    ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
+    ///    - progress: specifies a progress callback to get upload progress updates.
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    public func starDownload(queue: TNQueue? = TNQueue.shared,
+                             filePath: String,
+                             progressUpdate: TNProgressCallbackType?,
+                             onSuccess: TNDownloadSuccessCallback?,
+                             onFailure: TNFailureCallback?) {
+        currentQueue = queue ?? TNQueue.shared
+        currentQueue.beforeOperationStart(request: self)
+
+        dataTask = TNSessionTaskFactory.makeDownloadTask(with: self,
+                                                         filePath: filePath,
+                                                         progressUpdate: progressUpdate,
+                                                         completionHandler: { data, urlResponse in
+
+            TNLog.logRequest(request: self,
+                             data: data,
+                             urlResponse: urlResponse,
+                             tnError: nil)
+            onSuccess?()
             self.handleDataTaskCompleted(with: data,
                                         urlResponse: urlResponse,
                                         tnError: nil)

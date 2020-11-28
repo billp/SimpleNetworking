@@ -28,7 +28,7 @@ class TNRequestHelpers {
     ///     - data: Data on success after middleware handler
     ///     - tnError: TNError on any generated error
     static func processData(with tnRequest: TNRequest,
-                            data: Data?,
+                            data: Data? = nil,
                             urlResponse: URLResponse?,
                             serverError: Error?) -> TNRequestProcessReturnType {
         var customError: TNError?

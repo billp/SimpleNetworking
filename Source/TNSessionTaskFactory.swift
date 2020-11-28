@@ -153,4 +153,62 @@ class TNSessionTaskFactory {
 
         return uploadTask
     }
+
+    /// Creates a download task request.
+    /// - Parameters:
+    ///     - tnRequest: A TNRequest instance
+    ///     - completionHandler: A completion handler for success
+    ///     - onFailure: A completion handler for failures
+    static func makeDownloadTask(with tnRequest: TNRequest,
+                                 filePath destinationPath: String,
+                                 progressUpdate: TNProgressCallbackType?,
+                                 completionHandler: ((Data, URLResponse?) -> Void)?,
+                                 onFailure: TNFailureCallback?) -> URLSessionDownloadTask? {
+        let request: URLRequest!
+        do {
+            request = try tnRequest.asRequest()
+        } catch let error {
+            guard let tnError = error as? TNError else {
+                return nil
+            }
+
+            onFailure?(tnError, nil)
+            tnRequest.handleDataTaskFailure(with: nil,
+                                            urlResponse: nil,
+                                            tnError: tnError)
+            return nil
+        }
+
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate: TNSession(with: tnRequest),
+                                 delegateQueue: OperationQueue.current)
+
+        let dataTask = session.downloadTask(with: request) { url, urlResponse, error in
+            let dataResult = TNRequestHelpers.processData(with: tnRequest,
+                                                          urlResponse: urlResponse,
+                                                          serverError: error)
+
+            if let tnError = dataResult.tnError {
+                TNLog.logRequest(request: tnRequest,
+                                 data: dataResult.data,
+                                 urlResponse: urlResponse,
+                                 tnError: tnError)
+                onFailure?(tnError, dataResult.data)
+                tnRequest.handleDataTaskFailure(with: dataResult.data,
+                                                urlResponse: nil,
+                                                tnError: tnError)
+            } else {
+                if let path = url?.path {
+                    do {
+                        try FileManager.default.moveItem(atPath: path, toPath: destinationPath)
+                    } catch let error {
+                        onFailure?(.downloadedFileCannotBeSaved(error), dataResult.data)
+                    }
+                }
+                completionHandler?(dataResult.data ?? Data(), urlResponse)
+            }
+        }
+
+        return dataTask
+    }
 }

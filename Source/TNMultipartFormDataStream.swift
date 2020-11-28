@@ -31,7 +31,7 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
     }
 
     struct Constants {
-        static var bufferSize = 1024 * 1024 //1bm
+        static var bufferSize = 1024 * 1024
     }
 
     lazy var boundStreams: Streams = {
@@ -174,7 +174,6 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
             } else if case .url(let url) = value {
                 guard url.isFileURL else {
                     throw TNError.invalidFileURL(url.absoluteString)
-                    return
                 }
                 totalBytes += createStreamBodyPart(withUrl: url,
                                                    shouldOpenBody:

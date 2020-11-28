@@ -15,7 +15,7 @@
 		F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAD2460A09E00DFE453 /* String+Extensions.swift */; };
 		F3116AB82460A09E00DFE453 /* TNRequest+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */; };
 		F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */; };
-		F3116ABA2460A09E00DFE453 /* TNRequest+UploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB12460A09E00DFE453 /* TNRequest+UploadOperations.swift */; };
+		F3116ABA2460A09E00DFE453 /* TNRequest+FileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */; };
 		F3116ABB2460A09E00DFE453 /* TNRequest+DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */; };
 		F3116ABC2460A09E00DFE453 /* TNRequest+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */; };
 		F3116ABD2460A09E00DFE453 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */; };
@@ -81,7 +81,7 @@
 		F3116AAD2460A09E00DFE453 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+Mock.swift"; sourceTree = "<group>"; };
 		F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
-		F3116AB12460A09E00DFE453 /* TNRequest+UploadOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+UploadOperations.swift"; sourceTree = "<group>"; };
+		F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+FileOperations.swift"; sourceTree = "<group>"; };
 		F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+DataOperations.swift"; sourceTree = "<group>"; };
 		F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+Middleware.swift"; sourceTree = "<group>"; };
 		F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 		F3116AB02460A09E00DFE453 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				F3116AB12460A09E00DFE453 /* TNRequest+UploadOperations.swift */,
+				F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */,
 				F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */,
 			);
 			path = Operations;
@@ -489,7 +489,7 @@
 				F3116AB82460A09E00DFE453 /* TNRequest+Mock.swift in Sources */,
 				F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */,
 				F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */,
-				F3116ABA2460A09E00DFE453 /* TNRequest+UploadOperations.swift in Sources */,
+				F3116ABA2460A09E00DFE453 /* TNRequest+FileOperations.swift in Sources */,
 				F3116ABE2460A09E00DFE453 /* Data+Extensions.swift in Sources */,
 				F3850CA6243D104900F7CC13 /* TNRouter.swift in Sources */,
 				F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */,

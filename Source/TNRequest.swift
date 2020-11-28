@@ -19,6 +19,8 @@
 
 /// Custom type for success data task.
 public typealias TNSuccessCallback<T> = (T) -> Void
+/// Custom type for download success data task.
+public typealias TNDownloadSuccessCallback = () -> Void
 /// Custom type for failure data task.
 public typealias TNFailureCallback = (_ error: TNError, _ data: Data?) -> Void
 

@@ -42,11 +42,11 @@ class TNFileStreamer {
     func readNextChunk(seekToOffset offset: Int = 0, nextChunkClosure: ChunkType? = nil) throws {
         if let fileHandle = fileHandle {
             autoreleasepool {
-                    try? fileHandle.seek(toOffset: UInt64(offset))
-                    self.sizeRead = offset + self.bufferSize
-                    let data = fileHandle.readData(ofLength: self.bufferSize)
-                        nextChunkClosure?(data)
-                }
+                try? fileHandle.seek(toOffset: UInt64(offset))
+                self.sizeRead = offset + self.bufferSize
+                let data = fileHandle.readData(ofLength: self.bufferSize)
+                    nextChunkClosure?(data)
+            }
         }
     }
 }

@@ -44,14 +44,9 @@ class TNRequestBodyGenerator {
     }
 
     static func generateJSONBodyData(with params: [String: Any?]) throws -> Data {
-        do {
-            if let body = try params.toJSONData() {
-                return body
-            } else {
-                throw TNError.invalidParams
-            }
-        } catch {
+        guard let body = try params.toJSONData() else {
             throw TNError.invalidParams
         }
+        return body
     }
 }

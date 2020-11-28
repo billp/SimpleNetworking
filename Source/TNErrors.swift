@@ -50,6 +50,8 @@ public enum TNError: Error {
     case invalidMultipartParams
     /// Thrown when an invalid file path URL is passed on upload/download operations.
     case invalidFileURL(String)
+    /// Thrown when the file cannot be saved to destination for some reason.
+    case downloadedFileCannotBeSaved(Error)
 }
 
 extension TNError: LocalizedError {
@@ -89,6 +91,8 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Parameters are invalid. Expected parameters of type TNMultipartFormDataPartType.", comment: "TNError")
         case .invalidFileURL(let path):
             return String(format: NSLocalizedString("File path %@ is not valid.", comment: "TNError"), path)
+        case .downloadedFileCannotBeSaved(let error):
+            return String(format: NSLocalizedString("File cannot be saved to destination: %@.", comment: "TNError"), error.localizedDescription)
         }
     }
 }
