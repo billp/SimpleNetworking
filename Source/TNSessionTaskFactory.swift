@@ -53,7 +53,7 @@ class TNSessionTaskFactory {
         }
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(with: tnRequest),
+                                 delegate: TNSession<Data>(with: tnRequest),
                                  delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: request) { data, urlResponse, error in
@@ -124,9 +124,12 @@ class TNSessionTaskFactory {
             return nil
         }
 
-        let sessionDelegate = TNSession(with: tnRequest,
-                                        uploadProgressCallback: progressUpdate,
-                                        completedCallback: { (data, urlResponse, error) in
+        // Set the type of the request
+        tnRequest.requestType = .upload
+
+        let sessionDelegate = TNSession<Data>(with: tnRequest,
+                                              progressCallback: progressUpdate,
+                                              completedCallback: { (data, urlResponse, error) in
             let dataResult = TNRequestHelpers.processData(with: tnRequest,
                                                           data: data,
                                                           urlResponse: urlResponse,
@@ -162,7 +165,7 @@ class TNSessionTaskFactory {
     static func makeDownloadTask(with tnRequest: TNRequest,
                                  filePath destinationPath: String,
                                  progressUpdate: TNProgressCallbackType?,
-                                 completionHandler: ((Data, URLResponse?) -> Void)?,
+                                 completionHandler: ((Data?, URLResponse?) -> Void)?,
                                  onFailure: TNFailureCallback?) -> URLSessionDownloadTask? {
         let request: URLRequest!
         do {
@@ -179,11 +182,10 @@ class TNSessionTaskFactory {
             return nil
         }
 
-        let session = URLSession(configuration: URLSessionConfiguration.default,
-                                 delegate: TNSession(with: tnRequest),
-                                 delegateQueue: OperationQueue.current)
+        // Set the type of the request
+        tnRequest.requestType = .download(destinationPath)
 
-        let dataTask = session.downloadTask(with: request) { url, urlResponse, error in
+        let callback: ((URL?, URLResponse?, Error?) -> Void)? = { url, urlResponse, error in
             let dataResult = TNRequestHelpers.processData(with: tnRequest,
                                                           urlResponse: urlResponse,
                                                           serverError: error)
@@ -201,14 +203,28 @@ class TNSessionTaskFactory {
                 if let path = url?.path {
                     do {
                         try FileManager.default.moveItem(atPath: path, toPath: destinationPath)
+                        completionHandler?(dataResult.data, urlResponse)
                     } catch let error {
-                        onFailure?(.downloadedFileCannotBeSaved(error), dataResult.data)
+                        let tnError = TNError.downloadedFileCannotBeSaved(error)
+                        onFailure?(tnError, dataResult.data)
+                        TNLog.logRequest(request: tnRequest,
+                                         data: dataResult.data,
+                                         urlResponse: urlResponse,
+                                         tnError: tnError)
+                        return
                     }
                 }
-                completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
         }
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate: TNSession<URL>(with: tnRequest,
+                                                          progressCallback: progressUpdate,
+                                                          completedCallback: callback, failureCallback: onFailure),
+                                 delegateQueue: OperationQueue.current)
 
-        return dataTask
+        let task = session.downloadTask(with: request)
+        task.resume()
+
+        return task
     }
 }

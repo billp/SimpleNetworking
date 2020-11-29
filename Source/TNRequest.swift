@@ -38,6 +38,13 @@ public enum TNMethod: String {
     case patch
 }
 
+/// Internal type for figuring out the type of the request
+internal enum RequestType {
+    case data
+    case upload
+    case download(String)
+}
+
 /// The core class of TermiNetwork. It uses all
 open class TNRequest: TNOperation {
     // MARK: Internal properties
@@ -52,6 +59,7 @@ open class TNRequest: TNOperation {
     internal var mockFilePath: TNPath?
     internal var multipartBoundary: String?
     internal var multipartFormDataStream: TNMultipartFormDataStream?
+    internal var requestType: RequestType = .data
 
     // MARK: Public properties
 

@@ -18,28 +18,24 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// This is a custom implementation of URLSessionDelegate, used to handle certification pinning
-class TNSession: NSObject, URLSessionDataDelegate {
+class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
     weak var request: TNRequest?
 
     var receivedData: Data?
 
-    var uploadProgressCallback: TNProgressCallbackType?
-    var completedCallback: ((Data?, URLResponse?, Error?) -> Void)?
+    var progressCallback: TNProgressCallbackType?
+    var completedCallback: ((ResponseType?, URLResponse?, Error?) -> Void)?
     var failureCallback: TNFailureCallback?
     var inputStream: InputStream?
 
     init(with request: TNRequest,
-         uploadProgressCallback: TNProgressCallbackType? = nil,
-         completedCallback: ((Data?, URLResponse?, Error?) -> Void)? = nil,
+         progressCallback: TNProgressCallbackType? = nil,
+         completedCallback: ((ResponseType?, URLResponse?, Error?) -> Void)? = nil,
          failureCallback: TNFailureCallback? = nil) {
         self.request = request
-        self.uploadProgressCallback = uploadProgressCallback
+        self.progressCallback = progressCallback
         self.completedCallback = completedCallback
         self.failureCallback = failureCallback
-
-        if uploadProgressCallback != nil {
-            receivedData = Data()
-        }
     }
 
     func urlSession(_ session: URLSession,
@@ -75,13 +71,23 @@ class TNSession: NSObject, URLSessionDataDelegate {
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            failureCallback?(.networkError(error), receivedData)
+            let tnError = TNError.networkError(error)
+
+            failureCallback?(tnError, receivedData)
+
+            TNLog.logRequest(request: request,
+                             data: receivedData,
+                             urlResponse: nil,
+                             tnError: tnError)
         } else {
-            completedCallback?(receivedData, task.response, error)
+            completedCallback?(receivedData as? ResponseType, task.response, error)
         }
     }
 
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        if case .upload = request?.requestType, receivedData == nil {
+            receivedData = Data()
+        }
         receivedData?.append(data)
     }
 
@@ -94,4 +100,28 @@ class TNSession: NSObject, URLSessionDataDelegate {
         completionHandler(streamDelegate.boundStreams.input)
    }
 
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didFinishDownloadingTo location: URL) {
+        completedCallback?(location as? ResponseType, nil, downloadTask.error)
+    }
+
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didWriteData bytesWritten: Int64,
+                    totalBytesWritten: Int64,
+                    totalBytesExpectedToWrite: Int64) {
+        let totalBytesWritten = Int(totalBytesWritten)
+        let totalBytesExpectedToWrite = Int(totalBytesExpectedToWrite)
+        let progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
+
+        TNLog.logProgress(request: request,
+                          bytesProcessed: totalBytesWritten,
+                          totalBytes: totalBytesExpectedToWrite,
+                          progress: progress)
+
+        progressCallback?(Int(totalBytesWritten),
+                          Int(totalBytesExpectedToWrite),
+                          Float(totalBytesWritten)/Float(totalBytesExpectedToWrite))
+    }
 }

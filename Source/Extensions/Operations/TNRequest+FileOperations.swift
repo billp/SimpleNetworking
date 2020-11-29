@@ -19,9 +19,9 @@
 
 /// Progress callback type
 /// - parameters:
-///     - bytesSent: The total size of bytes sent to server.
-///     - totalBytes: The total size of upload data.
-///     - progress: Upload progress
+///     - bytesSent/bytesDownloaded: The total size of bytes sent/downloaded to/from server.
+///     - totalBytes: The total size of upload/download data.
+///     - progress: Download/Upload progress
 public typealias TNProgressCallbackType = (Int, Int, Float) -> Void
 
 extension TNRequest {
@@ -88,11 +88,11 @@ extension TNRequest {
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
-    public func starDownload(queue: TNQueue? = TNQueue.shared,
-                             filePath: String,
-                             progressUpdate: TNProgressCallbackType?,
-                             onSuccess: TNDownloadSuccessCallback?,
-                             onFailure: TNFailureCallback?) {
+    public func startDownload(queue: TNQueue? = TNQueue.shared,
+                              filePath: String,
+                              progressUpdate: TNProgressCallbackType?,
+                              onSuccess: TNDownloadSuccessCallback?,
+                              onFailure: TNFailureCallback?) {
         currentQueue = queue ?? TNQueue.shared
         currentQueue.beforeOperationStart(request: self)
 

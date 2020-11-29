@@ -26,6 +26,7 @@
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
+		F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556064257401330047D46D /* TestDownloadOperations.swift */; };
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
@@ -94,6 +95,7 @@
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
 		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
+		F3556064257401330047D46D /* TestDownloadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDownloadOperations.swift; sourceTree = "<group>"; };
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		F3F48286245EBE6800656449 /* Data Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F3556064257401330047D46D /* TestDownloadOperations.swift */,
 				F3F48287245EBE8000656449 /* TestUploadOperations.swift */,
 			);
 			name = "Data Operations";
@@ -525,6 +528,7 @@
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,
 				F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */,
+				F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */,
 				F3850C8B243D103700F7CC13 /* APIRoute.swift in Sources */,
 				F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */,
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,

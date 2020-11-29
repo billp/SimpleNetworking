@@ -92,7 +92,7 @@ extension TNError: LocalizedError {
         case .invalidFileURL(let path):
             return String(format: NSLocalizedString("File path %@ is not valid.", comment: "TNError"), path)
         case .downloadedFileCannotBeSaved(let error):
-            return String(format: NSLocalizedString("File cannot be saved to destination: %@.", comment: "TNError"), error.localizedDescription)
+            return String(format: NSLocalizedString("File save error: %@.", comment: "TNError"), error.localizedDescription)
         }
     }
 }

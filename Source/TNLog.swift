@@ -20,10 +20,11 @@
 import Foundation
 
 internal class TNLog {
-    static func logRequest(request: TNRequest,
+    static func logRequest(request: TNRequest?,
                            data: Data?,
                            urlResponse: URLResponse?,
                            tnError: TNError?) {
+        guard let request = request else { return }
         guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else { return }
 
@@ -38,7 +39,7 @@ internal class TNLog {
         }
         print("🎛️ Method: " + request.method.rawValue.uppercased())
         if !isStream {
-            print("🔮 CURL Command: " + urlRequest.curlString)
+            print("🔮 CURL: " + urlRequest.curlString)
         }
 
         if request.configuration.certificateData != nil {
@@ -74,6 +75,8 @@ internal class TNLog {
             } else {
                 print("📦 Response: [non-printable]")
             }
+        } else if case .download(let destinationPath) = request.requestType, tnError == nil {
+            print(String(format: "📦 File saved to: '%@'", destinationPath))
         }
     }
 

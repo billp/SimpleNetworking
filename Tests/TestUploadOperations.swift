@@ -1,4 +1,4 @@
-// TestTNRequest.swift
+// TestUploadOperations.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -159,7 +159,7 @@ class TestUploadOperations: XCTestCase {
         XCTAssert(successCount == iterations && progressSuccessCount == iterations)
     }
 
-    func testIvalidFileUrlUpload() {
+    func testInvalidFileUrlUpload() {
         let expectation = XCTestExpectation(description: "testDataUpload")
 
         var failed: Bool = false
