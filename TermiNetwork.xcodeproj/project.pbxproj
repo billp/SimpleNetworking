@@ -27,6 +27,9 @@
 		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
 		F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556064257401330047D46D /* TestDownloadOperations.swift */; };
+		F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */; };
+		F355608D257527C40047D46D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355607A257527C20047D46D /* ContentView.swift */; };
+		F355608F257527C40047D46D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F355607B257527C40047D46D /* Assets.xcassets */; };
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
@@ -58,6 +61,8 @@
 		F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
+		F3D16EC82575299900F7B523 /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
+		F3D16EC92575299900F7B523 /* TermiNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
 		F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */; };
@@ -71,7 +76,28 @@
 			remoteGlobalIDString = F319682C243D01E1008725CE;
 			remoteInfo = TermiNetwork;
 		};
+		F3D16ECA2575299A00F7B523 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F3196824243D01E1008725CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F319682C243D01E1008725CE;
+			remoteInfo = TermiNetwork;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F3D16ECC2575299A00F7B523 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F3D16EC92575299900F7B523 /* TermiNetwork.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestBodyGenerators.swift; sourceTree = "<group>"; };
@@ -96,6 +122,11 @@
 		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		F3556064257401330047D46D /* TestDownloadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDownloadOperations.swift; sourceTree = "<group>"; };
+		F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermiNetworkExamplesApp.swift; sourceTree = "<group>"; };
+		F355607A257527C20047D46D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F355607B257527C40047D46D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3556080257527C40047D46D /* TermiNetworkExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TermiNetworkExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3556082257527C40047D46D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
@@ -146,6 +177,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F355607D257527C40047D46D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3D16EC82575299900F7B523 /* TermiNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +239,9 @@
 			children = (
 				F319682F243D01E1008725CE /* TermiNetwork */,
 				F3850C78243D103700F7CC13 /* Tests */,
+				F3D16EB32575285600F7B523 /* Examples */,
 				F319682E243D01E1008725CE /* Products */,
+				F3D16EC72575299900F7B523 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +250,7 @@
 			children = (
 				F319682D243D01E1008725CE /* TermiNetwork.framework */,
 				F3196836243D01E1008725CE /* TermiNetworkTests.xctest */,
+				F3556080257527C40047D46D /* TermiNetworkExamples.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -237,6 +279,16 @@
 				F3850C85243D103700F7CC13 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F3556078257527C20047D46D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
+				F355607A257527C20047D46D /* ContentView.swift */,
+				F355607B257527C40047D46D /* Assets.xcassets */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		F3850C78243D103700F7CC13 /* Tests */ = {
@@ -317,6 +369,30 @@
 			name = Middlewares;
 			sourceTree = "<group>";
 		};
+		F3D16EB32575285600F7B523 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				F3556078257527C20047D46D /* Shared */,
+				F3D16EB42575288100F7B523 /* Supporting Files */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		F3D16EB42575288100F7B523 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F3556082257527C40047D46D /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F3D16EC72575299900F7B523 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3F48286245EBE6800656449 /* Data Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,13 +457,32 @@
 			productReference = F3196836243D01E1008725CE /* TermiNetworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F355607F257527C40047D46D /* TermiNetworkExamples (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3556095257527C40047D46D /* Build configuration list for PBXNativeTarget "TermiNetworkExamples (iOS)" */;
+			buildPhases = (
+				F355607C257527C40047D46D /* Sources */,
+				F355607D257527C40047D46D /* Frameworks */,
+				F355607E257527C40047D46D /* Resources */,
+				F3D16ECC2575299A00F7B523 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3D16ECB2575299A00F7B523 /* PBXTargetDependency */,
+			);
+			name = "TermiNetworkExamples (iOS)";
+			productName = "TermiNetworkExamples (iOS)";
+			productReference = F3556080257527C40047D46D /* TermiNetworkExamples.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		F3196824243D01E1008725CE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Bill Panagiotopoulos";
 				TargetAttributes = {
@@ -398,6 +493,9 @@
 					F3196835243D01E1008725CE = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
+					};
+					F355607F257527C40047D46D = {
+						CreatedOnToolsVersion = 12.2;
 					};
 				};
 			};
@@ -419,6 +517,7 @@
 			targets = (
 				F319682C243D01E1008725CE /* TermiNetwork */,
 				F3196835243D01E1008725CE /* TermiNetworkTests */,
+				F355607F257527C40047D46D /* TermiNetworkExamples (iOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -439,6 +538,14 @@
 				F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */,
 				F33684D52466939200C64471 /* photo.jpg in Resources */,
 				F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F355607E257527C40047D46D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F355608F257527C40047D46D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +650,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F355607C257527C40047D46D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F355608D257527C40047D46D /* ContentView.swift in Sources */,
+				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -550,6 +666,11 @@
 			isa = PBXTargetDependency;
 			target = F319682C243D01E1008725CE /* TermiNetwork */;
 			targetProxy = F3196838243D01E1008725CE /* PBXContainerItemProxy */;
+		};
+		F3D16ECB2575299A00F7B523 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F319682C243D01E1008725CE /* TermiNetwork */;
+			targetProxy = F3D16ECA2575299A00F7B523 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -764,6 +885,51 @@
 			};
 			name = Release;
 		};
+		F3556091257527C40047D46D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 899S8YHUCE;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Examples/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetworkExamples;
+				PRODUCT_NAME = TermiNetworkExamples;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F3556092257527C40047D46D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 899S8YHUCE;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Examples/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetworkExamples;
+				PRODUCT_NAME = TermiNetworkExamples;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -790,6 +956,15 @@
 			buildConfigurations = (
 				F3196845243D01E1008725CE /* Debug */,
 				F3196846243D01E1008725CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F3556095257527C40047D46D /* Build configuration list for PBXNativeTarget "TermiNetworkExamples (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3556091257527C40047D46D /* Debug */,
+				F3556092257527C40047D46D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
