@@ -23,19 +23,17 @@ internal class TNLog {
     enum State {
         case started
         case finished
+        case unknown
     }
 
     // swiftlint:disable function_body_length
     static func logRequest(request: TNRequest?,
                            data: Data?,
-                           state: State = .finished,
+                           state: State = .unknown,
                            urlResponse: URLResponse?,
                            tnError: TNError?) {
                 guard let request = request else { return }
-        guard request.configuration.verbose == true else {
-            TNLog.printSimpleErrorIfNeeded(tnError)
-            return
-        }
+        guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else {
             TNLog.printSimpleErrorIfNeeded(tnError)
             return
@@ -63,10 +61,10 @@ internal class TNLog {
             if let params = request.params as [String: AnyObject]?,
                 params.keys.count > 0,
                 request.method != .get {
-                if request.configuration.requestBodyType == .JSON {
-                    print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "[unknown]")))
-                } else if request.multipartFormDataStream != nil {
+                if case .upload = request.requestType {
                     print("🗃️ Request Body: [multipart/form-data]")
+                } else if request.configuration.requestBodyType == .JSON {
+                    print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "[unknown]")))
                 } else {
                     print(String(format: "🗃️ Request Body: %@", params.description))
                 }
@@ -82,7 +80,8 @@ internal class TNLog {
                 if let responseJSON = data.toJSONString() {
                     print(String(format: "📦 Response: %@", responseJSON))
                 } else if let stringResponse = String(data: data, encoding: .utf8) {
-                    print(String(format: "📦 Response: %@", (stringResponse.isEmpty ? "[empty-response]" : stringResponse)))
+                    print(String(format: "📦 Response: %@",
+                                 (stringResponse.isEmpty ? "[empty-response]" : stringResponse)))
                 } else {
                     print("📦 Response: [non-printable]")
                 }
@@ -96,8 +95,10 @@ internal class TNLog {
                 print("🚀 Request Started...\n")
             case .finished:
                 print("🏁 Request finished.\n")
+            case .unknown:
+                break
             }
-            }
+        }
     }
 
     static func logProgress(request: TNRequest?,

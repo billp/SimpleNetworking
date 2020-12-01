@@ -50,10 +50,6 @@ extension TNRequest {
                                                         self.configuration.keyDecodingStrategy) as T
             } catch let error {
                 let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
-               TNLog.logRequest(request: self,
-                                data: data,
-                                urlResponse: nil,
-                                tnError: tnError)
                onFailure?(tnError, data)
                self.handleDataTaskFailure(with: data,
                                           urlResponse: urlResponse,
@@ -61,10 +57,6 @@ extension TNRequest {
                return
             }
 
-            TNLog.logRequest(request: self,
-                             data: data,
-                             urlResponse: urlResponse,
-                             tnError: nil)
             onSuccess?(object)
             self.handleDataTaskCompleted(with: data,
                                         urlResponse: urlResponse,
@@ -99,11 +91,6 @@ extension TNRequest {
                                                          filePath: filePath,
                                                          progressUpdate: progressUpdate,
                                                          completionHandler: { data, urlResponse in
-
-            TNLog.logRequest(request: self,
-                             data: data,
-                             urlResponse: urlResponse,
-                             tnError: nil)
             onSuccess?()
             self.handleDataTaskCompleted(with: data,
                                         urlResponse: urlResponse,

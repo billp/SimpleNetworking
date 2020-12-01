@@ -54,8 +54,13 @@ class TNMultipartFormDataHelpers {
         return raw.data(using: .utf8) ?? Data()
     }
 
-    static func mimeTypeForPath(path: String) -> String {
+    static func mimeTypeForPath(path: String) -> String? {
         let url = NSURL(fileURLWithPath: path)
+
+        guard url.isFileURL else {
+            return nil
+        }
+
         let pathExtension = url.pathExtension
 
         if let uti = UTTypeCreatePreferredIdentifierForTag(

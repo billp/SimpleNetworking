@@ -42,11 +42,6 @@ class TNSessionTaskFactory {
             tnRequest.handleDataTaskFailure(with: nil,
                                             urlResponse: nil,
                                             tnError: tnError)
-
-            TNLog.logRequest(request: tnRequest,
-                             data: nil,
-                             urlResponse: nil,
-                             tnError: tnError)
             return nil
         }
 
@@ -68,10 +63,6 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                TNLog.logRequest(request: tnRequest,
-                                 data: dataResult.data,
-                                 urlResponse: urlResponse,
-                                 tnError: tnError)
                 onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
@@ -99,6 +90,11 @@ class TNSessionTaskFactory {
             return nil
         }
 
+        // Set the type of the request
+        tnRequest.requestType = .upload
+
+        var request: URLRequest
+
         let boundary = TNMultipartFormDataHelpers.generateBoundary()
         tnRequest.configuration.requestBodyType = .multipartFormData(boundary: boundary)
         tnRequest.multipartBoundary = boundary
@@ -107,30 +103,14 @@ class TNSessionTaskFactory {
                                                                               params: params,
                                                                               boundary: boundary,
                                                                               uploadProgressCallback: progressUpdate)
-        } catch let error {
-            guard let tnError = error as? TNError else {
-                return nil
-            }
-            onFailure?(tnError, nil)
-            return nil
-        }
-
-        var request: URLRequest!
-        do {
             request = try tnRequest.asRequest()
         } catch let error {
             guard let tnError = error as? TNError else {
                 return nil
             }
             onFailure?(tnError, nil)
-            tnRequest.handleDataTaskFailure(with: nil,
-                                            urlResponse: nil,
-                                            tnError: tnError)
             return nil
         }
-
-        // Set the type of the request
-        tnRequest.requestType = .upload
 
         let sessionDelegate = TNSession<Data>(with: tnRequest,
                                               progressCallback: progressUpdate,
@@ -141,10 +121,6 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                TNLog.logRequest(request: tnRequest,
-                                 data: dataResult.data,
-                                 urlResponse: urlResponse,
-                                 tnError: tnError)
                 onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
@@ -196,10 +172,6 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                TNLog.logRequest(request: tnRequest,
-                                 data: dataResult.data,
-                                 urlResponse: urlResponse,
-                                 tnError: tnError)
                 onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
@@ -212,10 +184,9 @@ class TNSessionTaskFactory {
                     } catch let error {
                         let tnError = TNError.downloadedFileCannotBeSaved(error)
                         onFailure?(tnError, dataResult.data)
-                        TNLog.logRequest(request: tnRequest,
-                                         data: dataResult.data,
-                                         urlResponse: urlResponse,
-                                         tnError: tnError)
+                        tnRequest.handleDataTaskFailure(with: dataResult.data,
+                                                        urlResponse: nil,
+                                                        tnError: tnError)
                         return
                     }
                 }

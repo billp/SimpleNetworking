@@ -74,11 +74,6 @@ class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownl
             let tnError = TNError.networkError(error)
 
             failureCallback?(tnError, receivedData)
-
-            TNLog.logRequest(request: request,
-                             data: receivedData,
-                             urlResponse: nil,
-                             tnError: tnError)
         } else {
             completedCallback?(receivedData as? ResponseType, task.response, error)
         }

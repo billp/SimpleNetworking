@@ -42,10 +42,6 @@ extension TNRequest {
                                                         self.configuration.keyDecodingStrategy) as T
             } catch let error {
                 let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
-                TNLog.logRequest(request: self,
-                                 data: data,
-                                 urlResponse: nil,
-                                 tnError: tnError)
                 onFailure?(tnError, data)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: urlResponse,
@@ -53,10 +49,6 @@ extension TNRequest {
                 return
             }
 
-            TNLog.logRequest(request: self,
-                             data: data,
-                             urlResponse: urlResponse,
-                             tnError: nil)
             onSuccess?(object)
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
@@ -90,20 +82,11 @@ extension TNRequest {
 
             if image == nil {
                 let tnError = TNError.responseInvalidImageData
-                TNLog.logRequest(request: self,
-                                 data: data,
-                                 urlResponse: urlResponse,
-                                 tnError: tnError)
-
                 onFailure?(.responseInvalidImageData, data)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: nil,
                                            tnError: tnError)
             } else {
-                TNLog.logRequest(request: self,
-                                 data: data,
-                                 urlResponse: urlResponse,
-                                 tnError: nil)
                 onSuccess?(image ?? T())
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: nil,
@@ -136,21 +119,12 @@ extension TNRequest {
                                                      completionHandler: { data, urlResponse in
             DispatchQueue.main.async {
                 if let string = String(data: data, encoding: .utf8) {
-                    TNLog.logRequest(request: self,
-                                     data: data,
-                                     urlResponse: urlResponse,
-                                     tnError: nil)
-
                     onSuccess?(string)
                     self.handleDataTaskCompleted(with: data,
                                                  urlResponse: urlResponse,
                                                  tnError: nil)
                 } else {
                     let tnError = TNError.cannotConvertToString
-                    TNLog.logRequest(request: self,
-                                     data: data,
-                                     urlResponse: urlResponse,
-                                     tnError: tnError)
                     onFailure?(tnError, data)
                     self.handleDataTaskFailure(with: data,
                                                urlResponse: nil,
@@ -184,10 +158,6 @@ extension TNRequest {
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in
             DispatchQueue.main.async {
-                TNLog.logRequest(request: self,
-                                 data: data,
-                                 urlResponse: urlResponse,
-                                 tnError: nil)
                 onSuccess?(data)
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
