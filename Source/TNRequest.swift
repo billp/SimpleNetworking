@@ -286,11 +286,6 @@ open class TNRequest: TNOperation {
     func handleDataTaskCompleted(with data: Data?,
                                  urlResponse: URLResponse?,
                                  tnError: TNError?) {
-        currentQueue.afterOperationFinished(request: self,
-                                            data: data,
-                                            response: urlResponse,
-                                            tnError: tnError)
-
         TNLog.logRequest(request: self,
                          data: data,
                          state: .finished,
@@ -299,6 +294,11 @@ open class TNRequest: TNOperation {
 
         _executing = false
         _finished = true
+
+        currentQueue.afterOperationFinished(request: self,
+                                            data: data,
+                                            response: urlResponse,
+                                            tnError: tnError)
     }
 
     func handleDataTaskFailure(with data: Data?,
