@@ -39,7 +39,6 @@ extension TNRequest {
                                           onSuccess: TNSuccessCallback<T>?,
                                           onFailure: TNFailureCallback?) {
         currentQueue = queue ?? TNQueue.shared
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
                                                        progressUpdate: progressUpdate,
@@ -95,7 +94,6 @@ extension TNRequest {
                               onSuccess: TNDownloadSuccessCallback?,
                               onFailure: TNFailureCallback?) {
         currentQueue = queue ?? TNQueue.shared
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDownloadTask(with: self,
                                                          filePath: filePath,

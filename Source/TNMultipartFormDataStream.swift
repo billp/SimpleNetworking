@@ -48,7 +48,6 @@ class TNMultipartFormDataStream: NSObject, StreamDelegate {
         // configure and open output stream
         output.delegate = self
         output.schedule(in: .current, forMode: .default)
-        output.open()
         return Streams(input: input, output: output)
     }()
 

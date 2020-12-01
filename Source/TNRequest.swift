@@ -269,9 +269,22 @@ open class TNRequest: TNOperation {
 
     // MARK: Operation
     open override func start() {
+        currentQueue.beforeEachRequestCallback?(self)
+
         _executing = true
         _finished = false
         dataTask?.resume()
+
+        TNLog.logRequest(request: self,
+                         data: nil,
+                         state: .started,
+                         urlResponse: nil,
+                         tnError: nil)
+
+        // Open output sttream in case of upload
+        if case .upload = requestType {
+            multipartFormDataStream?.boundStreams.output.open()
+        }
     }
 
     func handleDataTaskCompleted(with data: Data?,

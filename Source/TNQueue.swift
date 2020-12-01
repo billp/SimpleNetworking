@@ -87,13 +87,6 @@ open class TNQueue: OperationQueue {
         self.failureMode = failureMode
     }
 
-    internal func beforeOperationStart(request: TNRequest) {
-        if operationCount == 0 {
-            beforeAllRequestsCallback?()
-        }
-        beforeEachRequestCallback?(request)
-    }
-
     internal func afterOperationFinished(request: TNRequest,
                                          data: Data?,
                                          response: URLResponse?,
@@ -116,6 +109,10 @@ open class TNQueue: OperationQueue {
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
     ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
     override open func addOperation(_ operation: Operation) {
+        if operationCount == 0 {
+            beforeAllRequestsCallback?()
+        }
+
         if let request = operation as? TNRequest {
             guard !request.shouldMockRequest() else {
                 return
@@ -123,12 +120,6 @@ open class TNQueue: OperationQueue {
             guard request.dataTask != nil else {
                 return
             }
-
-            TNLog.logRequest(request: request,
-                             data: nil,
-                             state: .started,
-                             urlResponse: nil,
-                             tnError: nil)
         }
 
         super.addOperation(operation)

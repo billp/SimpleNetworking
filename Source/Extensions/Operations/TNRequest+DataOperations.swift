@@ -32,7 +32,6 @@ extension TNRequest {
                                     onSuccess: TNSuccessCallback<T>?,
                                     onFailure: TNFailureCallback?) {
         currentQueue = queue ?? TNQueue.shared
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in
@@ -84,7 +83,6 @@ extension TNRequest {
                                   onSuccess: TNSuccessCallback<T>?,
                                   onFailure: TNFailureCallback?) {
         currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in
@@ -133,7 +131,6 @@ extension TNRequest {
                       onSuccess: TNSuccessCallback<String>?,
                       onFailure: TNFailureCallback?) {
         currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in
@@ -183,7 +180,6 @@ extension TNRequest {
                       onSuccess: TNSuccessCallback<Data>?,
                       onFailure: TNFailureCallback?) {
         currentQueue = queue
-        currentQueue.beforeOperationStart(request: self)
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in

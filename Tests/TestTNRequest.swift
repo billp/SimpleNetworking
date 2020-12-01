@@ -212,8 +212,10 @@ class TestTNRequest: XCTestCase {
     func testAfterAllRequests() {
         let expectation = XCTestExpectation(description: "Test testAfterAllRequests")
         let queue = TNQueue()
+        var failed = true
 
         queue.afterAllRequestsCallback = { error in
+            failed = queue.operations.count > 0
             expectation.fulfill()
         }
 
@@ -221,9 +223,9 @@ class TestTNRequest: XCTestCase {
         sampleRequest(queue: queue)
         sampleRequest(queue: queue)
 
-        wait(for: [expectation], timeout: 60)
+        wait(for: [expectation], timeout: 10)
 
-        XCTAssert(true)
+        XCTAssert(!failed)
     }
 
     func testBeforeEachRequest() {

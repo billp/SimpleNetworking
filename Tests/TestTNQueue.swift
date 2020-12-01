@@ -249,7 +249,7 @@ class TestTNQueue: XCTestCase {
             })
         }
 
-        wait(for: [expectation], timeout: 20)
+        wait(for: [expectation], timeout: 40)
 
         XCTAssert(queue.operationCount == 0 && numberOfRequests == 3)
     }
