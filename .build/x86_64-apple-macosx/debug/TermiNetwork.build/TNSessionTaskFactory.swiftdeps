@@ -1,0 +1,334 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "TNSessionTaskFactory"
+provides-nominal:
+- "12TermiNetwork20TNSessionTaskFactoryC"
+provides-member:
+- ["12TermiNetwork20TNSessionTaskFactoryC", ""]
+provides-dynamic-lookup:
+- "makeDataTask"
+- "makeDownloadTask"
+- "makeUploadTask"
+depends-top-level:
+- "AssignmentPrecedence"
+- "CastingPrecedence"
+- "Data"
+- "Error"
+- "FileManager"
+- !private "OperationQueue"
+- "String"
+- "TNError"
+- "TNFailureCallback"
+- "TNLog"
+- !private "TNMultipartFormDataHelpers"
+- "TNMultipartFormDataPartType"
+- !private "TNMultipartFormDataStream"
+- "TNProgressCallbackType"
+- "TNRequest"
+- "TNRequestHelpers"
+- !private "TNSession"
+- "TNSessionTaskFactory"
+- "URL"
+- "URLRequest"
+- "URLResponse"
+- !private "URLSession"
+- !private "URLSessionConfiguration"
+- "URLSessionDataTask"
+- "URLSessionDownloadTask"
+- "URLSessionUploadTask"
+- "Void"
+depends-member:
+- !private ["s7CVarArgP", "asRequest"]
+- !private ["s7CVarArgP", "configuration"]
+- !private ["s7CVarArgP", "createMockRequest"]
+- !private ["s7CVarArgP", "current"]
+- !private ["s7CVarArgP", "default"]
+- !private ["s7CVarArgP", "handleDataTaskFailure"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "moveItem"]
+- !private ["s7CVarArgP", "multipartBoundary"]
+- !private ["s7CVarArgP", "multipartFormDataStream"]
+- !private ["s7CVarArgP", "params"]
+- !private ["s7CVarArgP", "requestType"]
+- !private ["s7CVarArgP", "shouldMockRequest"]
+- !private ["s28CustomDebugStringConvertibleP", ""]
+- !private ["s28CustomDebugStringConvertibleP", "asRequest"]
+- !private ["s28CustomDebugStringConvertibleP", "configuration"]
+- !private ["s28CustomDebugStringConvertibleP", "createMockRequest"]
+- !private ["s28CustomDebugStringConvertibleP", "current"]
+- !private ["s28CustomDebugStringConvertibleP", "default"]
+- !private ["s28CustomDebugStringConvertibleP", "handleDataTaskFailure"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "moveItem"]
+- !private ["s28CustomDebugStringConvertibleP", "multipartBoundary"]
+- !private ["s28CustomDebugStringConvertibleP", "multipartFormData"]
+- !private ["s28CustomDebugStringConvertibleP", "multipartFormDataStream"]
+- !private ["s28CustomDebugStringConvertibleP", "params"]
+- !private ["s28CustomDebugStringConvertibleP", "path"]
+- !private ["s28CustomDebugStringConvertibleP", "requestType"]
+- !private ["s28CustomDebugStringConvertibleP", "shouldMockRequest"]
+- !private ["s17CustomReflectableP", "multipartFormData"]
+- !private ["s23CustomStringConvertibleP", ""]
+- !private ["s23CustomStringConvertibleP", "asRequest"]
+- !private ["s23CustomStringConvertibleP", "configuration"]
+- !private ["s23CustomStringConvertibleP", "createMockRequest"]
+- !private ["s23CustomStringConvertibleP", "current"]
+- !private ["s23CustomStringConvertibleP", "default"]
+- !private ["s23CustomStringConvertibleP", "handleDataTaskFailure"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "moveItem"]
+- !private ["s23CustomStringConvertibleP", "multipartBoundary"]
+- !private ["s23CustomStringConvertibleP", "multipartFormDataStream"]
+- !private ["s23CustomStringConvertibleP", "params"]
+- !private ["s23CustomStringConvertibleP", "path"]
+- !private ["s23CustomStringConvertibleP", "requestType"]
+- !private ["s23CustomStringConvertibleP", "shouldMockRequest"]
+- !private ["Se", "multipartFormData"]
+- !private ["Se", "path"]
+- !private ["SE", "multipartFormData"]
+- !private ["SE", "path"]
+- !private ["SQ", ""]
+- !private ["SQ", "asRequest"]
+- !private ["SQ", "configuration"]
+- !private ["SQ", "createMockRequest"]
+- !private ["SQ", "current"]
+- !private ["SQ", "default"]
+- !private ["SQ", "handleDataTaskFailure"]
+- !private ["SQ", "init"]
+- !private ["SQ", "moveItem"]
+- !private ["SQ", "multipartBoundary"]
+- !private ["SQ", "multipartFormData"]
+- !private ["SQ", "multipartFormDataStream"]
+- !private ["SQ", "params"]
+- !private ["SQ", "path"]
+- !private ["SQ", "requestType"]
+- !private ["SQ", "shouldMockRequest"]
+- !private ["s5ErrorP", ""]
+- !private ["s5ErrorP", "downloadedFileCannotBeSaved"]
+- !private ["s23ExpressibleByNilLiteralP", "multipartFormData"]
+- !private ["So13NSFileManagerC", "default"]
+- !private ["So13NSFileManagerC", "moveItem"]
+- !private ["SH", ""]
+- !private ["SH", "asRequest"]
+- !private ["SH", "configuration"]
+- !private ["SH", "createMockRequest"]
+- !private ["SH", "current"]
+- !private ["SH", "default"]
+- !private ["SH", "handleDataTaskFailure"]
+- !private ["SH", "init"]
+- !private ["SH", "moveItem"]
+- !private ["SH", "multipartBoundary"]
+- !private ["SH", "multipartFormData"]
+- !private ["SH", "multipartFormDataStream"]
+- !private ["SH", "params"]
+- !private ["SH", "path"]
+- !private ["SH", "requestType"]
+- !private ["SH", "shouldMockRequest"]
+- !private ["10Foundation14LocalizedErrorP", "downloadedFileCannotBeSaved"]
+- !private ["So8NSCodingP", ""]
+- !private ["So9NSCopyingP", "default"]
+- !private ["So9NSCopyingP", "requestBodyType"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "asRequest"]
+- !private ["So8NSObjectC", "configuration"]
+- !private ["So8NSObjectC", "createMockRequest"]
+- !private ["So8NSObjectC", "current"]
+- !private ["So8NSObjectC", "default"]
+- !private ["So8NSObjectC", "handleDataTaskFailure"]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectC", "moveItem"]
+- !private ["So8NSObjectC", "moveItemAtPath"]
+- !private ["So8NSObjectC", "moveItemAtURL"]
+- !private ["So8NSObjectC", "multipartBoundary"]
+- !private ["So8NSObjectC", "multipartFormDataStream"]
+- !private ["So8NSObjectC", "params"]
+- !private ["So8NSObjectC", "requestType"]
+- !private ["So8NSObjectC", "sessionWithConfiguration"]
+- !private ["So8NSObjectC", "shouldMockRequest"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "asRequest"]
+- !private ["So8NSObjectP", "configuration"]
+- !private ["So8NSObjectP", "createMockRequest"]
+- !private ["So8NSObjectP", "current"]
+- !private ["So8NSObjectP", "default"]
+- !private ["So8NSObjectP", "handleDataTaskFailure"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So8NSObjectP", "moveItem"]
+- !private ["So8NSObjectP", "moveItemAtPath"]
+- !private ["So8NSObjectP", "moveItemAtURL"]
+- !private ["So8NSObjectP", "multipartBoundary"]
+- !private ["So8NSObjectP", "multipartFormDataStream"]
+- !private ["So8NSObjectP", "params"]
+- !private ["So8NSObjectP", "requestType"]
+- !private ["So8NSObjectP", "sessionWithConfiguration"]
+- !private ["So8NSObjectP", "shouldMockRequest"]
+- !private ["So11NSOperationC", "asRequest"]
+- !private ["So11NSOperationC", "configuration"]
+- !private ["So11NSOperationC", "createMockRequest"]
+- !private ["So11NSOperationC", "handleDataTaskFailure"]
+- !private ["So11NSOperationC", "multipartBoundary"]
+- !private ["So11NSOperationC", "multipartFormDataStream"]
+- !private ["So11NSOperationC", "params"]
+- !private ["So11NSOperationC", "requestType"]
+- !private ["So11NSOperationC", "shouldMockRequest"]
+- !private ["So16NSOperationQueueC", "current"]
+- !private ["Sq", "multipartFormData"]
+- !private ["So19NSProgressReportingP", "current"]
+- !private ["10Foundation20ReferenceConvertibleP", "path"]
+- !private ["12TermiNetwork11RequestTypeO", "download"]
+- !private ["12TermiNetwork11RequestTypeO", "upload"]
+- !private ["7Combine9SchedulerP", "current"]
+- !private ["So16NSStreamDelegateP", "init"]
+- !private ["12TermiNetwork15TNConfigurationC", "requestBodyType"]
+- !private ["12TermiNetwork7TNErrorO", ""]
+- !private ["12TermiNetwork7TNErrorO", "downloadedFileCannotBeSaved"]
+- !private ["12TermiNetwork5TNLogC", "logRequest"]
+- !private ["12TermiNetwork26TNMultipartFormDataHelpersC", "generateBoundary"]
+- !private ["12TermiNetwork25TNMultipartFormDataStreamC", "init"]
+- !private ["12TermiNetwork11TNOperationC", "asRequest"]
+- !private ["12TermiNetwork11TNOperationC", "configuration"]
+- !private ["12TermiNetwork11TNOperationC", "createMockRequest"]
+- !private ["12TermiNetwork11TNOperationC", "handleDataTaskFailure"]
+- !private ["12TermiNetwork11TNOperationC", "multipartBoundary"]
+- !private ["12TermiNetwork11TNOperationC", "multipartFormDataStream"]
+- !private ["12TermiNetwork11TNOperationC", "params"]
+- !private ["12TermiNetwork11TNOperationC", "requestType"]
+- !private ["12TermiNetwork11TNOperationC", "shouldMockRequest"]
+- !private ["12TermiNetwork9TNRequestC", "asRequest"]
+- !private ["12TermiNetwork9TNRequestC", "configuration"]
+- !private ["12TermiNetwork9TNRequestC", "createMockRequest"]
+- !private ["12TermiNetwork9TNRequestC", "handleDataTaskFailure"]
+- !private ["12TermiNetwork9TNRequestC", "multipartBoundary"]
+- !private ["12TermiNetwork9TNRequestC", "multipartFormDataStream"]
+- !private ["12TermiNetwork9TNRequestC", "params"]
+- !private ["12TermiNetwork9TNRequestC", "requestType"]
+- !private ["12TermiNetwork9TNRequestC", "shouldMockRequest"]
+- !private ["12TermiNetwork17TNRequestBodyTypeO", "multipartFormData"]
+- !private ["12TermiNetwork16TNRequestHelpersC", "processData"]
+- !private ["12TermiNetwork9TNSessionC", "init"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "Data"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "Error"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "FileManager"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "OperationQueue"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "String"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNError"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "TNFailureCallback"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNLog"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNMultipartFormDataHelpers"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNMultipartFormDataPartType"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNMultipartFormDataStream"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "TNProgressCallbackType"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "TNRequest"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNRequestHelpers"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "TNSession"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "URL"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "URLRequest"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "URLResponse"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "URLSession"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "URLSessionConfiguration"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "URLSessionDataTask"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "URLSessionDownloadTask"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "URLSessionUploadTask"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "Void"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "deinit"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "init"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "makeDataTask"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "makeDownloadTask"]
+- ["12TermiNetwork20TNSessionTaskFactoryC", "makeUploadTask"]
+- !private ["10Foundation3URLV", "path"]
+- !private ["So12NSURLSessionC", "init"]
+- !private ["So25NSURLSessionConfigurationC", "default"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "path"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByFileReferenceLiteralP", "path"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "asRequest"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "configuration"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "createMockRequest"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "current"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "default"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "handleDataTaskFailure"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "moveItem"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "multipartBoundary"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "multipartFormDataStream"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "params"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "requestType"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "shouldMockRequest"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "asRequest"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "configuration"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "createMockRequest"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "current"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "default"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "handleDataTaskFailure"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "moveItem"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "multipartBoundary"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "multipartFormDataStream"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "params"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "requestType"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "shouldMockRequest"]
+- !private ["s21_ObjectiveCBridgeableP", ""]
+- !private ["s21_ObjectiveCBridgeableP", "multipartFormData"]
+- !private ["s21_ObjectiveCBridgeableP", "path"]
+depends-nominal:
+- !private "s7CVarArgP"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- !private "s5ErrorP"
+- !private "s23ExpressibleByNilLiteralP"
+- !private "So13NSFileManagerC"
+- !private "SH"
+- !private "10Foundation14LocalizedErrorP"
+- !private "So8NSCodingP"
+- !private "So9NSCopyingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- !private "So11NSOperationC"
+- !private "So16NSOperationQueueC"
+- !private "Sq"
+- !private "So19NSProgressReportingP"
+- !private "10Foundation20ReferenceConvertibleP"
+- !private "12TermiNetwork11RequestTypeO"
+- !private "7Combine9SchedulerP"
+- !private "So16NSStreamDelegateP"
+- !private "12TermiNetwork15TNConfigurationC"
+- !private "12TermiNetwork7TNErrorO"
+- !private "12TermiNetwork5TNLogC"
+- !private "12TermiNetwork26TNMultipartFormDataHelpersC"
+- !private "12TermiNetwork25TNMultipartFormDataStreamC"
+- !private "12TermiNetwork11TNOperationC"
+- !private "12TermiNetwork9TNRequestC"
+- !private "12TermiNetwork17TNRequestBodyTypeO"
+- !private "12TermiNetwork16TNRequestHelpersC"
+- !private "12TermiNetwork9TNSessionC"
+- "12TermiNetwork20TNSessionTaskFactoryC"
+- !private "10Foundation3URLV"
+- !private "So12NSURLSessionC"
+- !private "So25NSURLSessionConfigurationC"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- !private "s34_ExpressibleByFileReferenceLiteralP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "63c869a0306c1aa150c3b9910deffb24"

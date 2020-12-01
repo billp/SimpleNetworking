@@ -13,7 +13,7 @@ import TermiNetwork
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions
-                        launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+                        launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
 
         TNEnvironment.set(Environment.heroku)
         return true

@@ -14,12 +14,3 @@ struct City: Codable {
     let countryName: String
     let thumb: String
 }
-
-struct Cities: Codable {
-    var cities: [City]
-
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        cities = try values.decode([City].self, forKey: .cities)
-    }
-}

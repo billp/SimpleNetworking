@@ -20,9 +20,15 @@
 import Foundation
 
 internal class TNLog {
+    enum State {
+        case started
+        case finished
+    }
+
     // swiftlint:disable function_body_length
     static func logRequest(request: TNRequest?,
                            data: Data?,
+                           state: State = .finished,
                            urlResponse: URLResponse?,
                            tnError: TNError?) {
         guard let request = request else { return }
@@ -39,14 +45,13 @@ internal class TNLog {
         let headers = urlRequest.allHTTPHeaderFields
         let isStream = request.multipartFormDataStream != nil
 
-        print("--------------------------------")
-        print("🌎 URL: " + url)
+        print(String(format: "🌎 URL: %@", url))
         if request.configuration.useMockData == true {
             print("🗂 Uses mock data")
         }
-        print("🎛️ Method: " + request.method.rawValue.uppercased())
+        print(String(format: "🎛️ Method: %@", request.method.rawValue.uppercased()))
         if !isStream {
-            print("🔮 CURL: " + urlRequest.curlString)
+            print(String(format: "🔮 CURL: %@", urlRequest.curlString))
         }
 
         if request.configuration.certificateData != nil {
@@ -54,36 +59,43 @@ internal class TNLog {
         }
 
         if let headers = headers, headers.keys.count > 0 {
-            print("📃 Request Headers: " + headers.description)
+            print(String(format: "📃 Request Headers: %@", headers.description))
         }
         if let params = request.params as [String: AnyObject]?,
             params.keys.count > 0,
             request.method != .get {
             if request.configuration.requestBodyType == .JSON {
-                print("🗃️ Request Body: " + (params.toJSONString() ?? "[unknown]"))
+                print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "[unknown]")))
             } else if request.multipartFormDataStream != nil {
                 print("🗃️ Request Body: [multipart/form-data]")
             } else {
-                print("🗃️ Request Body: " + params.description)
+                print(String(format: "🗃️ Request Body: %@", params.description))
             }
         }
 
         if let customError = tnError {
-            print("❌ Error: " + (customError.localizedDescription ?? ""))
+            print(String(format: "❌ Error: %@", (customError.localizedDescription ?? "")))
         } else if let response = urlResponse as? HTTPURLResponse {
-            print("✅ Status: " + String(response.statusCode))
+            print(String(format: "✅ Status: %@", String(response.statusCode)))
         }
 
         if let data = data {
             if let responseJSON = data.toJSONString() {
-                print("📦 Response: " + responseJSON)
+                print(String(format: "📦 Response: %@", responseJSON))
             } else if let stringResponse = String(data: data, encoding: .utf8) {
-                print("📦 Response: " + (stringResponse.isEmpty ? "[empty-response]" : stringResponse))
+                print(String(format: "📦 Response: %@", (stringResponse.isEmpty ? "[empty-response]" : stringResponse)))
             } else {
                 print("📦 Response: [non-printable]")
             }
         } else if case .download(let destinationPath) = request.requestType, tnError == nil {
             print(String(format: "📦 File saved to: '%@'", destinationPath))
+        }
+
+        switch state {
+        case .started:
+            print("🚀 Request Started...\n")
+        case .finished:
+            print("🏁 Request finished.\n")
         }
     }
 

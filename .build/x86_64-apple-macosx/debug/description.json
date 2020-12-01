@@ -1,0 +1,14 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "swiftTargetMap" : {
+    "C.TermiNetwork-debug.module" : "TermiNetwork"
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

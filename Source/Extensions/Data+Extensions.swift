@@ -20,8 +20,13 @@
 import Foundation
 
 extension Data {
-    internal func deserializeJSONData<T>() throws -> T where T: Decodable {
+    internal func deserializeJSONData<T>(
+        withKeyDecodingStrategy keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil)
+    throws -> T where T: Decodable {
         let jsonDecoder = JSONDecoder()
+        if let keyDecodingStrategy = keyDecodingStrategy {
+            jsonDecoder.keyDecodingStrategy = keyDecodingStrategy
+        }
         return try jsonDecoder.decode(T.self, from: self)
     }
 

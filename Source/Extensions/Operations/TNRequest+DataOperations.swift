@@ -39,9 +39,10 @@ extension TNRequest {
             let object: T!
 
             do {
-                object = try data.deserializeJSONData() as T
+                object = try data.deserializeJSONData(withKeyDecodingStrategy:
+                                                        self.configuration.keyDecodingStrategy) as T
             } catch let error {
-                let tnError = TNError.cannotDeserialize(error)
+                let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
                 TNLog.logRequest(request: self,
                                  data: data,
                                  urlResponse: nil,

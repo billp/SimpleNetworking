@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (82% documented)
+         (83% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -132,6 +132,9 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork30TNBeforeQueueStartCallbackTypea">TNBeforeQueueStartCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork25TNDownloadSuccessCallbacka">TNDownloadSuccessCallback</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a>
@@ -266,9 +269,9 @@ Also, each request can have its own TNConfiguration whose settings will override
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork15TNConfigurationC15certificateDataSo6NSDataCSgvp"></a>
+                    <a name="/s:12TermiNetwork15TNConfigurationC15certificateDataSaySo6NSDataCGSgvp"></a>
                     <a name="//apple_ref/swift/Property/certificateData" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC15certificateDataSo6NSDataCSgvp">certificateData</a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC15certificateDataSaySo6NSDataCGSgvp">certificateData</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -283,7 +286,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">certificateData</span><span class="p">:</span> <span class="kt">NSData</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">certificateData</span><span class="p">:</span> <span class="p">[</span><span class="kt">NSData</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
@@ -428,6 +431,34 @@ Also, each request can have its own TNConfiguration whose settings will override
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12TermiNetwork15TNConfigurationC19keyDecodingStrategy10Foundation11JSONDecoderC03KeyeF0OSgvp"></a>
+                    <a name="//apple_ref/swift/Property/keyDecodingStrategy" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC19keyDecodingStrategy10Foundation11JSONDecoderC03KeyeF0OSgvp">keyDecodingStrategy</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Specifies a key decoding strategy. Take a look
+at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy">https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy</a></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">keyDecodingStrategy</span><span class="p">:</span> <span class="kt">JSONDecoder</span><span class="o">.</span><span class="kt">KeyDecodingStrategy</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12TermiNetwork15TNConfigurationC18requestMiddlewaresSayAA27TNRequestMiddlewareProtocol_pGSgvp"></a>
                     <a name="//apple_ref/swift/Property/requestMiddlewares" class="dashAnchor"></a>
                     <a class="token" href="#/s:12TermiNetwork15TNConfigurationC18requestMiddlewaresSayAA27TNRequestMiddlewareProtocol_pGSgvp">requestMiddlewares</a>
@@ -468,9 +499,9 @@ Also, each request can have its own TNConfiguration whose settings will override
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType15certificatePath7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSSSgSbSgSDyS2SGSgSo8NSBundleCSgAUSd3min_Sd3maxtSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePath:verbose:headers:mockDataBundle:useMockData:mockDelay:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType15certificatePath7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSSSgSbSgSDyS2SGSgSo8NSBundleCSgAUSd3min_Sd3maxtSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePath:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>useMockData:<wbr>mockDelay:<wbr>)</a>
+                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAVSd3min_Sd3maxtSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:useMockData:mockDelay:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAVSd3min_Sd3maxtSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePaths:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>useMockData:<wbr>mockDelay:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -488,7 +519,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cachePolicy</span><span class="p">:</span> <span class="kt">URLRequest</span><span class="o">.</span><span class="kt">CachePolicy</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="kt">TimeInterval</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">requestBodyType</span><span class="p">:</span> <span class="kt"><a href="../Enums/TNRequestBodyType.html">TNRequestBodyType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">certificatePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">certificatePaths</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">mockDataBundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -535,8 +566,8 @@ Also, each request can have its own TNConfiguration whose settings will override
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-09-16)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

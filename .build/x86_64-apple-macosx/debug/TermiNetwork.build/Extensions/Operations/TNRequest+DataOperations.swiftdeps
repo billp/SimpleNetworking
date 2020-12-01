@@ -1,0 +1,239 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+provides-nominal:
+provides-member:
+- ["12TermiNetwork9TNRequestC", ""]
+- ["12TermiNetwork9TNRequestC", "start"]
+- ["12TermiNetwork9TNRequestC", "start"]
+- ["12TermiNetwork9TNRequestC", "start"]
+- ["12TermiNetwork9TNRequestC", "start"]
+provides-dynamic-lookup:
+- "start"
+depends-top-level:
+- !private "??"
+- "AssignmentPrecedence"
+- "Data"
+- "Decodable"
+- "DispatchQueue"
+- "String"
+- "TNFailureCallback"
+- "TNQueue"
+- "TNRequest"
+- !private "TNSessionTaskFactory"
+- "TNSuccessCallback"
+- "UIImage"
+- !private "currentQueue"
+- !private "dataTask"
+depends-member:
+- ["s7CVarArgP", "Data"]
+- !private ["s7CVarArgP", "DispatchQueue"]
+- !private ["s7CVarArgP", "TNQueue"]
+- !private ["s7CVarArgP", "TNSessionTaskFactory"]
+- ["s7CVarArgP", "UIImage"]
+- !private ["s7CVarArgP", "addOperation"]
+- !private ["s7CVarArgP", "beforeOperationStart"]
+- !private ["s7CVarArgP", "currentQueue"]
+- !private ["s7CVarArgP", "dataTask"]
+- !private ["s7CVarArgP", "shared"]
+- ["s28CustomDebugStringConvertibleP", "Data"]
+- !private ["s28CustomDebugStringConvertibleP", "DispatchQueue"]
+- !private ["s28CustomDebugStringConvertibleP", "TNQueue"]
+- !private ["s28CustomDebugStringConvertibleP", "TNSessionTaskFactory"]
+- ["s28CustomDebugStringConvertibleP", "UIImage"]
+- !private ["s28CustomDebugStringConvertibleP", "addOperation"]
+- !private ["s28CustomDebugStringConvertibleP", "beforeOperationStart"]
+- !private ["s28CustomDebugStringConvertibleP", "currentQueue"]
+- !private ["s28CustomDebugStringConvertibleP", "dataTask"]
+- !private ["s28CustomDebugStringConvertibleP", "shared"]
+- !private ["s17CustomReflectableP", "addOperation"]
+- !private ["s17CustomReflectableP", "beforeOperationStart"]
+- ["s23CustomStringConvertibleP", "Data"]
+- !private ["s23CustomStringConvertibleP", "DispatchQueue"]
+- !private ["s23CustomStringConvertibleP", "TNQueue"]
+- !private ["s23CustomStringConvertibleP", "TNSessionTaskFactory"]
+- ["s23CustomStringConvertibleP", "UIImage"]
+- !private ["s23CustomStringConvertibleP", "addOperation"]
+- !private ["s23CustomStringConvertibleP", "beforeOperationStart"]
+- !private ["s23CustomStringConvertibleP", "currentQueue"]
+- !private ["s23CustomStringConvertibleP", "dataTask"]
+- !private ["s23CustomStringConvertibleP", "shared"]
+- !private ["Se", "addOperation"]
+- !private ["Se", "beforeOperationStart"]
+- !private ["SE", "addOperation"]
+- !private ["SE", "beforeOperationStart"]
+- ["SQ", "Data"]
+- !private ["SQ", "DispatchQueue"]
+- !private ["SQ", "TNQueue"]
+- !private ["SQ", "TNSessionTaskFactory"]
+- ["SQ", "UIImage"]
+- ["SQ", ""]
+- !private ["SQ", "addOperation"]
+- !private ["SQ", "beforeOperationStart"]
+- !private ["SQ", "currentQueue"]
+- !private ["SQ", "dataTask"]
+- !private ["SQ", "shared"]
+- !private ["s23ExpressibleByNilLiteralP", "addOperation"]
+- !private ["s23ExpressibleByNilLiteralP", "beforeOperationStart"]
+- ["SH", "Data"]
+- !private ["SH", "DispatchQueue"]
+- !private ["SH", "TNQueue"]
+- !private ["SH", "TNSessionTaskFactory"]
+- ["SH", "UIImage"]
+- !private ["SH", "addOperation"]
+- !private ["SH", "beforeOperationStart"]
+- !private ["SH", "currentQueue"]
+- !private ["SH", "dataTask"]
+- !private ["SH", "shared"]
+- ["So8NSObjectC", "Data"]
+- ["So8NSObjectC", "Decodable"]
+- !private ["So8NSObjectC", "DispatchQueue"]
+- ["So8NSObjectC", "String"]
+- ["So8NSObjectC", "TNFailureCallback"]
+- ["So8NSObjectC", "TNQueue"]
+- !private ["So8NSObjectC", "TNSessionTaskFactory"]
+- ["So8NSObjectC", "TNSuccessCallback"]
+- ["So8NSObjectC", "UIImage"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "addOperation"]
+- !private ["So8NSObjectC", "addOperationWithBlock"]
+- !private ["So8NSObjectC", "beforeOperationStart"]
+- !private ["So8NSObjectC", "currentQueue"]
+- !private ["So8NSObjectC", "dataTask"]
+- !private ["So8NSObjectC", "shared"]
+- ["So8NSObjectP", "Data"]
+- ["So8NSObjectP", "Decodable"]
+- !private ["So8NSObjectP", "DispatchQueue"]
+- ["So8NSObjectP", "String"]
+- ["So8NSObjectP", "TNFailureCallback"]
+- ["So8NSObjectP", "TNQueue"]
+- !private ["So8NSObjectP", "TNSessionTaskFactory"]
+- ["So8NSObjectP", "TNSuccessCallback"]
+- ["So8NSObjectP", "UIImage"]
+- !private ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "addOperation"]
+- !private ["So8NSObjectP", "addOperationWithBlock"]
+- !private ["So8NSObjectP", "beforeOperationStart"]
+- !private ["So8NSObjectP", "currentQueue"]
+- !private ["So8NSObjectP", "dataTask"]
+- !private ["So8NSObjectP", "shared"]
+- ["So8NSObjectP", "start"]
+- ["So11NSOperationC", "Data"]
+- ["So11NSOperationC", "Decodable"]
+- !private ["So11NSOperationC", "DispatchQueue"]
+- ["So11NSOperationC", "String"]
+- ["So11NSOperationC", "TNFailureCallback"]
+- ["So11NSOperationC", "TNQueue"]
+- !private ["So11NSOperationC", "TNSessionTaskFactory"]
+- ["So11NSOperationC", "TNSuccessCallback"]
+- ["So11NSOperationC", "UIImage"]
+- ["So11NSOperationC", ""]
+- !private ["So11NSOperationC", "currentQueue"]
+- !private ["So11NSOperationC", "dataTask"]
+- ["So16NSOperationQueueC", ""]
+- !private ["So16NSOperationQueueC", "addOperation"]
+- !private ["So16NSOperationQueueC", "beforeOperationStart"]
+- !private ["So16NSOperationQueueC", "shared"]
+- !private ["Sq", "addOperation"]
+- !private ["Sq", "beforeOperationStart"]
+- !private ["So19NSProgressReportingP", "addOperation"]
+- !private ["So19NSProgressReportingP", "beforeOperationStart"]
+- !private ["So19NSProgressReportingP", "shared"]
+- !private ["7Combine9SchedulerP", "addOperation"]
+- !private ["7Combine9SchedulerP", "beforeOperationStart"]
+- !private ["7Combine9SchedulerP", "shared"]
+- ["12TermiNetwork11TNOperationC", "Data"]
+- ["12TermiNetwork11TNOperationC", "Decodable"]
+- !private ["12TermiNetwork11TNOperationC", "DispatchQueue"]
+- ["12TermiNetwork11TNOperationC", "String"]
+- ["12TermiNetwork11TNOperationC", "TNFailureCallback"]
+- ["12TermiNetwork11TNOperationC", "TNQueue"]
+- !private ["12TermiNetwork11TNOperationC", "TNSessionTaskFactory"]
+- ["12TermiNetwork11TNOperationC", "TNSuccessCallback"]
+- ["12TermiNetwork11TNOperationC", "UIImage"]
+- ["12TermiNetwork11TNOperationC", ""]
+- !private ["12TermiNetwork11TNOperationC", "currentQueue"]
+- !private ["12TermiNetwork11TNOperationC", "dataTask"]
+- !private ["12TermiNetwork7TNQueueC", "addOperation"]
+- !private ["12TermiNetwork7TNQueueC", "beforeOperationStart"]
+- !private ["12TermiNetwork7TNQueueC", "shared"]
+- ["12TermiNetwork9TNRequestC", "Data"]
+- ["12TermiNetwork9TNRequestC", "Decodable"]
+- !private ["12TermiNetwork9TNRequestC", "DispatchQueue"]
+- ["12TermiNetwork9TNRequestC", "String"]
+- ["12TermiNetwork9TNRequestC", "TNFailureCallback"]
+- ["12TermiNetwork9TNRequestC", "TNQueue"]
+- !private ["12TermiNetwork9TNRequestC", "TNSessionTaskFactory"]
+- ["12TermiNetwork9TNRequestC", "TNSuccessCallback"]
+- ["12TermiNetwork9TNRequestC", "UIImage"]
+- ["12TermiNetwork9TNRequestC", ""]
+- !private ["12TermiNetwork9TNRequestC", "currentQueue"]
+- !private ["12TermiNetwork9TNRequestC", "dataTask"]
+- ["12TermiNetwork9TNRequestC", "start"]
+- !private ["12TermiNetwork20TNSessionTaskFactoryC", "makeDataTask"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "Data"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "DispatchQueue"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "TNQueue"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "TNSessionTaskFactory"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "UIImage"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "addOperation"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "beforeOperationStart"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "currentQueue"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "dataTask"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "shared"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "Data"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "DispatchQueue"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNQueue"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNSessionTaskFactory"]
+- ["10Foundation37_KeyValueCodingAndObservingPublishingP", "UIImage"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "addOperation"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "beforeOperationStart"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "currentQueue"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "dataTask"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "shared"]
+- !private ["s21_ObjectiveCBridgeableP", "addOperation"]
+- !private ["s21_ObjectiveCBridgeableP", "beforeOperationStart"]
+depends-nominal:
+- "s7CVarArgP"
+- "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "Se"
+- !private "SE"
+- "SQ"
+- !private "s23ExpressibleByNilLiteralP"
+- "SH"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- "So11NSOperationC"
+- "So16NSOperationQueueC"
+- !private "Sq"
+- !private "So19NSProgressReportingP"
+- !private "7Combine9SchedulerP"
+- "12TermiNetwork11TNOperationC"
+- !private "12TermiNetwork7TNQueueC"
+- "12TermiNetwork9TNRequestC"
+- !private "12TermiNetwork20TNSessionTaskFactoryC"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/module.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "dd5dbd80a21531d41ac262e1905b92d4"

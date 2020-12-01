@@ -123,6 +123,12 @@ open class TNQueue: OperationQueue {
             guard request.dataTask != nil else {
                 return
             }
+
+            TNLog.logRequest(request: request,
+                             data: nil,
+                             state: .started,
+                             urlResponse: nil,
+                             tnError: nil)
         }
 
         super.addOperation(operation)

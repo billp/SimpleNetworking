@@ -16,7 +16,7 @@ struct CityView: View {
 
     func loadCities() {
         let router = TNRouter<CityRoute>()
-        router.request(for: .cities).start(responseType: Cities.self) { cities in
+        router.request(for: .cities).start(responseType: [City].self) { cities in
             
         } onFailure: { (error, _) in
 

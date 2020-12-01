@@ -31,9 +31,9 @@ public enum TNError: Error {
     case invalidParams
     /// Thrown when the response object is expected to be a UIImage but it's not.
     case responseInvalidImageData
-    /// Thrown when cannot deserialize the given model with Codable. It contains the error with information about what
+    /// Thrown when the given Codable type cannot be deserialized. It contains the className and the error about deserilization.
     /// was went wrong in parsing.
-    case cannotDeserialize(Error)
+    case cannotDeserialize(String, Error)
     /// Thrown when the response object is expected to be a String but it's not.
     case cannotConvertToString
     /// Thrown when a network error occured. It contains the NSURLError.
@@ -42,7 +42,7 @@ public enum TNError: Error {
     case notSuccess(Int)
     /// Thrown when a request is cancelled.
     case cancelled(Error)
-    /// Thrown when a request is mocked but the data are invalid.
+    /// Thrown when a request is mocked but the data is invalid (e.g. cannot parse JSON).
     case invalidMockData(String)
     /// Thrown when a middleware reports an error. It contains a custom type
     case middlewareError(Any)
@@ -51,6 +51,7 @@ public enum TNError: Error {
     /// Thrown when an invalid file path URL is passed on upload/download operations.
     case invalidFileURL(String)
     /// Thrown when the file cannot be saved to destination for some reason.
+    /// It contains the Error with additional information.
     case downloadedFileCannotBeSaved(Error)
 }
 
@@ -65,7 +66,7 @@ extension TNError: LocalizedError {
             return NSLocalizedString("The parameters are not valid", comment: "TNError")
         case .responseInvalidImageData:
             return NSLocalizedString("The response data is not a valid image", comment: "TNError")
-        case .cannotDeserialize(let error):
+        case .cannotDeserialize(let className, let error):
             let debugDescription = (error as NSError).userInfo["NSDebugDescription"] as? String ?? ""
             var errorKeys = ""
             if let codingPath = (error as NSError).userInfo["NSCodingPath"] as? [CodingKey] {
@@ -73,8 +74,8 @@ extension TNError: LocalizedError {
                     $0.stringValue
                 }).joined(separator: ", ")
             }
-            let fullDescription = "\(debugDescription)\(errorKeys)"
-            return NSLocalizedString("Cannot deserialize object: ", comment: "TNError") + fullDescription
+            let fullDescription = String(format: "className: %@. %@%@", className, debugDescription, errorKeys)
+            return NSLocalizedString("Cannot deserialize: ", comment: "TNError") + fullDescription
         case .networkError(let error):
                 return NSLocalizedString("Network error: ", comment: "TNError") + error.localizedDescription
         case .cannotConvertToString:
