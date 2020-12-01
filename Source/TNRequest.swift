@@ -273,7 +273,6 @@ open class TNRequest: TNOperation {
 
         _executing = true
         _finished = false
-        dataTask?.resume()
 
         TNLog.logRequest(request: self,
                          data: nil,
@@ -281,10 +280,7 @@ open class TNRequest: TNOperation {
                          urlResponse: nil,
                          tnError: nil)
 
-        // Open output sttream in case of upload
-        if case .upload = requestType {
-            multipartFormDataStream?.boundStreams.output.open()
-        }
+        dataTask?.resume()
     }
 
     func handleDataTaskCompleted(with data: Data?,

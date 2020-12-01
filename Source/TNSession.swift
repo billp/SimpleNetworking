@@ -97,6 +97,7 @@ class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownl
         guard let streamDelegate = request?.multipartFormDataStream else {
             return
         }
+        request?.multipartFormDataStream?.boundStreams.output.open()
         completionHandler(streamDelegate.boundStreams.input)
    }
 

@@ -104,12 +104,27 @@ internal class TNLog {
                             bytesProcessed: Int,
                             totalBytes: Int,
                             progress: Float) {
-        guard request?.configuration.verbose == true else { return }
+        guard let request = request else { return }
+        guard request.configuration.verbose == true else { return }
+        DispatchQueue.main.async {
 
-        print(String(format: "⌛️ Bytes processed: %d of %d, Progress: %f",
-                     bytesProcessed,
-                     totalBytes,
-                     progress))
+            var action = ""
+
+            switch request.requestType {
+            case .upload:
+                action = "sent"
+            case .download:
+                action = "received"
+            case .data:
+                action = "processed"
+            }
+
+            print(String(format: "⌛️ Bytes %@: %d of %d, Progress: %f",
+                         action,
+                         bytesProcessed,
+                         totalBytes,
+                         progress))
+            }
     }
 
     static func printSimpleErrorIfNeeded(_ tnError: TNError?) {

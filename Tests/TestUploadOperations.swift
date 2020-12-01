@@ -169,7 +169,8 @@ class TestUploadOperations: XCTestCase {
 
         router.request(for: .fileUpload(url: URL(string: "http://www.google.com")!,
                                         param: "tsttt"))
-            .startUpload(queue: queue, responseType: FileResponse.self,
+            .startUpload(queue: queue,
+                         responseType: FileResponse.self,
                             progressUpdate: nil,
                          onSuccess: { _ in
                             expectation.fulfill()
