@@ -58,6 +58,10 @@
 		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
+		F3A0BC0F25769385005139D5 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* Environment.swift */; };
+		F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC12257693D2005139D5 /* AppDelegate.swift */; };
+		F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC1B25769453005139D5 /* CityRoute.swift */; };
+		F3A0BC24257694F7005139D5 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC23257694F7005139D5 /* City.swift */; };
 		F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
@@ -156,6 +160,10 @@
 		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
+		F3A0BC07257692E6005139D5 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F3A0BC12257693D2005139D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3A0BC1B25769453005139D5 /* CityRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRoute.swift; sourceTree = "<group>"; };
+		F3A0BC23257694F7005139D5 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNFileStreamer.swift; sourceTree = "<group>"; };
 		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
@@ -289,6 +297,7 @@
 				F3F9709425758C0B0045138A /* CityView.swift */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
+				F3A0BC12257693D2005139D5 /* AppDelegate.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -371,9 +380,36 @@
 			name = Middlewares;
 			sourceTree = "<group>";
 		};
+		F3A0BC06257692D7005139D5 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0BC22257694E2005139D5 /* Models */,
+				F3A0BC21257694DC005139D5 /* Routers */,
+				F3A0BC07257692E6005139D5 /* Environment.swift */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
+		F3A0BC21257694DC005139D5 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0BC1B25769453005139D5 /* CityRoute.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
+		F3A0BC22257694E2005139D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0BC23257694F7005139D5 /* City.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F3D16EB32575285600F7B523 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				F3A0BC06257692D7005139D5 /* Communication */,
 				F3556078257527C20047D46D /* Shared */,
 				F3D16EB42575288100F7B523 /* Supporting Files */,
 			);
@@ -658,8 +694,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
+				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
+				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityView.swift in Sources */,
+				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
+				F3A0BC24257694F7005139D5 /* City.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

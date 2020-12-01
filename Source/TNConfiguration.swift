@@ -46,6 +46,9 @@ public class TNConfiguration {
     public var useMockData: Bool?
     /// Specifies a delay when mock data is used.
     public var mockDelay: TNMockDelayType?
+    /// Specifies a key decoding strategy. Take a look
+    /// at: https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy
+    public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy?
 
     /// Request middlewares
     public var requestMiddlewares: [TNRequestMiddlewareProtocol]?
@@ -102,6 +105,7 @@ extension TNConfiguration: NSCopying {
         configuration.mockDataBundle = mockDataBundle
         configuration.mockDelay = mockDelay
         configuration.useMockData = useMockData
+        configuration.keyDecodingStrategy = keyDecodingStrategy
         return configuration
     }
 }
@@ -118,6 +122,7 @@ extension TNConfiguration {
                                mockDelay: TNMockDelayType(min: 0.01, max: 0.07))
     }
 
+    // swiftlint:disable cyclomatic_complexity
     static func override(configuration: TNConfiguration,
                          with overrideConfiguration: TNConfiguration)
                 -> TNConfiguration {
@@ -158,7 +163,9 @@ extension TNConfiguration {
         if let requestMiddlewares = overrideConfiguration.requestMiddlewares {
             clone.requestMiddlewares = requestMiddlewares
         }
-
+        if let keyDecodingStrategy = overrideConfiguration.keyDecodingStrategy {
+            clone.keyDecodingStrategy = keyDecodingStrategy
+        }
         return clone
     }
 }

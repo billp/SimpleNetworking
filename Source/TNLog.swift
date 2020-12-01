@@ -20,13 +20,20 @@
 import Foundation
 
 internal class TNLog {
+    // swiftlint:disable function_body_length
     static func logRequest(request: TNRequest?,
                            data: Data?,
                            urlResponse: URLResponse?,
                            tnError: TNError?) {
         guard let request = request else { return }
-        guard request.configuration.verbose == true else { return }
-        guard let urlRequest = try? request.asRequest() else { return }
+        guard request.configuration.verbose == true else {
+            TNLog.printSimpleErrorIfNeeded(tnError)
+            return
+        }
+        guard let urlRequest = try? request.asRequest() else {
+            TNLog.printSimpleErrorIfNeeded(tnError)
+            return
+        }
 
         let url = urlRequest.url?.absoluteString ?? "n/a"
         let headers = urlRequest.allHTTPHeaderFields
@@ -90,5 +97,11 @@ internal class TNLog {
                      bytesProcessed,
                      totalBytes,
                      progress))
+    }
+
+    static func printSimpleErrorIfNeeded(_ tnError: TNError?) {
+        if let localizedError = tnError?.localizedDescription {
+            print(String(format: "❌ Error: %@", localizedError))
+        }
     }
 }

@@ -60,7 +60,7 @@ extension TNError: LocalizedError {
         case .invalidURL:
             return NSLocalizedString("The URL is invalid", comment: "TNError")
         case .environmentNotSet:
-            return NSLocalizedString("Environment not set, use TNEnvironment.set(YOUR_ENVIRONMENT)", comment: "TNError")
+            return NSLocalizedString("Environment not set, add the 'TNEnvironment.set(<Environment>)' method call in your AppDelegate application(_:didFinishLaunchingWithOptions:) method.", comment: "TNError")
         case .invalidParams:
             return NSLocalizedString("The parameters are not valid", comment: "TNError")
         case .responseInvalidImageData:

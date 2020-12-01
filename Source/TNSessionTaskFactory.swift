@@ -42,6 +42,11 @@ class TNSessionTaskFactory {
             tnRequest.handleDataTaskFailure(with: nil,
                                             urlResponse: nil,
                                             tnError: tnError)
+
+            TNLog.logRequest(request: tnRequest,
+                             data: nil,
+                             urlResponse: nil,
+                             tnError: tnError)
             return nil
         }
 
