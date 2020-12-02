@@ -29,6 +29,7 @@ class TestTNConfiguration: XCTestCase {
         conf.requestBodyType = .JSON
         conf.certificateData = [NSData()]
         conf.headers = ["test": "123", "test2": "abcdefg"]
+        conf.keyDecodingStrategy = .convertFromSnakeCase
 
         return conf
     }()
@@ -41,6 +42,7 @@ class TestTNConfiguration: XCTestCase {
         conf.requestBodyType = .xWWWFormURLEncoded
         conf.certificateData = [NSData()]
         conf.headers = ["test": "test", "afb": "fff"]
+        conf.keyDecodingStrategy = .useDefaultKeys
 
         return conf
     }()
@@ -65,7 +67,6 @@ class TestTNConfiguration: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
         TNEnvironment.set(Env.test)
     }
 
@@ -77,15 +78,19 @@ class TestTNConfiguration: XCTestCase {
     func testEnvConfiguration() {
         let request = router.request(for: .testHeaders)
         let reqConf = request.configuration
-        let envConf = request.configuration
 
-        XCTAssert(reqConf.verbose == envConf.verbose)
-        XCTAssert(reqConf.cachePolicy == envConf.cachePolicy)
-        XCTAssert(reqConf.timeoutInterval == envConf.timeoutInterval)
-        XCTAssert(reqConf.requestBodyType == envConf.requestBodyType)
-        XCTAssert(reqConf.certificateData == envConf.certificateData)
-        XCTAssert(reqConf.verbose == envConf.verbose)
-        XCTAssert(reqConf.headers == envConf.headers)
+        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.cachePolicy == TestTNConfiguration.envConfiguration.cachePolicy)
+        XCTAssert(reqConf.timeoutInterval == TestTNConfiguration.envConfiguration.timeoutInterval)
+        XCTAssert(reqConf.requestBodyType == TestTNConfiguration.envConfiguration.requestBodyType)
+        XCTAssert(reqConf.certificateData == TestTNConfiguration.envConfiguration.certificateData)
+        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.headers == TestTNConfiguration.envConfiguration.headers)
+        if case .convertFromSnakeCase = reqConf.keyDecodingStrategy {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
     }
 
     func testRouteConfiguration() {
@@ -106,5 +111,10 @@ class TestTNConfiguration: XCTestCase {
         XCTAssert(reqConf.certificateData == routeConf.certificateData)
         XCTAssert(reqConf.verbose == routeConf.verbose)
         XCTAssert(reqConf.headers == allHeaders)
+        if case .useDefaultKeys = reqConf.keyDecodingStrategy {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
     }
 }

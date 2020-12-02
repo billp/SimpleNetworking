@@ -49,7 +49,8 @@ public class TNConfiguration {
     /// Specifies a key decoding strategy. Take a look
     /// at: https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy
     public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy?
-
+    /// Error handlers that will be used as fallback after request failure.
+    public var errorHandlers: [TNErrorHandlerProtocol]?
     /// Request middlewares
     public var requestMiddlewares: [TNRequestMiddlewareProtocol]?
 
@@ -63,7 +64,9 @@ public class TNConfiguration {
                 headers: [String: String]? = nil,
                 mockDataBundle: Bundle? = nil,
                 useMockData: Bool? = nil,
-                mockDelay: TNMockDelayType? = nil) {
+                mockDelay: TNMockDelayType? = nil,
+                keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil,
+                errorHandlers: [TNErrorHandlerProtocol]? = nil) {
 
         self.cachePolicy = cachePolicy
         self.timeoutInterval = timeoutInterval
@@ -73,6 +76,8 @@ public class TNConfiguration {
         self.mockDataBundle = mockDataBundle
         self.useMockData = useMockData
         self.mockDelay = mockDelay
+        self.keyDecodingStrategy = keyDecodingStrategy
+        self.errorHandlers = errorHandlers
 
         if let certPaths = certificatePaths {
             setCertificateData(with: certPaths)
@@ -106,6 +111,7 @@ extension TNConfiguration: NSCopying {
         configuration.mockDelay = mockDelay
         configuration.useMockData = useMockData
         configuration.keyDecodingStrategy = keyDecodingStrategy
+        configuration.errorHandlers = errorHandlers
         return configuration
     }
 }
@@ -165,6 +171,9 @@ extension TNConfiguration {
         }
         if let keyDecodingStrategy = overrideConfiguration.keyDecodingStrategy {
             clone.keyDecodingStrategy = keyDecodingStrategy
+        }
+        if let errorHandlers = overrideConfiguration.errorHandlers {
+            clone.errorHandlers = errorHandlers
         }
         return clone
     }

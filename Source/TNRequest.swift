@@ -303,7 +303,20 @@ open class TNRequest: TNOperation {
 
     func handleDataTaskFailure(with data: Data?,
                                urlResponse: URLResponse?,
-                               tnError: TNError?) {
+                               tnError: TNError,
+                               onFailure: TNFailureCallback?) {
+        onFailure?(tnError, data)
+
+        configuration.errorHandlers?.forEach({ errorHandler in
+            if errorHandler.shouldHandleRequestFailure(withResponse: data,
+                                                       error: tnError,
+                                                       request: self) {
+                errorHandler.requestFailed(withResponse: data,
+                                           error: tnError,
+                                           request: self)
+            }
+        })
+
         switch currentQueue.failureMode {
         case .continue:
             break

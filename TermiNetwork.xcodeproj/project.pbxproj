@@ -23,6 +23,8 @@
 		F3116AC32460A91B00DFE453 /* TNMultipartFormDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AC22460A91B00DFE453 /* TNMultipartFormDataHelpers.swift */; };
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
+		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
@@ -123,6 +125,8 @@
 		F3196830243D01E1008725CE /* TermiNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermiNetwork.h; sourceTree = "<group>"; };
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
+		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
 		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
@@ -216,6 +220,7 @@
 			children = (
 				F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */,
 				F3116AA82460A06600DFE453 /* TNRequestMiddlewareProtocol.swift */,
+				F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -283,6 +288,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F32195B625783EBB000941F1 /* ErrorHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */,
+			);
+			name = ErrorHandlers;
+			sourceTree = "<group>";
+		};
 		F32C3D14243E49D0004497BC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,6 +318,7 @@
 		F3850C78243D103700F7CC13 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F32195B625783EBB000941F1 /* ErrorHandlers */,
 				F3F48286245EBE6800656449 /* Data Operations */,
 				F397EC97244F60E10082E12D /* Middlewares */,
 				F32C3D14243E49D0004497BC /* Supporting Files */,
@@ -655,6 +669,7 @@
 				F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */,
 				F3850CAE243D104900F7CC13 /* TNConfiguration.swift in Sources */,
 				F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */,
+				F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */,
 				F3116AA52460A04B00DFE453 /* TNRequestHelpers.swift in Sources */,
 				F3116ABB2460A09E00DFE453 /* TNRequest+DataOperations.swift in Sources */,
 				F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */,
@@ -674,6 +689,7 @@
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,
 				F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */,
+				F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */,
 				F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */,
 				F3850C8B243D103700F7CC13 /* APIRoute.swift in Sources */,
 				F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */,

@@ -38,10 +38,10 @@ class TNSessionTaskFactory {
                 return nil
             }
 
-            onFailure?(tnError, nil)
             tnRequest.handleDataTaskFailure(with: nil,
                                             urlResponse: nil,
-                                            tnError: tnError)
+                                            tnError: tnError,
+                                            onFailure: onFailure)
             return nil
         }
 
@@ -63,10 +63,10 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
-                                                tnError: tnError)
+                                                tnError: tnError,
+                                                onFailure: onFailure)
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
@@ -121,10 +121,10 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
-                                                tnError: tnError)
+                                                tnError: tnError,
+                                                onFailure: onFailure)
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
@@ -156,10 +156,10 @@ class TNSessionTaskFactory {
                 return nil
             }
 
-            onFailure?(tnError, nil)
             tnRequest.handleDataTaskFailure(with: nil,
                                             urlResponse: nil,
-                                            tnError: tnError)
+                                            tnError: tnError,
+                                            onFailure: onFailure)
             return nil
         }
 
@@ -172,10 +172,10 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                onFailure?(tnError, dataResult.data)
                 tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                 urlResponse: nil,
-                                                tnError: tnError)
+                                                tnError: tnError,
+                                                onFailure: onFailure)
             } else {
                 if let path = url?.path {
                     do {
@@ -183,10 +183,10 @@ class TNSessionTaskFactory {
                         completionHandler?(dataResult.data, urlResponse)
                     } catch let error {
                         let tnError = TNError.downloadedFileCannotBeSaved(error)
-                        onFailure?(tnError, dataResult.data)
                         tnRequest.handleDataTaskFailure(with: dataResult.data,
                                                         urlResponse: nil,
-                                                        tnError: tnError)
+                                                        tnError: tnError,
+                                                        onFailure: onFailure)
                         return
                     }
                 }

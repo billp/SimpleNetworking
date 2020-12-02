@@ -42,10 +42,10 @@ extension TNRequest {
                                                         self.configuration.keyDecodingStrategy) as T
             } catch let error {
                 let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
-                onFailure?(tnError, data)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: urlResponse,
-                                           tnError: tnError)
+                                           tnError: tnError,
+                                           onFailure: onFailure)
                 return
             }
 
@@ -54,10 +54,10 @@ extension TNRequest {
                                          urlResponse: urlResponse,
                                          tnError: nil)
         }, onFailure: { tnError, data in
-            onFailure?(tnError, data)
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError)
+                                       tnError: tnError,
+                                       onFailure: onFailure)
         })
 
         currentQueue.addOperation(self)
@@ -82,10 +82,10 @@ extension TNRequest {
 
             if image == nil {
                 let tnError = TNError.responseInvalidImageData
-                onFailure?(.responseInvalidImageData, data)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: nil,
-                                           tnError: tnError)
+                                           tnError: tnError,
+                                           onFailure: onFailure)
             } else {
                 onSuccess?(image ?? T())
                 self.handleDataTaskCompleted(with: data,
@@ -93,10 +93,10 @@ extension TNRequest {
                                              tnError: nil)
             }
         }, onFailure: { tnError, data in
-            onFailure?(tnError, data)
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError)
+                                       tnError: tnError,
+                                       onFailure: onFailure)
         })
 
         currentQueue.addOperation(self)
@@ -125,18 +125,18 @@ extension TNRequest {
                                                  tnError: nil)
                 } else {
                     let tnError = TNError.cannotConvertToString
-                    onFailure?(tnError, data)
                     self.handleDataTaskFailure(with: data,
                                                urlResponse: nil,
-                                               tnError: tnError)
+                                               tnError: tnError,
+                                               onFailure: onFailure)
                 }
 
             }
         }, onFailure: { tnError, data in
-            onFailure?(tnError, data)
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError)
+                                       tnError: tnError,
+                                       onFailure: onFailure)
         })
 
         currentQueue.addOperation(self)
@@ -164,10 +164,10 @@ extension TNRequest {
                                              tnError: nil)
             }
         }, onFailure: { tnError, data in
-            onFailure?(tnError, data)
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError)
+                                       tnError: tnError,
+                                       onFailure: onFailure)
         })
 
         currentQueue.addOperation(self)

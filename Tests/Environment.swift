@@ -43,6 +43,7 @@ enum Environment: TNEnvironmentProtocol {
                                          requestBodyType: .xWWWFormURLEncoded)
             config.verbose = true
             config.headers = ["Custom-Header": "dsadas"]
+            config.errorHandlers = [GlobalErrorHandler()]
             return config
         }()
 
