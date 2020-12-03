@@ -33,11 +33,12 @@ extension TNRequest {
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    @discardableResult
     public func startUpload<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                           responseType: T.Type,
                                           progressUpdate: TNProgressCallbackType?,
                                           onSuccess: TNSuccessCallback<T>?,
-                                          onFailure: TNFailureCallback?) {
+                                          onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
@@ -69,6 +70,7 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 
     /// Adds a request to a queue and starts its execution for Decodable types.
@@ -80,11 +82,12 @@ extension TNRequest {
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    @discardableResult
     public func startDownload(queue: TNQueue? = TNQueue.shared,
                               filePath: String,
                               progressUpdate: TNProgressCallbackType?,
                               onSuccess: TNDownloadSuccessCallback?,
-                              onFailure: TNFailureCallback?) {
+                              onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeDownloadTask(with: self,
@@ -103,5 +106,6 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 }

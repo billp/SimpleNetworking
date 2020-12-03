@@ -21,7 +21,6 @@ import XCTest
 import TermiNetwork
 
 class TestTNErrors: XCTestCase {
-
     var router: TNRouter<APIRoute> {
        return TNRouter<APIRoute>()
     }

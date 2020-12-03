@@ -27,10 +27,11 @@ extension TNRequest {
     ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    @discardableResult
     public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                     responseType: T.Type,
                                     onSuccess: TNSuccessCallback<T>?,
-                                    onFailure: TNFailureCallback?) {
+                                    onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -61,6 +62,7 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 
     /// Adds a request to a queue and starts its execution for UIImage responses.
@@ -70,10 +72,11 @@ extension TNRequest {
     ///     - responseType: The response type is UIImage.self.
     ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    @discardableResult
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,
                                   onSuccess: TNSuccessCallback<T>?,
-                                  onFailure: TNFailureCallback?) {
+                                  onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -100,6 +103,7 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 
     /// Adds a request to a queue and starts its execution for String responses.
@@ -109,10 +113,11 @@ extension TNRequest {
     ///    - responseType: The response type is String.self.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>
+    @discardableResult
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: String.Type,
                       onSuccess: TNSuccessCallback<String>?,
-                      onFailure: TNFailureCallback?) {
+                      onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -140,6 +145,7 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 
     /// Adds a request to a queue and starts its execution for Data responses.
@@ -149,10 +155,11 @@ extension TNRequest {
     ///     - responseType: The response type is Data.self.
     ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>
     ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>
+    @discardableResult
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: Data.Type,
                       onSuccess: TNSuccessCallback<Data>?,
-                      onFailure: TNFailureCallback?) {
+                      onFailure: TNFailureCallback?) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -171,5 +178,6 @@ extension TNRequest {
         })
 
         currentQueue.addOperation(self)
+        return self
     }
 }
