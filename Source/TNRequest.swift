@@ -305,7 +305,6 @@ open class TNRequest: TNOperation {
                                urlResponse: URLResponse?,
                                tnError: TNError,
                                onFailure: TNFailureCallback?) {
-        onFailure?(tnError, data)
 
         configuration.errorHandlers?.forEach({ errorHandler in
             if errorHandler.shouldHandleRequestFailure(withResponse: data,
@@ -316,6 +315,8 @@ open class TNRequest: TNOperation {
                                            request: self)
             }
         })
+
+        onFailure?(tnError, data)
 
         switch currentQueue.failureMode {
         case .continue:

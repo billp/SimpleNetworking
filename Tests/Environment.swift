@@ -80,7 +80,8 @@ enum Environment: TNEnvironmentProtocol {
             return TNEnvironment(scheme: .http,
                                  host: "localhostt",
                                  suffix: nil,
-                                 port: 1234)
+                                 port: 1234,
+                                 configuration: requestConfiguration2)
         case .google:
             return TNEnvironment(scheme: .https, host: "google.com")
         }

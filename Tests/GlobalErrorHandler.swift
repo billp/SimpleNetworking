@@ -10,11 +10,14 @@ import Foundation
 import TermiNetwork
 
 class GlobalErrorHandler: TNErrorHandlerProtocol {
-    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+    static var failed = false
+    static var skip = true
 
+    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+        GlobalErrorHandler.failed = true
     }
 
     func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
-        true
+        !GlobalErrorHandler.skip
     }
 }
