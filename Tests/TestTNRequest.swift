@@ -98,7 +98,7 @@ class TestTNRequest: XCTestCase {
                                            value2: 3,
                                            value3: 5.13453124189,
                                            value4: "test",
-                                           value5: nil)).start(responseType: TestParam.self, onSuccess: { object in
+                                           value5: nil)).start(responseType: TestParams.self, onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&
                 object.param3 == "5.13453124189" &&
@@ -124,7 +124,7 @@ class TestTNRequest: XCTestCase {
                                            value3: 5.13453124189,
                                            value4: "τεστ",
                                            value5: nil))
-            .start(responseType: TestParam.self,
+            .start(responseType: TestParams.self,
                    onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&
@@ -151,7 +151,7 @@ class TestTNRequest: XCTestCase {
                                                               value3: 5.13453124189,
                                                               value4: "test",
                                                               value5: nil))
-            .start(responseType: TestParam.self,
+            .start(responseType: TestParams.self,
                    onSuccess: { object in
             failed = !(object.param1 == "true" &&
                 object.param2 == "3" &&

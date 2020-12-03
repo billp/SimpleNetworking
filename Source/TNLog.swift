@@ -35,7 +35,10 @@ internal class TNLog {
                 guard let request = request else { return }
         guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else {
-            TNLog.printSimpleErrorIfNeeded(tnError)
+            if !request.urlRequestLogInitiated {
+                request.urlRequestLogInitiated = true
+                TNLog.printSimpleErrorIfNeeded(tnError)
+            }
             return
         }
         DispatchQueue.main.async {

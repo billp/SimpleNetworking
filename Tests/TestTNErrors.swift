@@ -118,7 +118,7 @@ class TestTNErrors: XCTestCase {
                                                     }, onFailure: { _, _ in
                                                         expectation.fulfill()
                                                         failed = true
-                                                    })
+                                                    }).start()
 
         wait(for: [expectation], timeout: 10)
 
@@ -232,7 +232,7 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "Test Response Cannot Deserialize")
         var failed = true
 
-        router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: TestParam.self,
+        router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: TestParams.self,
                                                                                 onSuccess: { _ in
             failed = true
             expectation.fulfill()
@@ -261,7 +261,7 @@ class TestTNErrors: XCTestCase {
                                            value2: 3,
                                            value3: 1.32,
                                            value4: "Test",
-                                           value5: nil)).start(responseType: TestParam.self, onSuccess: { _ in
+                                           value5: nil)).start(responseType: TestParams.self, onSuccess: { _ in
             failed = false
             expectation.fulfill()
         }, onFailure: { error, _ in

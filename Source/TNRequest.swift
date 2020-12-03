@@ -60,6 +60,7 @@ open class TNRequest: TNOperation {
     internal var multipartBoundary: String?
     internal var multipartFormDataStream: TNMultipartFormDataStream?
     internal var requestType: RequestType = .data
+    internal var urlRequestLogInitiated: Bool = false
 
     // MARK: Public properties
 

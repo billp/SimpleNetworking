@@ -1,4 +1,4 @@
-// TNQueue.swift
+// Decodable+Transformer.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -17,21 +17,29 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
 import Foundation
 
-struct TestParams: Codable {
+public protocol TNTransformerProtocol: NSObject {
+    associatedtype FromType
+    associatedtype ToType
 
-    let param1: String
-    let param2: String
-    let param3: String
-    let param4: String
-    let param5: String?
+    func transform(_ object: FromType) -> ToType?
+}
 
-    enum CodingKeys: String, CodingKey {
-        case param1 = "key1"
-        case param2 = "key2"
-        case param3 = "key3"
-        case param4 = "key4"
-        case param5 = "key5"
+open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
+    open func transform(_ object: FromType) -> ToType? {
+        return nil
+    }
+}
+
+public extension Decodable {
+    func transform<F, T>(from fromType: F.Type,
+                         to toType: T.Type,
+                         transformer: TNTransformer<F, T>) -> T? {
+        guard let object = self as? F else {
+            return nil
+        }
+        return transformer.transform(object)
     }
 }
