@@ -17,17 +17,24 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 import Foundation
 
-public protocol TNTransformerProtocol: NSObject {
+protocol TNTransformerProtocol: NSObject {
     associatedtype FromType
     associatedtype ToType
 
     func transform(_ object: FromType) -> ToType?
 }
 
+/// Use this class as super class to create your transformers.
+/// You should pass FromType and ToType in your subclass definition.
+/// Those types are used in transform function.
 open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
+    /// This is the default transform method. This method should be overriden by subclass
+    ///
+    /// - parameters:
+    ///    - object: The object that will be transformed
+    /// - returns: The transformed object
     open func transform(_ object: FromType) -> ToType? {
         return nil
     }

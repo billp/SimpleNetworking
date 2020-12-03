@@ -11,7 +11,7 @@ import TermiNetwork
 
 @main
 struct TermiNetworkExamplesApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) weak var appDelegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {
