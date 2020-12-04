@@ -21,15 +21,14 @@ class TestTNTransformers: XCTestCase {
     func testGetParamsWithTransformer() {
         let expectation = XCTestExpectation(description: "Test get params")
         var failed = true
-        var newModel: TestModel?
+        var testModel: TestModel?
         router.request(for: .testGetParams(value1: true,
                                            value2: 3,
                                            value3: 5.13453124189,
                                            value4: "test",
-                                           value5: nil)).start(responseType: TestParams.self, onSuccess: { object in
-            newModel = object.transform(from: TestParams.self,
-                                        to: TestModel.self,
-                                        transformer: TestTransformer())
+                                           value5: nil)).start(transformer: TestTransformer(),
+                                                               onSuccess: { object in
+            testModel = object
             failed = false
             expectation.fulfill()
         }, onFailure: { _, _ in
@@ -38,7 +37,7 @@ class TestTNTransformers: XCTestCase {
 
         wait(for: [expectation], timeout: 10)
 
-        XCTAssert(!failed && newModel?.name == "true")
+        XCTAssert(!failed && testModel?.name == "true")
     }
 
 }

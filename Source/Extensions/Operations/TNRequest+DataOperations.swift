@@ -65,6 +65,44 @@ extension TNRequest {
         return self
     }
 
+    @discardableResult
+    public func start<FromType: Decodable, ToType>(queue: TNQueue? = TNQueue.shared,
+                                                   transformer: TNTransformer<FromType, ToType>,
+                                                   onSuccess: TNSuccessCallback<ToType>?,
+                                                   onFailure: TNFailureCallback?) -> TNRequest {
+        currentQueue = queue ?? TNQueue.shared
+
+        dataTask = TNSessionTaskFactory.makeDataTask(with: self,
+                                                     completionHandler: { data, urlResponse in
+            let object: FromType!
+
+            do {
+                object = try data.deserializeJSONData(withKeyDecodingStrategy:
+                                                        self.configuration.keyDecodingStrategy) as FromType
+            } catch let error {
+                let tnError = TNError.cannotDeserialize(String(describing: FromType.self), error)
+                self.handleDataTaskFailure(with: data,
+                                           urlResponse: urlResponse,
+                                           tnError: tnError,
+                                           onFailure: onFailure)
+                return
+            }
+
+            onSuccess?(object.transform(with: transformer)!)
+            self.handleDataTaskCompleted(with: data,
+                                         urlResponse: urlResponse,
+                                         tnError: nil)
+        }, onFailure: { tnError, data in
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
+                                       tnError: tnError,
+                                       onFailure: onFailure)
+        })
+
+        currentQueue.addOperation(self)
+        return self
+    }
+
     /// Adds a request to a queue and starts its execution for UIImage responses.
     ///
     /// - parameters:

@@ -41,10 +41,8 @@ open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
 }
 
 public extension Decodable {
-    func transform<F, T>(from fromType: F.Type,
-                         to toType: T.Type,
-                         transformer: TNTransformer<F, T>) -> T? {
-        guard let object = self as? F else {
+    func transform<FromType, ToType>(with transformer: TNTransformer<FromType, ToType>) -> ToType? {
+        guard let object = self as? FromType else {
             return nil
         }
         return transformer.transform(object)
