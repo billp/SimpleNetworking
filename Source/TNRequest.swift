@@ -52,7 +52,6 @@ open class TNRequest: TNOperation {
     internal var method: TNMethod!
     internal var currentQueue: TNQueue!
     internal var dataTask: URLSessionTask?
-    //internal var urlResponse: URLResponse?
     internal var params: [String: Any?]?
     internal var path: String
     internal var pathType: SNPathType = .relative
@@ -96,24 +95,15 @@ open class TNRequest: TNOperation {
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
-    /// Initializes a TNRequest request.
-    ///
-    /// parameters:
-    ///  - method: The http method of request, e.g. .get, .post, .head, etc.
-    ///  - url: The URL of the request.
-    ///  - configuration: A TNConfiguration object.
-    convenience init(method: TNMethod, url: String,
-                     configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()) {
-        self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
-    }
-
     /// Initializes a TNRequest request
     ///
     /// - parameters:
     ///     - method: The http method of request, e.g. .get, .post, .head, etc.
     ///     - url: The URL of the request
     ///     - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-    convenience init(method: TNMethod, url: String, headers: [String: String]? = nil) {
+    convenience init(method: TNMethod,
+                     url: String,
+                     headers: [String: String]? = nil) {
         self.init(method: method, url: url, headers: nil, params: nil)
     }
 

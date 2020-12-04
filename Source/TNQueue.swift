@@ -109,6 +109,9 @@ open class TNQueue: OperationQueue {
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
     ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
     override open func addOperation(_ operation: Operation) {
+        guard !operation.isExecuting && !operation.isFinished else {
+            return
+        }
         if operationCount == 0 {
             beforeAllRequestsCallback?()
         }

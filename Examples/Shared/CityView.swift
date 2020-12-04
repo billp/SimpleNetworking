@@ -16,7 +16,7 @@ struct CityView: View {
 
     var body: some View {
         if cities.count == 0 {
-            VStack() {
+            VStack {
                 Spacer()
                 ProgressView()
                 Spacer()
@@ -24,6 +24,8 @@ struct CityView: View {
         }
 
         List(cities, id: \.id) { city in
+
+            TNImage(withUrl: TNEnvironment.current.description + city.thumb).frame(width: 80, height: 80)
             Text(city.name)
         }
         .navigationTitle("City Grid")
@@ -40,7 +42,7 @@ struct CityView: View {
 
     func loadCities() {
         request = router.request(for: .cities).start(transformer: CitiesTransformer()) { cities in
-            self.cities = cities
+            self.cities = cities + cities + cities
         }
     }
 }
