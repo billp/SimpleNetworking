@@ -42,11 +42,6 @@ class TestUploadOperations: XCTestCase {
         super.tearDown()
     }
 
-    class FileResponse: Decodable {
-        var success: Bool
-        var checksum: String
-    }
-
     func testDataUpload() {
         let expectation = XCTestExpectation(description: "testDataUpload")
         var failed = true
@@ -66,6 +61,36 @@ class TestUploadOperations: XCTestCase {
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
                 failed = !(response.success && response.checksum == checksum)
+                expectation.fulfill()
+            }, onFailure: { (error, _) in
+                print(String(describing: error.localizedDescription))
+                expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 30)
+
+        XCTAssert(!failed && completed)
+    }
+
+    func testDataUploadWithTransformer() {
+        let expectation = XCTestExpectation(description: "testDataUploadWithTransformer")
+        var failed = true
+        var completed = false
+
+        guard let filePath = Bundle(for: TestUploadOperations.self).path(forResource: "photo",
+                                                                         ofType: "jpg"),
+        let uploadData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
+            assert(false)
+        }
+
+        let checksum = TestHelpers.sha256(url: URL(fileURLWithPath: filePath))
+
+        router.request(for: .dataUpload(data: uploadData, param: "bhbbrbrbrhbh"))
+            .startUpload(transformer: TestUploadTrasnformer(),
+                         progressUpdate: { bytesSent, totalBytes, progress in
+                completed = bytesSent == totalBytes && progress == 1
+            }, onSuccess: { response in
+                failed = !(response.name == checksum)
                 expectation.fulfill()
             }, onFailure: { (error, _) in
                 print(String(describing: error.localizedDescription))

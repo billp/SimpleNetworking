@@ -50,7 +50,8 @@ internal class TNLog {
                 print("🗂 Uses mock data")
             }
             print(String(format: "🎛️ Method: %@", request.method.rawValue.uppercased()))
-            if case .data = request.requestType {
+            if case .data = request.requestType,
+               case .started = state {
                 print(String(format: "🔮 CURL: %@", urlRequest.curlString))
             }
 
@@ -58,16 +59,27 @@ internal class TNLog {
                 print("🔒 Pinning Enabled")
             }
 
-            if let headers = headers, headers.keys.count > 0 {
-                print(String(format: "📃 Request Headers: %@", headers.description))
+            switch state {
+            case .started:
+                if let headers = headers, headers.keys.count > 0 {
+                    print(String(format: "📃 Request Headers: %@", headers.description))
+                }
+            case .finished:
+                if let httpURLResponse = urlResponse as? HTTPURLResponse {
+                    print(String(format: "📃 Response Headers: %@",
+                                 (httpURLResponse.allHeaderFields as? [String: String])?.description ?? ""))
+                }
+            default:
+                break
             }
+
             if let params = request.params as [String: AnyObject]?,
                 params.keys.count > 0,
                 request.method != .get {
                 if case .upload = request.requestType {
-                    print("🗃️ Request Body: [multipart/form-data]")
+                    print("🗃️ Request Body: multipart/form-data")
                 } else if request.configuration.requestBodyType == .JSON {
-                    print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "[unknown]")))
+                    print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "unknown")))
                 } else {
                     print(String(format: "🗃️ Request Body: %@", params.description))
                 }

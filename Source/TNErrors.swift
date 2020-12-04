@@ -53,6 +53,10 @@ public enum TNError: Error {
     /// Thrown when the file cannot be saved to destination for some reason.
     /// It contains the Error with additional information.
     case downloadedFileCannotBeSaved(Error)
+    /// Thrown when the transform method is not implemented (overriden in subclass).
+    case transformerNotImplemented
+    /// Thrown when the transformation failed for some reason, e.g. Incompatible Types
+    case transformationFailed
 }
 
 extension TNError: LocalizedError {
@@ -94,6 +98,10 @@ extension TNError: LocalizedError {
             return String(format: NSLocalizedString("File path %@ is not valid.", comment: "TNError"), path)
         case .downloadedFileCannotBeSaved(let error):
             return String(format: NSLocalizedString("File save error: %@.", comment: "TNError"), error.localizedDescription)
+        case .transformerNotImplemented:
+            return NSLocalizedString("Transformer not implemented.", comment: "TNError")
+        case .transformationFailed:
+            return NSLocalizedString("Transormation Failed.", comment: "TNError")
         }
     }
 }

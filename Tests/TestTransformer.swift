@@ -9,13 +9,8 @@
 import Foundation
 import TermiNetwork
 
-class TestModel: NSObject {
-    var name: String?
-    override init() { }
-}
-
 class TestTransformer: TNTransformer<TestParams, TestModel> {
-    override func transform(_ object: TestParams) -> TestModel? {
+    override func transform(_ object: TestParams) -> TestModel {
         let model = TestModel()
         model.name = object.param1
 

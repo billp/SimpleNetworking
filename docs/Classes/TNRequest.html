@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (83% documented)
+         (84% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -68,6 +68,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TNRouter.html">TNRouter</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TNTransformer.html">TNTransformer</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -100,6 +103,9 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Decodable.html">Decodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
               </li>
             </ul>
@@ -109,6 +115,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TNEnvironmentProtocol.html">TNEnvironmentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TNRequestMiddlewareProtocol.html">TNRequestMiddlewareProtocol</a>
@@ -403,9 +412,9 @@ them to url, otherwise it is seting them as request body.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
+                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
                     <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -420,10 +429,11 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                                 <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
                                 <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
-                                <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                                <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -482,15 +492,109 @@ them to url, otherwise it is seting them as request body.</li>
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7UIImageCRbzlF"></a>
+                    <a name="/s:12TermiNetwork9TNRequestC5start5queue11transformer9onSuccess0G7FailureAcA7TNQueueCSg_AA13TNTransformerCyxq_Gyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:transformer:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue11transformer9onSuccess0G7FailureAcA7TNQueueCSg_AA13TNTransformerCyxq_Gyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF">start(queue:<wbr>transformer:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Decodable types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">:</span> <span class="kt">Decodable</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                               <span class="nv">transformer</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNTransformer.html">TNTransformer</a></span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">,</span>
+                                               <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">ToType</span><span class="o">&gt;</span><span class="p">?,</span>
+                                               <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transformer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transformer object that handles the transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type TNSuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type TNFailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7UIImageCRbzlF"></a>
                     <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7UIImageCRbzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7UIImageCRbzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -505,10 +609,11 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">UIImage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">UIImage</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                               <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
                               <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
-                              <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                              <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -567,15 +672,19 @@ them to url, otherwise it is seting them as request body.</li>
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
+                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
                     <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -590,10 +699,11 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                   <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
                   <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?,</span>
-                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -658,9 +768,9 @@ them to url, otherwise it is seting them as request body.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF"></a>
+                    <a name="/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF"></a>
                     <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureyAA7TNQueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC5start5queue12responseType9onSuccess0H7FailureAcA7TNQueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -675,10 +785,11 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                   <span class="nv">responseType</span><span class="p">:</span> <span class="kt">Data</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
                   <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span>
-                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -743,9 +854,9 @@ them to url, otherwise it is seting them as request body.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureyAA7TNQueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
+                    <a name="/s:12TermiNetwork9TNRequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureAcA7TNQueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
                     <a name="//apple_ref/swift/Method/startUpload(queue:responseType:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureyAA7TNQueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">startUpload(queue:<wbr>responseType:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureAcA7TNQueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">startUpload(queue:<wbr>responseType:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -760,11 +871,12 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">startUpload</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">startUpload</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                                       <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
                                       <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork22TNProgressCallbackTypea">TNProgressCallbackType</a></span><span class="p">?,</span>
                                       <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
-                                      <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                                      <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -835,15 +947,19 @@ them to url, otherwise it is seting them as request body.</li>
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork9TNRequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureyAA7TNQueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
-                    <a name="//apple_ref/swift/Method/startDownload(queue:filePath:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork9TNRequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureyAA7TNQueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">startDownload(queue:<wbr>filePath:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    <a name="/s:12TermiNetwork9TNRequestC11startUpload5queue11transformer14progressUpdate9onSuccess0J7FailureAcA7TNQueueCSg_AA13TNTransformerCyxq_GySi_SiSftcSgyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/startUpload(queue:transformer:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC11startUpload5queue11transformer14progressUpdate9onSuccess0J7FailureAcA7TNQueueCSg_AA13TNTransformerCyxq_GySi_SiSftcSgyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF">startUpload(queue:<wbr>transformer:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -858,11 +974,115 @@ them to url, otherwise it is seting them as request body.</li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startDownload</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">startUpload</span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">:</span> <span class="kt">Decodable</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                                     <span class="nv">transformer</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNTransformer.html">TNTransformer</a></span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">,</span>
+                                                     <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork22TNProgressCallbackTypea">TNProgressCallbackType</a></span><span class="p">?,</span>
+                                                     <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNSuccessCallbacka">TNSuccessCallback</a></span><span class="o">&lt;</span><span class="kt">ToType</span><span class="o">&gt;</span><span class="p">?,</span>
+                                                     <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNQueue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transformer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transformer object that handles the transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a progress callback to get upload progress updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type TNSuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type TNFailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork9TNRequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureAcA7TNQueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
+                    <a name="//apple_ref/swift/Method/startDownload(queue:filePath:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork9TNRequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureAcA7TNQueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">startDownload(queue:<wbr>filePath:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Decodable types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">startDownload</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/TNQueue.html">TNQueue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
                           <span class="nv">filePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
                           <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork22TNProgressCallbackTypea">TNProgressCallbackType</a></span><span class="p">?,</span>
                           <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork25TNDownloadSuccessCallbacka">TNDownloadSuccessCallback</a></span><span class="p">?,</span>
-                          <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span></code></pre>
+                          <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">TNRequest</span></code></pre>
 
                         </div>
                       </div>
@@ -945,6 +1165,10 @@ them to url, otherwise it is seting them as request body.</li>
                           </tbody>
                         </table>
                       </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The TNRequest object.</p>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -956,7 +1180,7 @@ them to url, otherwise it is seting them as request body.</li>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-04)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

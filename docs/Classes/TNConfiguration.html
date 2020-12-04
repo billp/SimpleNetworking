@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (83% documented)
+         (84% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -68,6 +68,9 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TNRouter.html">TNRouter</a>
               </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TNTransformer.html">TNTransformer</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -100,6 +103,9 @@
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Decodable.html">Decodable</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
               </li>
             </ul>
@@ -109,6 +115,9 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TNEnvironmentProtocol.html">TNEnvironmentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Protocols/TNRequestMiddlewareProtocol.html">TNRequestMiddlewareProtocol</a>
@@ -459,6 +468,33 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12TermiNetwork15TNConfigurationC13errorHandlersSayAA22TNErrorHandlerProtocol_pGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/errorHandlers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC13errorHandlersSayAA22TNErrorHandlerProtocol_pGSgvp">errorHandlers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Error handlers that will be used as fallback after request failure.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">errorHandlers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12TermiNetwork15TNConfigurationC18requestMiddlewaresSayAA27TNRequestMiddlewareProtocol_pGSgvp"></a>
                     <a name="//apple_ref/swift/Property/requestMiddlewares" class="dashAnchor"></a>
                     <a class="token" href="#/s:12TermiNetwork15TNConfigurationC18requestMiddlewaresSayAA27TNRequestMiddlewareProtocol_pGSgvp">requestMiddlewares</a>
@@ -499,9 +535,9 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAVSd3min_Sd3maxtSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:useMockData:mockDelay:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5DelayACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAVSd3min_Sd3maxtSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePaths:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>useMockData:<wbr>mockDelay:<wbr>)</a>
+                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5Delay19keyDecodingStrategy13errorHandlersACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAXSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyvW0OSgSayAA22TNErrorHandlerProtocol_pGSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:useMockData:mockDelay:keyDecodingStrategy:errorHandlers:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle07useMockP00O5Delay19keyDecodingStrategy13errorHandlersACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAXSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyvW0OSgSayAA22TNErrorHandlerProtocol_pGSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePaths:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>useMockData:<wbr>mockDelay:<wbr>keyDecodingStrategy:<wbr>errorHandlers:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -524,7 +560,9 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
             <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">mockDataBundle</span><span class="p">:</span> <span class="kt">Bundle</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">useMockData</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">mockDelay</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15TNMockDelayTypea">TNMockDelayType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+            <span class="nv">mockDelay</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15TNMockDelayTypea">TNMockDelayType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">keyDecodingStrategy</span><span class="p">:</span> <span class="kt">JSONDecoder</span><span class="o">.</span><span class="kt">KeyDecodingStrategy</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">errorHandlers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -566,7 +604,7 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-01)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-04)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

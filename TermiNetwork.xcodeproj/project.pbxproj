@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F31126A5257A55E000775D7E /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A4257A55E000775D7E /* TestModel.swift */; };
+		F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A8257A560200775D7E /* TestUploadTransformer.swift */; };
+		F31126AD257A563600775D7E /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126AC257A563600775D7E /* FileResponse.swift */; };
 		F3116AA42460A04B00DFE453 /* TNRequestBodyGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */; };
 		F3116AA52460A04B00DFE453 /* TNRequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA32460A04B00DFE453 /* TNRequestHelpers.swift */; };
 		F3116AA92460A06600DFE453 /* TNRouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */; };
@@ -111,6 +114,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F31126A4257A55E000775D7E /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
+		F31126A8257A560200775D7E /* TestUploadTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadTransformer.swift; sourceTree = "<group>"; };
+		F31126AC257A563600775D7E /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
 		F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestBodyGenerators.swift; sourceTree = "<group>"; };
 		F3116AA32460A04B00DFE453 /* TNRequestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestHelpers.swift; sourceTree = "<group>"; };
 		F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouteProtocol.swift; sourceTree = "<group>"; };
@@ -213,6 +219,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F31126B0257A563F00775D7E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F31126A4257A55E000775D7E /* TestModel.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		F31126B1257A564700775D7E /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				F3850C7F243D103700F7CC13 /* TestParams.swift */,
+				F3850C80243D103700F7CC13 /* TestJSONParams.swift */,
+				F3850C81243D103700F7CC13 /* TestHeaders.swift */,
+				F397ECA0244F76300082E12D /* EncryptedModel.swift */,
+				F333429925792E9D0087BDBA /* ErrorModel.swift */,
+				F31126AC257A563600775D7E /* FileResponse.swift */,
+			);
+			path = Rest;
+			sourceTree = "<group>";
+		};
 		F3116AA12460A04B00DFE453 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,11 +380,8 @@
 		F3850C7E243D103700F7CC13 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F3850C7F243D103700F7CC13 /* TestParams.swift */,
-				F3850C80243D103700F7CC13 /* TestJSONParams.swift */,
-				F3850C81243D103700F7CC13 /* TestHeaders.swift */,
-				F397ECA0244F76300082E12D /* EncryptedModel.swift */,
-				F333429925792E9D0087BDBA /* ErrorModel.swift */,
+				F31126B1257A564700775D7E /* Rest */,
+				F31126B0257A563F00775D7E /* Domain */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -401,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				F387B0EC2579531200A8C0C7 /* TestTransformer.swift */,
+				F31126A8257A560200775D7E /* TestUploadTransformer.swift */,
 			);
 			name = Transformers;
 			sourceTree = "<group>";
@@ -717,6 +742,8 @@
 				F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */,
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,
+				F31126A5257A55E000775D7E /* TestModel.swift in Sources */,
+				F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */,
 				F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */,
 				F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */,
 				F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */,
@@ -725,6 +752,7 @@
 				F333429A25792E9D0087BDBA /* ErrorModel.swift in Sources */,
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,
 				F387B0ED2579531200A8C0C7 /* TestTransformer.swift in Sources */,
+				F31126AD257A563600775D7E /* FileResponse.swift in Sources */,
 				F3850C88243D103700F7CC13 /* Environment.swift in Sources */,
 				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
 				F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */,

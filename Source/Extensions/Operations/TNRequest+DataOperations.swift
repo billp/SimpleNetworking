@@ -27,6 +27,7 @@ extension TNRequest {
     ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
     @discardableResult
     public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                     responseType: T.Type,
@@ -65,6 +66,14 @@ extension TNRequest {
         return self
     }
 
+    /// Adds a request to a queue and starts its execution for Decodable types.
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///    - transformer: The transformer object that handles the transformation.
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
     @discardableResult
     public func start<FromType: Decodable, ToType>(queue: TNQueue? = TNQueue.shared,
                                                    transformer: TNTransformer<FromType, ToType>,
@@ -88,7 +97,20 @@ extension TNRequest {
                 return
             }
 
-            onSuccess?(object.transform(with: transformer)!)
+            // Transformation
+            do {
+                onSuccess?(try object.transform(with: transformer))
+            } catch let error {
+                guard let tnError = error as? TNError else {
+                    return
+                }
+                self.handleDataTaskFailure(with: data,
+                                           urlResponse: nil,
+                                           tnError: tnError,
+                                           onFailure: onFailure)
+                return
+            }
+
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
                                          tnError: nil)
@@ -110,6 +132,7 @@ extension TNRequest {
     ///     - responseType: The response type is UIImage.self.
     ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
     @discardableResult
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,

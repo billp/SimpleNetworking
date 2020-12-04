@@ -19,11 +19,11 @@
 
 import Foundation
 
-protocol TNTransformerProtocol: NSObject {
+private protocol TNTransformerProtocol: NSObject {
     associatedtype FromType
     associatedtype ToType
 
-    func transform(_ object: FromType) -> ToType?
+    func transform(_ object: FromType) throws -> ToType
 }
 
 /// Use this class as super class to create your transformers.
@@ -35,16 +35,21 @@ open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
     /// - parameters:
     ///    - object: The object that will be transformed
     /// - returns: The transformed object
-    open func transform(_ object: FromType) -> ToType? {
-        return nil
+    open func transform(_ object: FromType) throws -> ToType {
+        throw TNError.transformationFailed
     }
 }
 
 public extension Decodable {
-    func transform<FromType, ToType>(with transformer: TNTransformer<FromType, ToType>) -> ToType? {
+    /// Transforms the decodable object with the specified transformer.
+    ///
+    /// - parameters:
+    ///    - transformer: The transformer object that handles the transformation.
+    /// - returns: The transformed object
+    func transform<FromType, ToType>(with transformer: TNTransformer<FromType, ToType>) throws -> ToType {
         guard let object = self as? FromType else {
-            return nil
+            throw TNError.transformationFailed
         }
-        return transformer.transform(object)
+        return try transformer.transform(object)
     }
 }

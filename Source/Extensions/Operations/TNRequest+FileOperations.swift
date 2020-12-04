@@ -33,6 +33,7 @@ extension TNRequest {
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
     @discardableResult
     public func startUpload<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                           responseType: T.Type,
@@ -77,11 +78,74 @@ extension TNRequest {
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    ///    - transformer: The transformer object that handles the transformation.
+    ///    - progress: specifies a progress callback to get upload progress updates.
+    ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
+    ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
+    @discardableResult
+    public func startUpload<FromType: Decodable, ToType>(queue: TNQueue? = TNQueue.shared,
+                                                         transformer: TNTransformer<FromType, ToType>,
+                                                         progressUpdate: TNProgressCallbackType?,
+                                                         onSuccess: TNSuccessCallback<ToType>?,
+                                                         onFailure: TNFailureCallback?) -> TNRequest {
+        currentQueue = queue ?? TNQueue.shared
+
+        dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
+                                                       progressUpdate: progressUpdate,
+                                                       completionHandler: { data, urlResponse in
+            let object: FromType!
+
+            do {
+                object = try data.deserializeJSONData(withKeyDecodingStrategy:
+                                                        self.configuration.keyDecodingStrategy) as FromType
+            } catch let error {
+                let tnError = TNError.cannotDeserialize(String(describing: FromType.self), error)
+               self.handleDataTaskFailure(with: data,
+                                          urlResponse: urlResponse,
+                                          tnError: tnError,
+                                          onFailure: onFailure)
+               return
+            }
+
+            // Transformation
+            do {
+                onSuccess?(try object.transform(with: transformer))
+            } catch let error {
+                guard let tnError = error as? TNError else {
+                    return
+                }
+                self.handleDataTaskFailure(with: data,
+                                           urlResponse: nil,
+                                           tnError: tnError,
+                                           onFailure: onFailure)
+                return
+            }
+
+            self.handleDataTaskCompleted(with: data,
+                                        urlResponse: urlResponse,
+                                        tnError: nil)
+        }, onFailure: { tnError, data in
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
+                                       tnError: tnError,
+                                       onFailure: onFailure)
+        })
+
+        currentQueue.addOperation(self)
+        return self
+    }
+
+    /// Adds a request to a queue and starts its execution for Decodable types.
+    ///
+    /// - parameters:
+    ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
     ///    - filePath: The destination file path to save the file.
     ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
     ///    - progress: specifies a progress callback to get upload progress updates.
     ///    - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///    - onFailure: specifies a failure callback of type TNFailureCallback<T>.
+    /// - returns: The TNRequest object.
     @discardableResult
     public func startDownload(queue: TNQueue? = TNQueue.shared,
                               filePath: String,
