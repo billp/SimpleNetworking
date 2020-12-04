@@ -10,18 +10,38 @@ import SwiftUI
 import TermiNetwork
 
 struct CityView: View {
+    @State var router = TNRouter<CityRoute>()
+    @State var cities: [City] = []
+    @State var request: TNRequest?
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).onAppear(perform: loadCities)
+        if cities.count == 0 {
+            VStack() {
+                Spacer()
+                ProgressView()
+                Spacer()
+            }
+        }
+
+        List(cities, id: \.id) { city in
+            Text(city.name)
+        }
+        .navigationTitle("City Grid")
+        .onAppear(perform: onAppear)
+        .onDisappear(perform: onDisappear)
+    }
+
+    func onAppear() {
+        loadCities()
+    }
+    func onDisappear() {
+        request?.cancel()
     }
 
     func loadCities() {
-        let router = TNRouter<CityRoute>()
-        router.request(for: .cities).start(responseType: [City].self) { cities in
-            
-        } onFailure: { (error, _) in
-
+        request = router.request(for: .cities).start(transformer: CitiesTransformer()) { cities in
+            self.cities = cities
         }
-
     }
 }
 

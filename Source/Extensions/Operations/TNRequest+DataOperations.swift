@@ -32,7 +32,7 @@ extension TNRequest {
     public func start<T: Decodable>(queue: TNQueue? = TNQueue.shared,
                                     responseType: T.Type,
                                     onSuccess: TNSuccessCallback<T>?,
-                                    onFailure: TNFailureCallback?) -> TNRequest {
+                                    onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -78,7 +78,7 @@ extension TNRequest {
     public func start<FromType: Decodable, ToType>(queue: TNQueue? = TNQueue.shared,
                                                    transformer: TNTransformer<FromType, ToType>,
                                                    onSuccess: TNSuccessCallback<ToType>?,
-                                                   onFailure: TNFailureCallback?) -> TNRequest {
+                                                   onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -137,7 +137,7 @@ extension TNRequest {
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,
                                   onSuccess: TNSuccessCallback<T>?,
-                                  onFailure: TNFailureCallback?) -> TNRequest {
+                                  onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -178,7 +178,7 @@ extension TNRequest {
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: String.Type,
                       onSuccess: TNSuccessCallback<String>?,
-                      onFailure: TNFailureCallback?) -> TNRequest {
+                      onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -220,7 +220,7 @@ extension TNRequest {
     public func start(queue: TNQueue? = TNQueue.shared,
                       responseType: Data.Type,
                       onSuccess: TNSuccessCallback<Data>?,
-                      onFailure: TNFailureCallback?) -> TNRequest {
+                      onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,

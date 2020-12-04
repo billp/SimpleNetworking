@@ -63,10 +63,7 @@ class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                tnRequest.handleDataTaskFailure(with: dataResult.data,
-                                                urlResponse: nil,
-                                                tnError: tnError,
-                                                onFailure: onFailure)
+                onFailure?(tnError, data)
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }

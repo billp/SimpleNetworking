@@ -39,7 +39,7 @@ extension TNRequest {
                                           responseType: T.Type,
                                           progressUpdate: TNProgressCallbackType?,
                                           onSuccess: TNSuccessCallback<T>?,
-                                          onFailure: TNFailureCallback?) -> TNRequest {
+                                          onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
@@ -88,7 +88,7 @@ extension TNRequest {
                                                          transformer: TNTransformer<FromType, ToType>,
                                                          progressUpdate: TNProgressCallbackType?,
                                                          onSuccess: TNSuccessCallback<ToType>?,
-                                                         onFailure: TNFailureCallback?) -> TNRequest {
+                                                         onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeUploadTask(with: self,
@@ -151,7 +151,7 @@ extension TNRequest {
                               filePath: String,
                               progressUpdate: TNProgressCallbackType?,
                               onSuccess: TNDownloadSuccessCallback?,
-                              onFailure: TNFailureCallback?) -> TNRequest {
+                              onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
 
         dataTask = TNSessionTaskFactory.makeDownloadTask(with: self,

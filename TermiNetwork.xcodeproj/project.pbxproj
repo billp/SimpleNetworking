@@ -26,6 +26,8 @@
 		F3116AC32460A91B00DFE453 /* TNMultipartFormDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AC22460A91B00DFE453 /* TNMultipartFormDataHelpers.swift */; };
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8899257A80E100D9A802 /* CitiesTransformer.swift */; };
+		F31F88A4257A816400D9A802 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8895257A809600D9A802 /* City.swift */; };
 		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
@@ -70,7 +72,7 @@
 		F3A0BC0F25769385005139D5 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* Environment.swift */; };
 		F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC12257693D2005139D5 /* AppDelegate.swift */; };
 		F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC1B25769453005139D5 /* CityRoute.swift */; };
-		F3A0BC24257694F7005139D5 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC23257694F7005139D5 /* City.swift */; };
+		F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC23257694F7005139D5 /* RSCity.swift */; };
 		F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
@@ -135,6 +137,8 @@
 		F3196830243D01E1008725CE /* TermiNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermiNetwork.h; sourceTree = "<group>"; };
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F31F8895257A809600D9A802 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		F31F8899257A80E100D9A802 /* CitiesTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTransformer.swift; sourceTree = "<group>"; };
 		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
 		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
@@ -181,7 +185,7 @@
 		F3A0BC07257692E6005139D5 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F3A0BC12257693D2005139D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3A0BC1B25769453005139D5 /* CityRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRoute.swift; sourceTree = "<group>"; };
-		F3A0BC23257694F7005139D5 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		F3A0BC23257694F7005139D5 /* RSCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSCity.swift; sourceTree = "<group>"; };
 		F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNFileStreamer.swift; sourceTree = "<group>"; };
 		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
@@ -324,6 +328,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F31F8890257A807300D9A802 /* Transformers */ = {
+			isa = PBXGroup;
+			children = (
+				F31F8899257A80E100D9A802 /* CitiesTransformer.swift */,
+			);
+			path = Transformers;
+			sourceTree = "<group>";
+		};
+		F31F8891257A807A00D9A802 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				F3A0BC23257694F7005139D5 /* RSCity.swift */,
+			);
+			path = Rest;
+			sourceTree = "<group>";
+		};
+		F31F8892257A807D00D9A802 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				F31F8895257A809600D9A802 /* City.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		F32195B625783EBB000941F1 /* ErrorHandlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +478,7 @@
 		F3A0BC06257692D7005139D5 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				F31F8890257A807300D9A802 /* Transformers */,
 				F3A0BC22257694E2005139D5 /* Models */,
 				F3A0BC21257694DC005139D5 /* Routers */,
 				F3A0BC07257692E6005139D5 /* Environment.swift */,
@@ -468,7 +497,8 @@
 		F3A0BC22257694E2005139D5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F3A0BC23257694F7005139D5 /* City.swift */,
+				F31F8892257A807D00D9A802 /* Domain */,
+				F31F8891257A807A00D9A802 /* Rest */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -771,11 +801,13 @@
 			files = (
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
+				F31F88A4257A816400D9A802 /* City.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
-				F3A0BC24257694F7005139D5 /* City.swift in Sources */,
+				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,
+				F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

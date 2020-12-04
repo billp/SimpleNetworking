@@ -24,7 +24,7 @@ extension TNRequest {
 
     internal func createMockRequest(request: URLRequest,
                                     completionHandler: ((Data, URLResponse?) -> Void)?,
-                                    onFailure: TNFailureCallback?) -> URLSessionDataTask {
+                                    onFailure: TNFailureCallback? = nil) -> URLSessionDataTask {
         let fakeSession = URLSession(configuration: URLSession.shared.configuration)
                             .dataTask(with: request)
 
