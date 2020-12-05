@@ -46,7 +46,7 @@ internal enum RequestType {
 }
 
 /// The core class of TermiNetwork. It uses all
-open class TNRequest: TNOperation {
+public final class TNRequest: TNOperation {
     // MARK: Internal properties
 
     internal var method: TNMethod!
@@ -206,7 +206,7 @@ open class TNRequest: TNOperation {
     }
 
     /// Cancels a request
-    open override func cancel() {
+    public override func cancel() {
         super.cancel()
         dataTask?.cancel()
     }
@@ -259,7 +259,7 @@ open class TNRequest: TNOperation {
     }
 
     // MARK: Operation
-    open override func start() {
+    public override func start() {
         currentQueue.beforeEachRequestCallback?(self)
 
         _executing = true

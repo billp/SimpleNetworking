@@ -14,6 +14,12 @@
     "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Dictionary+Extensions~partial.swiftmodule",
     "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Dictionary+Extensions.swiftdeps"
   },
+  "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/Operations/Decodable+Transformer.swift": {
+    "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/Decodable+Transformer.d",
+    "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/Decodable+Transformer.swift.o",
+    "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/Decodable+Transformer~partial.swiftmodule",
+    "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/Decodable+Transformer.swiftdeps"
+  },
   "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/Operations/TNRequest+DataOperations.swift": {
     "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/TNRequest+DataOperations.d",
     "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/Operations/TNRequest+DataOperations.swift.o",
@@ -43,6 +49,12 @@
     "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/TNRequest+Mock.swift.o",
     "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/TNRequest+Mock~partial.swiftmodule",
     "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/TNRequest+Mock.swiftdeps"
+  },
+  "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/UIImage+Extensions.swift": {
+    "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/UIImage+Extensions.d",
+    "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/UIImage+Extensions.swift.o",
+    "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/UIImage+Extensions~partial.swiftmodule",
+    "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/UIImage+Extensions.swiftdeps"
   },
   "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/UIImageView+Extensions.swift": {
     "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Extensions/UIImageView+Extensions.d",
@@ -74,6 +86,12 @@
     "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Helpers/TNRequestHelpers~partial.swiftmodule",
     "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Helpers/TNRequestHelpers.swiftdeps"
   },
+  "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Protocols/TNErrorHandlerProtocol.swift": {
+    "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNErrorHandlerProtocol.d",
+    "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNErrorHandlerProtocol.swift.o",
+    "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNErrorHandlerProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNErrorHandlerProtocol.swiftdeps"
+  },
   "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Protocols/TNRequestMiddlewareProtocol.swift": {
     "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNRequestMiddlewareProtocol.d",
     "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNRequestMiddlewareProtocol.swift.o",
@@ -85,6 +103,18 @@
     "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNRouteProtocol.swift.o",
     "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNRouteProtocol~partial.swiftmodule",
     "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/Protocols/TNRouteProtocol.swiftdeps"
+  },
+  "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift": {
+    "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/SwiftUI/TNImage.d",
+    "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/SwiftUI/TNImage.swift.o",
+    "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/SwiftUI/TNImage~partial.swiftmodule",
+    "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/SwiftUI/TNImage.swiftdeps"
+  },
+  "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNCache.swift": {
+    "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TNCache.d",
+    "object": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TNCache.swift.o",
+    "swiftmodule": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TNCache~partial.swiftmodule",
+    "swift-dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TNCache.swiftdeps"
   },
   "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift": {
     "dependencies": "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TNConfiguration.d",

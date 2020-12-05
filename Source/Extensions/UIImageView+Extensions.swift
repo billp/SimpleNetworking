@@ -49,7 +49,7 @@ extension UIImageView {
     public func tn_setRemoteImage(url: String,
                                   defaultImage: UIImage? = nil,
                                   beforeStart: (() -> Void)? = nil,
-                                  preprocessImage: ((UIImage) -> (UIImage))? = nil,
+                                  preprocessImage: PreprocessImageType? = nil,
                                   onFinish: ((UIImage?, Error?) -> Void)? = nil) throws {
 
         self.image = defaultImage

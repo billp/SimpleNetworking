@@ -20,7 +20,7 @@
 import Foundation
 
 /// Factory class that creates Session task for each specific case
-class TNSessionTaskFactory {
+internal class TNSessionTaskFactory {
     /// Creates a data task request.
     /// - Parameters:
     ///     - tnRequest: A TNRequest instance

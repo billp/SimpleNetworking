@@ -35,6 +35,7 @@ provides-dynamic-lookup:
 - "requestType"
 - "setHeaders"
 - "start"
+- "urlRequestLogInitiated"
 depends-top-level:
 - !private "!="
 - !private "+"
@@ -42,7 +43,8 @@ depends-top-level:
 - !private "??"
 - !private "Array"
 - "AssignmentPrecedence"
-- !private "BooleanLiteralType"
+- "Bool"
+- "BooleanLiteralType"
 - "CastingPrecedence"
 - "Data"
 - !private "Dictionary"
@@ -58,6 +60,7 @@ depends-top-level:
 - "TNEnvironment"
 - "TNError"
 - "TNFailureCallback"
+- !private "TNLog"
 - "TNMethod"
 - !private "TNMultipartFormDataHelpers"
 - "TNMultipartFormDataPartType"
@@ -93,14 +96,19 @@ depends-top-level:
 - !private "~="
 depends-member:
 - !private ["s18AdditiveArithmeticP", ""]
+- !private ["Sa", "forEach"]
 - !private ["SK", ""]
+- !private ["SK", "forEach"]
 - !private ["SK", "init"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "forEach"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "init"]
 - ["s7CVarArgP", "Data"]
 - !private ["s7CVarArgP", "NSMutableString"]
 - !private ["s7CVarArgP", "String"]
 - ["s7CVarArgP", "TNConfiguration"]
 - !private ["s7CVarArgP", "TNEnvironment"]
 - !private ["s7CVarArgP", "TNError"]
+- !private ["s7CVarArgP", "TNLog"]
 - !private ["s7CVarArgP", "TNMethod"]
 - !private ["s7CVarArgP", "TNMultipartFormDataHelpers"]
 - !private ["s7CVarArgP", "TNRequestBodyGenerator"]
@@ -112,6 +120,7 @@ depends-member:
 - !private ["s7CVarArgP", "_executing"]
 - !private ["s7CVarArgP", "_finished"]
 - !private ["s7CVarArgP", "addBodyParamsIfNeeded"]
+- !private ["s7CVarArgP", "beforeEachRequestCallback"]
 - !private ["s7CVarArgP", "cancel"]
 - !private ["s7CVarArgP", "cancelAllOperations"]
 - !private ["s7CVarArgP", "configuration"]
@@ -121,6 +130,7 @@ depends-member:
 - !private ["s7CVarArgP", "executing"]
 - !private ["s7CVarArgP", "failureMode"]
 - !private ["s7CVarArgP", "finished"]
+- !private ["s7CVarArgP", "forEach"]
 - !private ["s7CVarArgP", "handleDataTaskCompleted"]
 - !private ["s7CVarArgP", "handleDataTaskFailure"]
 - !private ["s7CVarArgP", "handleMiddlewareBodyBeforeSendIfNeeded"]
@@ -137,16 +147,19 @@ depends-member:
 - !private ["s7CVarArgP", "setHeaders"]
 - !private ["s7CVarArgP", "start"]
 - !private ["Sl", ""]
+- !private ["Sl", "forEach"]
 - !private ["Sl", "init"]
 - !private ["Sl", "merge"]
 - !private ["SL", ""]
 - !private ["SL", "init"]
+- !private ["10Foundation15ContiguousBytesP", "forEach"]
 - ["s28CustomDebugStringConvertibleP", "Data"]
 - !private ["s28CustomDebugStringConvertibleP", "NSMutableString"]
 - !private ["s28CustomDebugStringConvertibleP", "String"]
 - ["s28CustomDebugStringConvertibleP", "TNConfiguration"]
 - !private ["s28CustomDebugStringConvertibleP", "TNEnvironment"]
 - !private ["s28CustomDebugStringConvertibleP", "TNError"]
+- !private ["s28CustomDebugStringConvertibleP", "TNLog"]
 - !private ["s28CustomDebugStringConvertibleP", "TNMethod"]
 - !private ["s28CustomDebugStringConvertibleP", "TNMultipartFormDataHelpers"]
 - !private ["s28CustomDebugStringConvertibleP", "TNRequestBodyGenerator"]
@@ -158,6 +171,7 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "_executing"]
 - !private ["s28CustomDebugStringConvertibleP", "_finished"]
 - !private ["s28CustomDebugStringConvertibleP", "addBodyParamsIfNeeded"]
+- !private ["s28CustomDebugStringConvertibleP", "beforeEachRequestCallback"]
 - !private ["s28CustomDebugStringConvertibleP", "cancel"]
 - !private ["s28CustomDebugStringConvertibleP", "cancelAllOperations"]
 - !private ["s28CustomDebugStringConvertibleP", "configuration"]
@@ -167,6 +181,7 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "executing"]
 - !private ["s28CustomDebugStringConvertibleP", "failureMode"]
 - !private ["s28CustomDebugStringConvertibleP", "finished"]
+- !private ["s28CustomDebugStringConvertibleP", "forEach"]
 - !private ["s28CustomDebugStringConvertibleP", "get"]
 - !private ["s28CustomDebugStringConvertibleP", "handleDataTaskCompleted"]
 - !private ["s28CustomDebugStringConvertibleP", "handleDataTaskFailure"]
@@ -183,8 +198,10 @@ depends-member:
 - !private ["s28CustomDebugStringConvertibleP", "pathType"]
 - !private ["s28CustomDebugStringConvertibleP", "setHeaders"]
 - !private ["s28CustomDebugStringConvertibleP", "start"]
+- !private ["s17CustomReflectableP", "beforeEachRequestCallback"]
 - !private ["s17CustomReflectableP", "cancelAllOperations"]
 - !private ["s17CustomReflectableP", "failureMode"]
+- !private ["s17CustomReflectableP", "forEach"]
 - !private ["s17CustomReflectableP", "get"]
 - !private ["s17CustomReflectableP", "init"]
 - !private ["s17CustomReflectableP", "merge"]
@@ -194,6 +211,7 @@ depends-member:
 - ["s23CustomStringConvertibleP", "TNConfiguration"]
 - !private ["s23CustomStringConvertibleP", "TNEnvironment"]
 - !private ["s23CustomStringConvertibleP", "TNError"]
+- !private ["s23CustomStringConvertibleP", "TNLog"]
 - !private ["s23CustomStringConvertibleP", "TNMethod"]
 - !private ["s23CustomStringConvertibleP", "TNMultipartFormDataHelpers"]
 - !private ["s23CustomStringConvertibleP", "TNRequestBodyGenerator"]
@@ -205,6 +223,7 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "_executing"]
 - !private ["s23CustomStringConvertibleP", "_finished"]
 - !private ["s23CustomStringConvertibleP", "addBodyParamsIfNeeded"]
+- !private ["s23CustomStringConvertibleP", "beforeEachRequestCallback"]
 - !private ["s23CustomStringConvertibleP", "cancel"]
 - !private ["s23CustomStringConvertibleP", "cancelAllOperations"]
 - !private ["s23CustomStringConvertibleP", "configuration"]
@@ -216,6 +235,7 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "executing"]
 - !private ["s23CustomStringConvertibleP", "failureMode"]
 - !private ["s23CustomStringConvertibleP", "finished"]
+- !private ["s23CustomStringConvertibleP", "forEach"]
 - !private ["s23CustomStringConvertibleP", "handleDataTaskCompleted"]
 - !private ["s23CustomStringConvertibleP", "handleDataTaskFailure"]
 - !private ["s23CustomStringConvertibleP", "handleMiddlewareBodyBeforeSendIfNeeded"]
@@ -231,14 +251,20 @@ depends-member:
 - !private ["s23CustomStringConvertibleP", "pathType"]
 - !private ["s23CustomStringConvertibleP", "setHeaders"]
 - !private ["s23CustomStringConvertibleP", "start"]
+- !private ["10Foundation12DataProtocolP", ""]
+- !private ["10Foundation12DataProtocolP", "forEach"]
+- !private ["Se", "beforeEachRequestCallback"]
 - !private ["Se", "cancelAllOperations"]
 - !private ["Se", "failureMode"]
+- !private ["Se", "forEach"]
 - !private ["Se", "get"]
 - !private ["Se", "init"]
 - !private ["Se", "merge"]
 - !private ["SD", "merge"]
+- !private ["SE", "beforeEachRequestCallback"]
 - !private ["SE", "cancelAllOperations"]
 - !private ["SE", "failureMode"]
+- !private ["SE", "forEach"]
 - !private ["SE", "get"]
 - !private ["SE", "init"]
 - !private ["SE", "merge"]
@@ -252,6 +278,7 @@ depends-member:
 - ["SQ", "TNConfiguration"]
 - !private ["SQ", "TNEnvironment"]
 - !private ["SQ", "TNError"]
+- !private ["SQ", "TNLog"]
 - !private ["SQ", "TNMethod"]
 - !private ["SQ", "TNMultipartFormDataHelpers"]
 - !private ["SQ", "TNRequestBodyGenerator"]
@@ -267,6 +294,7 @@ depends-member:
 - ["SQ", "_rawHashValue"]
 - !private ["SQ", "absolute"]
 - !private ["SQ", "addBodyParamsIfNeeded"]
+- !private ["SQ", "beforeEachRequestCallback"]
 - !private ["SQ", "cancel"]
 - ["SQ", "cancelAll"]
 - !private ["SQ", "cancelAllOperations"]
@@ -279,6 +307,7 @@ depends-member:
 - !private ["SQ", "failureMode"]
 - !private ["SQ", "findStringSwitchCase"]
 - !private ["SQ", "finished"]
+- !private ["SQ", "forEach"]
 - !private ["SQ", "get"]
 - !private ["SQ", "handleDataTaskCompleted"]
 - !private ["SQ", "handleDataTaskFailure"]
@@ -300,12 +329,15 @@ depends-member:
 - ["SQ", "relative"]
 - !private ["SQ", "setHeaders"]
 - !private ["SQ", "start"]
+- !private ["SQ", "started"]
 - ["SQ", "xWWWFormURLEncoded"]
 - !private ["s5ErrorP", ""]
 - !private ["s5ErrorP", "absolute"]
 - !private ["s5ErrorP", "environmentNotSet"]
 - !private ["s5ErrorP", "invalidURL"]
 - ["s5ErrorP", "relative"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "forEach"]
 - !private ["s25ExpressibleByArrayLiteralP", "init"]
 - !private ["s30ExpressibleByDictionaryLiteralP", "Key"]
 - !private ["s30ExpressibleByDictionaryLiteralP", "Value"]
@@ -314,6 +346,7 @@ depends-member:
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
 - !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s27ExpressibleByIntegerLiteralP", ""]
+- !private ["s23ExpressibleByNilLiteralP", "beforeEachRequestCallback"]
 - !private ["s23ExpressibleByNilLiteralP", "cancelAllOperations"]
 - !private ["s23ExpressibleByNilLiteralP", "failureMode"]
 - !private ["s23ExpressibleByNilLiteralP", "get"]
@@ -324,6 +357,10 @@ depends-member:
 - !private ["s26ExpressibleByStringLiteralP", "init"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["7SwiftUI7GestureP", "beforeEachRequestCallback"]
+- !private ["7SwiftUI7GestureP", "cancelAllOperations"]
+- !private ["7SwiftUI7GestureP", "failureMode"]
+- !private ["7SwiftUI7GestureP", "get"]
 - ["SH", "=="]
 - ["SH", "Data"]
 - ["SH", "Default_RawValue"]
@@ -333,6 +370,7 @@ depends-member:
 - ["SH", "TNConfiguration"]
 - !private ["SH", "TNEnvironment"]
 - !private ["SH", "TNError"]
+- !private ["SH", "TNLog"]
 - !private ["SH", "TNMethod"]
 - !private ["SH", "TNMultipartFormDataHelpers"]
 - !private ["SH", "TNRequestBodyGenerator"]
@@ -348,6 +386,7 @@ depends-member:
 - ["SH", "_rawHashValue"]
 - !private ["SH", "absolute"]
 - !private ["SH", "addBodyParamsIfNeeded"]
+- !private ["SH", "beforeEachRequestCallback"]
 - !private ["SH", "cancel"]
 - ["SH", "cancelAll"]
 - !private ["SH", "cancelAllOperations"]
@@ -360,6 +399,7 @@ depends-member:
 - !private ["SH", "failureMode"]
 - !private ["SH", "findStringSwitchCase"]
 - !private ["SH", "finished"]
+- !private ["SH", "forEach"]
 - !private ["SH", "get"]
 - !private ["SH", "handleDataTaskCompleted"]
 - !private ["SH", "handleDataTaskFailure"]
@@ -380,17 +420,23 @@ depends-member:
 - ["SH", "relative"]
 - !private ["SH", "setHeaders"]
 - !private ["SH", "start"]
+- !private ["SH", "started"]
 - !private ["10Foundation14LocalizedErrorP", "environmentNotSet"]
 - !private ["10Foundation14LocalizedErrorP", "invalidURL"]
 - !private ["s25LosslessStringConvertibleP", ""]
 - !private ["s25LosslessStringConvertibleP", "init"]
 - !private ["s10MirrorPathP", "init"]
+- !private ["SM", ""]
+- !private ["SM", "forEach"]
+- !private ["10Foundation19MutableDataProtocolP", "forEach"]
 - !private ["So8NSCodingP", ""]
+- !private ["So9NSCopyingP", "errorHandlers"]
 - !private ["So9NSCopyingP", "headers"]
 - ["So9NSCopyingP", "makeDefaultConfiguration"]
 - !private ["So9NSCopyingP", "override"]
 - !private ["So9NSCopyingP", "requestBodyType"]
 - !private ["So9NSCopyingP", "timeoutInterval"]
+- ["So8NSObjectC", "Bool"]
 - ["So8NSObjectC", "Data"]
 - !private ["So8NSObjectC", "NSMutableString"]
 - ["So8NSObjectC", "RequestType"]
@@ -399,6 +445,8 @@ depends-member:
 - ["So8NSObjectC", "TNConfiguration"]
 - ["So8NSObjectC", "TNEnvironment"]
 - ["So8NSObjectC", "TNError"]
+- ["So8NSObjectC", "TNFailureCallback"]
+- !private ["So8NSObjectC", "TNLog"]
 - ["So8NSObjectC", "TNMethod"]
 - !private ["So8NSObjectC", "TNMultipartFormDataHelpers"]
 - !private ["So8NSObjectC", "TNMultipartFormDataPartType"]
@@ -415,6 +463,7 @@ depends-member:
 - !private ["So8NSObjectC", "_executing"]
 - !private ["So8NSObjectC", "_finished"]
 - !private ["So8NSObjectC", "addBodyParamsIfNeeded"]
+- !private ["So8NSObjectC", "beforeEachRequestCallback"]
 - ["So8NSObjectC", "cancel"]
 - !private ["So8NSObjectC", "cancelAllOperations"]
 - ["So8NSObjectC", "configuration"]
@@ -438,6 +487,7 @@ depends-member:
 - ["So8NSObjectC", "requestType"]
 - ["So8NSObjectC", "setHeaders"]
 - ["So8NSObjectC", "start"]
+- ["So8NSObjectC", "urlRequestLogInitiated"]
 - ["So8NSObjectP", "Data"]
 - !private ["So8NSObjectP", "NSMutableString"]
 - ["So8NSObjectP", "RequestType"]
@@ -446,6 +496,8 @@ depends-member:
 - ["So8NSObjectP", "TNConfiguration"]
 - ["So8NSObjectP", "TNEnvironment"]
 - ["So8NSObjectP", "TNError"]
+- ["So8NSObjectP", "TNFailureCallback"]
+- !private ["So8NSObjectP", "TNLog"]
 - ["So8NSObjectP", "TNMethod"]
 - !private ["So8NSObjectP", "TNMultipartFormDataHelpers"]
 - !private ["So8NSObjectP", "TNMultipartFormDataPartType"]
@@ -462,6 +514,7 @@ depends-member:
 - ["So8NSObjectP", "_finished"]
 - ["So8NSObjectP", "addBodyParamsIfNeeded"]
 - ["So8NSObjectP", "asRequest"]
+- !private ["So8NSObjectP", "beforeEachRequestCallback"]
 - ["So8NSObjectP", "cancel"]
 - !private ["So8NSObjectP", "cancelAllOperations"]
 - ["So8NSObjectP", "configuration"]
@@ -488,7 +541,9 @@ depends-member:
 - ["So8NSObjectP", "requestType"]
 - ["So8NSObjectP", "setHeaders"]
 - ["So8NSObjectP", "start"]
+- ["So8NSObjectP", "urlRequestLogInitiated"]
 - !private ["Sj", ""]
+- ["So11NSOperationC", "Bool"]
 - ["So11NSOperationC", "Data"]
 - !private ["So11NSOperationC", "NSMutableString"]
 - ["So11NSOperationC", "RequestType"]
@@ -497,6 +552,8 @@ depends-member:
 - ["So11NSOperationC", "TNConfiguration"]
 - ["So11NSOperationC", "TNEnvironment"]
 - ["So11NSOperationC", "TNError"]
+- ["So11NSOperationC", "TNFailureCallback"]
+- !private ["So11NSOperationC", "TNLog"]
 - ["So11NSOperationC", "TNMethod"]
 - !private ["So11NSOperationC", "TNMultipartFormDataHelpers"]
 - !private ["So11NSOperationC", "TNMultipartFormDataPartType"]
@@ -534,14 +591,22 @@ depends-member:
 - ["So11NSOperationC", "requestType"]
 - ["So11NSOperationC", "setHeaders"]
 - ["So11NSOperationC", "start"]
+- ["So11NSOperationC", "urlRequestLogInitiated"]
 - ["So16NSOperationQueueC", ""]
+- !private ["So16NSOperationQueueC", "beforeEachRequestCallback"]
 - !private ["So16NSOperationQueueC", "cancelAllOperations"]
 - !private ["So16NSOperationQueueC", "failureMode"]
+- !private ["Sq", "beforeEachRequestCallback"]
 - !private ["Sq", "cancelAllOperations"]
 - !private ["Sq", "failureMode"]
 - !private ["Sq", "get"]
+- !private ["So19NSProgressReportingP", "beforeEachRequestCallback"]
 - !private ["So19NSProgressReportingP", "cancelAllOperations"]
 - !private ["So19NSProgressReportingP", "failureMode"]
+- !private ["Sk", ""]
+- !private ["Sk", "forEach"]
+- !private ["Sm", ""]
+- !private ["Sm", "forEach"]
 - !private ["Sm", "init"]
 - ["SY", "=="]
 - ["SY", "Default_RawValue"]
@@ -563,17 +628,21 @@ depends-member:
 - !private ["12TermiNetwork10SNPathTypeO", ""]
 - !private ["12TermiNetwork10SNPathTypeO", "absolute"]
 - ["12TermiNetwork10SNPathTypeO", "relative"]
+- !private ["7Combine9SchedulerP", "beforeEachRequestCallback"]
 - !private ["7Combine9SchedulerP", "cancelAllOperations"]
 - !private ["7Combine9SchedulerP", "failureMode"]
 - !private ["ST", "Element"]
 - !private ["ST", "Iterator"]
 - !private ["ST", ""]
+- !private ["ST", "forEach"]
 - !private ["ST", "init"]
 - !private ["ST", "makeIterator"]
 - !private ["ST", "merge"]
+- !private ["12TermiNetwork5TNLogC5StateO", "started"]
 - !private ["Sx", ""]
 - !private ["SS", "init"]
 - !private ["Sy", "init"]
+- !private ["12TermiNetwork15TNConfigurationC", "errorHandlers"]
 - !private ["12TermiNetwork15TNConfigurationC", "headers"]
 - ["12TermiNetwork15TNConfigurationC", "makeDefaultConfiguration"]
 - !private ["12TermiNetwork15TNConfigurationC", "override"]
@@ -586,6 +655,9 @@ depends-member:
 - !private ["12TermiNetwork7TNErrorO", ""]
 - !private ["12TermiNetwork7TNErrorO", "environmentNotSet"]
 - !private ["12TermiNetwork7TNErrorO", "invalidURL"]
+- !private ["12TermiNetwork22TNErrorHandlerProtocolP", "requestFailed"]
+- !private ["12TermiNetwork22TNErrorHandlerProtocolP", "shouldHandleRequestFailure"]
+- !private ["12TermiNetwork5TNLogC", "logRequest"]
 - ["12TermiNetwork8TNMethodO", "=="]
 - ["12TermiNetwork8TNMethodO", "Default_RawValue"]
 - ["12TermiNetwork8TNMethodO", "RawValue"]
@@ -608,6 +680,7 @@ depends-member:
 - ["12TermiNetwork8TNMethodO", "rawValue"]
 - ["12TermiNetwork8TNMethodO", "trace"]
 - !private ["12TermiNetwork26TNMultipartFormDataHelpersC", "contentLength"]
+- ["12TermiNetwork11TNOperationC", "Bool"]
 - ["12TermiNetwork11TNOperationC", "Data"]
 - !private ["12TermiNetwork11TNOperationC", "NSMutableString"]
 - ["12TermiNetwork11TNOperationC", "RequestType"]
@@ -616,6 +689,8 @@ depends-member:
 - ["12TermiNetwork11TNOperationC", "TNConfiguration"]
 - ["12TermiNetwork11TNOperationC", "TNEnvironment"]
 - ["12TermiNetwork11TNOperationC", "TNError"]
+- ["12TermiNetwork11TNOperationC", "TNFailureCallback"]
+- !private ["12TermiNetwork11TNOperationC", "TNLog"]
 - ["12TermiNetwork11TNOperationC", "TNMethod"]
 - !private ["12TermiNetwork11TNOperationC", "TNMultipartFormDataHelpers"]
 - !private ["12TermiNetwork11TNOperationC", "TNMultipartFormDataPartType"]
@@ -653,11 +728,14 @@ depends-member:
 - ["12TermiNetwork11TNOperationC", "requestType"]
 - ["12TermiNetwork11TNOperationC", "setHeaders"]
 - ["12TermiNetwork11TNOperationC", "start"]
+- ["12TermiNetwork11TNOperationC", "urlRequestLogInitiated"]
 - !private ["12TermiNetwork6TNPathO", "convertedPath"]
+- !private ["12TermiNetwork7TNQueueC", "beforeEachRequestCallback"]
 - !private ["12TermiNetwork7TNQueueC", "cancelAllOperations"]
 - !private ["12TermiNetwork7TNQueueC", "failureMode"]
 - ["12TermiNetwork18TNQueueFailureModeO", "cancelAll"]
 - ["12TermiNetwork18TNQueueFailureModeO", "continue"]
+- ["12TermiNetwork9TNRequestC", "Bool"]
 - ["12TermiNetwork9TNRequestC", "Data"]
 - !private ["12TermiNetwork9TNRequestC", "NSMutableString"]
 - ["12TermiNetwork9TNRequestC", "RequestType"]
@@ -666,6 +744,8 @@ depends-member:
 - ["12TermiNetwork9TNRequestC", "TNConfiguration"]
 - ["12TermiNetwork9TNRequestC", "TNEnvironment"]
 - ["12TermiNetwork9TNRequestC", "TNError"]
+- ["12TermiNetwork9TNRequestC", "TNFailureCallback"]
+- !private ["12TermiNetwork9TNRequestC", "TNLog"]
 - ["12TermiNetwork9TNRequestC", "TNMethod"]
 - !private ["12TermiNetwork9TNRequestC", "TNMultipartFormDataHelpers"]
 - !private ["12TermiNetwork9TNRequestC", "TNMultipartFormDataPartType"]
@@ -707,6 +787,7 @@ depends-member:
 - ["12TermiNetwork9TNRequestC", "requestType"]
 - !private ["12TermiNetwork9TNRequestC", "setHeaders"]
 - ["12TermiNetwork9TNRequestC", "start"]
+- ["12TermiNetwork9TNRequestC", "urlRequestLogInitiated"]
 - !private ["12TermiNetwork22TNRequestBodyGeneratorC", "generateJSONBodyData"]
 - !private ["12TermiNetwork22TNRequestBodyGeneratorC", "generateUrlEncodedString"]
 - ["12TermiNetwork17TNRequestBodyTypeO", "JSON"]
@@ -723,15 +804,23 @@ depends-member:
 - !private ["s16TextOutputStreamP", "init"]
 - !private ["s20TextOutputStreamableP", ""]
 - !private ["s20TextOutputStreamableP", "init"]
+- !private ["7SwiftUI4ViewP", "beforeEachRequestCallback"]
+- !private ["7SwiftUI4ViewP", "cancelAllOperations"]
+- !private ["7SwiftUI4ViewP", "failureMode"]
+- !private ["7SwiftUI4ViewP", "get"]
+- !private ["s14_ArrayProtocolP", "forEach"]
 - !private ["s30_CustomPlaygroundQuickLookableP", "init"]
-- !private ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- !private ["s24_DestructorSafeContainerP", "forEach"]
+- ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
 - !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "init"]
 - !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
 - ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
 - !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "init"]
+- !private ["s19_HasContiguousBytesP", "forEach"]
 - !private ["s19_HasContiguousBytesP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "forEach"]
 - !private ["s35_HasCustomAnyHashableRepresentationP", "merge"]
 - ["10Foundation27_KeyValueCodingAndObservingP", "Data"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "NSMutableString"]
@@ -739,6 +828,7 @@ depends-member:
 - ["10Foundation27_KeyValueCodingAndObservingP", "TNConfiguration"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "TNEnvironment"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "TNError"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "TNLog"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "TNMethod"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "TNMultipartFormDataHelpers"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "TNRequestBodyGenerator"]
@@ -750,6 +840,7 @@ depends-member:
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "_executing"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "_finished"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "addBodyParamsIfNeeded"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "beforeEachRequestCallback"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "cancel"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "cancelAllOperations"]
 - !private ["10Foundation27_KeyValueCodingAndObservingP", "configuration"]
@@ -779,6 +870,7 @@ depends-member:
 - ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNConfiguration"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNEnvironment"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNError"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNLog"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNMethod"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNMultipartFormDataHelpers"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "TNRequestBodyGenerator"]
@@ -790,6 +882,7 @@ depends-member:
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "_executing"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "_finished"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "addBodyParamsIfNeeded"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "beforeEachRequestCallback"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "cancel"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "cancelAllOperations"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "configuration"]
@@ -813,21 +906,27 @@ depends-member:
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "pathType"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "setHeaders"]
 - !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "start"]
+- !private ["s21_ObjectiveCBridgeableP", "beforeEachRequestCallback"]
 - !private ["s21_ObjectiveCBridgeableP", "cancelAllOperations"]
 - !private ["s21_ObjectiveCBridgeableP", "failureMode"]
+- !private ["s21_ObjectiveCBridgeableP", "forEach"]
 - !private ["s21_ObjectiveCBridgeableP", "get"]
 - !private ["s21_ObjectiveCBridgeableP", "init"]
 - !private ["s21_ObjectiveCBridgeableP", "merge"]
 - !private ["s26_OptionalNilComparisonTypeV", "get"]
 depends-nominal:
 - !private "s18AdditiveArithmeticP"
+- !private "Sa"
 - !private "SK"
+- !private "8CloudKit21CKRecordValueProtocolP"
 - "s7CVarArgP"
 - !private "Sl"
 - !private "SL"
+- !private "10Foundation15ContiguousBytesP"
 - "s28CustomDebugStringConvertibleP"
 - !private "s17CustomReflectableP"
 - "s23CustomStringConvertibleP"
+- !private "10Foundation12DataProtocolP"
 - !private "Se"
 - !private "SD"
 - !private "SE"
@@ -841,10 +940,13 @@ depends-nominal:
 - !private "s32ExpressibleByStringInterpolationP"
 - !private "s26ExpressibleByStringLiteralP"
 - !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "7SwiftUI7GestureP"
 - "SH"
 - !private "10Foundation14LocalizedErrorP"
 - !private "s25LosslessStringConvertibleP"
 - !private "s10MirrorPathP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
 - !private "So8NSCodingP"
 - "So9NSCopyingP"
 - "So8NSObjectC"
@@ -854,18 +956,22 @@ depends-nominal:
 - "So16NSOperationQueueC"
 - !private "Sq"
 - !private "So19NSProgressReportingP"
+- !private "Sk"
 - !private "Sm"
 - "SY"
 - "12TermiNetwork11RequestTypeO"
 - "12TermiNetwork10SNPathTypeO"
 - !private "7Combine9SchedulerP"
 - !private "ST"
+- !private "12TermiNetwork5TNLogC5StateO"
 - !private "Sx"
 - !private "SS"
 - !private "Sy"
 - "12TermiNetwork15TNConfigurationC"
 - !private "12TermiNetwork13TNEnvironmentC"
 - !private "12TermiNetwork7TNErrorO"
+- !private "12TermiNetwork22TNErrorHandlerProtocolP"
+- !private "12TermiNetwork5TNLogC"
 - "12TermiNetwork8TNMethodO"
 - !private "12TermiNetwork26TNMultipartFormDataHelpersC"
 - "12TermiNetwork11TNOperationC"
@@ -879,8 +985,11 @@ depends-nominal:
 - !private "12TermiNetwork15TNRouteProtocolP"
 - !private "s16TextOutputStreamP"
 - !private "s20TextOutputStreamableP"
+- !private "7SwiftUI4ViewP"
+- !private "s14_ArrayProtocolP"
 - !private "s30_CustomPlaygroundQuickLookableP"
-- !private "s35_ExpressibleByBuiltinBooleanLiteralP"
+- !private "s24_DestructorSafeContainerP"
+- "s35_ExpressibleByBuiltinBooleanLiteralP"
 - !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
 - !private "s35_ExpressibleByBuiltinIntegerLiteralP"
 - "s34_ExpressibleByBuiltinStringLiteralP"
@@ -895,21 +1004,43 @@ depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreData.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreImage.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/QuartzCore.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Metal.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreLocation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/os.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/UniformTypeIdentifiers.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CloudKit.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/DeveloperToolsSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/dyld.modulemap"
 - "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/module.modulemap"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/xpc/XPC.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "00217e14617ac9c90eacd696a76a1300"
+interface-hash: "9ccb80d963bf83019b14444de96cc62f"

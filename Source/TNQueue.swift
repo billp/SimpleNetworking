@@ -50,7 +50,7 @@ public typealias TNAfterEachRequestCallbackType = (
     _ error: Error?) -> Void
 
 /// This class can be used to create custom queues
-open class TNQueue: OperationQueue {
+public final class TNQueue: OperationQueue {
     // MARK: Static properties
 
     /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances,
@@ -108,7 +108,7 @@ open class TNQueue: OperationQueue {
     /// - parameters:
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,
     ///      this is the default) and .cancelAll (cancels all the remaining requests in queue)
-    override open func addOperation(_ operation: Operation) {
+    override public func addOperation(_ operation: Operation) {
         guard !operation.isExecuting && !operation.isFinished else {
             return
         }

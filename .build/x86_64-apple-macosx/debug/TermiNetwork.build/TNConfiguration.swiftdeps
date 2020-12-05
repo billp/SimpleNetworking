@@ -12,6 +12,7 @@ provides-dynamic-lookup:
 - "cachePolicy"
 - "certificateData"
 - "copy"
+- "errorHandlers"
 - "headers"
 - "keyDecodingStrategy"
 - "makeDefaultConfiguration"
@@ -43,6 +44,7 @@ depends-top-level:
 - "String"
 - "StringLiteralType"
 - "TNConfiguration"
+- "TNErrorHandlerProtocol"
 - "TNMockDelayType"
 - "TNRequestBodyType"
 - "TNRequestMiddlewareProtocol"
@@ -52,6 +54,7 @@ depends-top-level:
 - "assertionFailure"
 - !private "cachePolicy"
 - !private "certificateData"
+- !private "errorHandlers"
 - !private "headers"
 - !private "keyDecodingStrategy"
 - !private "mockDataBundle"
@@ -70,6 +73,10 @@ depends-member:
 - !private ["SK", "count"]
 - !private ["SK", "forEach"]
 - !private ["SK", "init"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "append"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "count"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "forEach"]
+- !private ["8CloudKit21CKRecordValueProtocolP", "init"]
 - !private ["s7CVarArgP", "append"]
 - !private ["s7CVarArgP", "count"]
 - !private ["s7CVarArgP", "forEach"]
@@ -159,6 +166,8 @@ depends-member:
 - !private ["s26ExpressibleByStringLiteralP", "init"]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
 - !private ["s33ExpressibleByUnicodeScalarLiteralP", "init"]
+- !private ["7SwiftUI7GestureP", "useProtocolCachePolicy"]
+- !private ["7SwiftUI7GestureP", "xWWWFormURLEncoded"]
 - ["SH", "CachePolicy"]
 - ["SH", ""]
 - !private ["SH", "append"]
@@ -191,6 +200,7 @@ depends-member:
 - ["So9NSCopyingP", "certificateData"]
 - ["So9NSCopyingP", "copy"]
 - ["So9NSCopyingP", "copyWithZone"]
+- ["So9NSCopyingP", "errorHandlers"]
 - ["So9NSCopyingP", "headers"]
 - ["So9NSCopyingP", "init"]
 - ["So9NSCopyingP", "keyDecodingStrategy"]
@@ -214,6 +224,7 @@ depends-member:
 - !private ["So8NSObjectC", "dataWithContentsOfURL"]
 - !private ["So8NSObjectC", "dataWithData"]
 - !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectP", ""]
 - !private ["So8NSObjectP", "data"]
 - !private ["So8NSObjectP", "dataWithBytes"]
 - !private ["So8NSObjectP", "dataWithBytesNoCopy"]
@@ -251,6 +262,7 @@ depends-member:
 - ["12TermiNetwork15TNConfigurationC", "NSZone"]
 - ["12TermiNetwork15TNConfigurationC", "String"]
 - ["12TermiNetwork15TNConfigurationC", "TNConfiguration"]
+- ["12TermiNetwork15TNConfigurationC", "TNErrorHandlerProtocol"]
 - ["12TermiNetwork15TNConfigurationC", "TNMockDelayType"]
 - ["12TermiNetwork15TNConfigurationC", "TNRequestBodyType"]
 - ["12TermiNetwork15TNConfigurationC", "TNRequestMiddlewareProtocol"]
@@ -263,6 +275,7 @@ depends-member:
 - ["12TermiNetwork15TNConfigurationC", "copy"]
 - ["12TermiNetwork15TNConfigurationC", "copyWithZone"]
 - ["12TermiNetwork15TNConfigurationC", "deinit"]
+- ["12TermiNetwork15TNConfigurationC", "errorHandlers"]
 - ["12TermiNetwork15TNConfigurationC", "headers"]
 - ["12TermiNetwork15TNConfigurationC", "init"]
 - ["12TermiNetwork15TNConfigurationC", "keyDecodingStrategy"]
@@ -283,6 +296,8 @@ depends-member:
 - !private ["s20TextOutputStreamableP", "init"]
 - ["7Combine15TopLevelDecoderP", "KeyDecodingStrategy"]
 - ["10Foundation10URLRequestV", "CachePolicy"]
+- !private ["7SwiftUI4ViewP", "useProtocolCachePolicy"]
+- !private ["7SwiftUI4ViewP", "xWWWFormURLEncoded"]
 - !private ["s14_ArrayProtocolP", "append"]
 - !private ["s14_ArrayProtocolP", "count"]
 - !private ["s14_ArrayProtocolP", "forEach"]
@@ -318,9 +333,11 @@ depends-member:
 - !private ["s21_ObjectiveCBridgeableP", "merge"]
 - !private ["s21_ObjectiveCBridgeableP", "useProtocolCachePolicy"]
 - !private ["s21_ObjectiveCBridgeableP", "xWWWFormURLEncoded"]
+- !private ["So13CKRecordValueP", "init"]
 depends-nominal:
 - !private "Sa"
 - !private "SK"
+- !private "8CloudKit21CKRecordValueProtocolP"
 - !private "s7CVarArgP"
 - !private "So23NSURLRequestCachePolicyV"
 - !private "Sl"
@@ -341,6 +358,7 @@ depends-nominal:
 - !private "s32ExpressibleByStringInterpolationP"
 - !private "s26ExpressibleByStringLiteralP"
 - !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "7SwiftUI7GestureP"
 - "SH"
 - "10Foundation11JSONDecoderC"
 - !private "s25LosslessStringConvertibleP"
@@ -368,6 +386,7 @@ depends-nominal:
 - !private "s20TextOutputStreamableP"
 - "7Combine15TopLevelDecoderP"
 - "10Foundation10URLRequestV"
+- !private "7SwiftUI4ViewP"
 - !private "s14_ArrayProtocolP"
 - !private "s30_CustomPlaygroundQuickLookableP"
 - !private "s24_DestructorSafeContainerP"
@@ -382,6 +401,7 @@ depends-nominal:
 - !private "10Foundation27_KeyValueCodingAndObservingP"
 - !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
 - "s21_ObjectiveCBridgeableP"
+- !private "So13CKRecordValueP"
 depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
@@ -392,6 +412,7 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/dyld.modulemap"
@@ -399,11 +420,20 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/xpc/XPC.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreLocation.framework/Headers/CoreLocation.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/os.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework/Headers/UniformTypeIdentifiers.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CloudKit.framework/Headers/CloudKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
 - "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
-interface-hash: "0f1b9dc3b04c9c964b749de2f2f3439b"
+interface-hash: "8b6a726c7cb970f70455b76cc18f89e6"

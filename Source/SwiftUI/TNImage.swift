@@ -21,10 +21,13 @@ import Foundation
 import Combine
 import SwiftUI
 
-var imageCache = NSCache<NSString, UIImage>()
+public typealias PreprocessImageType = ((UIImage) -> (UIImage))
 
-class ImageLoader: ObservableObject {
+final private class ImageLoader: ObservableObject {
     var url: String
+    var configuration: TNConfiguration?
+    var preprocessImageClosure: PreprocessImageType?
+
     var didChange = PassthroughSubject<UIImage, Never>()
     var image = UIImage() {
         didSet {
@@ -32,42 +35,57 @@ class ImageLoader: ObservableObject {
         }
     }
 
-    public init(with url: String) {
+    public init(with url: String,
+                configuration: TNConfiguration? = nil,
+                preprocessImage: PreprocessImageType? = nil) {
         self.url = url
+        self.configuration = configuration
+        self.preprocessImageClosure = preprocessImage
     }
 
     func loadImage() {
-
-        if let cachedImage = imageCache.object(forKey: url as NSString) {
-            self.image = cachedImage
+        if let cachedImageData = TNCache.shared[url],
+           let image = UIImage(data: cachedImageData) {
+            self.image = image
             return
         }
 
-        let configuration = TNConfiguration()
-        configuration.cachePolicy = .returnCacheDataElseLoad
+        TNRequest(method: .get,
+                  url: url,
+                  configuration: configuration).start(responseType: UIImage.self) { image in
+            var image = image
+            if let preprocessImage = self.preprocessImageClosure {
 
-        TNRequest(method: .get, url: url, configuration: configuration).start(responseType: UIImage.self) { image in
-            self.image = image
-            imageCache.setObject(image, forKey: self.url as NSString)
+                DispatchQueue.global(qos: .background).async {
+                    image = preprocessImage(image)
+
+                    DispatchQueue.main.async {
+                        self.image = image
+                        TNCache.shared[self.url] = image.pngData()
+                    }
+                }
+            }
         }
     }
 }
 
 public struct TNImage: View {
-    @ObservedObject var imageLoader: ImageLoader
+    @ObservedObject private var imageLoader: ImageLoader
     @State var image = UIImage()
 
     public var body: some View {
-        Image(uiImage: image).resizable().onReceive(imageLoader.didChange) { image in
+        Image(uiImage: image)
+            .resizable()
+            .onReceive(imageLoader.didChange) { image in
             self.image = image
-        }.onAppear(perform: onAppear)
+        }.onAppear(perform: self.imageLoader.loadImage)
     }
 
-    public init(withUrl url: String) {
-       self.imageLoader = ImageLoader(with: url)
-    }
-
-    func onAppear() {
-        self.imageLoader.loadImage()
+    public init(withUrl url: String,
+                configuration: TNConfiguration? = nil,
+                preprocessImage: PreprocessImageType? = nil) {
+        self.imageLoader = ImageLoader(with: url,
+                                       configuration: configuration,
+                                       preprocessImage: preprocessImage)
     }
 }

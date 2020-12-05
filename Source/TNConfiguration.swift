@@ -25,7 +25,7 @@ public typealias TNMockDelayType = (min: TimeInterval, max: TimeInterval)
 /// A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
 /// If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
 /// Also, each request can have its own TNConfiguration whose settings will override those from environment.
-public class TNConfiguration {
+public final class TNConfiguration {
     // MARK: Public properties
 
     /// The cache policy of the request.

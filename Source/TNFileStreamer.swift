@@ -21,7 +21,7 @@ import Foundation
 
 typealias ChunkType = (Data?) -> Void
 
-class TNFileStreamer {
+internal class TNFileStreamer {
     var nextChunkClosure: ChunkType?
     var bufferSize: Int = 1024
     var fileSize: Int = -1

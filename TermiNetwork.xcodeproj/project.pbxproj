@@ -29,6 +29,8 @@
 		F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8899257A80E100D9A802 /* CitiesTransformer.swift */; };
 		F31F88A4257A816400D9A802 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8895257A809600D9A802 /* City.swift */; };
 		F31F88A8257AD39400D9A802 /* TNImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88A7257AD39400D9A802 /* TNImage.swift */; };
+		F31F88B4257C056200D9A802 /* TNCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88AE257C040600D9A802 /* TNCache.swift */; };
+		F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */; };
 		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
@@ -141,6 +143,8 @@
 		F31F8895257A809600D9A802 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F31F8899257A80E100D9A802 /* CitiesTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTransformer.swift; sourceTree = "<group>"; };
 		F31F88A7257AD39400D9A802 /* TNImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNImage.swift; sourceTree = "<group>"; };
+		F31F88AE257C040600D9A802 /* TNCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNCache.swift; sourceTree = "<group>"; };
+		F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
 		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
@@ -270,13 +274,14 @@
 			isa = PBXGroup;
 			children = (
 				F3116AB02460A09E00DFE453 /* Operations */,
-				F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */,
 				F3116AAD2460A09E00DFE453 /* String+Extensions.swift */,
 				F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */,
 				F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */,
 				F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */,
 				F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */,
 				F3116AB52460A09E00DFE453 /* Data+Extensions.swift */,
+				F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */,
+				F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 				F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */,
 				F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */,
 				F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */,
+				F31F88AE257C040600D9A802 /* TNCache.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -744,6 +750,7 @@
 				F3850CAD243D104900F7CC13 /* TNLog.swift in Sources */,
 				F3116AA92460A06600DFE453 /* TNRouteProtocol.swift in Sources */,
 				F3116AB82460A09E00DFE453 /* TNRequest+Mock.swift in Sources */,
+				F31F88B4257C056200D9A802 /* TNCache.swift in Sources */,
 				F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */,
 				F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */,
 				F3116ABA2460A09E00DFE453 /* TNRequest+FileOperations.swift in Sources */,
@@ -770,6 +777,7 @@
 				F3116ABB2460A09E00DFE453 /* TNRequest+DataOperations.swift in Sources */,
 				F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */,
 				F3116ABD2460A09E00DFE453 /* Dictionary+Extensions.swift in Sources */,
+				F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */,
 				F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */,
 				F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */,
 			);

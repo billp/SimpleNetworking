@@ -24,7 +24,7 @@ enum TNMultipartBodyPart {
     case stream(stream: TNFileStreamer, fileURL: URL)
 }
 
-class TNMultipartFormDataStream: NSObject, StreamDelegate {
+internal class TNMultipartFormDataStream: NSObject, StreamDelegate {
     struct Streams {
         let input: InputStream
         let output: OutputStream

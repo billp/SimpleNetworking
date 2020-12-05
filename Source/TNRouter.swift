@@ -18,7 +18,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// This class is used to create instances of TNRouter that can be used to start requests based on the given Route.
-open class TNRouter<Route: TNRouteProtocol> {
+public final class TNRouter<Route: TNRouteProtocol> {
     // MARK: Properties
     fileprivate var environment: TNEnvironment?
     fileprivate var configuration: TNConfiguration?

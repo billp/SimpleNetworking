@@ -18,7 +18,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// Used to configure a route
-public class TNRouteConfiguration {
+public final class TNRouteConfiguration {
     var method: TNMethod
     var path: TNPath
     var params: [String: Any?]?

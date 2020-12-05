@@ -18,7 +18,7 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// This is a custom implementation of URLSessionDelegate, used to handle certification pinning
-class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
+internal final class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
     weak var request: TNRequest?
 
     var receivedData: Data?
