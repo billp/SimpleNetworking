@@ -36,18 +36,22 @@ extension UIImageView {
     }
 
     ///
-    /// Set a remote image from url.
+    /// Download a remote image with the specified url.
     ///
     /// - parameters:
-    ///     - url: The url of the remote image
-    ///     - defaultImage: the UIImage showed while the image url is downloading (optional)
-    ///     - beforeStart: a block of code executed before image download (optional)
-    ///     - preprocessImage: a block of code that preprocess the image before showing. It should
-    ///            return the new image. This block will run in the background thread (optional)
-    ///     - onFinish: a block of code executed after the completion of the download image request.
-    ///            It may fail so error will be returned in that case (optional)
+    ///     - url: The url of the image.
+    ///     - configuration: A TNConfiguration object that will be used to make the request.
+    ///     - defaultImage: A UIImage to show before the is downloaded (optional)
+    ///     - resize: Resizes the image to the given CGSize
+    ///     - beforeStart: A block of code to execute before image download (optional)
+    ///     - preprocessImage: A block of code that preprocesses the after the download.
+    ///     This block will run in the background thread (optional)
+    ///     - onFinish: A block of code to execute after the completion of the download image request.
+    ///            If the request fails, an error will be returned (optional)
     public func tn_setRemoteImage(url: String,
+                                  configuration: TNConfiguration? = nil,
                                   defaultImage: UIImage? = nil,
+                                  resize: CGSize? = nil,
                                   beforeStart: (() -> Void)? = nil,
                                   preprocessImage: PreprocessImageType? = nil,
                                   onFinish: ((UIImage?, Error?) -> Void)? = nil) throws {
@@ -63,6 +67,10 @@ extension UIImageView {
 
             DispatchQueue.global(qos: .background).async {
                 image = preprocessImage?(image) ?? image
+
+                if let resize = resize {
+                    image = image.tn_resize(resize) ?? image
+                }
 
                 DispatchQueue.main.async {
                     self.image = image

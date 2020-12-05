@@ -26,6 +26,8 @@ public typealias PreprocessImageType = ((UIImage) -> (UIImage))
 final private class ImageLoader: ObservableObject {
     var url: String
     var configuration: TNConfiguration?
+    var defaultImage: UIImage?
+    var resize: CGSize?
     var preprocessImageClosure: PreprocessImageType?
 
     var didChange = PassthroughSubject<UIImage, Never>()
@@ -37,9 +39,13 @@ final private class ImageLoader: ObservableObject {
 
     public init(with url: String,
                 configuration: TNConfiguration? = nil,
+                defaultImage: UIImage? = nil,
+                resize: CGSize? = nil,
                 preprocessImage: PreprocessImageType? = nil) {
         self.url = url
         self.configuration = configuration
+        self.defaultImage = defaultImage
+        self.resize = resize
         self.preprocessImageClosure = preprocessImage
     }
 
@@ -50,19 +56,43 @@ final private class ImageLoader: ObservableObject {
             return
         }
 
+        self.image = defaultImage ?? UIImage()
+
         TNRequest(method: .get,
                   url: url,
                   configuration: configuration).start(responseType: UIImage.self) { image in
+                    self.handleResizeImage(image: image)
+                    self.handlePreprocessImage(image: image)
+        }
+    }
+
+    // MARK: Helpers
+    private func updateImage(_ image: UIImage) {
+        self.image = image
+        TNCache.shared[self.url] = image.pngData()
+    }
+
+    private func handlePreprocessImage(image: UIImage) {
+        var image = image
+        if let preprocessImage = self.preprocessImageClosure {
+            DispatchQueue.global(qos: .background).async {
+                image = preprocessImage(image)
+
+                DispatchQueue.main.async {
+                    self.updateImage(image)
+                }
+            }
+        } else {
+            updateImage(image)
+        }
+    }
+    private func handleResizeImage(image: UIImage) {
+        if let size = self.resize {
             var image = image
-            if let preprocessImage = self.preprocessImageClosure {
-
-                DispatchQueue.global(qos: .background).async {
-                    image = preprocessImage(image)
-
-                    DispatchQueue.main.async {
-                        self.image = image
-                        TNCache.shared[self.url] = image.pngData()
-                    }
+            DispatchQueue.global(qos: .background).async {
+                image = image.tn_resize(size) ?? image
+                DispatchQueue.main.async {
+                    self.updateImage(image)
                 }
             }
         }
@@ -81,11 +111,25 @@ public struct TNImage: View {
         }.onAppear(perform: self.imageLoader.loadImage)
     }
 
+    ///
+    /// Download a remote image with the specified url.
+    ///
+    /// - parameters:
+    ///     - url: The url of the image.
+    ///     - configuration: A TNConfiguration object that will be used to make the request.
+    ///     - defaultImage: A UIImage to show before the is downloaded (optional)
+    ///     - resize: Resizes the image to the given CGSize
+    ///     - preprocessImage: A block of code that preprocesses the after the download.
+    ///     This block will run in the background thread (optional)
     public init(withUrl url: String,
                 configuration: TNConfiguration? = nil,
+                defaultImage: UIImage? = nil,
+                resize: CGSize? = nil,
                 preprocessImage: PreprocessImageType? = nil) {
         self.imageLoader = ImageLoader(with: url,
                                        configuration: configuration,
+                                       defaultImage: defaultImage,
+                                       resize: resize,
                                        preprocessImage: preprocessImage)
     }
 }

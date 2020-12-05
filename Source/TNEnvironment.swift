@@ -73,9 +73,10 @@ open class TNEnvironment {
     }
 }
 
-// MARK: CustomStringConvertible
-extension TNEnvironment: CustomStringConvertible {
-    public var description: String {
+// MARK: Extensions
+extension TNEnvironment {
+    /// Get the String value of the environment.
+    public var stringUrl: String {
         var urlComponents = [String]()
         urlComponents.append(scheme.rawValue + ":/")
         urlComponents.append(port != nil ? host + ":" + String(describing: port!) : host)

@@ -31,13 +31,13 @@ struct ContentView: View {
 
         let apps = [
             DemoApp(
-                name: "City Grid",
-                description: "TNRequest + Codables",
-                destination: AnyView(CityView())
+                name: "City Explorer",
+                description: "Router, Transformers, Codables",
+                destination: AnyView(CityExplorerView())
             ),
             DemoApp(
-                name: "City Grid - Mock Data ",
-                description: "TNRequest + Codables + Mock Data",
+                name: "City Explorer - Mock Data ",
+                description: "Router, Transformers, Codables, Mock Data",
                 destination: AnyView(Text("da"))
             ),
             DemoApp(

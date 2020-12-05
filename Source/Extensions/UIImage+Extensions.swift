@@ -22,34 +22,36 @@ import UIKit
 
 extension UIImage {
     ///
-    /// Resizes an UIImage object. (Taken from: https://stackoverflow.com/a/31314494/3473048)
+    /// Resizes an UIImage object.
     ///
     /// - parameters:
     ///     - size: The size of the new image.
     /// - returns: The new resized UIImage object.
-    func tn_resize(size: CGSize) -> UIImage? {
-        let size = size
+    func tn_resize(_ targetSize: CGSize) -> UIImage? {
+        // Determine the scale factor that preserves aspect ratio
+        let widthRatio = targetSize.width / size.width
+        let heightRatio = targetSize.height / size.height
 
-        let widthRatio  = size.width  / size.width
-        let heightRatio = size.height / size.height
+        let scaleFactor = min(widthRatio, heightRatio)
 
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if widthRatio > heightRatio {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        // Compute the new image size that preserves aspect ratio
+        let scaledImageSize = CGSize(
+            width: size.width * scaleFactor,
+            height: size.height * scaleFactor
+        )
+
+        // Draw and return the resized UIImage
+        let renderer = UIGraphicsImageRenderer(
+            size: scaledImageSize
+        )
+
+        let scaledImage = renderer.image { _ in
+            self.draw(in: CGRect(
+                origin: .zero,
+                size: scaledImageSize
+            ))
         }
 
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        return newImage
+        return scaledImage
     }
 }

@@ -84,7 +84,7 @@
 		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
 		F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */; };
-		F3F9709525758C0B0045138A /* CityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F9709425758C0B0045138A /* CityView.swift */; };
+		F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F9709425758C0B0045138A /* CityExplorerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,7 +198,7 @@
 		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
 		F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataStream.swift; sourceTree = "<group>"; };
-		F3F9709425758C0B0045138A /* CityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityView.swift; sourceTree = "<group>"; };
+		F3F9709425758C0B0045138A /* CityExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,7 +387,7 @@
 		F3556078257527C20047D46D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				F3F9709425758C0B0045138A /* CityView.swift */,
+				F3F9709425758C0B0045138A /* CityExplorerView.swift */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
 				F3A0BC12257693D2005139D5 /* AppDelegate.swift */,
@@ -823,7 +823,7 @@
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
 				F31F88A4257A816400D9A802 /* City.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
-				F3F9709525758C0B0045138A /* CityView.swift in Sources */,
+				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
 				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,

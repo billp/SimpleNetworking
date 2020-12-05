@@ -21,7 +21,7 @@ import XCTest
 import TermiNetwork
 
 class TestExtensions: XCTestCase {
-    lazy var sampleImageURL = TNEnvironment.current.description + "/sample.jpeg"
+    lazy var sampleImageURL = TNEnvironment.current.stringUrl + "/sample.jpeg"
 
     override func setUp() {
         super.setUp()

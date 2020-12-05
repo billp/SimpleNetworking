@@ -166,7 +166,7 @@ public final class TNRequest: TNOperation {
 
         if pathType == .relative {
             guard let currentEnvironment = environment else { throw TNError.environmentNotSet }
-            urlString.setString(currentEnvironment.description + "/" + path)
+            urlString.setString(currentEnvironment.stringUrl + "/" + path)
         } else {
             urlString.setString(path)
         }
