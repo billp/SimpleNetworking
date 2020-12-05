@@ -1,4 +1,0 @@
-module TermiNetwork {
-    header "/Users/billpanagiotopoulos/Projects/TermiNetwork/.build/x86_64-apple-macosx/debug/TermiNetwork.build/TermiNetwork-Swift.h"
-    requires objc
-}
