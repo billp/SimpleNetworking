@@ -37,7 +37,7 @@ struct CityExplorerView: View {
                 }
             }
         }
-        .navigationTitle("City Grid")
+        .navigationTitle("City Explorer")
         .onAppear(perform: loadCities)
         .onDisappear(perform: activeRequest?.cancel)
     }
@@ -45,9 +45,14 @@ struct CityExplorerView: View {
     func loadCities() {
         activeRequest = cityRouter.request(for: .cities).start(transformer: CitiesTransformer.self,
                                                                onSuccess: { cities in
-            self.cities = cities + cities + cities
+            self.cities = cities
         }, onFailure: { (error, _) in
-            self.errorMessage = error.localizedDescription
+            switch error {
+            case .canceled:
+                break
+            default:
+                self.errorMessage = error.localizedDescription
+            }
         })
     }
 }
@@ -58,18 +63,24 @@ struct CityRow: View {
     var thumbHeight: CGFloat
 
     var body: some View {
-        NavigationLink(destination: Text("test")) {
+        NavigationLink(destination: CityExplorerDetails(city: self.city)) {
             Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0)
                 .frame(width: thumbWidth, height: thumbHeight)
-                .overlay(
-                    TNImage(withUrl: TNEnvironment.current.stringUrl + city.thumb,
-                            resize: CGSize(width: thumbWidth * UIScreen.main.scale,
-                                           height: thumbHeight * UIScreen.main.scale))
-                        .aspectRatio(contentMode: .fill)
-                    )
+                .overlay(thumbView)
                 .cornerRadius(10)
             Text(city.name).font(.headline)
         }
+    }
+
+    var thumbView: AnyView {
+        guard let thumb = city.thumb else {
+            return AnyView(EmptyView())
+        }
+        return AnyView(
+            TNImage(withUrl: TNEnvironment.current.stringUrl + thumb,
+                resize: CGSize(width: thumbWidth * UIScreen.main.scale,
+                               height: thumbHeight * UIScreen.main.scale))
+                .aspectRatio(contentMode: .fill))
     }
 }
 

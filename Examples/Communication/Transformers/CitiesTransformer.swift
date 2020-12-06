@@ -15,8 +15,10 @@ final class CitiesTransformer: TNTransformer<[RSCity], [City]> {
             City(id: UUID(),
                  cityID: rsCity.id,
                  name: rsCity.name,
+                 description: rsCity.description,
                  countryName: rsCity.countryName,
-                 thumb: rsCity.thumb)
+                 thumb: rsCity.thumb,
+                 image: rsCity.image)
         }
     }
 }

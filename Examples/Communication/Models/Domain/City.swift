@@ -12,6 +12,8 @@ struct City: Identifiable {
     let id: UUID
     let cityID: Int
     let name: String
+    let description: String?
     let countryName: String
-    let thumb: String
+    let thumb: String?
+    let image: String?
 }

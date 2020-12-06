@@ -46,6 +46,8 @@
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
+		F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */; };
+		F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F9257D2A83003EFB1F /* CityTransformer.swift */; };
 		F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
 		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
@@ -164,6 +166,8 @@
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
+		F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerDetails.swift; sourceTree = "<group>"; };
+		F37A17F9257D2A83003EFB1F /* CityTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformer.swift; sourceTree = "<group>"; };
 		F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNSessionTaskFactory.swift; sourceTree = "<group>"; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				F31F8899257A80E100D9A802 /* CitiesTransformer.swift */,
+				F37A17F9257D2A83003EFB1F /* CityTransformer.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -397,15 +402,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F3556078257527C20047D46D /* Shared */ = {
+		F3556078257527C20047D46D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				F3F9709425758C0B0045138A /* CityExplorerView.swift */,
+				F37A17F0257D2927003EFB1F /* City Explorer */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
 				F3A0BC12257693D2005139D5 /* AppDelegate.swift */,
 			);
-			path = Shared;
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		F37A17F0257D2927003EFB1F /* City Explorer */ = {
+			isa = PBXGroup;
+			children = (
+				F3F9709425758C0B0045138A /* CityExplorerView.swift */,
+				F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */,
+			);
+			path = "City Explorer";
 			sourceTree = "<group>";
 		};
 		F3850C78243D103700F7CC13 /* Tests */ = {
@@ -538,7 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				F3A0BC06257692D7005139D5 /* Communication */,
-				F3556078257527C20047D46D /* Shared */,
+				F3556078257527C20047D46D /* Screens */,
 				F3D16EB42575288100F7B523 /* Supporting Files */,
 			);
 			path = Examples;
@@ -841,8 +855,10 @@
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
+				F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
 				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,
+				F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */,
 				F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

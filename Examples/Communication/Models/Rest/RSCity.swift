@@ -11,6 +11,9 @@ import Foundation
 struct RSCity: Codable {
     let id: Int
     let name: String
+    let description: String?
     let countryName: String
-    let thumb: String
+    let thumb: String?
+    let image: String?
+
 }
