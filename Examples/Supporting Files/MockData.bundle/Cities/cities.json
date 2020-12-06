@@ -1,0 +1,38 @@
+[
+  {
+    "id" : 24,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--687bfb28cf56ed645dce2477dd4f1dba75a6622b\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/athens.jpg",
+    "name" : "Athens",
+    "country_name" : "Greece"
+  },
+  {
+    "id" : 25,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cb7226c89fcff3cccc6e1dd572ffa2bd9e25199a\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/yokohama.jpg",
+    "name" : "Yokohama",
+    "country_name" : "Japan"
+  },
+  {
+    "id" : 23,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBJdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--9145363fe9db5685e247513778be063a5e91a5eb\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/paris.jpg",
+    "name" : "Paris",
+    "country_name" : "France"
+  },
+  {
+    "id" : 26,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--91a7d99dcae930b2abf5d94b3386cb7560d7bf74\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/cairo.jpeg",
+    "name" : "Cairo",
+    "country_name" : "Egypt"
+  },
+  {
+    "id" : 27,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBKdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--4a0973405f17ea8d1cfff5c0bfed4ebd5b1433f3\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/barcelona.jpg",
+    "name" : "Barcelona",
+    "country_name" : "Spain"
+  },
+  {
+    "id" : 28,
+    "thumb" : "\/rails\/active_storage\/representations\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBLQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--de5cb9417f562c98aacac7f9fbed641ca0b945a5\/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCam9MY21WemFYcGxTU0lOTkRBd2VEUXdNRDRHT2daRlZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--ab4a1a59a129eb2f2f03a2094b1137feef6c38d4\/prague.jpeg",
+    "name" : "Prague",
+    "country_name" : "Czech Republic"
+  }
+]

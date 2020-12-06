@@ -57,7 +57,7 @@ class TestTNErrors: XCTestCase {
                     expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -82,7 +82,7 @@ class TestTNErrors: XCTestCase {
                         expectation.fulfill()
                     })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -120,7 +120,7 @@ class TestTNErrors: XCTestCase {
                                                         failed = true
                                                     }).start()
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -147,7 +147,7 @@ class TestTNErrors: XCTestCase {
             }
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -165,7 +165,7 @@ class TestTNErrors: XCTestCase {
             failed = true
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -193,7 +193,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed && GlobalErrorHandler.failed)
     }
@@ -223,7 +223,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed && !GlobalErrorHandler.failed)
     }
@@ -248,7 +248,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -270,7 +270,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -297,7 +297,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -323,7 +323,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -337,7 +337,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         }, onFailure: { error, _ in
             switch error {
-            case .cancelled:
+            case .canceled:
                 failed = false
             default:
                 failed = true
@@ -347,7 +347,7 @@ class TestTNErrors: XCTestCase {
 
         request.cancel()
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }

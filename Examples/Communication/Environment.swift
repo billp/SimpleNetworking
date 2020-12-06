@@ -26,6 +26,9 @@ enum Environment: TNEnvironmentProtocol {
         configuration.keyDecodingStrategy = .convertFromSnakeCase
         configuration.verbose = true
         configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
+        if let path = Bundle.main.path(forResource: "MockData", ofType: "bundle") {
+            configuration.mockDataBundle = Bundle(path: path)
+        }
         return configuration
     }
 }

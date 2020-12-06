@@ -87,7 +87,7 @@ class TestTNQueue: XCTestCase {
             })
         }
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(queue.operationCount == 0 && !completedWithError)
     }
@@ -156,7 +156,7 @@ class TestTNQueue: XCTestCase {
             })
         }
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(queue.operationCount == 0 && completedWithError)
     }
 
@@ -188,7 +188,7 @@ class TestTNQueue: XCTestCase {
             }, onFailure: { _, _ in })
         }
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(queue.operationCount == 0 && completedWithError)
     }
 
@@ -237,7 +237,7 @@ class TestTNQueue: XCTestCase {
                 numberOfRequests -= 1
             }, onFailure: { error, _ in
 
-                if case .cancelled(_) = error {
+                if case .canceled(_) = error {
 
                 } else {
                     numberOfRequests -= 1

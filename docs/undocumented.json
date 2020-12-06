@@ -23,16 +23,9 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
-      "line": 72,
+      "line": 116,
       "symbol": "TNImage",
       "symbol_kind": "source.lang.swift.decl.struct",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
-      "line": 84,
-      "symbol": "TNImage.init(withUrl:configuration:preprocessImage:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -45,7 +38,7 @@
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift",
       "line": 59,
-      "symbol": "TNConfiguration.init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:useMockData:mockDelay:keyDecodingStrategy:errorHandlers:)",
+      "symbol": "TNConfiguration.init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:mockDataEnabled:mockDelay:keyDecodingStrategy:errorHandlers:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
@@ -58,7 +51,7 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNEnvironment.swift",
-      "line": 46,
+      "line": 48,
       "symbol": "TNEnvironment.current",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"

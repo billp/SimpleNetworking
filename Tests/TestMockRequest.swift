@@ -32,7 +32,7 @@ class TestMockRequests: XCTestCase {
 
         if let bundlePath = Bundle(for: TestTNConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
             conf.mockDataBundle = Bundle(path: bundlePath)
-            conf.useMockData = true
+            conf.mockDataEnabled = true
         }
 
         return conf
@@ -49,7 +49,7 @@ class TestMockRequests: XCTestCase {
 
         if let bundlePath = Bundle(for: TestTNConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
             conf.mockDataBundle = Bundle(path: bundlePath)
-            conf.useMockData = true
+            conf.mockDataEnabled = true
             conf.mockDelay = TNMockDelayType(min: 0.3, max: 2.05)
         }
 
@@ -98,7 +98,7 @@ class TestMockRequests: XCTestCase {
                                                     expectation.fulfill()
                                                 }, onFailure: nil)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
 
@@ -119,7 +119,7 @@ class TestMockRequests: XCTestCase {
                                                         expectation.fulfill()
                                                     }, onFailure: nil)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
 

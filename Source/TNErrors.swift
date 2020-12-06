@@ -89,7 +89,7 @@ extension TNError: LocalizedError {
         case .canceled(let error):
             return NSLocalizedString("The request has been canceled: ", comment: "TNError") + error.localizedDescription
         case .invalidMockData(let path):
-            return String(format: NSLocalizedString("Invalid mock data file for: %@", comment: "TNError"), path)
+            return String(format: NSLocalizedString("Invalid mock data file: '%@'", comment: "TNError"), path)
         case .middlewareError(let error):
             return String(format: NSLocalizedString("Middleware error: %@", comment: "TNError"), String(describing: error))
         case .invalidMultipartParams:

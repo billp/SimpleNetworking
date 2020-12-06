@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (82% documented)
+         (84% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -105,6 +105,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Data.html">Data</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Decodable.html">Decodable</a>
               </li>
@@ -198,9 +201,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So11UIImageViewC12TermiNetworkE17tn_setRemoteImage3url07defaultH011beforeStart010preprocessH08onFinishySS_So0A0CSgyycSgA2KcSgyAL_s5Error_pSgtcSgtKF"></a>
-                    <a name="//apple_ref/swift/Method/tn_setRemoteImage(url:defaultImage:beforeStart:preprocessImage:onFinish:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So11UIImageViewC12TermiNetworkE17tn_setRemoteImage3url07defaultH011beforeStart010preprocessH08onFinishySS_So0A0CSgyycSgA2KcSgyAL_s5Error_pSgtcSgtKF">tn_setRemoteImage(url:<wbr>defaultImage:<wbr>beforeStart:<wbr>preprocessImage:<wbr>onFinish:<wbr>)</a>
+                    <a name="/s:So11UIImageViewC12TermiNetworkE17tn_setRemoteImage3url13configuration07defaultH06resize11beforeStart010preprocessH08onFinishySS_AC15TNConfigurationCSgSo0A0CSgSo6CGSizeVSgyycSgA2PcSgyAQ_s5Error_pSgtcSgtKF"></a>
+                    <a name="//apple_ref/swift/Method/tn_setRemoteImage(url:configuration:defaultImage:resize:beforeStart:preprocessImage:onFinish:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11UIImageViewC12TermiNetworkE17tn_setRemoteImage3url13configuration07defaultH06resize11beforeStart010preprocessH08onFinishySS_AC15TNConfigurationCSgSo0A0CSgSo6CGSizeVSgyycSgA2PcSgyAQ_s5Error_pSgtcSgtKF">tn_setRemoteImage(url:<wbr>configuration:<wbr>defaultImage:<wbr>resize:<wbr>beforeStart:<wbr>preprocessImage:<wbr>onFinish:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -208,7 +211,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Set a remote image from url.</p>
+                        <p>Download a remote image with the specified url.</p>
 
                       </div>
                       <div class="declaration">
@@ -216,7 +219,9 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tn_setRemoteImage</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                              <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNConfiguration.html">TNConfiguration</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
                               <span class="n">defaultImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+                              <span class="nv">resize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
                               <span class="nv">beforeStart</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
                               <span class="nv">preprocessImage</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork19PreprocessImageTypea">PreprocessImageType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
                               <span class="nv">onFinish</span><span class="p">:</span> <span class="p">((</span><span class="kt">UIImage</span><span class="p">?,</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
@@ -235,7 +240,19 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The url of the remote image</p>
+                                  <p>The url of the image.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A TNConfiguration object that will be used to make the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -247,7 +264,19 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>the UIImage showed while the image url is downloading (optional)</p>
+                                  <p>A UIImage to show before the is downloaded (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>resize</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Resizes the image to the given CGSize</p>
                                 </div>
                               </td>
                             </tr>
@@ -259,7 +288,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>a block of code executed before image download (optional)</p>
+                                  <p>A block of code to execute before image download (optional)</p>
                                 </div>
                               </td>
                             </tr>
@@ -271,8 +300,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>a block of code that preprocess the image before showing. It should
-   return the new image. This block will run in the background thread (optional)</p>
+                                  <p>A block of code that preprocesses the after the download.
+This block will run in the background thread (optional)</p>
                                 </div>
                               </td>
                             </tr>
@@ -284,8 +313,8 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>a block of code executed after the completion of the download image request.
-   It may fail so error will be returned in that case (optional)</p>
+                                  <p>A block of code to execute after the completion of the download image request.
+   If the request fails, an error will be returned (optional)</p>
                                 </div>
                               </td>
                             </tr>
@@ -303,7 +332,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-05)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-06)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

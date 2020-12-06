@@ -20,4 +20,6 @@ class GlobalErrorHandler: TNErrorHandlerProtocol {
     func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
         !GlobalErrorHandler.skip
     }
+
+    required init() { }
 }

@@ -11,8 +11,6 @@ import SwiftUI
 import TermiNetwork
 
 struct CityExplorerDetails: View {
-    let cityRouter = TNRouter<CityRoute>()
-
     @State var activeRequest: TNRequest?
     @State var city: City
     @State var errorMessage: String?
@@ -26,8 +24,7 @@ struct CityExplorerDetails: View {
                     .accentColor(.red)
                     .font(.caption)
                     .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30))
-            }
-            else if !cityFetched {
+            } else if !cityFetched {
                 ProgressView()
             } else {
                 GeometryReader { geometry in
@@ -43,12 +40,19 @@ struct CityExplorerDetails: View {
     }
 
     func loadCity() {
-        activeRequest = cityRouter
+        activeRequest = TNRouter<CityRoute>()
             .request(for: .city(id: city.cityID))
-            .start(transformer: CityTransformer.self) { city in
-            self.city = city
-            self.cityFetched = true
-        }
+            .start(transformer: CityTransformer.self, onSuccess: { city in
+                self.city = city
+                self.cityFetched = true
+            }, onFailure: { (error, _) in
+                switch error {
+                case .canceled:
+                    break
+                default:
+                    self.errorMessage = error.localizedDescription
+                }
+            })
     }
 }
 
@@ -58,29 +62,23 @@ struct CityDetailsEntry: View {
     var imageHeight: CGFloat
 
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                VStack {
-                    Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0)
-                        .overlay(thumbView)
-                        .cornerRadius(10)
-                        .frame(height: imageHeight)
-                    Text(city.description ?? "")
-                        .font(.body)
-                }
-                .padding([.leading, .trailing, .bottom], 20)
+        ScrollView {
+            VStack {
+                Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0)
+                    .overlay(thumbView)
+                    .cornerRadius(10)
+                    .frame(height: imageHeight)
+                Text(city.description ?? "")
+                    .font(.body)
             }
+            .padding([.leading, .trailing, .bottom], 20)
         }
     }
 
     var thumbView: AnyView {
-        guard let image = city.image else {
-            return AnyView(EmptyView())
-        }
-        return AnyView(
-            TNImage(withUrl: TNEnvironment.current.stringUrl + image,
-                resize: CGSize(width: imageWidth * UIScreen.main.scale,
-                               height: imageHeight * UIScreen.main.scale))
-                .aspectRatio(contentMode: .fill))
+        AnyView(TNImage(with: TNRouter<CityRoute>().request(for: .image(city: city)),
+                        resize: CGSize(width: imageWidth * UIScreen.main.scale,
+                                       height: imageHeight * UIScreen.main.scale))
+                    .aspectRatio(contentMode: .fill))
     }
 }

@@ -11,7 +11,7 @@ import TermiNetwork
 import Combine
 
 struct CityExplorerView: View {
-    let cityRouter = TNRouter<CityRoute>()
+    var usesMockData: Bool = false
 
     @State var cities: [City] = []
     @State var request: TNRequest?
@@ -43,8 +43,12 @@ struct CityExplorerView: View {
     }
 
     func loadCities() {
-        activeRequest = cityRouter.request(for: .cities).start(transformer: CitiesTransformer.self,
-                                                               onSuccess: { cities in
+        TNEnvironment.current.configuration?.mockDataEnabled = usesMockData
+
+        activeRequest = TNRouter<CityRoute>()
+            .request(for: .cities)
+            .start(transformer: CitiesTransformer.self,
+                   onSuccess: { cities in
             self.cities = cities
         }, onFailure: { (error, _) in
             switch error {
@@ -73,17 +77,13 @@ struct CityRow: View {
     }
 
     var thumbView: AnyView {
-        guard let thumb = city.thumb else {
-            return AnyView(EmptyView())
-        }
+        let request = TNRouter<CityRoute>().request(for: .thumb(city: city))
         return AnyView(
-            TNImage(withUrl: TNEnvironment.current.stringUrl + thumb,
-                resize: CGSize(width: thumbWidth * UIScreen.main.scale,
-                               height: thumbHeight * UIScreen.main.scale))
+            TNImage(with: request, resize: CGSize(width: thumbWidth * UIScreen.main.scale,
+                                                  height: thumbHeight * UIScreen.main.scale))
                 .aspectRatio(contentMode: .fill))
     }
 }
-
 
 struct CityExplorerView_Previews: PreviewProvider {
     static var previews: some View {

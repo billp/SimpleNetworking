@@ -77,7 +77,7 @@ class TestDownloadOperations: XCTestCase {
                 expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 1030)
+        wait(for: [expectation], timeout: 500)
 
         XCTAssert(!failed)
     }
@@ -102,7 +102,7 @@ class TestDownloadOperations: XCTestCase {
                 expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 1030)
+        wait(for: [expectation], timeout: 500)
 
         XCTAssert(failed)
     }

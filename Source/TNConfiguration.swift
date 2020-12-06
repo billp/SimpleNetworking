@@ -43,7 +43,7 @@ public final class TNConfiguration {
     /// The Bundle object of mock data used when useMockData is true.
     public var mockDataBundle: Bundle?
     /// Enables or disables  request mocking.
-    public var useMockData: Bool?
+    public var mockDataEnabled: Bool?
     /// Specifies a delay when mock data is used.
     public var mockDelay: TNMockDelayType?
     /// Specifies a key decoding strategy. Take a look
@@ -63,7 +63,7 @@ public final class TNConfiguration {
                 verbose: Bool? = nil,
                 headers: [String: String]? = nil,
                 mockDataBundle: Bundle? = nil,
-                useMockData: Bool? = nil,
+                mockDataEnabled: Bool? = nil,
                 mockDelay: TNMockDelayType? = nil,
                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil,
                 errorHandlers: [TNErrorHandlerProtocol.Type]? = nil) {
@@ -74,7 +74,7 @@ public final class TNConfiguration {
         self.verbose = verbose
         self.headers = headers
         self.mockDataBundle = mockDataBundle
-        self.useMockData = useMockData
+        self.mockDataEnabled = mockDataEnabled
         self.mockDelay = mockDelay
         self.keyDecodingStrategy = keyDecodingStrategy
         self.errorHandlers = errorHandlers
@@ -109,7 +109,7 @@ extension TNConfiguration: NSCopying {
         configuration.headers = headers
         configuration.mockDataBundle = mockDataBundle
         configuration.mockDelay = mockDelay
-        configuration.useMockData = useMockData
+        configuration.mockDataEnabled = mockDataEnabled
         configuration.keyDecodingStrategy = keyDecodingStrategy
         configuration.errorHandlers = errorHandlers
         return configuration
@@ -124,7 +124,7 @@ extension TNConfiguration {
                                verbose: false,
                                headers: [:],
                                mockDataBundle: nil,
-                               useMockData: false,
+                               mockDataEnabled: false,
                                mockDelay: TNMockDelayType(min: 0.01, max: 0.07))
     }
 
@@ -160,8 +160,8 @@ extension TNConfiguration {
         if let mockDataBundle = overrideConfiguration.mockDataBundle {
             clone.mockDataBundle = mockDataBundle
         }
-        if let useMockData = overrideConfiguration.useMockData {
-            clone.useMockData = useMockData
+        if let mockDataEnabled = overrideConfiguration.mockDataEnabled {
+            clone.mockDataEnabled = mockDataEnabled
         }
         if let mockDelay = overrideConfiguration.mockDelay {
             clone.mockDelay = mockDelay

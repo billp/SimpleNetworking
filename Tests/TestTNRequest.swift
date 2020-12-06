@@ -66,7 +66,7 @@ class TestTNRequest: XCTestCase {
         }, onFailure: { _, _ in
             expectation.fulfill()
         })
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -85,7 +85,7 @@ class TestTNRequest: XCTestCase {
         }, onFailure: { (_, _) in
             expectation.fulfill()
         })
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -110,7 +110,7 @@ class TestTNRequest: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -137,7 +137,7 @@ class TestTNRequest: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -163,7 +163,7 @@ class TestTNRequest: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -188,7 +188,7 @@ class TestTNRequest: XCTestCase {
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -204,7 +204,7 @@ class TestTNRequest: XCTestCase {
         self.sampleRequest(queue: queue)
         self.sampleRequest(queue: queue)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(queue.operationCount == 3)
     }
@@ -223,7 +223,7 @@ class TestTNRequest: XCTestCase {
         sampleRequest(queue: queue)
         sampleRequest(queue: queue)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
     }
@@ -240,7 +240,7 @@ class TestTNRequest: XCTestCase {
 
         sampleRequest(queue: queue)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)
     }
 
@@ -256,7 +256,7 @@ class TestTNRequest: XCTestCase {
 
         sampleRequest(onSuccess: { _ in })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)
     }
 
@@ -276,7 +276,7 @@ class TestTNRequest: XCTestCase {
             expectation.fulfill()
         }, onFailure: nil)
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)
     }
 
@@ -323,7 +323,7 @@ class TestTNRequest: XCTestCase {
             expectation1.fulfill()
         })
 
-        wait(for: [expectation1], timeout: 10)
+        wait(for: [expectation1], timeout: 60)
 
         XCTAssert(!failed)
 
@@ -346,7 +346,7 @@ class TestTNRequest: XCTestCase {
             XCTAssert(!failed)
         })
 
-        wait(for: [expectation2], timeout: 10)
+        wait(for: [expectation2], timeout: 60)
     }
 
     func testMiddleware() {
@@ -364,7 +364,7 @@ class TestTNRequest: XCTestCase {
                         expectation.fulfill()
                    })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)
     }
 

@@ -23,9 +23,9 @@ struct DemoApp: Identifiable  {
                destination: AnyView(CityExplorerView())
            ),
            DemoApp(
-               name: "City Explorer - Mock Data ",
+               name: "City Explorer - Offline Mode",
                description: "Router, Transformers, Codables, Mock Data",
-               destination: AnyView(Text("da"))
+               destination: AnyView(CityExplorerView(usesMockData: true))
            ),
            DemoApp(
                name: "Certificate Pinning",

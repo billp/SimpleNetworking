@@ -30,7 +30,6 @@ struct ContentView: View {
             }
             .navigationTitle(Text("TermiNetwork"))
         }
-
     }
 }
 

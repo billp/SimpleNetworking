@@ -15,6 +15,34 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 24,
+      "symbol": "PreprocessImageType",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 72,
+      "symbol": "TNImage",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 84,
+      "symbol": "TNImage.init(withUrl:configuration:preprocessImage:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNCache.swift",
+      "line": 25,
+      "symbol": "TNCache.shared",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift",
       "line": 59,
       "symbol": "TNConfiguration.init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:useMockData:mockDelay:keyDecodingStrategy:errorHandlers:)",
@@ -121,14 +149,14 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 163,
+      "line": 153,
       "symbol": "TNRequest.init(route:environment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 272,
+      "line": 262,
       "symbol": "TNRequest.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

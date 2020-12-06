@@ -19,7 +19,7 @@
 
 extension TNRequest {
     internal func shouldMockRequest() -> Bool {
-        return self.configuration.useMockData ?? false
+        return self.configuration.mockDataEnabled ?? false
     }
 
     internal func createMockRequest(request: URLRequest,
@@ -33,8 +33,12 @@ extension TNRequest {
             return fakeSession
         }
 
+        let subdirectory = filePath
+            .components(separatedBy: "/")
+            .dropLast()
+            .joined(separator: "/")
+
         if  let filenameWithExt = filePath.components(separatedBy: "/").last,
-            let subdirectory = filePath.components(separatedBy: "/").first,
             let filename = filenameWithExt.components(separatedBy: ".").first,
             let url = configuration.mockDataBundle?.url(forResource: filename,
                                                         withExtension: filenameWithExt
@@ -47,7 +51,7 @@ extension TNRequest {
             }
         } else {
             randomizeResponse {
-                onFailure?(.invalidMockData(self.path), nil)
+                onFailure?(.invalidMockData(filePath), nil)
             }
         }
 

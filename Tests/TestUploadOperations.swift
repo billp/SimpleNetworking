@@ -86,7 +86,7 @@ class TestUploadOperations: XCTestCase {
         let checksum = TestHelpers.sha256(url: URL(fileURLWithPath: filePath))
 
         router.request(for: .dataUpload(data: uploadData, param: "bhbbrbrbrhbh"))
-            .startUpload(transformer: TestUploadTrasnformer(),
+            .startUpload(transformer: TestUploadTrasnformer.self,
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
@@ -138,7 +138,7 @@ class TestUploadOperations: XCTestCase {
             })
         }
 
-        wait(for: [expectation], timeout: 1030)
+        wait(for: [expectation], timeout: 500)
 
         XCTAssert(successCount == iterations && progressSuccessCount == iterations)
     }
@@ -201,7 +201,7 @@ class TestUploadOperations: XCTestCase {
                 expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 60)
 
         XCTAssert(failed)
     }

@@ -46,8 +46,8 @@ internal class TNLog {
             let headers = urlRequest.allHTTPHeaderFields
 
             print(String(format: "🌎 URL: %@", url))
-            if request.configuration.useMockData == true {
-                print("🗂 Uses mock data")
+            if request.configuration.mockDataEnabled == true {
+                print("🗂 Mock Data Enabled.")
             }
             print(String(format: "🎛️ Method: %@", request.method.rawValue.uppercased()))
             if case .data = request.requestType,

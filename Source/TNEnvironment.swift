@@ -40,7 +40,9 @@ open class TNEnvironment {
     var host: String
     var port: Int?
     var suffix: TNPath?
-    var configuration: TNConfiguration?
+
+    /// The configuration object.
+    public var configuration: TNConfiguration?
 
     // MARK: Static members
     public static var current: TNEnvironment!
