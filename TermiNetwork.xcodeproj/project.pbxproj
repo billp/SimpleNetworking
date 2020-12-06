@@ -31,6 +31,8 @@
 		F31F88A8257AD39400D9A802 /* TNImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88A7257AD39400D9A802 /* TNImage.swift */; };
 		F31F88B4257C056200D9A802 /* TNCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88AE257C040600D9A802 /* TNCache.swift */; };
 		F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */; };
+		F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */; };
+		F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88D3257CDA7700D9A802 /* DemoApp.swift */; };
 		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
@@ -145,6 +147,8 @@
 		F31F88A7257AD39400D9A802 /* TNImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNImage.swift; sourceTree = "<group>"; };
 		F31F88AE257C040600D9A802 /* TNCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNCache.swift; sourceTree = "<group>"; };
 		F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNetworkErrorHandler.swift; sourceTree = "<group>"; };
+		F31F88D3257CDA7700D9A802 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
 		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 		F31F8892257A807D00D9A802 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F31F88D3257CDA7700D9A802 /* DemoApp.swift */,
 				F31F8895257A809600D9A802 /* City.swift */,
 			);
 			path = Domain;
@@ -365,6 +370,14 @@
 				F31F88A7257AD39400D9A802 /* TNImage.swift */,
 			);
 			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		F31F88C5257CCF4800D9A802 /* Error Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */,
+			);
+			path = "Error Handlers";
 			sourceTree = "<group>";
 		};
 		F32195B625783EBB000941F1 /* ErrorHandlers */ = {
@@ -495,6 +508,7 @@
 		F3A0BC06257692D7005139D5 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
+				F31F88C5257CCF4800D9A802 /* Error Handlers */,
 				F31F8890257A807300D9A802 /* Transformers */,
 				F3A0BC22257694E2005139D5 /* Models */,
 				F3A0BC21257694DC005139D5 /* Routers */,
@@ -821,7 +835,9 @@
 			files = (
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
+				F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */,
 				F31F88A4257A816400D9A802 /* City.swift in Sources */,
+				F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,

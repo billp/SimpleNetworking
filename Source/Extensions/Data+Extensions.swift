@@ -19,8 +19,11 @@
 
 import Foundation
 
-extension Data {
-    internal func deserializeJSONData<T>(
+public extension Data {
+    ///
+    /// Deserializes the JSON Data to the given type.
+    /// - returns: The deserilized object.
+    func deserializeJSONData<T>(
         withKeyDecodingStrategy keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil)
     throws -> T where T: Decodable {
         let jsonDecoder = JSONDecoder()

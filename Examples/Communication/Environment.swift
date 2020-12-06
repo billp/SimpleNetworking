@@ -25,6 +25,7 @@ enum Environment: TNEnvironmentProtocol {
         let configuration = TNConfiguration()
         configuration.keyDecodingStrategy = .convertFromSnakeCase
         configuration.verbose = true
+        configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
         return configuration
     }
 }

@@ -103,7 +103,7 @@ public final class TNQueue: OperationQueue {
 
     // MARK: Public methods
 
-    /// Adds a TNRequest instane into queue.
+    /// Adds a TNRequest instance into queue.
     ///
     /// - parameters:
     ///     - failureMode: Supported values are .continue (continues the execution of queue even if a request fails,

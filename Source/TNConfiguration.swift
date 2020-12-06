@@ -49,8 +49,8 @@ public final class TNConfiguration {
     /// Specifies a key decoding strategy. Take a look
     /// at: https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy
     public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy?
-    /// Error handlers that will be used as fallback after request failure.
-    public var errorHandlers: [TNErrorHandlerProtocol]?
+    /// Error handlers that will be used as a fallback after request failure.
+    public var errorHandlers: [TNErrorHandlerProtocol.Type]?
     /// Request middlewares
     public var requestMiddlewares: [TNRequestMiddlewareProtocol]?
 
@@ -66,7 +66,7 @@ public final class TNConfiguration {
                 useMockData: Bool? = nil,
                 mockDelay: TNMockDelayType? = nil,
                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil,
-                errorHandlers: [TNErrorHandlerProtocol]? = nil) {
+                errorHandlers: [TNErrorHandlerProtocol.Type]? = nil) {
 
         self.cachePolicy = cachePolicy
         self.timeoutInterval = timeoutInterval

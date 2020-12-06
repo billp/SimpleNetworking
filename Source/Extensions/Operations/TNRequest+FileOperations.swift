@@ -85,7 +85,7 @@ extension TNRequest {
     /// - returns: The TNRequest object.
     @discardableResult
     public func startUpload<FromType: Decodable, ToType>(queue: TNQueue? = TNQueue.shared,
-                                                         transformer: TNTransformer<FromType, ToType>,
+                                                         transformer: TNTransformer<FromType, ToType>.Type,
                                                          progressUpdate: TNProgressCallbackType?,
                                                          onSuccess: TNSuccessCallback<ToType>?,
                                                          onFailure: TNFailureCallback? = nil) -> TNRequest {
@@ -110,7 +110,7 @@ extension TNRequest {
 
             // Transformation
             do {
-                onSuccess?(try object.transform(with: transformer))
+                onSuccess?(try object.transform(with: transformer.init()))
             } catch let error {
                 guard let tnError = error as? TNError else {
                     return

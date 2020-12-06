@@ -297,7 +297,8 @@ public final class TNRequest: TNOperation {
                                tnError: TNError,
                                onFailure: TNFailureCallback?) {
 
-        configuration.errorHandlers?.forEach({ errorHandler in
+        configuration.errorHandlers?.forEach({ errorHandlerType in
+            let errorHandler = errorHandlerType.init()
             if errorHandler.shouldHandleRequestFailure(withResponse: data,
                                                        error: tnError,
                                                        request: self) {

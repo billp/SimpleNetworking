@@ -38,6 +38,9 @@ open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
     open func transform(_ object: FromType) throws -> ToType {
         throw TNError.transformationFailed
     }
+
+    /// Default initializer
+    required public override init() { }
 }
 
 public extension Decodable {

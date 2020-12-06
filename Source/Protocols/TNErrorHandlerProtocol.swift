@@ -21,7 +21,7 @@ import Foundation
 
 /// Use this protocol to create error handlers that can be passed to TNConfiguration instances.
 /// Every class that implements this protocol will be used to handle errors when a request is failed.
-public protocol TNErrorHandlerProtocol {
+public protocol TNErrorHandlerProtocol: class {
     /// This function is called when a request is failed.
     ///   - parameters:
     ///     - response: The deserialized error object
@@ -35,4 +35,7 @@ public protocol TNErrorHandlerProtocol {
     ///     - error: The TNError provided by Terminetwork
     ///     - request: The TNRequest object
     func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool
+
+    /// Default initializer
+    init()
 }
