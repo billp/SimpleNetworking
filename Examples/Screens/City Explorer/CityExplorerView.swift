@@ -38,7 +38,7 @@ struct CityExplorerView: View {
         }
         .navigationTitle("City Explorer")
         .onAppear(perform: loadCities)
-        .onDisappear(perform: activeRequest?.cancel)
+        .onDisappear(perform: onDisappear)
     }
 
     func loadCities() {
@@ -51,12 +51,17 @@ struct CityExplorerView: View {
             self.cities = cities
         }, onFailure: { (error, _) in
             switch error {
-            case .canceled:
+            case .cancelled:
                 break
             default:
                 self.errorMessage = error.localizedDescription
             }
         })
+    }
+
+    func onDisappear() {
+        activeRequest?.cancel()
+        TNEnvironment.current.configuration?.mockDataEnabled = false
     }
 }
 

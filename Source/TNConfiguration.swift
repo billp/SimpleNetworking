@@ -34,8 +34,16 @@ public final class TNConfiguration {
     public var timeoutInterval: TimeInterval?
     /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.
     public var requestBodyType: TNRequestBodyType?
+    /// The certificate file paths used for pining.
+    public var certificatePaths: [String]? {
+        didSet {
+            if let certPaths = certificatePaths {
+                setCertificateData(with: certPaths)
+            }
+        }
+    }
     /// The certificate data when certificate pinning is enabled.
-    public var certificateData: [NSData]?
+    internal var certificateData: [NSData]?
     /// Enables or disables debug mode.
     public var verbose: Bool?
     /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration.

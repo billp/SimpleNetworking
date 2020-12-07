@@ -237,7 +237,7 @@ class TestTNQueue: XCTestCase {
                 numberOfRequests -= 1
             }, onFailure: { error, _ in
 
-                if case .canceled(_) = error {
+                if case .cancelled(_) = error {
 
                 } else {
                     numberOfRequests -= 1

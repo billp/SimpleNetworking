@@ -14,6 +14,7 @@ enum CityRoute: TNRouteProtocol {
     case city(id: Int)
     case thumb(city: City)
     case image(city: City)
+    case pinning(configuration: TNConfiguration)
 
     func configure() -> TNRouteConfiguration {
         switch self {
@@ -37,6 +38,12 @@ enum CityRoute: TNRouteProtocol {
                                         path: .path([city.image ?? ""]),
                                         mockFilePath:
                                             .path(["Cities", "Images", String(format: "%i.jpg", city.cityID)]))
+        case .pinning(let configuration):
+            return TNRouteConfiguration(
+                method: .get,
+                path: .path(["cities"]),
+                configuration: configuration
+            )
         }
     }
 }

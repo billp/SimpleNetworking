@@ -30,7 +30,7 @@ struct DemoApp: Identifiable  {
            DemoApp(
                name: "Certificate Pinning",
                description: "Man-in-the-middle attack prevention",
-               destination: AnyView(Text("ds"))
+               destination: AnyView(CertificatePinningView())
            ),
            DemoApp(
                name: "Middlewares",

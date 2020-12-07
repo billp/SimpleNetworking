@@ -33,7 +33,10 @@ public extension Data {
         return try jsonDecoder.decode(T.self, from: self)
     }
 
-    internal func toJSONString() -> String? {
+    ///
+    /// Creates a JSON string (pretty printed) from Data.
+    /// - returns: The pretty printed string.
+    func toJSONString() -> String? {
         if let dictionary = try? JSONSerialization.jsonObject(with: self, options: []) {
             if let jsonData = try? JSONSerialization.data(withJSONObject: dictionary,
                                                           options: .prettyPrinted),

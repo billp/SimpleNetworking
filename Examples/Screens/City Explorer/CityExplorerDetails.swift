@@ -47,7 +47,7 @@ struct CityExplorerDetails: View {
                 self.cityFetched = true
             }, onFailure: { (error, _) in
                 switch error {
-                case .canceled:
+                case .cancelled:
                     break
                 default:
                     self.errorMessage = error.localizedDescription

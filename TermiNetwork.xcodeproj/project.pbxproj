@@ -50,6 +50,9 @@
 		F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F9257D2A83003EFB1F /* CityTransformer.swift */; };
 		F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F37A17FD257D49A8003EFB1F /* MockData.bundle */; };
 		F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */; };
+		F383AEA8257ECC8300DE43FA /* CertificatePinningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383AE9A257ECC0700DE43FA /* CertificatePinningView.swift */; };
+		F383AEAD257ED51500DE43FA /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAB257ED51500DE43FA /* forums.swift.org.cer */; };
+		F383AEAE257ED51500DE43FA /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAC257ED51500DE43FA /* herokuapp.com.cer */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
 		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
 		F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7B243D103700F7CC13 /* TestTNQueue.swift */; };
@@ -171,6 +174,9 @@
 		F37A17F9257D2A83003EFB1F /* CityTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformer.swift; sourceTree = "<group>"; };
 		F37A17FD257D49A8003EFB1F /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNSessionTaskFactory.swift; sourceTree = "<group>"; };
+		F383AE9A257ECC0700DE43FA /* CertificatePinningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatePinningView.swift; sourceTree = "<group>"; };
+		F383AEAB257ED51500DE43FA /* forums.swift.org.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = forums.swift.org.cer; path = Tests/forums.swift.org.cer; sourceTree = SOURCE_ROOT; };
+		F383AEAC257ED51500DE43FA /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = herokuapp.com.cer; path = Tests/herokuapp.com.cer; sourceTree = SOURCE_ROOT; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
 		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F3850C7B243D103700F7CC13 /* TestTNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNQueue.swift; sourceTree = "<group>"; };
@@ -397,7 +403,6 @@
 		F32C3D14243E49D0004497BC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F35B533D2443325400C1853A /* MockData.bundle */,
 				F3850C85243D103700F7CC13 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -406,6 +411,7 @@
 		F3556078257527C20047D46D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F383AE99257ECBF900DE43FA /* Pinning */,
 				F37A17F0257D2927003EFB1F /* City Explorer */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
@@ -429,6 +435,14 @@
 				F31F88D3257CDA7700D9A802 /* DemoApp.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F383AE99257ECBF900DE43FA /* Pinning */ = {
+			isa = PBXGroup;
+			children = (
+				F383AE9A257ECC0700DE43FA /* CertificatePinningView.swift */,
+			);
+			path = Pinning;
 			sourceTree = "<group>";
 		};
 		F3850C78243D103700F7CC13 /* Tests */ = {
@@ -495,6 +509,7 @@
 		F3850CB7243DAD2300F7CC13 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F35B533D2443325400C1853A /* MockData.bundle */,
 				F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */,
 				F33684D3246692E400C64471 /* photo.jpg */,
 				F3850C83243D103700F7CC13 /* forums.swift.org.cer */,
@@ -571,6 +586,8 @@
 		F3D16EB42575288100F7B523 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F383AEAB257ED51500DE43FA /* forums.swift.org.cer */,
+				F383AEAC257ED51500DE43FA /* herokuapp.com.cer */,
 				F355607B257527C40047D46D /* Assets.xcassets */,
 				F3556082257527C40047D46D /* Info.plist */,
 				F37A17FD257D49A8003EFB1F /* MockData.bundle */,
@@ -737,6 +754,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F383AEAD257ED51500DE43FA /* forums.swift.org.cer in Resources */,
+				F383AEAE257ED51500DE43FA /* herokuapp.com.cer in Resources */,
 				F355608F257527C40047D46D /* Assets.xcassets in Resources */,
 				F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */,
 			);
@@ -871,6 +890,7 @@
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
 				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,
 				F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */,
+				F383AEA8257ECC8300DE43FA /* CertificatePinningView.swift in Sources */,
 				F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

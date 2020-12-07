@@ -40,8 +40,8 @@ public enum TNError: Error {
     case networkError(Error)
     /// Thrown when a request is not succeeded (it's not 2xx). It contains the HTTP Status Code.
     case notSuccess(Int)
-    /// Thrown when a request is canceled.
-    case canceled(Error)
+    /// Thrown when a request is cancelled.
+    case cancelled(Error)
     /// Thrown when a request is mocked but the data is invalid (e.g. cannot parse JSON).
     case invalidMockData(String)
     /// Thrown when a middleware reports an error. It contains a custom type
@@ -86,8 +86,8 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Cannot convert to String", comment: "TNError")
         case .notSuccess(let code):
             return String(format: NSLocalizedString("The request returned a not success status code: %i", comment: "TNError"), code)
-        case .canceled(let error):
-            return NSLocalizedString("The request has been canceled: ", comment: "TNError") + error.localizedDescription
+        case .cancelled(let error):
+            return NSLocalizedString("The request has been cancelled: ", comment: "TNError") + error.localizedDescription
         case .invalidMockData(let path):
             return String(format: NSLocalizedString("Invalid mock data file: '%@'", comment: "TNError"), path)
         case .middlewareError(let error):

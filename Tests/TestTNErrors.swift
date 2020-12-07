@@ -337,7 +337,7 @@ class TestTNErrors: XCTestCase {
             expectation.fulfill()
         }, onFailure: { error, _ in
             switch error {
-            case .canceled:
+            case .cancelled:
                 failed = false
             default:
                 failed = true
