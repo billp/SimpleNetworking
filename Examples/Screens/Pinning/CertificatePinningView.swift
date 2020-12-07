@@ -21,7 +21,7 @@ struct CertificatePinningView: View {
     var body: some View {
         VStack {
             TextEditor(text: $responseString)
-                .frame(width: nil, height: 400)
+                .frame(width: nil, height: 300)
                 .padding(10)
                 .background(Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0))
                 .cornerRadius(5)
@@ -30,6 +30,7 @@ struct CertificatePinningView: View {
             Toggle("Valid Certificate", isOn: $isCertificateValid)
                 .padding(.top, 10)
                 .padding(.bottom, 50)
+            Spacer()
             Button(action: startRequest) {
                 Text("Start Request")
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -40,6 +41,7 @@ struct CertificatePinningView: View {
             .background(Color.blue)
             .cornerRadius(5)
             .clipped()
+            .padding(.bottom, 20)
 
         }
         .padding([.leading, .trailing], 20)
