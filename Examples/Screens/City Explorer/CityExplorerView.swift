@@ -26,8 +26,7 @@ struct CityExplorerView: View {
                     .accentColor(.red)
                     .font(.caption)
                     .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30))
-            }
-            else if cities.count == 0 {
+            } else if cities.count == 0 {
                 ProgressView()
             } else {
                 List(cities, id: \.id) { city in

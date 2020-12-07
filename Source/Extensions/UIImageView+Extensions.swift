@@ -42,7 +42,6 @@ extension UIImageView {
     ///     - configuration: A TNConfiguration object that will be used to make the request.
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
-    ///     - beforeStart: A block of code to execute before image download (optional)
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread (optional)
     ///     - onFinish: A block of code to execute after the completion of the download image request.
@@ -51,7 +50,6 @@ extension UIImageView {
                                   configuration: TNConfiguration? = nil,
                                   defaultImage: UIImage? = nil,
                                   resize: CGSize? = nil,
-                                  beforeStart: (() -> Void)? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishType? = nil) throws {
 
@@ -60,7 +58,6 @@ extension UIImageView {
                                              configuration: configuration),
                         defaultImage: defaultImage,
                         resize: resize,
-                        beforeStart: beforeStart,
                         preprocessImage: preprocessImage,
                         onFinish: onFinish)
     }
@@ -72,7 +69,6 @@ extension UIImageView {
     ///     - request: A TNRequest instance.
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
-    ///     - beforeStart: A block of code to execute before image download (optional)
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread (optional)
     ///     - onFinish: A block of code to execute after the completion of the download image request.
@@ -80,14 +76,12 @@ extension UIImageView {
     public func tn_setRemoteImage(request: TNRequest,
                                   defaultImage: UIImage? = nil,
                                   resize: CGSize? = nil,
-                                  beforeStart: (() -> Void)? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishType? = nil) throws {
 
         try makeRequest(with: request,
                         defaultImage: defaultImage,
                         resize: resize,
-                        beforeStart: beforeStart,
                         preprocessImage: preprocessImage,
                         onFinish: onFinish)
     }
@@ -96,13 +90,11 @@ extension UIImageView {
     private func makeRequest(with request: TNRequest,
                              defaultImage: UIImage? = nil,
                              resize: CGSize? = nil,
-                             beforeStart: (() -> Void)? = nil,
                              preprocessImage: ImagePreprocessType? = nil,
                              onFinish: ImageOnFinishType? = nil) throws {
         cancelActiveCallInImageView()
         self.image = defaultImage
 
-        beforeStart?()
         setActiveCallInImageView(try UIImageView.downloadImage(request: request,
                                                                onSuccess: { image in
             var image = image

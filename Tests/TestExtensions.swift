@@ -38,22 +38,13 @@ class TestExtensions: XCTestCase {
     func testImageViewRemoteURL() {
         let expectation = XCTestExpectation(description: "Test testImageViewRemoteURL")
         var failed = true
-        var tmp = 0
 
         let imageView = UIImageView()
         try? imageView.tn_setRemoteImage(url: sampleImageURL,
-                                         defaultImage: nil,
-                                         beforeStart: {
-            tmp += 1
-        }, preprocessImage: { image in
-            tmp += 1
-            if tmp != 2 {
-                failed = true
-                expectation.fulfill()
-            }
+                                         defaultImage: nil, preprocessImage: { image in
             return image
         }, onFinish: { image, error in
-            failed = !(tmp == 2 && image != nil && error == nil)
+            failed = !(image != nil && error == nil)
             expectation.fulfill()
         })
 
@@ -69,17 +60,11 @@ class TestExtensions: XCTestCase {
         let imageView = UIImageView()
         try? imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: sampleImageURL),
                                          defaultImage: nil,
-                                         beforeStart: {
+                                         preprocessImage: { image in
             tmp += 1
-        }, preprocessImage: { image in
-            tmp += 1
-            if tmp != 2 {
-                failed = true
-                expectation.fulfill()
-            }
             return image
         }, onFinish: { image, error in
-            failed = !(tmp == 2 && image != nil && error == nil)
+            failed = !(tmp == 1 && image != nil && error == nil)
             expectation.fulfill()
         })
 
