@@ -36,6 +36,11 @@ public final class TNCache {
         cache.totalCostLimit = size
     }
 
+    /// Clears cache.
+    public func clearCache() {
+        cache.removeAllObjects()
+    }
+
     subscript(key: String) -> Data? {
         get {
             cache.object(forKey: key as NSString) as Data?

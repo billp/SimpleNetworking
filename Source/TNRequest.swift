@@ -67,6 +67,10 @@ public final class TNRequest: TNOperation {
     /// values if needed.
     public var configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()
 
+    /// An associated object with the request. Use this variable to assign an object in order to use it later.
+    /// (e.g. an object to be handled by TNErrorHandlerProtocol implementations).
+    weak public var associatedObject: AnyObject?
+
     // MARK: Private properties
     private var headers: [String: String]?
     private var environment: TNEnvironment?

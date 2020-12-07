@@ -21,14 +21,16 @@ import Foundation
 import Combine
 import SwiftUI
 
-public typealias PreprocessImageType = ((UIImage) -> (UIImage))
+public typealias ImagePreprocessType = (UIImage) -> (UIImage)
+public typealias ImageOnFinishType = (UIImage?, TNError?) -> Void
 
-final private class ImageLoader: ObservableObject {
+final public class ImageLoader: ObservableObject {
     var request: TNRequest
     var url: String?
     var defaultImage: UIImage?
     var resize: CGSize?
-    var preprocessImageClosure: PreprocessImageType?
+    var preprocessImageClosure: ImagePreprocessType?
+    var onFinishImageClosure: ImageOnFinishType?
 
     var didChange = PassthroughSubject<UIImage, Never>()
     var image = UIImage() {
@@ -41,7 +43,8 @@ final private class ImageLoader: ObservableObject {
                 configuration: TNConfiguration? = nil,
                 defaultImage: UIImage? = nil,
                 resize: CGSize? = nil,
-                preprocessImage: PreprocessImageType? = nil) {
+                preprocessImage: ImagePreprocessType? = nil,
+                onFinish: ImageOnFinishType? = nil) {
         self.url = url
         self.request = TNRequest(method: .get,
                                  url: url,
@@ -49,20 +52,23 @@ final private class ImageLoader: ObservableObject {
         self.defaultImage = defaultImage
         self.resize = resize
         self.preprocessImageClosure = preprocessImage
+        self.onFinishImageClosure = onFinish
     }
 
     public init(with request: TNRequest,
                 defaultImage: UIImage? = nil,
                 resize: CGSize? = nil,
-                preprocessImage: PreprocessImageType? = nil) {
+                preprocessImage: ImagePreprocessType? = nil,
+                onFinish: ImageOnFinishType? = nil) {
         self.request = request
         self.defaultImage = defaultImage
         self.resize = resize
         self.preprocessImageClosure = preprocessImage
+        self.onFinishImageClosure = onFinish
         self.url = try? request.asRequest().url?.absoluteString
     }
 
-    func loadImage() {
+    public func loadImage() {
         if let url = url,
            let cachedImageData = TNCache.shared[url],
            let image = UIImage(data: cachedImageData) {
@@ -72,10 +78,12 @@ final private class ImageLoader: ObservableObject {
 
         self.image = defaultImage ?? UIImage()
 
-        request.start(responseType: UIImage.self) { image in
-                    self.handleResizeImage(image: image)
-                    self.handlePreprocessImage(image: image)
-        }
+        request.start(responseType: UIImage.self, onSuccess: { image in
+            self.handleResizeImage(image: image)
+            self.handlePreprocessImage(image: image)
+        }, onFailure: { (error, _) in
+            self.onFinishImageClosure?(nil, error)
+        })
     }
 
     // MARK: Helpers
@@ -94,6 +102,7 @@ final private class ImageLoader: ObservableObject {
 
                 DispatchQueue.main.async {
                     self.updateImage(image)
+                    self.onFinishImageClosure?(image, nil)
                 }
             }
         } else {
@@ -114,7 +123,7 @@ final private class ImageLoader: ObservableObject {
 }
 
 public struct TNImage: View {
-    @ObservedObject private var imageLoader: ImageLoader
+    @ObservedObject public var imageLoader: ImageLoader
     @State var image = UIImage()
 
     public var body: some View {
@@ -134,24 +143,28 @@ public struct TNImage: View {
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
-    ///     This block will run in the background thread (optional)
-    public init(withUrl url: String,
+    ///     This block will run in the background thread
+    ///     - onFinish: A block of code to execute after the completion of the request.
+    ///            If the request fails, an error will be returned
+    public init(with url: String,
                 configuration: TNConfiguration? = nil,
                 defaultImage: UIImage? = nil,
                 resize: CGSize? = nil,
-                preprocessImage: PreprocessImageType? = nil) {
+                preprocessImage: ImagePreprocessType? = nil,
+                onFinish: ImageOnFinishType? = nil) {
         self.imageLoader = ImageLoader(with: url,
                                        configuration: configuration,
                                        defaultImage: defaultImage,
                                        resize: resize,
-                                       preprocessImage: preprocessImage)
+                                       preprocessImage: preprocessImage,
+                                       onFinish: onFinish)
     }
 
     ///
     /// Download a remote image with the specified url.
     ///
     /// - parameters:
-    ///     - url: The url of the image.
+    ///     - request: A TNRequest instance.
     ///     - configuration: A TNConfiguration object that will be used to make the request.
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
@@ -160,11 +173,12 @@ public struct TNImage: View {
     public init(with request: TNRequest,
                 defaultImage: UIImage? = nil,
                 resize: CGSize? = nil,
-                preprocessImage: PreprocessImageType? = nil) {
+                preprocessImage: ImagePreprocessType? = nil,
+                onFinish: ImageOnFinishType? = nil) {
         self.imageLoader = ImageLoader(with: request,
                                        defaultImage: defaultImage,
                                        resize: resize,
-                                       preprocessImage: preprocessImage)
+                                       preprocessImage: preprocessImage,
+                                       onFinish: onFinish)
     }
-
 }

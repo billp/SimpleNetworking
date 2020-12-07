@@ -19,6 +19,7 @@
 
 import XCTest
 import TermiNetwork
+import SwiftUI
 
 class TestExtensions: XCTestCase {
     lazy var sampleImageURL = TNEnvironment.current.stringUrl + "/sample.jpeg"
@@ -55,6 +56,86 @@ class TestExtensions: XCTestCase {
             failed = !(tmp == 2 && image != nil && error == nil)
             expectation.fulfill()
         })
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testImageViewRemoteRequest() {
+        let expectation = XCTestExpectation(description: "Test testImageViewRemoteRequest")
+        var failed = true
+        var tmp = 0
+
+        let imageView = UIImageView()
+        try? imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: sampleImageURL),
+                                         defaultImage: nil,
+                                         beforeStart: {
+            tmp += 1
+        }, preprocessImage: { image in
+            tmp += 1
+            if tmp != 2 {
+                failed = true
+                expectation.fulfill()
+            }
+            return image
+        }, onFinish: { image, error in
+            failed = !(tmp == 2 && image != nil && error == nil)
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testSwiftUIImageViewRemoteRequest() {
+        TNCache.shared.clearCache()
+
+        let expectation = XCTestExpectation(description: "Test testSwiftUIImageViewRemoteRequest")
+        var failed = true
+        var tmp = 1
+
+        let image = TNImage(with: TNRequest.init(method: .get, url: sampleImageURL),
+                    defaultImage: nil,
+                    resize: nil,
+                    preprocessImage: { image in
+                        tmp += 1
+                        if tmp != 2 {
+                            failed = true
+                            expectation.fulfill()
+                        }
+                        return image
+                    }, onFinish: { image, error in
+                        failed = !(tmp == 2 && image != nil && error == nil)
+                        expectation.fulfill()
+                    })
+        image.imageLoader.loadImage()
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testSwiftUIImageViewRemoteURL() {
+        TNCache.shared.clearCache()
+
+        let expectation = XCTestExpectation(description: "Test testSwiftUIImageViewRemoteURL")
+        var failed = true
+        var tmp = 1
+
+        let image = TNImage(with: sampleImageURL,
+                    defaultImage: nil,
+                    resize: nil,
+                    preprocessImage: { image in
+                        tmp += 1
+                        if tmp != 2 {
+                            failed = true
+                            expectation.fulfill()
+                        }
+                        return image
+                    }, onFinish: { image, error in
+                        failed = !(tmp == 2 && image != nil && error == nil)
+                        expectation.fulfill()
+                    })
+        image.imageLoader.loadImage()
 
         wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)

@@ -23,10 +23,9 @@ extension UIImageView {
     private static var activeRequestsDictionary: [String: TNRequest] = [:]
     private static var imageViewQueue: TNQueue = TNQueue()
 
-    fileprivate static func downloadImage(url: String,
+    fileprivate static func downloadImage(request: TNRequest,
                                           onSuccess: @escaping TNSuccessCallback<UIImage>,
                                           onFailure: @escaping TNFailureCallback) throws -> TNRequest {
-        let request = TNRequest(method: .get, url: url, headers: nil, params: nil)
         request.start(queue: imageViewQueue,
                       responseType: UIImage.self,
                       onSuccess: onSuccess,
@@ -53,16 +52,59 @@ extension UIImageView {
                                   defaultImage: UIImage? = nil,
                                   resize: CGSize? = nil,
                                   beforeStart: (() -> Void)? = nil,
-                                  preprocessImage: PreprocessImageType? = nil,
-                                  onFinish: ((UIImage?, Error?) -> Void)? = nil) throws {
+                                  preprocessImage: ImagePreprocessType? = nil,
+                                  onFinish: ImageOnFinishType? = nil) throws {
 
+        try makeRequest(with: TNRequest.init(method: .get,
+                                             url: url,
+                                             configuration: configuration),
+                        defaultImage: defaultImage,
+                        resize: resize,
+                        beforeStart: beforeStart,
+                        preprocessImage: preprocessImage,
+                        onFinish: onFinish)
+    }
+
+    ///
+    /// Download a remote image with the specified url.
+    ///
+    /// - parameters:
+    ///     - request: A TNRequest instance.
+    ///     - defaultImage: A UIImage to show before the is downloaded (optional)
+    ///     - resize: Resizes the image to the given CGSize
+    ///     - beforeStart: A block of code to execute before image download (optional)
+    ///     - preprocessImage: A block of code that preprocesses the after the download.
+    ///     This block will run in the background thread (optional)
+    ///     - onFinish: A block of code to execute after the completion of the download image request.
+    ///            If the request fails, an error will be returned (optional)
+    public func tn_setRemoteImage(request: TNRequest,
+                                  defaultImage: UIImage? = nil,
+                                  resize: CGSize? = nil,
+                                  beforeStart: (() -> Void)? = nil,
+                                  preprocessImage: ImagePreprocessType? = nil,
+                                  onFinish: ImageOnFinishType? = nil) throws {
+
+        try makeRequest(with: request,
+                        defaultImage: defaultImage,
+                        resize: resize,
+                        beforeStart: beforeStart,
+                        preprocessImage: preprocessImage,
+                        onFinish: onFinish)
+    }
+
+    // MARK: Helpers
+    private func makeRequest(with request: TNRequest,
+                             defaultImage: UIImage? = nil,
+                             resize: CGSize? = nil,
+                             beforeStart: (() -> Void)? = nil,
+                             preprocessImage: ImagePreprocessType? = nil,
+                             onFinish: ImageOnFinishType? = nil) throws {
+        cancelActiveCallInImageView()
         self.image = defaultImage
 
         beforeStart?()
-
-        cancelActiveCallInImageView()
-
-        setActiveCallInImageView(try UIImageView.downloadImage(url: url, onSuccess: { image in
+        setActiveCallInImageView(try UIImageView.downloadImage(request: request,
+                                                               onSuccess: { image in
             var image = image
 
             DispatchQueue.global(qos: .background).async {
@@ -83,7 +125,6 @@ extension UIImageView {
         }))
     }
 
-    // MARK: Helpers
     private func getAddress() -> String {
         return String(describing: Unmanaged.passUnretained(self).toOpaque())
     }
