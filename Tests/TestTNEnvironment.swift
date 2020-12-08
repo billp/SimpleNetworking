@@ -39,6 +39,9 @@ class TestTNEnvironment: XCTestCase {
         TNEnvironment.set(Environment.httpHostWithPort)
         XCTAssert(TNEnvironment.current.stringUrl == "http://localhost:8080")
 
+        TNEnvironment.set(TNEnvironment(url: "http://www.google.com:8009/test/2"))
+        XCTAssert(TNEnvironment.current.stringUrl == "http://www.google.com:8009/test/2")
+
         TNEnvironment.set(Environment.httpHostWithPortAndSuffix)
         XCTAssert(TNEnvironment.current.stringUrl == "http://localhost:8080/v1/json")
 

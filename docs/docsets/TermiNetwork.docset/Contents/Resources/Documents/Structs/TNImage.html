@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (84% documented)
+         (81% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -47,6 +47,9 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/ImageLoader.html">ImageLoader</a>
+              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Classes/TNCache.html">TNCache</a>
               </li>
@@ -145,7 +148,10 @@
             <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork19PreprocessImageTypea">PreprocessImageType</a>
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork17ImageOnFinishTypea">ImageOnFinishType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork19ImagePreprocessTypea">ImagePreprocessType</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork30TNAfterAllRequestsCallbackTypea">TNAfterAllRequestsCallbackType</a>
@@ -202,6 +208,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12TermiNetwork7TNImageV11imageLoaderAA05ImageE0Cvp"></a>
+                    <a name="//apple_ref/swift/Property/imageLoader" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNImageV11imageLoaderAA05ImageE0Cvp">imageLoader</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@ObservedObject</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">imageLoader</span><span class="p">:</span> <span class="kt"><a href="../Classes/ImageLoader.html">ImageLoader</a></span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:7SwiftUI4ViewP4body4BodyQzvp"></a>
                     <a name="//apple_ref/swift/Property/body" class="dashAnchor"></a>
                     <a class="token" href="#/s:7SwiftUI4ViewP4body4BodyQzvp">body</a>
@@ -228,9 +262,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork7TNImageV7withUrl13configuration12defaultImage6resize010preprocessH0ACSS_AA15TNConfigurationCSgSo7UIImageCSgSo6CGSizeVSgA2McSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(withUrl:configuration:defaultImage:resize:preprocessImage:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork7TNImageV7withUrl13configuration12defaultImage6resize010preprocessH0ACSS_AA15TNConfigurationCSgSo7UIImageCSgSo6CGSizeVSgA2McSgtcfc">init(withUrl:<wbr>configuration:<wbr>defaultImage:<wbr>resize:<wbr>preprocessImage:<wbr>)</a>
+                    <a name="/s:12TermiNetwork7TNImageV4with13configuration12defaultImage6resize010preprocessG08onFinishACSS_AA15TNConfigurationCSgSo7UIImageCSgSo6CGSizeVSgA2NcSgyAO_AA7TNErrorOSgtcSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(with:configuration:defaultImage:resize:preprocessImage:onFinish:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNImageV4with13configuration12defaultImage6resize010preprocessG08onFinishACSS_AA15TNConfigurationCSgSo7UIImageCSgSo6CGSizeVSgA2NcSgyAO_AA7TNErrorOSgtcSgtcfc">init(with:<wbr>configuration:<wbr>defaultImage:<wbr>resize:<wbr>preprocessImage:<wbr>onFinish:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -245,11 +279,12 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">withUrl</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
             <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNConfiguration.html">TNConfiguration</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="n">defaultImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">resize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">preprocessImage</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork19PreprocessImageTypea">PreprocessImageType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+            <span class="nv">preprocessImage</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork19ImagePreprocessTypea">ImagePreprocessType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">onFinish</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17ImageOnFinishTypea">ImageOnFinishType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -314,7 +349,20 @@
                               <td>
                                 <div>
                                   <p>A block of code that preprocesses the after the download.
-This block will run in the background thread (optional)</p>
+This block will run in the background thread</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFinish</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A block of code to execute after the completion of the request.
+   If the request fails, an error will be returned</p>
                                 </div>
                               </td>
                             </tr>
@@ -327,9 +375,9 @@ This block will run in the background thread (optional)</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork7TNImageV4with12defaultImage6resize010preprocessF0AcA9TNRequestC_So7UIImageCSgSo6CGSizeVSgA2KcSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(with:defaultImage:resize:preprocessImage:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork7TNImageV4with12defaultImage6resize010preprocessF0AcA9TNRequestC_So7UIImageCSgSo6CGSizeVSgA2KcSgtcfc">init(with:<wbr>defaultImage:<wbr>resize:<wbr>preprocessImage:<wbr>)</a>
+                    <a name="/s:12TermiNetwork7TNImageV4with12defaultImage6resize010preprocessF08onFinishAcA9TNRequestC_So7UIImageCSgSo6CGSizeVSgA2LcSgyAM_AA7TNErrorOSgtcSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(with:defaultImage:resize:preprocessImage:onFinish:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7TNImageV4with12defaultImage6resize010preprocessF08onFinishAcA9TNRequestC_So7UIImageCSgSo6CGSizeVSgA2LcSgyAM_AA7TNErrorOSgtcSgtcfc">init(with:<wbr>defaultImage:<wbr>resize:<wbr>preprocessImage:<wbr>onFinish:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -347,7 +395,8 @@ This block will run in the background thread (optional)</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/TNRequest.html">TNRequest</a></span><span class="p">,</span>
             <span class="n">defaultImage</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">resize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">preprocessImage</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork19PreprocessImageTypea">PreprocessImageType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+            <span class="nv">preprocessImage</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork19ImagePreprocessTypea">ImagePreprocessType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">onFinish</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork17ImageOnFinishTypea">ImageOnFinishType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -358,12 +407,12 @@ This block will run in the background thread (optional)</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>url</em>
+                                <em>request</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The url of the image.</p>
+                                  <p>A TNRequest instance.</p>
                                 </div>
                               </td>
                             </tr>
@@ -430,7 +479,7 @@ This block will run in the background thread (optional)</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-06)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-08)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

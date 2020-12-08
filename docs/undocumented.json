@@ -17,15 +17,57 @@
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
       "line": 24,
-      "symbol": "PreprocessImageType",
+      "symbol": "ImagePreprocessType",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
-      "line": 116,
+      "line": 25,
+      "symbol": "ImageOnFinishType",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 27,
+      "symbol": "ImageLoader",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 42,
+      "symbol": "ImageLoader.init(with:configuration:defaultImage:resize:preprocessImage:onFinish:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 58,
+      "symbol": "ImageLoader.init(with:defaultImage:resize:preprocessImage:onFinish:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 71,
+      "symbol": "ImageLoader.loadImage()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 125,
       "symbol": "TNImage",
       "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/SwiftUI/TNImage.swift",
+      "line": 126,
+      "symbol": "TNImage.imageLoader",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -37,28 +79,28 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift",
-      "line": 59,
+      "line": 67,
       "symbol": "TNConfiguration.init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:mockDataEnabled:mockDelay:keyDecodingStrategy:errorHandlers:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNConfiguration.swift",
-      "line": 102,
+      "line": 110,
       "symbol": "TNConfiguration.copy(with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNEnvironment.swift",
-      "line": 48,
+      "line": 50,
       "symbol": "TNEnvironment.current",
       "symbol_kind": "source.lang.swift.decl.var.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNErrors.swift",
-      "line": 63,
+      "line": 65,
       "symbol": "TNError.localizedDescription",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -142,14 +184,14 @@
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 153,
+      "line": 157,
       "symbol": "TNRequest.init(route:environment:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/TNRequest.swift",
-      "line": 262,
+      "line": 266,
       "symbol": "TNRequest.start()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

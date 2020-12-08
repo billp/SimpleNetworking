@@ -105,6 +105,27 @@ class TestTNConfiguration: XCTestCase {
         }
     }
 
+    func testEnvConfigurationWithTNEnvironmentObject() {
+        TNEnvironment.set(TNEnvironment(url: "http://www.google.com/abc/def",
+                                        configuration: TestTNConfiguration.envConfiguration))
+
+        let request = router.request(for: .testHeaders)
+        let reqConf = request.configuration
+
+        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.cachePolicy == TestTNConfiguration.envConfiguration.cachePolicy)
+        XCTAssert(reqConf.timeoutInterval == TestTNConfiguration.envConfiguration.timeoutInterval)
+        XCTAssert(reqConf.requestBodyType == TestTNConfiguration.envConfiguration.requestBodyType)
+        XCTAssert(reqConf.certificatePaths == TestTNConfiguration.envConfiguration.certificatePaths)
+        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.headers == TestTNConfiguration.envConfiguration.headers)
+        if case .convertFromSnakeCase = reqConf.keyDecodingStrategy {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
+
     func testRouteConfiguration() {
         let request = router.request(for:
             .testConfigurationParameterized(conf: TestTNConfiguration.routeConfiguration))

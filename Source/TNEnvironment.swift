@@ -35,11 +35,13 @@ public enum TNURLScheme: String {
 
 /// The TNEnvironment contains information about host, port, configuration and it's used in TNRequest instances.
 open class TNEnvironment {
-    // MARK: Properties
-    var scheme: TNURLScheme
-    var host: String
-    var port: Int?
-    var suffix: TNPath?
+    private enum EnvironmentType {
+        case normal(scheme: TNURLScheme, host: String, port: Int?, suffix: TNPath?)
+        case url(String)
+    }
+
+    // MARK: Private Properties
+    private var type: EnvironmentType
 
     /// The configuration object.
     public var configuration: TNConfiguration?
@@ -47,14 +49,23 @@ open class TNEnvironment {
     // MARK: Static members
     public static var current: TNEnvironment!
 
-    /// Set a global environment for all TNRequest instances.
+    /// Set a global environment for TermiNetwork.
+    /// - parameters:
+    ///     - environment: An enum case type that impleements the TNEnvironmentProtocol.
     public static func set(_ environment: TNEnvironmentProtocol) {
         current = environment.configure()
     }
 
+    /// Set a global environment for TermiNetwork with a given String URL.
+    /// - parameters:
+    ///     - environment: A TNEnvironment object.
+    public static func set(_ environment: TNEnvironment) {
+        current = environment
+    }
+
     // MARK: Initializers
 
-    /// Instantiates an environment
+    /// Initializes an environment.
     ///
     /// - parameters:
     ///     - scheme: The scheme of the host (.http or .https)
@@ -67,10 +78,17 @@ open class TNEnvironment {
                 suffix: TNPath? = nil,
                 port: Int? = nil,
                 configuration: TNConfiguration? = nil) {
-        self.scheme = scheme
-        self.host = host
-        self.suffix = suffix
-        self.port = port
+        type = .normal(scheme: scheme, host: host, port: port, suffix: suffix)
+        self.configuration = configuration
+    }
+
+    /// Initializes an environment with an URL.
+    ///
+    /// - parameters:
+    ///     - url: The scheme of the host (.http or .https)
+    public init(url: String,
+                configuration: TNConfiguration? = nil) {
+        type = .url(url)
         self.configuration = configuration
     }
 }
@@ -79,13 +97,18 @@ open class TNEnvironment {
 extension TNEnvironment {
     /// Get the String value of the environment.
     public var stringUrl: String {
-        var urlComponents = [String]()
-        urlComponents.append(scheme.rawValue + ":/")
-        urlComponents.append(port != nil ? host + ":" + String(describing: port!) : host)
-        if let suffix = suffix {
-            urlComponents.append(suffix.convertedPath)
-        }
+        switch type {
+        case let .normal(scheme, host, port, suffix):
+            var urlComponents = [String]()
+            urlComponents.append(scheme.rawValue + ":/")
+            urlComponents.append(port != nil ? host + ":" + String(describing: port!) : host)
+            if let suffix = suffix {
+                urlComponents.append(suffix.convertedPath)
+            }
 
-        return urlComponents.joined(separator: "/")
+            return urlComponents.joined(separator: "/")
+        case let .url(url):
+            return url
+        }
     }
 }

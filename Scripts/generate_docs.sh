@@ -1,5 +1,3 @@
 #!/usr/bin/env sh
 
-jazzy --author TermiNetwork \
-      --module TermiNetwork \
-      --theme fullwidth
+jazzy --module TermiNetwork --theme fullwidth --xcodebuild-arguments -scheme,'TermiNetwork'
