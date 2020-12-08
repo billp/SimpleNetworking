@@ -21,13 +21,25 @@ import XCTest
 import TermiNetwork
 
 class TestTNConfiguration: XCTestCase {
+
+    static var bundle: Bundle = {
+        return Bundle(for: TestPinning.self)
+    }()
+
+    static var certPath: String {
+        return bundle.path(forResource: "forums.swift.org",
+                           ofType: "cer",
+                           inDirectory: nil,
+                           forLocalization: nil) ?? ""
+    }
+
     static var envConfiguration: TNConfiguration = {
         let conf = TNConfiguration()
         conf.verbose = true
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
         conf.requestBodyType = .JSON
-        conf.certificateData = [NSData()]
+        conf.certificatePaths = [certPath]
         conf.headers = ["test": "123", "test2": "abcdefg"]
         conf.keyDecodingStrategy = .convertFromSnakeCase
 
@@ -40,7 +52,7 @@ class TestTNConfiguration: XCTestCase {
         conf.cachePolicy = .returnCacheDataDontLoad
         conf.timeoutInterval = 231
         conf.requestBodyType = .xWWWFormURLEncoded
-        conf.certificateData = [NSData()]
+        conf.certificatePaths = ["test"]
         conf.headers = ["test": "test", "afb": "fff"]
         conf.keyDecodingStrategy = .useDefaultKeys
 
@@ -83,7 +95,7 @@ class TestTNConfiguration: XCTestCase {
         XCTAssert(reqConf.cachePolicy == TestTNConfiguration.envConfiguration.cachePolicy)
         XCTAssert(reqConf.timeoutInterval == TestTNConfiguration.envConfiguration.timeoutInterval)
         XCTAssert(reqConf.requestBodyType == TestTNConfiguration.envConfiguration.requestBodyType)
-        XCTAssert(reqConf.certificateData == TestTNConfiguration.envConfiguration.certificateData)
+        XCTAssert(reqConf.certificatePaths == TestTNConfiguration.envConfiguration.certificatePaths)
         XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
         XCTAssert(reqConf.headers == TestTNConfiguration.envConfiguration.headers)
         if case .convertFromSnakeCase = reqConf.keyDecodingStrategy {
@@ -108,7 +120,7 @@ class TestTNConfiguration: XCTestCase {
         XCTAssert(reqConf.cachePolicy == routeConf.cachePolicy)
         XCTAssert(reqConf.timeoutInterval == routeConf.timeoutInterval)
         XCTAssert(reqConf.requestBodyType == routeConf.requestBodyType)
-        XCTAssert(reqConf.certificateData == routeConf.certificateData)
+        XCTAssert(reqConf.certificatePaths == routeConf.certificatePaths)
         XCTAssert(reqConf.verbose == routeConf.verbose)
         XCTAssert(reqConf.headers == allHeaders)
         if case .useDefaultKeys = reqConf.keyDecodingStrategy {

@@ -100,7 +100,7 @@ public final class TNConfiguration {
             if let certData = NSData(contentsOfFile: path) {
                 self.certificateData?.append(certData)
             } else {
-                assertionFailure(String(format: "Certificate not found in %@!", path))
+                TNLog.printSimpleErrorIfNeeded(TNError.invalidCertificatePath(path))
             }
         }
     }
@@ -112,6 +112,7 @@ extension TNConfiguration: NSCopying {
         configuration.cachePolicy = cachePolicy
         configuration.timeoutInterval = timeoutInterval
         configuration.requestBodyType = requestBodyType
+        configuration.certificatePaths = certificatePaths
         configuration.certificateData = certificateData
         configuration.verbose = verbose
         configuration.headers = headers
@@ -151,6 +152,9 @@ extension TNConfiguration {
         }
         if let requestBodyType = overrideConfiguration.requestBodyType {
             clone.requestBodyType = requestBodyType
+        }
+        if let certificatePaths = overrideConfiguration.certificatePaths {
+            clone.certificatePaths = certificatePaths
         }
         if let certificateData = overrideConfiguration.certificateData {
             clone.certificateData = certificateData

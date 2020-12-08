@@ -57,6 +57,8 @@ public enum TNError: Error {
     case transformerNotImplemented
     /// Thrown when the transformation failed for some reason, e.g. Incompatible Types
     case transformationFailed
+    /// Thrown when a certificate path is invalid.
+    case invalidCertificatePath(String)
 }
 
 extension TNError: LocalizedError {
@@ -102,6 +104,8 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Transformer not implemented.", comment: "TNError")
         case .transformationFailed:
             return NSLocalizedString("Transormation Failed.", comment: "TNError")
+        case .invalidCertificatePath(let path):
+            return String(format: NSLocalizedString("Certificate not found at '%@'.", comment: "TNError"), path)
         }
     }
 }
