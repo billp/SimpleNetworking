@@ -21,7 +21,6 @@ struct CertificatePinningView: View {
     var body: some View {
         VStack {
             TextEditor(text: $responseString)
-                .frame(width: nil, height: 300)
                 .padding(10)
                 .background(Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0))
                 .cornerRadius(5)
