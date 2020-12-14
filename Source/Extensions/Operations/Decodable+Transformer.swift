@@ -36,7 +36,7 @@ open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
     ///    - object: The object that will be transformed
     /// - returns: The transformed object
     open func transform(_ object: FromType) throws -> ToType {
-        throw TNError.transformationFailed
+        fatalError("You must override this method.")
     }
 
     /// Default initializer

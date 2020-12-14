@@ -33,7 +33,7 @@ class TestTNRequest: XCTestCase {
 
     lazy var routerWithMiddleware: TNRouter<APIRoute> = {
         let configuration = TNConfiguration()
-        configuration.requestMiddlewares = [CryptoMiddleware()]
+        configuration.requestMiddlewares = [CryptoMiddleware.self]
         configuration.verbose = true
         configuration.requestBodyType = .JSON
 

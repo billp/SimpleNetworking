@@ -87,7 +87,7 @@ extension TNError: LocalizedError {
         case .cannotConvertToString:
             return NSLocalizedString("Cannot convert to String", comment: "TNError")
         case .notSuccess(let code):
-            return String(format: NSLocalizedString("The request returned a not success status code: %i", comment: "TNError"), code)
+            return String(format: NSLocalizedString("The request returned an HTTP status code: %i", comment: "TNError"), code)
         case .cancelled(let error):
             return NSLocalizedString("The request has been cancelled: ", comment: "TNError") + error.localizedDescription
         case .invalidMockData(let path):

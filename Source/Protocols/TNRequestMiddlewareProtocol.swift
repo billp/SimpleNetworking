@@ -42,4 +42,7 @@ public protocol TNRequestMiddlewareProtocol {
     ///   - returns:
     ///     - the new modified headers
     func modifyHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]?
+
+    /// Required initializer
+    init()
 }

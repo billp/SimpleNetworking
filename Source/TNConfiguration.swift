@@ -60,7 +60,7 @@ public final class TNConfiguration {
     /// Error handlers that will be used as a fallback after request failure.
     public var errorHandlers: [TNErrorHandlerProtocol.Type]?
     /// Request middlewares
-    public var requestMiddlewares: [TNRequestMiddlewareProtocol]?
+    public var requestMiddlewares: [TNRequestMiddlewareProtocol.Type]?
 
     // MARK: Initializers
 

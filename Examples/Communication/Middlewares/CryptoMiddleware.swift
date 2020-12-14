@@ -10,9 +10,10 @@ import TermiNetwork
 import CryptoSwift
 
 class CryptoMiddleware: TNRequestMiddlewareProtocol {
-    fileprivate static let key = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
-
     required init() { }
+
+    static var encryptionKey = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
+    static var decryptionKey = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
 
     func modifyBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]? {
         if let params = params, let jsonString = params.toJSONString() {
@@ -38,7 +39,7 @@ class CryptoMiddleware: TNRequestMiddlewareProtocol {
             throw TNError.middlewareError("Cannot decode base64 data to string")
         }
         do {
-            let aes = try AES.init(key: CryptoMiddleware.key.bytes, blockMode: ECB())
+            let aes = try AES.init(key: CryptoMiddleware.decryptionKey.bytes, blockMode: ECB())
             let data = Data(try aes.decrypt(base64Data.bytes))
             return data
         } catch {
@@ -48,7 +49,7 @@ class CryptoMiddleware: TNRequestMiddlewareProtocol {
 
     fileprivate func encryptedBase64(jsonString: String) throws -> String {
         do {
-            let aes = try AES.init(key: CryptoMiddleware.key.bytes, blockMode: ECB())
+            let aes = try AES.init(key: CryptoMiddleware.encryptionKey.bytes, blockMode: ECB())
             let data = Data(try aes.encrypt(jsonString.bytes))
             return data.base64EncodedString()
         } catch {

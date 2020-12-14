@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F30A298A258787320046C8E6 /* MiscRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A2989258787320046C8E6 /* MiscRoute.swift */; };
+		F30A298E2587881D0046C8E6 /* RSEncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A298D258788180046C8E6 /* RSEncryptedModel.swift */; };
+		F30A29922587884B0046C8E6 /* EncryptedModelTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */; };
+		F30A2998258788880046C8E6 /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A2997258788880046C8E6 /* EncryptedModel.swift */; };
+		F30A299B25878C5F0046C8E6 /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A2986258783B40046C8E6 /* CryptoMiddleware.swift */; };
 		F31126A5257A55E000775D7E /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A4257A55E000775D7E /* TestModel.swift */; };
 		F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A8257A560200775D7E /* TestUploadTransformer.swift */; };
 		F31126AD257A563600775D7E /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126AC257A563600775D7E /* FileResponse.swift */; };
@@ -128,6 +133,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F30A2986258783B40046C8E6 /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
+		F30A2989258787320046C8E6 /* MiscRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiscRoute.swift; sourceTree = "<group>"; };
+		F30A298D258788180046C8E6 /* RSEncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSEncryptedModel.swift; sourceTree = "<group>"; };
+		F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModelTransformer.swift; sourceTree = "<group>"; };
+		F30A2997258788880046C8E6 /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
 		F31126A4257A55E000775D7E /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		F31126A8257A560200775D7E /* TestUploadTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadTransformer.swift; sourceTree = "<group>"; };
 		F31126AC257A563600775D7E /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
@@ -247,6 +257,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F30A2985258783970046C8E6 /* Middlewares */ = {
+			isa = PBXGroup;
+			children = (
+				F30A2986258783B40046C8E6 /* CryptoMiddleware.swift */,
+			);
+			path = Middlewares;
+			sourceTree = "<group>";
+		};
 		F31126B0257A563F00775D7E /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +376,7 @@
 			children = (
 				F31F8899257A80E100D9A802 /* CitiesTransformer.swift */,
 				F37A17F9257D2A83003EFB1F /* CityTransformer.swift */,
+				F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */,
 			);
 			path = Transformers;
 			sourceTree = "<group>";
@@ -365,6 +384,7 @@
 		F31F8891257A807A00D9A802 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
+				F30A298D258788180046C8E6 /* RSEncryptedModel.swift */,
 				F3A0BC23257694F7005139D5 /* RSCity.swift */,
 			);
 			path = Rest;
@@ -374,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				F31F8895257A809600D9A802 /* City.swift */,
+				F30A2997258788880046C8E6 /* EncryptedModel.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -558,8 +579,9 @@
 			isa = PBXGroup;
 			children = (
 				F31F88C5257CCF4800D9A802 /* Error Handlers */,
-				F31F8890257A807300D9A802 /* Transformers */,
 				F3A0BC22257694E2005139D5 /* Models */,
+				F30A2985258783970046C8E6 /* Middlewares */,
+				F31F8890257A807300D9A802 /* Transformers */,
 				F3A0BC21257694DC005139D5 /* Routers */,
 				F3A0BC07257692E6005139D5 /* Environment.swift */,
 			);
@@ -570,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				F3A0BC1B25769453005139D5 /* CityRoute.swift */,
+				F30A2989258787320046C8E6 /* MiscRoute.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -892,17 +915,22 @@
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
 				F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */,
+				F30A2998258788880046C8E6 /* EncryptedModel.swift in Sources */,
+				F30A299B25878C5F0046C8E6 /* CryptoMiddleware.swift in Sources */,
 				F31F88A4257A816400D9A802 /* City.swift in Sources */,
 				F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */,
+				F30A298A258787320046C8E6 /* MiscRoute.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3211EC6258019280085E873 /* EncryptedCommunicationView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
 				F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */,
+				F30A298E2587881D0046C8E6 /* RSEncryptedModel.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
 				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,
 				F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */,
 				F383AEA8257ECC8300DE43FA /* CertificatePinningView.swift in Sources */,
+				F30A29922587884B0046C8E6 /* EncryptedModelTransformer.swift in Sources */,
 				F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
