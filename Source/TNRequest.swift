@@ -60,6 +60,7 @@ public final class TNRequest: TNOperation {
     internal var multipartFormDataStream: TNMultipartFormDataStream?
     internal var requestType: RequestType = .data
     internal var urlRequestLogInitiated: Bool = false
+    internal var responseHeadersClosure: ((URLResponse?) -> Void)?
 
     /// The start date of the request.
     public var startedAt: Date?
@@ -284,11 +285,34 @@ public final class TNRequest: TNOperation {
         dataTask?.resume()
     }
 
+    ///
+    /// Starts a request without callbacks.
+    /// - parameters:
+    ///     - queue: A TNQueue instance. If no queue is specified it uses the default one.
+    public func startEmpty(_ queue: TNQueue? = nil) -> TNRequest {
+        currentQueue = queue ?? TNQueue.shared
+        dataTask = TNSessionTaskFactory.makeDataTask(with: self,
+                                                     completionHandler: { data, urlResponse in
+            self.handleDataTaskCompleted(with: data,
+                                         urlResponse: urlResponse,
+                                         tnError: nil)
+        }, onFailure: { tnError, data in
+            self.handleDataTaskFailure(with: data,
+                                       urlResponse: nil,
+                                       tnError: tnError,
+                                       onFailure: nil)
+        })
+
+        currentQueue.addOperation(self)
+        return self
+    }
+
     func handleDataTaskCompleted(with data: Data?,
                                  urlResponse: URLResponse?,
                                  tnError: TNError?) {
 
-        duration = startedAt?.distance(to: Date())
+        self.duration = startedAt?.distance(to: Date())
+        self.responseHeadersClosure?(urlResponse)
 
         TNLog.logRequest(request: self,
                          data: data,
@@ -309,6 +333,7 @@ public final class TNRequest: TNOperation {
                                urlResponse: URLResponse?,
                                tnError: TNError,
                                onFailure: TNFailureCallback?) {
+        self.responseHeadersClosure?(urlResponse)
 
         configuration.errorHandlers?.forEach({ errorHandlerType in
             let errorHandler = errorHandlerType.init()

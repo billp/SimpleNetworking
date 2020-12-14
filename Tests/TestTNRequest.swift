@@ -381,4 +381,39 @@ class TestTNRequest: XCTestCase {
                    responseType: TestJSONParams.self,
                    onSuccess: onSuccess, onFailure: nil)
     }
+
+    func testResponseHeaders() {
+        var failed = true
+
+        let expectation = XCTestExpectation(description: "testResponseHeaders")
+
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+            .startEmpty()
+            .responseHeaders { (headers, _) in
+                failed = headers?["Content-Type"] != "application/json; charset=utf-8"
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testInvalidResponseHeaders() {
+        var failed = true
+
+        let expectation = XCTestExpectation(description: "testMiddleware")
+
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+            .responseHeaders { (_, error) in
+                if case .cannotReadResponseHeaders = error {
+                    failed = false
+                } else {
+                    failed = true
+                }
+                expectation.fulfill()
+            }
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
 }

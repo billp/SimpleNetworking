@@ -59,6 +59,10 @@ public enum TNError: Error {
     case transformationFailed
     /// Thrown when a certificate path is invalid.
     case invalidCertificatePath(String)
+    /// Thrown when the response headers cannot be retrieved.
+    /// Typicaly when you forget to call the start() method.
+    case cannotReadResponseHeaders
+
 }
 
 extension TNError: LocalizedError {
@@ -106,6 +110,8 @@ extension TNError: LocalizedError {
             return NSLocalizedString("Transormation Failed.", comment: "TNError")
         case .invalidCertificatePath(let path):
             return String(format: NSLocalizedString("Certificate not found at '%@'.", comment: "TNError"), path)
+        case .cannotReadResponseHeaders:
+            return String("Cannot read response headers. Did you forget to call to call the start() method?")
         }
     }
 }
