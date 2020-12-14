@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestTNQueue.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -36,7 +36,7 @@ class TestTNQueue: XCTestCase {
     func testQueue() {
         var numberOfRequests = 8
         let queue = TNQueue()
-        let expectation = XCTestExpectation(description: "Test queue")
+        let expectation = XCTestExpectation(description: "testQueue")
 
         queue.afterAllRequestsCallback = { error in
             expectation.fulfill()
@@ -60,7 +60,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueCompletionBlockWithoutErrorContinue() {
         let queue = TNQueue(failureMode: .continue)
-        let expectation = XCTestExpectation(description: "testQueueCompletionBlock")
+        let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithoutErrorContinue")
         var completedWithError = false
         let urls = ["http://google.com",
                     "http://google.com",
@@ -94,7 +94,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueCompletionBlockWithoutErrorCancelAll() {
         let queue = TNQueue(failureMode: .cancelAll)
-        let expectation = XCTestExpectation(description: "testQueueCompletionBlock")
+        let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithoutErrorCancelAll")
         var completedWithError = false
         let urls = ["http://google.com",
                     "http://google.com",
@@ -128,7 +128,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueCompletionBlockWithErrorContinue() {
         let queue = TNQueue(failureMode: .continue)
-        let expectation = XCTestExpectation(description: "testQueueCompletionBlock")
+        let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithErrorContinue")
         let urls = ["http://google.com",
                     "http://google.com",
                     "http://google.com",
@@ -162,7 +162,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueCompletionBlockWithErrorCancelAll() {
         let queue = TNQueue(failureMode: .cancelAll)
-        let expectation = XCTestExpectation(description: "testQueueCompletionBlock")
+        let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithErrorCancelAll")
         let urls = ["http://google.com",
                     "http://google.com",
                     "http://google.com",

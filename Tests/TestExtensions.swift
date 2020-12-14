@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestExtensions.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -102,7 +102,7 @@ class TestExtensions: XCTestCase {
     func testSwiftUIImageViewRemoteURL() {
         TNCache.shared.clearCache()
 
-        let expectation = XCTestExpectation(description: "Test testSwiftUIImageViewRemoteURL")
+        let expectation = XCTestExpectation(description: "testSwiftUIImageViewRemoteURL")
         var failed = true
         var tmp = 1
 

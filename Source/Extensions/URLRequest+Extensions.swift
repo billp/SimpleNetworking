@@ -1,5 +1,4 @@
 // Request+Extensions.swift
-// Taken from: https://gist.github.com/shaps80/ba6a1e2d477af0383e8f19b87f53661d
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -22,6 +21,7 @@ import Foundation
 
 extension URLRequest {
     /// Returns a cURL command representation of this URL request.
+    /// Taken from: https://gist.github.com/shaps80/ba6a1e2d477af0383e8f19b87f53661d
     internal var curlString: String {
         guard let url = url else { return "" }
         var baseCommand = "curl \(url.absoluteString)"

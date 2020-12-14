@@ -19,37 +19,12 @@ struct EncryptedCommunicationView: View {
 
     var body: some View {
         VStack {
-            Text("Encryption Key")
-                .font(.caption)
-                .bold()
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            TextField("Encryption key", text: $encryptionKey)
-                .padding(5)
-                .background(textFieldBackgroundColor)
-                .font(.footnote)
-                .cornerRadius(3.0)
-                .clipped()
-            Text("Decryption Key")
-                .font(.caption)
-                .bold()
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            TextField("Decryption key", text: $decryptionKey)
-                .padding(5)
-                .background(textFieldBackgroundColor)
-                .font(.footnote)
-                .cornerRadius(3.0)
-                .clipped()
-            Text("Text")
-                .font(.caption)
-                .bold()
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-            TextField("Value", text: $text)
-                .padding(5)
-                .background(textFieldBackgroundColor)
-                .font(.footnote)
-                .cornerRadius(3.0)
-                .clipped()
-
+            FieldLabel("Encryption Key")
+            CustomTextField("Encryption key", text: $encryptionKey)
+            FieldLabel("Decryption Key")
+            CustomTextField("Decryption key", text: $decryptionKey)
+            FieldLabel("Text")
+            CustomTextField("Value", text: $text)
             TextEditor(text: $responseString)
                 .padding(10)
                 .background(textFieldBackgroundColor)
@@ -68,6 +43,21 @@ struct EncryptedCommunicationView: View {
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("Encryption Layer")
+    }
 
+    func fieldLabel(_ title: String) -> some View {
+        Text(title)
+            .font(.caption)
+            .bold()
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+    }
+
+    func customTextField(_ title: String, text: Binding<String>) -> some View {
+        TextField("Decryption key", text: text)
+            .padding(5)
+            .background(textFieldBackgroundColor)
+            .font(.footnote)
+            .cornerRadius(3.0)
+            .clipped()
     }
 }

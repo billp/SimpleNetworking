@@ -1,4 +1,4 @@
-// TNRequest.swift
+// TestTNRequest.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -55,7 +55,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testHeaders() {
-        let expectation = XCTestExpectation(description: "Test headers")
+        let expectation = XCTestExpectation(description: "testHeaders")
         var failed = true
 
         router.request(for: .testHeaders)
@@ -72,7 +72,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testOverrideHeaders() {
-        let expectation = XCTestExpectation(description: "Test headers")
+        let expectation = XCTestExpectation(description: "testOverrideHeaders")
         var failed = true
 
         router.request(for: .testOverrideHeaders)
@@ -91,7 +91,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testGetParams() {
-        let expectation = XCTestExpectation(description: "Test get params")
+        let expectation = XCTestExpectation(description: "testGetParams")
         var failed = true
 
         router.request(for: .testGetParams(value1: true,
@@ -116,7 +116,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testGetParamsEscaped() {
-        let expectation = XCTestExpectation(description: "Test get params")
+        let expectation = XCTestExpectation(description: "testGetParamsEscaped")
         var failed = true
 
         router.request(for: .testGetParams(value1: true,
@@ -143,7 +143,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testPostParams() {
-        let expectation = XCTestExpectation(description: "Test post params")
+        let expectation = XCTestExpectation(description: "testPostParams")
         var failed = true
 
         router.request(for: .testPostParamsxWWWFormURLEncoded(value1: true,
@@ -169,7 +169,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testJSONRequestPostParams() {
-        let expectation = XCTestExpectation(description: "Test JSON post params")
+        let expectation = XCTestExpectation(description: "testJSONRequestPostParams")
         var failed = true
 
         router.request(for: .testPostParams(value1: true,
@@ -194,7 +194,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testBeforeAllRequests() {
-        let expectation = XCTestExpectation(description: "Test beforeEachRequestCallback")
+        let expectation = XCTestExpectation(description: "testBeforeAllRequests")
         let queue = TNQueue()
         queue.beforeAllRequestsCallback = {
             expectation.fulfill()
@@ -210,7 +210,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testAfterAllRequests() {
-        let expectation = XCTestExpectation(description: "Test testAfterAllRequests")
+        let expectation = XCTestExpectation(description: "testAfterAllRequests")
         let queue = TNQueue()
         var failed = true
 
@@ -229,7 +229,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testBeforeEachRequest() {
-        let expectation = XCTestExpectation(description: "Test beforeEachRequestCallback")
+        let expectation = XCTestExpectation(description: "testBeforeEachRequest")
         var failed = true
         let queue = TNQueue()
 
@@ -245,7 +245,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testAfterEachRequest() {
-        let expectation = XCTestExpectation(description: "Test afterEachRequestCallback")
+        let expectation = XCTestExpectation(description: "testAfterEachRequest")
         var failed = true
         TNQueue.shared.cancelAllOperations()
 
@@ -261,7 +261,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testStringResponse() {
-        let expectation = XCTestExpectation(description: "Test afterEachRequestCallback")
+        let expectation = XCTestExpectation(description: "testStringResponse")
         var failed = true
         TNQueue.shared.cancelAllOperations()
 
@@ -305,8 +305,8 @@ class TestTNRequest: XCTestCase {
     func testOverrideEnvironment() {
         TNEnvironment.set(Environment.termiNetworkRemote)
 
-        let expectation1 = XCTestExpectation(description: "Test testOverrideEnvironment")
-        let expectation2 = XCTestExpectation(description: "Test testOverrideEnvironment")
+        let expectation1 = XCTestExpectation(description: "testOverrideEnvironment1")
+        let expectation2 = XCTestExpectation(description: "testOverrideEnvironment2")
 
         var failed = true
 
@@ -352,7 +352,7 @@ class TestTNRequest: XCTestCase {
     func testMiddleware() {
         var failed = true
 
-        let expectation = XCTestExpectation(description: "Test encrypted request")
+        let expectation = XCTestExpectation(description: "testMiddleware")
 
         routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
             .start(responseType: EncryptedModel.self,

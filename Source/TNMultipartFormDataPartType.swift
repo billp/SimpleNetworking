@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TNMultipartFormDataPartType.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //

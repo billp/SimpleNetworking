@@ -48,7 +48,7 @@ class TestDownloadOperations: XCTestCase {
     }
 
     func testFileDownload() {
-        let expectation = XCTestExpectation(description: "testDataDownload")
+        let expectation = XCTestExpectation(description: "testFileDownload")
 
         var failed = true
 
@@ -83,7 +83,7 @@ class TestDownloadOperations: XCTestCase {
     }
 
     func testInvalidFileDownload() {
-        let expectation = XCTestExpectation(description: "testDataDownload")
+        let expectation = XCTestExpectation(description: "testInvalidFileDownload")
 
         var failed = true
 

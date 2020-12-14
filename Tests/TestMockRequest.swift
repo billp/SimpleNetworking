@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestMockRequests.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -89,7 +89,7 @@ class TestMockRequests: XCTestCase {
     }
 
     func testEnvConfiguration() {
-        let expectation = XCTestExpectation(description: "Test testEnvConfiguration")
+        let expectation = XCTestExpectation(description: "testEnvConfiguration")
         var failed = true
 
         router.request(for: .testHeaders).start(responseType: TestHeaders.self,
@@ -105,7 +105,7 @@ class TestMockRequests: XCTestCase {
     }
 
     func testMockDelay() {
-        let expectation = XCTestExpectation(description: "Test testEnvConfiguration")
+        let expectation = XCTestExpectation(description: "testMockDelay")
         var failed = true
         let now = Date().timeIntervalSince1970
         router2.request(for: .testHeaders).start(responseType: TestHeaders.self,

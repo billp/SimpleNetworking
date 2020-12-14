@@ -103,7 +103,7 @@ class TestUploadOperations: XCTestCase {
     }
 
     func testFileUpload() {
-        let expectation = XCTestExpectation(description: "testDataUpload")
+        let expectation = XCTestExpectation(description: "testFileUpload")
         guard let url = Bundle(for: TestUploadOperations.self).url(forResource: "photo",
                                                                    withExtension: "jpg") else {
             XCTAssert(false)
@@ -144,7 +144,7 @@ class TestUploadOperations: XCTestCase {
     }
 
     func testRandomFileUpload() {
-        let expectation = XCTestExpectation(description: "testDataUpload")
+        let expectation = XCTestExpectation(description: "testRandomFileUpload")
 
         var progressSuccessCount = 0
         var successCount = 0
@@ -185,7 +185,7 @@ class TestUploadOperations: XCTestCase {
     }
 
     func testInvalidFileUrlUpload() {
-        let expectation = XCTestExpectation(description: "testDataUpload")
+        let expectation = XCTestExpectation(description: "testInvalidFileUrlUpload")
 
         var failed: Bool = false
 

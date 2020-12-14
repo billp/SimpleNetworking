@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestTNErrors.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -39,7 +39,7 @@ class TestTNErrors: XCTestCase {
 
     func testEnvironmentNotSetFullUrl() {
         TNEnvironment.current = nil
-        let expectation = XCTestExpectation(description: "Test testEnvironmentNotSetFullUrl")
+        let expectation = XCTestExpectation(description: "testEnvironmentNotSetFullUrl")
         var failed = true
 
         TNRequest(method: .get,
@@ -64,7 +64,7 @@ class TestTNErrors: XCTestCase {
 
     func testEnvironmentNotSetWithRoute() {
         TNEnvironment.current = nil
-        let expectation = XCTestExpectation(description: "Test Empty Response Body")
+        let expectation = XCTestExpectation(description: "testEnvironmentNotSetWithRoute")
         var failed = true
 
         router.request(for: .testPostParams(value1: true,
@@ -108,7 +108,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseDataIsNotEmpty() {
-        let expectation = XCTestExpectation(description: "Test Not Empty Response Body")
+        let expectation = XCTestExpectation(description: "testResponseDataIsNotEmpty")
         var failed = true
 
         router.request(for: .testEmptyBody).start(responseType: Data.self,
@@ -126,7 +126,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseInvalidImageData() {
-        let expectation = XCTestExpectation(description: "Test Empty Response Body")
+        let expectation = XCTestExpectation(description: "testResponseInvalidImageData")
         var failed = true
 
         router.request(for: .testPostParams(value1: false,
@@ -153,7 +153,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseValidImageData() {
-        let expectation = XCTestExpectation(description: "Test Empty Response Body")
+        let expectation = XCTestExpectation(description: "testResponseValidImageData")
         var failed = true
 
         router.request(for: .testImage(imageName: "sample.jpeg")).start(responseType: UIImage.self,
@@ -203,7 +203,7 @@ class TestTNErrors: XCTestCase {
         GlobalErrorHandler.failed = false
         GlobalErrorHandler.skip = true
 
-        let expectation = XCTestExpectation(description: "Test Response Network Error")
+        let expectation = XCTestExpectation(description: "testResponseErrorHandlersSkip")
         var failed = true
 
         router.request(for: .testStatusCode(code: 404))
@@ -229,7 +229,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseCannotDeserialize() {
-        let expectation = XCTestExpectation(description: "Test Response Cannot Deserialize")
+        let expectation = XCTestExpectation(description: "testResponseCannotDeserialize")
         var failed = true
 
         router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: TestParams.self,
@@ -254,7 +254,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseCanDeserialize() {
-        let expectation = XCTestExpectation(description: "Test Response Can Deserialize")
+        let expectation = XCTestExpectation(description: "testResponseCanDeserialize")
         var failed = true
 
         router.request(for: .testGetParams(value1: false,
@@ -278,7 +278,7 @@ class TestTNErrors: XCTestCase {
     func testNetworkError() {
         TNEnvironment.set(Environment.invalidHost)
 
-        let expectation = XCTestExpectation(description: "Test Response Network Error")
+        let expectation = XCTestExpectation(description: "testNetworkError")
         var failed = true
 
         router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: Data.self,
@@ -303,7 +303,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testNotSuccess() {
-        let expectation = XCTestExpectation(description: "Test Not Success")
+        let expectation = XCTestExpectation(description: "testNotSuccess")
         var failed = true
 
         router.request(for: .testStatusCode(code: 404))
@@ -329,7 +329,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testCancelled() {
-        let expectation = XCTestExpectation(description: "Test Not Success")
+        let expectation = XCTestExpectation(description: "testCancelled")
         var failed = true
 
         let request = TNRequest(route: APIRoute.testStatusCode(code: 404))

@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestPinning.swift
 //
 // Copyright © 2018-2020 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -52,7 +52,7 @@ class TestPinning: XCTestCase {
     }
 
      func testValidCertificate() {
-           let expectation = XCTestExpectation(description: "Test Not Success")
+           let expectation = XCTestExpectation(description: "testValidCertificate")
            var failed = true
 
             let request = TNRequest(route: APIRoute.testPinning(certPath: validCertPath))
@@ -70,7 +70,7 @@ class TestPinning: XCTestCase {
        }
 
        func testInvalidCertificate() {
-           let expectation = XCTestExpectation(description: "Test Not Success")
+           let expectation = XCTestExpectation(description: "testInvalidCertificate")
            var failed = true
 
            let request = TNRequest(route: APIRoute.testPinning(certPath: invalidCertPath))
