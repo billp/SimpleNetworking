@@ -33,8 +33,8 @@ struct DemoApp: Identifiable  {
                destination: AnyView(CertificatePinningView())
            ),
            DemoApp(
-               name: "Encryption Layer",
-               description: "Middlewares",
+               name: "Encrypted Communication",
+               description: "Crypto Middleware",
                destination: AnyView(EncryptedCommunicationView())
            ),
            DemoApp(

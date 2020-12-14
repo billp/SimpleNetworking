@@ -60,6 +60,8 @@ struct EncryptedCommunicationView: View {
 
     // MARK: Communication
     func startRequest() {
+        responseString = "fetching..."
+
         TNRouter<MiscRoute>(configuration: configuration).request(for: .testEncryptParams(param: text))
             .start(transformer: EncryptedModelTransformer.self, onSuccess: { model in
             responseString = model.text

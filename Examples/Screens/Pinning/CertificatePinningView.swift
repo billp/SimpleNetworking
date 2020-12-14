@@ -21,12 +21,14 @@ struct CertificatePinningView: View {
     var body: some View {
         VStack {
             TextEditor(text: $responseString)
-                .padding(10)
+                .padding(4)
                 .background(Color(.sRGB, red: 0.922, green: 0.922, blue: 0.922, opacity: 1.0))
                 .cornerRadius(5)
+                .font(.footnote)
                 .clipped()
 
             Toggle("Valid Certificate", isOn: $isCertificateValid)
+                .font(.footnote)
                 .padding(.top, 10)
                 .padding(.bottom, 50)
             Spacer()

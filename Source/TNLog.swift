@@ -61,6 +61,12 @@ internal class TNLog {
                 print("🔒 Pinning Enabled")
             }
 
+            if let middlewares = request.configuration.requestMiddlewares, middlewares.count > 0 {
+                print(String(format: "🧪 Middlewares: %@",
+                             middlewares.map { String(describing: $0) }
+                                        .joined(separator: ", ")))
+            }
+
             if let params = request.params as [String: AnyObject]?,
                 params.keys.count > 0,
                 request.method != .get {
@@ -109,7 +115,7 @@ internal class TNLog {
             case .started:
                 print("🚀 Request Started...\n")
             case .finished:
-                print("🏁 Request finished.\n")
+                print(String(format: "🏁 Request finished in %.5f seconds.\n", request.duration ?? 0))
             case .unknown:
                 break
             }

@@ -61,6 +61,11 @@ public final class TNRequest: TNOperation {
     internal var requestType: RequestType = .data
     internal var urlRequestLogInitiated: Bool = false
 
+    /// The start date of the request.
+    public var startedAt: Date?
+    /// The duration of the request.
+    public var duration: TimeInterval?
+
     // MARK: Public properties
 
     /// The configuration of the request. This will be merged with  environment configuration and will override
@@ -268,6 +273,7 @@ public final class TNRequest: TNOperation {
 
         _executing = true
         _finished = false
+        startedAt = Date()
 
         TNLog.logRequest(request: self,
                          data: nil,
@@ -281,6 +287,9 @@ public final class TNRequest: TNOperation {
     func handleDataTaskCompleted(with data: Data?,
                                  urlResponse: URLResponse?,
                                  tnError: TNError?) {
+
+        duration = startedAt?.distance(to: Date())
+
         TNLog.logRequest(request: self,
                          data: data,
                          state: .finished,
