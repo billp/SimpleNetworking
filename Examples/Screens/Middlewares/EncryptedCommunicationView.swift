@@ -27,32 +27,23 @@ struct EncryptedCommunicationView: View {
 
     var body: some View {
         VStack {
-            fieldLabel("Encryption Key")
-            customTextField("Encryption key", text: $encryptionKey, onChange: { val in
+            UIHelpers.fieldLabel("Encryption Key")
+            UIHelpers.customTextField("Encryption key", text: $encryptionKey, onChange: { val in
                 CryptoMiddleware.encryptionKey = val
             })
-            fieldLabel("Decryption Key")
-            customTextField("Decryption key", text: $decryptionKey, onChange: { val in
+            UIHelpers.fieldLabel("Decryption Key")
+            UIHelpers.customTextField("Decryption key", text: $decryptionKey, onChange: { val in
                 CryptoMiddleware.decryptionKey = val
             })
-            fieldLabel("Text")
-            customTextField("Value", text: $text)
-            fieldLabel("Response (if the decryption succeeds, it will show same value as in 'Text' field).")
+            UIHelpers.fieldLabel("Text")
+            UIHelpers.customTextField("Value", text: $text)
+            UIHelpers.fieldLabel("Response (if the decryption succeeds, it will show same value as in 'Text' field).")
             TextEditor(text: $responseString)
                 .font(.footnote)
                 .background(textFieldBackgroundColor)
                 .cornerRadius(5)
                 .clipped()
-            Button(action: startRequest) {
-                Text("Start Request")
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
-            }
-            .padding(10)
-            .background(Color.blue)
-            .cornerRadius(5)
-            .clipped()
-            .padding(.bottom, 20)
+            UIHelpers.button("Start Request", action: startRequest)
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("Encryption Layer")
@@ -68,26 +59,5 @@ struct EncryptedCommunicationView: View {
         }, onFailure: { (error, _) in
             responseString = error.localizedDescription ?? ""
         })
-    }
-
-    // MARK: Helpers
-    func fieldLabel(_ title: String) -> some View {
-        Text(title)
-            .font(.caption)
-            .bold()
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-    }
-
-    func customTextField(_ title: String,
-                         text: Binding<String>,
-                         onChange: ((String) -> Void)? = nil) -> some View {
-        TextField(title,
-                  text: text,
-                  onEditingChanged: { _ in onChange?(text.wrappedValue) })
-            .padding(5)
-            .background(textFieldBackgroundColor)
-            .font(.footnote)
-            .cornerRadius(3.0)
-            .clipped()
     }
 }

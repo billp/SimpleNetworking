@@ -46,6 +46,8 @@
 		F333429A25792E9D0087BDBA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333429925792E9D0087BDBA /* ErrorModel.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
 		F33ACF4D2587F904004DAC46 /* TNRequest+ResponseHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */; };
+		F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5325880A0F004DAC46 /* FileDownloader.swift */; };
+		F33ACF6225880B34004DAC46 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */; };
 		F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556064257401330047D46D /* TestDownloadOperations.swift */; };
 		F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */; };
 		F355608D257527C40047D46D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355607A257527C20047D46D /* ContentView.swift */; };
@@ -175,6 +177,8 @@
 		F333429925792E9D0087BDBA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+ResponseHeaders.swift"; sourceTree = "<group>"; };
+		F33ACF5325880A0F004DAC46 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		F3556064257401330047D46D /* TestDownloadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDownloadOperations.swift; sourceTree = "<group>"; };
 		F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermiNetworkExamplesApp.swift; sourceTree = "<group>"; };
 		F355607A257527C20047D46D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -442,12 +446,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F33ACF52258809FB004DAC46 /* File Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				F33ACF5325880A0F004DAC46 /* FileDownloader.swift */,
+			);
+			path = "File Downloader";
+			sourceTree = "<group>";
+		};
 		F3556078257527C20047D46D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F33ACF52258809FB004DAC46 /* File Downloader */,
 				F3211EC4258018E40085E873 /* Middlewares */,
 				F383AE99257ECBF900DE43FA /* Pinning */,
 				F37A17F0257D2927003EFB1F /* City Explorer */,
+				F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
 				F3A0BC12257693D2005139D5 /* AppDelegate.swift */,
@@ -919,12 +933,14 @@
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
 				F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */,
+				F33ACF6225880B34004DAC46 /* UIHelpers.swift in Sources */,
 				F30A2998258788880046C8E6 /* EncryptedModel.swift in Sources */,
 				F30A299B25878C5F0046C8E6 /* CryptoMiddleware.swift in Sources */,
 				F31F88A4257A816400D9A802 /* City.swift in Sources */,
 				F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */,
 				F30A298A258787320046C8E6 /* MiscRoute.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
+				F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3211EC6258019280085E873 /* EncryptedCommunicationView.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,

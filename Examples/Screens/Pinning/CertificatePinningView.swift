@@ -32,18 +32,7 @@ struct CertificatePinningView: View {
                 .padding(.top, 10)
                 .padding(.bottom, 50)
             Spacer()
-            Button(action: startRequest) {
-                Text("Start Request")
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
-            }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-            .padding(10)
-            .background(Color.blue)
-            .cornerRadius(5)
-            .clipped()
-            .padding(.bottom, 20)
-
+            UIHelpers.button("Start Request", action: startRequest)
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("Certificate Pinning")

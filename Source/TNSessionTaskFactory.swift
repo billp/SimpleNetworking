@@ -192,7 +192,8 @@ internal class TNSessionTaskFactory {
         let session = URLSession(configuration: URLSessionConfiguration.default,
                                  delegate: TNSession<URL>(with: tnRequest,
                                                           progressCallback: progressUpdate,
-                                                          completedCallback: callback, failureCallback: onFailure),
+                                                          completedCallback: callback,
+                                                          failureCallback: onFailure),
                                  delegateQueue: OperationQueue.current)
 
         let task = session.downloadTask(with: request)

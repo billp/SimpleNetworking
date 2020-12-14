@@ -141,7 +141,7 @@ internal class TNLog {
                 action = "processed"
             }
 
-            print(String(format: "⌛️ Bytes %@: %d of %d, Progress: %f",
+            print(String(format: "⌛️ Bytes %@: %lu of %lu, Progress: %f",
                          action,
                          bytesProcessed,
                          totalBytes,

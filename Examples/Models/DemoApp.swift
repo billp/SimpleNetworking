@@ -45,7 +45,7 @@ struct DemoApp: Identifiable  {
            DemoApp(
                name: "File Downloader",
                description: "Download files with progress",
-               destination: AnyView(Text(""))
+               destination: AnyView(FileDownloader())
            )
        ]
     }
