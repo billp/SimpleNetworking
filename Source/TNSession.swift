@@ -18,19 +18,19 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 /// This is a custom implementation of URLSessionDelegate, used to handle certification pinning
-internal final class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
+internal final class TNSession<ResultType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
     weak var request: TNRequest?
 
     var receivedData: Data?
 
     var progressCallback: TNProgressCallbackType?
-    var completedCallback: ((ResponseType?, URLResponse?, Error?) -> Void)?
+    var completedCallback: ((ResultType?, URLResponse?, Error?) -> Void)?
     var failureCallback: TNFailureCallback?
     var inputStream: InputStream?
 
     init(with request: TNRequest,
          progressCallback: TNProgressCallbackType? = nil,
-         completedCallback: ((ResponseType?, URLResponse?, Error?) -> Void)? = nil,
+         completedCallback: ((ResultType?, URLResponse?, Error?) -> Void)? = nil,
          failureCallback: TNFailureCallback? = nil) {
         self.request = request
         self.progressCallback = progressCallback
@@ -75,7 +75,7 @@ internal final class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, 
 
             failureCallback?(tnError, receivedData)
         } else {
-            completedCallback?(receivedData as? ResponseType, task.response, error)
+            completedCallback?(receivedData as? ResultType, task.response, error)
         }
     }
 
@@ -99,7 +99,7 @@ internal final class TNSession<ResponseType>: NSObject, URLSessionDataDelegate, 
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
-        completedCallback?(location as? ResponseType, nil, downloadTask.error)
+        completedCallback?(location as? ResultType, nil, downloadTask.error)
     }
 
     func urlSession(_ session: URLSession,

@@ -16,7 +16,6 @@
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-// swiftlint:disable function_body_length
 import Foundation
 
 /// Factory class that creates Session task for each specific case
@@ -169,10 +168,7 @@ internal class TNSessionTaskFactory {
                                                           serverError: error)
 
             if let tnError = dataResult.tnError {
-                tnRequest.handleDataTaskFailure(with: dataResult.data,
-                                                urlResponse: nil,
-                                                tnError: tnError,
-                                                onFailure: onFailure)
+                onFailure?(tnError, nil)
             } else {
                 if let path = url?.path {
                     do {
@@ -180,10 +176,7 @@ internal class TNSessionTaskFactory {
                         completionHandler?(dataResult.data, urlResponse)
                     } catch let error {
                         let tnError = TNError.downloadedFileCannotBeSaved(error)
-                        tnRequest.handleDataTaskFailure(with: dataResult.data,
-                                                        urlResponse: nil,
-                                                        tnError: tnError,
-                                                        onFailure: onFailure)
+                        onFailure?(tnError, nil)
                         return
                     }
                 }
