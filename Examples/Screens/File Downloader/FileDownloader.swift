@@ -64,6 +64,8 @@ struct FileDownloader: View {
             Spacer()
             UIHelpers.button(!downloadStarted ? "Start Download" : "Stop Download",
                              action: downloadAction)
+                .padding(.bottom, 20)
+            
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("File Downloader")
@@ -133,7 +135,6 @@ struct FileDownloader: View {
         bytesTotal = 0
         bytesDownloaded = 0
     }
-
 
     func clearAndCancelDownload() {
         request?.cancel()

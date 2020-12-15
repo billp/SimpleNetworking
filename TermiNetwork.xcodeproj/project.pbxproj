@@ -55,6 +55,7 @@
 		F35B533A24422FAE00C1853A /* TestTNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533924422FAE00C1853A /* TestTNConfiguration.swift */; };
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
+		F363508225894AC6002AF5DE /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F363507F25894A80002AF5DE /* FileUploader.swift */; };
 		F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */; };
 		F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F9257D2A83003EFB1F /* CityTransformer.swift */; };
 		F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F37A17FD257D49A8003EFB1F /* MockData.bundle */; };
@@ -86,6 +87,10 @@
 		F387B0E82579501000A8C0C7 /* Decodable+Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0E72579501000A8C0C7 /* Decodable+Transformer.swift */; };
 		F387B0ED2579531200A8C0C7 /* TestTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0EC2579531200A8C0C7 /* TestTransformer.swift */; };
 		F387B0F7257958EB00A8C0C7 /* TestTNTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0F6257958EB00A8C0C7 /* TestTNTransformers.swift */; };
+		F38F349225896AFF00D5BB17 /* FileUploadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F349125896AFF00D5BB17 /* FileUploadTransformer.swift */; };
+		F38F349625896B2300D5BB17 /* RSFileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F349525896B2300D5BB17 /* RSFileResponse.swift */; };
+		F38F349C25896B2B00D5BB17 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F349B25896B2B00D5BB17 /* FileResponse.swift */; };
+		F38F34A225896ED500D5BB17 /* FileUploaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */; };
 		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
@@ -188,6 +193,7 @@
 		F35B533924422FAE00C1853A /* TestTNConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNConfiguration.swift; sourceTree = "<group>"; };
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
+		F363507F25894A80002AF5DE /* FileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploader.swift; sourceTree = "<group>"; };
 		F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerDetails.swift; sourceTree = "<group>"; };
 		F37A17F9257D2A83003EFB1F /* CityTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformer.swift; sourceTree = "<group>"; };
 		F37A17FD257D49A8003EFB1F /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
@@ -220,6 +226,10 @@
 		F387B0E72579501000A8C0C7 /* Decodable+Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Transformer.swift"; sourceTree = "<group>"; };
 		F387B0EC2579531200A8C0C7 /* TestTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTransformer.swift; sourceTree = "<group>"; };
 		F387B0F6257958EB00A8C0C7 /* TestTNTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNTransformers.swift; sourceTree = "<group>"; };
+		F38F349125896AFF00D5BB17 /* FileUploadTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadTransformer.swift; sourceTree = "<group>"; };
+		F38F349525896B2300D5BB17 /* RSFileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSFileResponse.swift; sourceTree = "<group>"; };
+		F38F349B25896B2B00D5BB17 /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
+		F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploaderUtils.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
 		F3A0BC07257692E6005139D5 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -383,6 +393,7 @@
 			children = (
 				F31F8899257A80E100D9A802 /* CitiesTransformer.swift */,
 				F37A17F9257D2A83003EFB1F /* CityTransformer.swift */,
+				F38F349125896AFF00D5BB17 /* FileUploadTransformer.swift */,
 				F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */,
 			);
 			path = Transformers;
@@ -391,6 +402,7 @@
 		F31F8891257A807A00D9A802 /* Rest */ = {
 			isa = PBXGroup;
 			children = (
+				F38F349525896B2300D5BB17 /* RSFileResponse.swift */,
 				F30A298D258788180046C8E6 /* RSEncryptedModel.swift */,
 				F3A0BC23257694F7005139D5 /* RSCity.swift */,
 			);
@@ -402,6 +414,7 @@
 			children = (
 				F31F8895257A809600D9A802 /* City.swift */,
 				F30A2997258788880046C8E6 /* EncryptedModel.swift */,
+				F38F349B25896B2B00D5BB17 /* FileResponse.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -457,16 +470,27 @@
 		F3556078257527C20047D46D /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F363507E25894A77002AF5DE /* File Uploader */,
 				F33ACF52258809FB004DAC46 /* File Downloader */,
 				F3211EC4258018E40085E873 /* Middlewares */,
 				F383AE99257ECBF900DE43FA /* Pinning */,
 				F37A17F0257D2927003EFB1F /* City Explorer */,
 				F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */,
+				F31F88D3257CDA7700D9A802 /* DemoApp.swift */,
 				F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */,
 				F355607A257527C20047D46D /* ContentView.swift */,
 				F3A0BC12257693D2005139D5 /* AppDelegate.swift */,
 			);
 			path = Screens;
+			sourceTree = "<group>";
+		};
+		F363507E25894A77002AF5DE /* File Uploader */ = {
+			isa = PBXGroup;
+			children = (
+				F363507F25894A80002AF5DE /* FileUploader.swift */,
+				F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */,
+			);
+			path = "File Uploader";
 			sourceTree = "<group>";
 		};
 		F37A17F0257D2927003EFB1F /* City Explorer */ = {
@@ -476,14 +500,6 @@
 				F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */,
 			);
 			path = "City Explorer";
-			sourceTree = "<group>";
-		};
-		F37A1801257D5DB2003EFB1F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F31F88D3257CDA7700D9A802 /* DemoApp.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		F383AE99257ECBF900DE43FA /* Pinning */ = {
@@ -626,7 +642,6 @@
 		F3D16EB32575285600F7B523 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
-				F37A1801257D5DB2003EFB1F /* Models */,
 				F3A0BC06257692D7005139D5 /* Communication */,
 				F3556078257527C20047D46D /* Screens */,
 				F3D16EB42575288100F7B523 /* Supporting Files */,
@@ -932,7 +947,9 @@
 			files = (
 				F355608D257527C40047D46D /* ContentView.swift in Sources */,
 				F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */,
+				F38F34A225896ED500D5BB17 /* FileUploaderUtils.swift in Sources */,
 				F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */,
+				F363508225894AC6002AF5DE /* FileUploader.swift in Sources */,
 				F33ACF6225880B34004DAC46 /* UIHelpers.swift in Sources */,
 				F30A2998258788880046C8E6 /* EncryptedModel.swift in Sources */,
 				F30A299B25878C5F0046C8E6 /* CryptoMiddleware.swift in Sources */,
@@ -941,13 +958,16 @@
 				F30A298A258787320046C8E6 /* MiscRoute.swift in Sources */,
 				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
 				F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */,
+				F38F349225896AFF00D5BB17 /* FileUploadTransformer.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,
 				F3211EC6258019280085E873 /* EncryptedCommunicationView.swift in Sources */,
+				F38F349625896B2300D5BB17 /* RSFileResponse.swift in Sources */,
 				F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */,
 				F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */,
 				F30A298E2587881D0046C8E6 /* RSEncryptedModel.swift in Sources */,
 				F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */,
 				F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */,
+				F38F349C25896B2B00D5BB17 /* FileResponse.swift in Sources */,
 				F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */,
 				F383AEA8257ECC8300DE43FA /* CertificatePinningView.swift in Sources */,
 				F30A29922587884B0046C8E6 /* EncryptedModelTransformer.swift in Sources */,

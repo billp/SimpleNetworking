@@ -53,6 +53,5 @@ class UIHelpers {
         .background(Color.blue)
         .cornerRadius(5)
         .clipped()
-        .padding(.bottom, 20)
     }
 }

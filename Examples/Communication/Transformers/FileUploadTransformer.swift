@@ -1,4 +1,4 @@
-// CityTransformer.swift
+// FileUploadTransformer.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -20,14 +20,9 @@
 import Foundation
 import TermiNetwork
 
-class CityTransformer: TNTransformer<RSCity, City> {
-    override func transform(_ object: RSCity) throws -> City {
-        City(id: UUID(),
-             cityID: object.id,
-             name: object.name,
-             description: object.description,
-             countryName: object.countryName,
-             thumb: object.thumb,
-             image: object.image)
+class FileUploadTransformer: TNTransformer<RSFileResponse, FileResponse> {
+    override func transform(_ object: RSFileResponse) throws -> FileResponse {
+        return FileResponse(success: object.success,
+                            checksum: object.checksum)
     }
 }

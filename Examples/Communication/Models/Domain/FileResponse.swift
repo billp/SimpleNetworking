@@ -1,4 +1,4 @@
-// CityTransformer.swift
+// FileResponse.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -18,16 +18,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-import TermiNetwork
 
-class CityTransformer: TNTransformer<RSCity, City> {
-    override func transform(_ object: RSCity) throws -> City {
-        City(id: UUID(),
-             cityID: object.id,
-             name: object.name,
-             description: object.description,
-             countryName: object.countryName,
-             thumb: object.thumb,
-             image: object.image)
-    }
+struct FileResponse {
+    var success: Bool
+    var checksum: String
 }

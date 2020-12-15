@@ -55,6 +55,8 @@ struct EncryptedCommunicationView: View {
                 .cornerRadius(5)
                 .clipped()
             UIHelpers.button("Start Request", action: startRequest)
+                .padding(.bottom, 20)
+
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("Encryption Layer")

@@ -44,6 +44,7 @@ struct CertificatePinningView: View {
                 .padding(.bottom, 50)
             Spacer()
             UIHelpers.button("Start Request", action: startRequest)
+                .padding(.bottom, 20)
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("Certificate Pinning")
