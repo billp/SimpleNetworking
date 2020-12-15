@@ -289,7 +289,7 @@ public final class TNRequest: TNOperation {
     /// Starts a request without callbacks.
     /// - parameters:
     ///     - queue: A TNQueue instance. If no queue is specified it uses the default one.
-    internal func startEmpty(_ queue: TNQueue? = nil) -> TNRequest {
+    public func startEmpty(_ queue: TNQueue? = nil) -> TNRequest {
         currentQueue = queue ?? TNQueue.shared
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
                                                      completionHandler: { data, urlResponse in
