@@ -21,6 +21,7 @@ import Foundation
 import Combine
 import SwiftUI
 
+#if os(iOS)
 public typealias ImagePreprocessType = (UIImage) -> (UIImage)
 public typealias ImageOnFinishType = (UIImage?, TNError?) -> Void
 
@@ -182,3 +183,4 @@ public struct TNImage: View {
                                        onFinish: onFinish)
     }
 }
+#endif

@@ -31,8 +31,8 @@ class UIHelpers {
     }
 
     static func customTextField(_ title: String,
-                         text: Binding<String>,
-                         onChange: ((String) -> Void)? = nil) -> some View {
+                                text: Binding<String>,
+                                onChange: ((String) -> Void)? = nil) -> some View {
         TextField(title,
                   text: text,
                   onEditingChanged: { _ in onChange?(text.wrappedValue) })

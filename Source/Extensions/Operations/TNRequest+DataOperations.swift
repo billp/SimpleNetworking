@@ -17,7 +17,9 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#if os(iOS)
 import UIKit
+#endif
 
 extension TNRequest {
     /// Adds a request to a queue and starts its execution for Decodable types.
@@ -133,6 +135,7 @@ extension TNRequest {
     ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>.
     /// - returns: The TNRequest object.
+    #if os(iOS)
     @discardableResult
     public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
                                   responseType: T.Type,
@@ -166,6 +169,7 @@ extension TNRequest {
         currentQueue.addOperation(self)
         return self
     }
+    #endif
 
     /// Adds a request to a queue and starts its execution for String responses.
     ///

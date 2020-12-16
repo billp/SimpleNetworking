@@ -43,7 +43,9 @@ struct FileDownloader: View {
                 if bytesTotal > 0 {
                     ProgressView(value: progress, total: 100)
                         .padding(.top, 5)
-                    Text(String(format: "%.1f of %.1f MB downloaded.", Float(bytesDownloaded)/1024/1024, Float(bytesTotal)/1024/1024))
+                    Text(String(format: "%.1f of %.1f MB downloaded.",
+                                Float(bytesDownloaded)/1024/1024,
+                                Float(bytesTotal)/1024/1024))
                         .font(.footnote)
                         .padding(.top, 10)
                 } else {
@@ -65,7 +67,6 @@ struct FileDownloader: View {
             UIHelpers.button(!downloadStarted ? "Start Download" : "Stop Download",
                              action: downloadAction)
                 .padding(.bottom, 20)
-            
         }
         .padding([.leading, .trailing], 20)
         .navigationTitle("File Downloader")
@@ -119,7 +120,7 @@ struct FileDownloader: View {
                             self.downloadStarted = false
                             self.downloadFinished = true
                            },
-                           onFailure: { error ,_ in
+                           onFailure: { error, _ in
                             self.error = error.localizedDescription ?? ""
                             resetDownload()
                            })

@@ -43,6 +43,8 @@
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3309DB4258AA05700BB018D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3309DB3258AA05700BB018D /* Launch Screen.storyboard */; };
+		F3309DBF258ABF1200BB018D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F3309DBE258ABF1200BB018D /* CryptoSwift */; };
+		F3309DE7258AC45800BB018D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F3309DE6258AC45800BB018D /* CryptoSwift */; };
 		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F333429A25792E9D0087BDBA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333429925792E9D0087BDBA /* ErrorModel.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
@@ -92,7 +94,6 @@
 		F38F349625896B2300D5BB17 /* RSFileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F349525896B2300D5BB17 /* RSFileResponse.swift */; };
 		F38F349C25896B2B00D5BB17 /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F349B25896B2B00D5BB17 /* FileResponse.swift */; };
 		F38F34A225896ED500D5BB17 /* FileUploaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */; };
-		F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F397EC9B244F64BA0082E12D /* CryptoSwift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
 		F3A0BC0F25769385005139D5 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* Environment.swift */; };
@@ -252,7 +253,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F397EC9C244F64BA0082E12D /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */,
+				F3309DBF258ABF1200BB018D /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3D16EC82575299900F7B523 /* TermiNetwork.framework in Frameworks */,
+				F3309DE7258AC45800BB018D /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +712,6 @@
 			);
 			name = TermiNetwork;
 			packageProductDependencies = (
-				F397EC9B244F64BA0082E12D /* CryptoSwift */,
 			);
 			productName = TermiNetwork;
 			productReference = F319682D243D01E1008725CE /* TermiNetwork.framework */;
@@ -731,6 +732,9 @@
 				F3196839243D01E1008725CE /* PBXTargetDependency */,
 			);
 			name = TermiNetworkTests;
+			packageProductDependencies = (
+				F3309DBE258ABF1200BB018D /* CryptoSwift */,
+			);
 			productName = TermiNetworkTests;
 			productReference = F3196836243D01E1008725CE /* TermiNetworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -750,6 +754,9 @@
 				F3D16ECB2575299A00F7B523 /* PBXTargetDependency */,
 			);
 			name = "TermiNetworkExamples (iOS)";
+			packageProductDependencies = (
+				F3309DE6258AC45800BB018D /* CryptoSwift */,
+			);
 			productName = "TermiNetworkExamples (iOS)";
 			productReference = F3556080257527C40047D46D /* TermiNetworkExamples.app */;
 			productType = "com.apple.product-type.application";
@@ -787,7 +794,7 @@
 			);
 			mainGroup = F3196823243D01E1008725CE;
 			packageReferences = (
-				F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+				F3309DBD258ABF1200BB018D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = F319682E243D01E1008725CE /* Products */;
 			projectDirPath = "";
@@ -1135,10 +1142,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchos watchsimulator appletvos appletvsimulator macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,5,6";
 			};
 			name = Debug;
 		};
@@ -1160,9 +1169,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetwork;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				RESOURCES_TARGETED_DEVICE_FAMILY = "";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchos watchsimulator appletvos appletvsimulator macosx";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,5,6";
 			};
 			name = Release;
 		};
@@ -1180,9 +1191,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "watchsimulator watchos iphoneos iphonesimulator macosx appletvsimulator appletvos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,5,6";
 			};
 			name = Debug;
 		};
@@ -1200,8 +1212,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.billp.TermiNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "watchsimulator watchos iphoneos iphonesimulator macosx appletvsimulator appletvos";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,5,6";
 			};
 			name = Release;
 		};
@@ -1292,20 +1305,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+		F3309DBD258ABF1200BB018D /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.1;
+				minimumVersion = 1.3.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F397EC9B244F64BA0082E12D /* CryptoSwift */ = {
+		F3309DBE258ABF1200BB018D /* CryptoSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F397EC9A244F64BA0082E12D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			package = F3309DBD258ABF1200BB018D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+		F3309DE6258AC45800BB018D /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3309DBD258ABF1200BB018D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
 			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

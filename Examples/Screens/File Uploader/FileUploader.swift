@@ -33,7 +33,7 @@ struct FileUploader: View {
     @State var error: String?
     @State var outputFile: String = ""
     @State var request: TNRequest?
-    @State var imageUrl: URL? = nil
+    @State var imageUrl: URL?
     @State var showCaptureImageView: Bool = false
 
     var body: some View {
@@ -80,7 +80,9 @@ struct FileUploader: View {
                 if bytesTotal > 0 {
                     ProgressView(value: progress, total: 100)
                         .padding(.top, 5)
-                    Text(String(format: "%.1f of %.1f MB uploaded.", Float(bytesUploaded)/1024/1024, Float(bytesTotal)/1024/1024))
+                    Text(String(format: "%.1f of %.1f MB uploaded.",
+                                Float(bytesUploaded)/1024/1024,
+                                Float(bytesTotal)/1024/1024))
                         .font(.footnote)
                         .padding(.top, 10)
                 } else {
@@ -165,7 +167,7 @@ struct FileUploader: View {
                                     self.uploadFinished = true
                                     self.uploadedFileChecksum = response.checksum
                                  },
-                                 onFailure: { error ,_ in
+                                 onFailure: { error, _ in
                                     self.error = error.localizedDescription ?? ""
                                     resetUpload()
                                  })
@@ -181,7 +183,6 @@ struct FileUploader: View {
         bytesTotal = 0
         bytesUploaded = 0
     }
-
 
     func clearAndCancelUpload() {
         request?.cancel()
@@ -209,13 +210,12 @@ struct CaptureImageView {
     }
 }
 
-
 extension CaptureImageView: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-
     }
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<CaptureImageView>) -> UIImagePickerController {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<CaptureImageView>)
+    -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = .photoLibrary
@@ -239,7 +239,7 @@ class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerContro
         _checksum = checksum
     }
     func imagePickerController(_ picker: UIImagePickerController,
-                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let url = info[UIImagePickerController.InfoKey.imageURL] as? URL else {
             return
         }

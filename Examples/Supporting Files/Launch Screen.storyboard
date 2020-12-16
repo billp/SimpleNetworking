@@ -16,14 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TerrmiNetworkSplash" translatesAutoresizingMaskIntoConstraints="NO" id="xil-7Z-M88">
-                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <rect key="frame" x="107" y="278" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Yev-ha-VnP"/>
                                     <constraint firstAttribute="width" secondItem="xil-7Z-M88" secondAttribute="height" multiplier="1:1" id="cdI-a3-oww"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TermiNetwork Examples" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfG-GX-Jbw">
-                                <rect key="frame" x="53.5" y="532" width="307" height="137"/>
+                                <rect key="frame" x="53.5" y="462" width="307" height="137"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="307" id="APY-GI-egv"/>
                                     <constraint firstAttribute="height" constant="137" id="Wjh-TU-HpW"/>
@@ -38,7 +38,7 @@
                         <constraints>
                             <constraint firstItem="xil-7Z-M88" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="A5K-gi-ucp"/>
                             <constraint firstItem="BfG-GX-Jbw" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="FQp-x4-J7Y"/>
-                            <constraint firstItem="xil-7Z-M88" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Orj-3f-ehP"/>
+                            <constraint firstItem="xil-7Z-M88" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-70" id="Orj-3f-ehP"/>
                             <constraint firstItem="BfG-GX-Jbw" firstAttribute="top" secondItem="xil-7Z-M88" secondAttribute="bottom" constant="-16" id="asr-zj-bLl"/>
                         </constraints>
                     </view>

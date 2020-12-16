@@ -20,7 +20,7 @@
 import XCTest
 import TermiNetwork
 
-// swiftlint:disable type_body_length
+// swiftlint:disable file_length type_body_length
 
 class TestTNRequest: XCTestCase {
     lazy var router: TNRouter<APIRoute> = {
