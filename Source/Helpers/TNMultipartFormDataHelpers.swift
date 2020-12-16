@@ -19,8 +19,6 @@
 
 #if os(iOS)
 import MobileCoreServices
-#elseif os(macOS)
-import LaunchServices
 #endif
 
 class TNMultipartFormDataHelpers {
