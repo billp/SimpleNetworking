@@ -42,6 +42,7 @@
 		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
+		F3309DB4258AA05700BB018D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3309DB3258AA05700BB018D /* Launch Screen.storyboard */; };
 		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
 		F333429A25792E9D0087BDBA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333429925792E9D0087BDBA /* ErrorModel.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
@@ -178,6 +179,7 @@
 		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
 		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
+		F3309DB3258AA05700BB018D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F333429925792E9D0087BDBA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 		F3D16EB42575288100F7B523 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F3309DB3258AA05700BB018D /* Launch Screen.storyboard */,
 				F383AEAB257ED51500DE43FA /* forums.swift.org.cer */,
 				F383AEAC257ED51500DE43FA /* herokuapp.com.cer */,
 				F355607B257527C40047D46D /* Assets.xcassets */,
@@ -823,6 +826,7 @@
 				F383AEAD257ED51500DE43FA /* forums.swift.org.cer in Resources */,
 				F383AEAE257ED51500DE43FA /* herokuapp.com.cer in Resources */,
 				F355608F257527C40047D46D /* Assets.xcassets in Resources */,
+				F3309DB4258AA05700BB018D /* Launch Screen.storyboard in Resources */,
 				F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
