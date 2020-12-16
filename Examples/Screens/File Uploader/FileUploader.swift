@@ -40,8 +40,14 @@ struct FileUploader: View {
         VStack {
             UIHelpers.button("🌄 Select Photo",
                              action: {
-                                self.showCaptureImageView.toggle()
+                                imageUrl = nil
+                                fileChecksum = nil
+                                uploadedFileChecksum = nil
+                                resetUpload()
+                                showCaptureImageView.toggle()
                              })
+                .disabled(uploadStarted)
+
             if imageUrl != nil {
                 UIHelpers.fieldLabel("Filename")
                 UIHelpers.customTextField("Filename...", text: $fileName)
@@ -102,8 +108,8 @@ struct FileUploader: View {
 
         }
         .padding([.leading, .trailing], 20)
-        .navigationTitle("File Downloader")
-        .onDisappear(perform: clearAndCancelDownload)
+        .navigationTitle("File Uploader")
+        .onDisappear(perform: clearAndCancelUpload)
     }
 
     // MARK: UI Helpers
@@ -114,7 +120,7 @@ struct FileUploader: View {
     // MARK: Actions
     func uploadAction() {
         guard !uploadStarted else {
-            clearAndCancelDownload()
+            clearAndCancelUpload()
             return
         }
 
@@ -133,13 +139,13 @@ struct FileUploader: View {
         let configuration = TNConfiguration()
         configuration.verbose = true
 
-        // Construct the final path of the downloaded file
+        // Construct the final path of the uploaded file
         outputFile = documentsDirectory().appendingPathComponent(fileName).path
 
         // Remove old file if exists
         removeFileIfNeeded(at: outputFile)
 
-        // Reset download
+        // Reset upload
         error = nil
         uploadedFileChecksum = nil
 
@@ -177,7 +183,7 @@ struct FileUploader: View {
     }
 
 
-    func clearAndCancelDownload() {
+    func clearAndCancelUpload() {
         request?.cancel()
         resetUpload()
     }

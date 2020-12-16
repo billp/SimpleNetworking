@@ -115,7 +115,7 @@ internal class TNLog {
             case .started:
                 print("🚀 Request Started...\n")
             case .finished:
-                print(String(format: "🏁 Request finished in %.5f seconds.\n", request.duration ?? 0))
+                print(String(format: "🏁 Request completed in %.5f seconds.\n", request.duration ?? 0))
             case .unknown:
                 break
             }

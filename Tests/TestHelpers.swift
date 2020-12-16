@@ -11,7 +11,7 @@ import CommonCrypto
 
 class TestHelpers {
     static func createDummyFile(_ prefix: String) -> URL? {
-        guard let fileURL = try? FileManager.default.url(for: .documentDirectory,
+        guard let fileURL = try? FileManager.default.url(for: .cachesDirectory,
                                                          in: .userDomainMask,
                                                          appropriateFor: nil,
                                                          create: false)

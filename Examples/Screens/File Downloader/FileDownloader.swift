@@ -43,7 +43,7 @@ struct FileDownloader: View {
                 if bytesTotal > 0 {
                     ProgressView(value: progress, total: 100)
                         .padding(.top, 5)
-                    Text(String(format: "%.1f of %i MB downloaded.", Float(bytesDownloaded)/1024/1024, bytesTotal/1024/1024))
+                    Text(String(format: "%.1f of %.1f MB downloaded.", Float(bytesDownloaded)/1024/1024, Float(bytesTotal)/1024/1024))
                         .font(.footnote)
                         .padding(.top, 10)
                 } else {

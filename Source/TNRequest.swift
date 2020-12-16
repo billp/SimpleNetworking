@@ -270,6 +270,11 @@ public final class TNRequest: TNOperation {
 
     // MARK: Operation
     public override func start() {
+        // Prevent from calling this function directly.
+        guard dataTask != nil else {
+            fatalError("You should never call start() directly, use startEmpty() instead.")
+        }
+
         currentQueue.beforeEachRequestCallback?(self)
 
         _executing = true
