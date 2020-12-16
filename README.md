@@ -2,24 +2,16 @@
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
 
-[![Build Status](https://travis-ci.org/billp/TermiNetwork.svg?branch=master)](https://travis-ci.org/billp/TermiNetwork)
-[![Pod](https://img.shields.io/cocoapods/v/TermiNetwork.svg?style=flat)](https://cocoapods.org/pods/terminetwork)
-[![Tweet](https://img.shields.io/twitter/url/https/github.com/billp/TermiNetwork.svg?style=social)](https://twitter.com/home?status=https%3A%2F%2Fgithub.com%2Fbillp%2FTermiNetwork%20TermiNetwork%20is%20a%20networking%20abstraction%20layer%20written%20on%20top%20of%20Swift%27s%20URLRequest%20that%20supports%20multi-environment%20configuration%2C%20routing%20and%20automatic%20deserialization.)
+<p align="center"><b>TermiNetwork is a zero-dependency networking solution for building modern and secure iOS applications.</b>
+  <br /><br />
+  <img src="https://img.shields.io/badge/Language-Swift%205-blue" />
+  <img src="https://travis-ci.org/billp/TermiNetwork.svg?branch=1.0.0-new-structure" />
+  <img src="https://img.shields.io/cocoapods/v/TermiNetwork.svg?style=flat" />
+  <img src="https://img.shields.io/github/license/billp/TermiNetwork" />
+</p>
 
-TermiNetwork is a networking abstraction layer written on top of Swift's URLRequest and it is designed to work with Codables.
-
-# Features
-- Automatic model deserialization with Codable
-- Multi-environment configuration
-- Convert responses to the wanted type (Codable model, UIImage, Data or String)
-- Request fragmentation with Routes (perfect for modular environments)
-- Error handling
-- Mock requests
-- Certificate pinning
-- Flexible configuration
-- Middlewares (e.g. you can add an extra layer of encryption to your requests)
-- File upload and download (with files or raw data)
-- Descriptive debug information right in the console
+## Features
+<p align="center">Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transofmers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File upload/download 🔸 Pretty printed debug information in console</p>
 
 ## Installation
 
