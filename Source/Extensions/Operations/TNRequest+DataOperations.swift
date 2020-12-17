@@ -127,20 +127,19 @@ extension TNRequest {
         return self
     }
 
-    /// Adds a request to a queue and starts its execution for UIImage responses.
+    /// Adds a request to a queue and starts its execution for UIImage|NSImage or NSImage responses.
     ///
     /// - parameters:
     ///     - queue: A TNQueue instance. If no queue is specified it uses the default one.
-    ///     - responseType: The response type is UIImage.self.
+    ///     - responseType: The response type is UIImage.self or NSImage.self.
     ///     - onSuccess: specifies a success callback of type TNSuccessCallback<T>.
     ///     - onFailure: specifies a failure callback of type TNFailureCallback<T>.
     /// - returns: The TNRequest object.
-    #if os(iOS)
     @discardableResult
-    public func start<T: UIImage>(queue: TNQueue? = TNQueue.shared,
-                                  responseType: T.Type,
-                                  onSuccess: TNSuccessCallback<T>?,
-                                  onFailure: TNFailureCallback? = nil) -> TNRequest {
+    public func start<T: TNImageType>(queue: TNQueue? = TNQueue.shared,
+                                      responseType: T.Type,
+                                      onSuccess: TNSuccessCallback<T>?,
+                                      onFailure: TNFailureCallback? = nil) -> TNRequest {
         currentQueue = queue
 
         dataTask = TNSessionTaskFactory.makeDataTask(with: self,
@@ -169,7 +168,6 @@ extension TNRequest {
         currentQueue.addOperation(self)
         return self
     }
-    #endif
 
     /// Adds a request to a queue and starts its execution for String responses.
     ///

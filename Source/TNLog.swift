@@ -48,6 +48,13 @@ internal class TNLog {
             let headers = urlRequest.allHTTPHeaderFields
 
             print(String(format: "🌎 URL: %@", url))
+
+            if let customError = tnError {
+                print(String(format: "❌ Error: %@", (customError.localizedDescription ?? "")))
+            } else if let response = urlResponse as? HTTPURLResponse {
+                print(String(format: "✅ Status: %@", String(response.statusCode)))
+            }
+
             if request.configuration.mockDataEnabled == true {
                 print("🗂 Mock Data Enabled.")
             }
@@ -75,12 +82,6 @@ internal class TNLog {
                 } else {
                     print(String(format: "🗃️ Request Body: %@", (params.toJSONString() ?? "")))
                 }
-            }
-
-            if let customError = tnError {
-                print(String(format: "❌ Error: %@", (customError.localizedDescription ?? "")))
-            } else if let response = urlResponse as? HTTPURLResponse {
-                print(String(format: "✅ Status: %@", String(response.statusCode)))
             }
 
             switch state {

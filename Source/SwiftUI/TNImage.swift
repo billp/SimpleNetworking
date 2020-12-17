@@ -21,20 +21,25 @@ import Foundation
 import Combine
 import SwiftUI
 
-#if os(iOS)
-public typealias ImagePreprocessType = (UIImage) -> (UIImage)
-public typealias ImageOnFinishType = (UIImage?, TNError?) -> Void
+#if os(macOS)
+public typealias TNImageType = NSImage
+#elseif os(iOS) || os(watchOS) || os(tvOS)
+public typealias TNImageType = UIImage
+#endif
+
+public typealias ImagePreprocessType = (TNImageType) -> (TNImageType)
+public typealias ImageOnFinishType = (TNImageType?, TNError?) -> Void
 
 final public class ImageLoader: ObservableObject {
     var request: TNRequest
     var url: String?
-    var defaultImage: UIImage?
+    var defaultImage: TNImageType?
     var resize: CGSize?
     var preprocessImageClosure: ImagePreprocessType?
     var onFinishImageClosure: ImageOnFinishType?
 
-    var didChange = PassthroughSubject<UIImage, Never>()
-    var image = UIImage() {
+    var didChange = PassthroughSubject<TNImageType, Never>()
+    var image = TNImageType() {
         didSet {
             didChange.send(image)
         }
@@ -42,7 +47,7 @@ final public class ImageLoader: ObservableObject {
 
     public init(with url: String,
                 configuration: TNConfiguration? = nil,
-                defaultImage: UIImage? = nil,
+                defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
                 onFinish: ImageOnFinishType? = nil) {
@@ -57,7 +62,7 @@ final public class ImageLoader: ObservableObject {
     }
 
     public init(with request: TNRequest,
-                defaultImage: UIImage? = nil,
+                defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
                 onFinish: ImageOnFinishType? = nil) {
@@ -72,14 +77,14 @@ final public class ImageLoader: ObservableObject {
     public func loadImage() {
         if let url = url,
            let cachedImageData = TNCache.shared[url],
-           let image = UIImage(data: cachedImageData) {
+           let image = TNImageType(data: cachedImageData) {
             self.image = image
             return
         }
 
-        self.image = defaultImage ?? UIImage()
+        self.image = defaultImage ?? TNImageType()
 
-        request.start(responseType: UIImage.self, onSuccess: { image in
+        request.start(responseType: TNImageType.self, onSuccess: { image in
             self.handleResizeImage(image: image)
             self.handlePreprocessImage(image: image)
         }, onFailure: { (error, _) in
@@ -88,14 +93,18 @@ final public class ImageLoader: ObservableObject {
     }
 
     // MARK: Helpers
-    private func updateImage(_ image: UIImage) {
+    private func updateImage(_ image: TNImageType) {
         self.image = image
         if let url = url {
-            TNCache.shared[url] = image.pngData()
+            #if os(macOS)
+
+            #else
+                TNCache.shared[url] = image.pngData()
+            #endif
         }
     }
 
-    private func handlePreprocessImage(image: UIImage) {
+    private func handlePreprocessImage(image: TNImageType) {
         var image = image
         if let preprocessImage = self.preprocessImageClosure {
             DispatchQueue.global(qos: .background).async {
@@ -110,7 +119,7 @@ final public class ImageLoader: ObservableObject {
             updateImage(image)
         }
     }
-    private func handleResizeImage(image: UIImage) {
+    private func handleResizeImage(image: TNImageType) {
         if let size = self.resize {
             var image = image
             DispatchQueue.global(qos: .background).async {
@@ -125,11 +134,16 @@ final public class ImageLoader: ObservableObject {
 
 public struct TNImage: View {
     @ObservedObject public var imageLoader: ImageLoader
-    @State var image = UIImage()
+    @State var image = TNImageType()
 
     public var body: some View {
-        Image(uiImage: image)
-            .resizable()
+        #if os(macOS)
+        let imageView = Image(nsImage: image)
+        #else
+        let imageView = Image(uiImage: image)
+        #endif
+
+        imageView.resizable()
             .onReceive(imageLoader.didChange) { image in
             self.image = image
         }.onAppear(perform: self.imageLoader.loadImage)
@@ -141,7 +155,7 @@ public struct TNImage: View {
     /// - parameters:
     ///     - url: The url of the image.
     ///     - configuration: A TNConfiguration object that will be used to make the request.
-    ///     - defaultImage: A UIImage to show before the is downloaded (optional)
+    ///     - defaultImage: A UIImage|NSImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread
@@ -149,7 +163,7 @@ public struct TNImage: View {
     ///            If the request fails, an error will be returned
     public init(with url: String,
                 configuration: TNConfiguration? = nil,
-                defaultImage: UIImage? = nil,
+                defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
                 onFinish: ImageOnFinishType? = nil) {
@@ -167,12 +181,12 @@ public struct TNImage: View {
     /// - parameters:
     ///     - request: A TNRequest instance.
     ///     - configuration: A TNConfiguration object that will be used to make the request.
-    ///     - defaultImage: A UIImage to show before the is downloaded (optional)
+    ///     - defaultImage: A UIImage|NSImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread (optional)
     public init(with request: TNRequest,
-                defaultImage: UIImage? = nil,
+                defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
                 onFinish: ImageOnFinishType? = nil) {
@@ -183,4 +197,3 @@ public struct TNImage: View {
                                        onFinish: onFinish)
     }
 }
-#endif

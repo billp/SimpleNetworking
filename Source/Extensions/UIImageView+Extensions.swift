@@ -17,19 +17,27 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#if os(iOS)
-
+#if os(macOS)
+import AppKit
+typealias TNImageViewType = NSImageView
+#elseif os(iOS) || os(tvOS)
 import UIKit
+typealias TNImageViewType = UIImageView
+#elseif os(watchOS)
+import UIKit
+import WatchKit
+typealias TNImageViewType = WKInterfaceImage
+#endif
 
-extension UIImageView {
+extension TNImageViewType {
     private static var activeRequestsDictionary: [String: TNRequest] = [:]
     private static var imageViewQueue: TNQueue = TNQueue()
 
     fileprivate static func downloadImage(request: TNRequest,
-                                          onSuccess: @escaping TNSuccessCallback<UIImage>,
+                                          onSuccess: @escaping TNSuccessCallback<TNImageType>,
                                           onFailure: @escaping TNFailureCallback) throws -> TNRequest {
         request.start(queue: imageViewQueue,
-                      responseType: UIImage.self,
+                      responseType: TNImageType.self,
                       onSuccess: onSuccess,
                       onFailure: onFailure)
 
@@ -50,7 +58,7 @@ extension UIImageView {
     ///            If the request fails, an error will be returned (optional)
     public func tn_setRemoteImage(url: String,
                                   configuration: TNConfiguration? = nil,
-                                  defaultImage: UIImage? = nil,
+                                  defaultImage: TNImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishType? = nil) throws {
@@ -76,7 +84,7 @@ extension UIImageView {
     ///     - onFinish: A block of code to execute after the completion of the download image request.
     ///            If the request fails, an error will be returned (optional)
     public func tn_setRemoteImage(request: TNRequest,
-                                  defaultImage: UIImage? = nil,
+                                  defaultImage: TNImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishType? = nil) throws {
@@ -90,15 +98,19 @@ extension UIImageView {
 
     // MARK: Helpers
     private func makeRequest(with request: TNRequest,
-                             defaultImage: UIImage? = nil,
+                             defaultImage: TNImageType? = nil,
                              resize: CGSize? = nil,
                              preprocessImage: ImagePreprocessType? = nil,
                              onFinish: ImageOnFinishType? = nil) throws {
         cancelActiveCallInImageView()
+        #if os(watchOS)
+        self.setImage(defaultImage)
+        #else
         self.image = defaultImage
+        #endif
 
-        setActiveCallInImageView(try UIImageView.downloadImage(request: request,
-                                                               onSuccess: { image in
+        setActiveCallInImageView(try TNImageViewType.downloadImage(request: request,
+                                                                   onSuccess: { image in
             var image = image
 
             DispatchQueue.global(qos: .background).async {
@@ -109,12 +121,20 @@ extension UIImageView {
                 }
 
                 DispatchQueue.main.async {
+                    #if os(watchOS)
+                    self.setImage(image)
+                    #else
                     self.image = image
+                    #endif
                     onFinish?(image, nil)
                 }
             }
         }, onFailure: { error, _ in
+            #if os(watchOS)
+            self.setImage(nil)
+            #else
             self.image = nil
+            #endif
             onFinish?(nil, error)
         }))
     }
@@ -124,11 +144,10 @@ extension UIImageView {
     }
 
     private func cancelActiveCallInImageView() {
-        UIImageView.activeRequestsDictionary[getAddress()]?.cancel()
+        TNImageViewType.activeRequestsDictionary[getAddress()]?.cancel()
     }
 
     private func setActiveCallInImageView(_ call: TNRequest) {
-        UIImageView.activeRequestsDictionary[getAddress()] = call
+        TNImageViewType.activeRequestsDictionary[getAddress()] = call
     }
 }
-#endif

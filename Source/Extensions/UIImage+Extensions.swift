@@ -18,17 +18,37 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
-#if os(iOS)
+#if os(macOS)
+extension TNImageType {
+    // MARK: Resizing
+    /// Resize the image to the given size.
+    ///
+    /// - Parameter
+    ///     - size: The size to resize the image to.
+    /// - Returns: The resized image.
+    func tn_resize(_ targetSize: NSSize) -> TNImageType? {
+        let frame = NSRect(x: 0, y: 0, width: targetSize.width, height: targetSize.height)
+        guard let representation = self.bestRepresentation(for: frame, context: nil, hints: nil) else {
+            return nil
+        }
+        let image = TNImageType(size: targetSize, flipped: false, drawingHandler: { (_) -> Bool in
+            return representation.draw(in: frame)
+        })
+
+        return image
+    }
+}
+#elseif os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
 
-extension UIImage {
+extension TNImageType {
     ///
     /// Resizes an UIImage object.
     ///
     /// - parameters:
     ///     - size: The size of the new image.
     /// - returns: The new resized UIImage object.
-    func tn_resize(_ targetSize: CGSize) -> UIImage? {
+    func tn_resize(_ targetSize: CGSize) -> TNImageType? {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height
@@ -41,6 +61,15 @@ extension UIImage {
             height: size.height * scaleFactor
         )
 
+        #if os(watchOS)
+        UIGraphicsBeginImageContextWithOptions(targetSize, true, scale)
+        defer { UIGraphicsEndImageContext() }
+        let context = UIGraphicsGetCurrentContext()!
+        if let cgImage = self.cgImage {
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: scaledImageSize.width, height: scaledImageSize.height))
+        }
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()!
+        #else
         // Draw and return the resized UIImage
         let renderer = UIGraphicsImageRenderer(
             size: scaledImageSize
@@ -52,6 +81,7 @@ extension UIImage {
                 size: scaledImageSize
             ))
         }
+        #endif
 
         return scaledImage
     }
