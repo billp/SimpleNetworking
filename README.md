@@ -8,10 +8,22 @@
   <img src="https://travis-ci.org/billp/TermiNetwork.svg?branch=1.0.0-new-structure" />
   <img src="https://img.shields.io/cocoapods/v/TermiNetwork.svg?style=flat" />
   <img src="https://img.shields.io/github/license/billp/TermiNetwork" />
+  <img src="https://img.shields.io/cocoapods/p/TermiNetwork" />
 </p>
 
 ## Features
-<p align="center">Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transofmers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File upload/download 🔸 Pretty printed debug information in console</p>
+<p align="center">
+🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transofmers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File upload/download 🔸 Pretty printed debug information in console 🔸
+</p>
+
+#### Table of contents
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Simple usage](#simple_usage)
+  - [Advanced usage](#advanced_usage)
+- [Debug Logging](#debug_logging)
+
+<a name="installation" />
 
 ## Installation
 
@@ -26,7 +38,11 @@ target 'YourTarget' do
 end
 ```
 
+<a name="usage" />
+
 ## Usage
+
+<a name="simple_usage" />
 
 ### Simple usage
 
@@ -81,6 +97,8 @@ JSON.self, Codable.self, UIImage.self, Data.self or String.self
 **onSuccess**: a callback returning an object with the data type specified by
 
 **onFailure**: a callback returning an error+data on failure. There are two cases when this callback being called: the first is that the http status code is different than 2xx and the second is that there is an error with data conversion, e.g. it fails on deserialization of the *responseType*.
+
+<a name="advanced_usage" />
 
 ### Advanced usage with configuration and custom queue
 
@@ -274,19 +292,16 @@ imageView.setRemoteImage(url: "http://www.website.com/image.jpg", defaultImage: 
 }
 ```
 
-## Logging
+<a name="debug_logging" />
 
-You can turn on verbose mode to see what's going on in terminal for each request by setting the **TNEnvironment.verbose** to **true**
+## Debug Logging
+
+To enable the debug logging just set the **verbose** of a TNConfigurration instance to **true**.
 
 ## Tests
 
 To run the tests open the Sample project, select Product -> Test or simply press ⌘U on keyboard.
 
-## TODO
-- [x] Write test cases
-- [x] Add support for request cancelation
-- [x] Error handling
-- [ ] Add support for downloading/uploading files
 
 ## Contribution
 
