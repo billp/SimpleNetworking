@@ -75,11 +75,15 @@ class TestPinning: XCTestCase {
 
            let request = TNRequest(route: APIRoute.testPinning(certPath: invalidCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
-               failed = true
-               expectation.fulfill()
-           }, onFailure: { _, _ in
-               failed = false
-               expectation.fulfill()
+                failed = true
+                expectation.fulfill()
+           }, onFailure: { error, _ in
+            if case .pinningError = error {
+                failed = false
+            } else {
+                failed = true
+            }
+            expectation.fulfill()
            })
 
            wait(for: [expectation], timeout: 100)

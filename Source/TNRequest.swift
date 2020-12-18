@@ -61,6 +61,7 @@ public final class TNRequest: TNOperation {
     internal var requestType: RequestType = .data
     internal var urlRequestLogInitiated: Bool = false
     internal var responseHeadersClosure: ((URLResponse?) -> Void)?
+    internal var pinningErrorOccured: Bool = false
 
     /// The start date of the request.
     public var startedAt: Date?

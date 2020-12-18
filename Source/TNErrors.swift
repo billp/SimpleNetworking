@@ -42,6 +42,8 @@ public enum TNError: Error {
     case notSuccess(Int)
     /// Thrown when a request is cancelled.
     case cancelled(Error)
+    /// Thorwn when certificate pinning validation fails.
+    case pinningError
     /// Thrown when a request is mocked but the data is invalid (e.g. cannot parse JSON).
     case invalidMockData(String)
     /// Thrown when a middleware reports an error. It contains a custom type
@@ -62,7 +64,6 @@ public enum TNError: Error {
     /// Thrown when the response headers cannot be retrieved.
     /// Typicaly when you forget to call the start() method.
     case cannotReadResponseHeaders
-
 }
 
 extension TNError: LocalizedError {
@@ -112,7 +113,9 @@ extension TNError: LocalizedError {
         case .invalidCertificatePath(let path):
             return String(format: NSLocalizedString("Certificate not found at '%@'.", comment: "TNError"), path)
         case .cannotReadResponseHeaders:
-            return String("Cannot read response headers. Did you forget to call to call the start() method?")
+            return NSLocalizedString("Cannot read response headers. Did you forget to call to call the start() method?", comment: "TNError")
+        case .pinningError:
+            return NSLocalizedString("Certificate pinning failed validation", comment: "TNError")
         }
     }
 }

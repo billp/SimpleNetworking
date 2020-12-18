@@ -61,6 +61,8 @@ internal final class TNSession<ResultType>: NSObject, URLSessionDataDelegate, UR
             let remoteCertificateData: NSData = SecCertificateCopyData(remoteCert)
             if isServerTrusted && error == nil && certData.contains(remoteCertificateData) {
                 challengeDisposition = .useCredential
+            } else {
+                request?.pinningErrorOccured = true
             }
         } else {
             challengeDisposition = .performDefaultHandling

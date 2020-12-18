@@ -37,7 +37,11 @@ class TNRequestHelpers {
         /// Error handling
         if let error = serverError {
             if (error as NSError).code == NSURLErrorCancelled {
-                customError = TNError.cancelled(error)
+                if tnRequest.pinningErrorOccured {
+                    customError = TNError.pinningError
+                } else {
+                    customError = TNError.cancelled(error)
+                }
             } else {
                 customError = TNError.networkError(error)
             }
