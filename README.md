@@ -1,4 +1,5 @@
 
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
@@ -26,6 +27,8 @@
 	  - [Parameters](#parameters)
   - [Advanced usage of TNRequest with Configuration and custom Queue](#advanced_usage)
 	  - [Additional Parameters](#parameters)
+  - [Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)](#complete_setup)
+	  - [Setup your Environments](#setup_environments)
 - [Debug Logging](#debug_logging)
 
 <a name="installation" />
@@ -149,11 +152,15 @@ The configuration object to use.
 ##### queue (optional)
 Specifies the queue in which the request will be added. If you omit this argument, the request will be added to a shared queue **TNQueue.shared**.
 
-## Router
-You can organize your requests by creating an Environment (class) and a Router (enum) that conform TNEnvironmentProtocol and TNRouterProtocol respectively. To do so, create an environment enum and at least one router class as shown bellow:
+<a name="complete_setup" />
 
-#### Environment.swift
+## Complete setup with <b>Environments</b> and routers <b>Routers</b>
+The complete and recommended usage of TermiNetwork library consists of creating your environments and define your routers.  
 
+<a name="setup_environments" />
+
+#### Setup your Environments
+Create a swift class that implements the **TNEnvironmentProtocol** and define your environments. See bellow for an example:
 ```swift
 enum Environment: TNEnvironmentProtocol {
     case localhost
@@ -184,7 +191,7 @@ enum Environment: TNEnvironmentProtocol {
     }
 }
 ```
-You can optionally pass a requestConfiguration object to make all requests inherit the specified settings. (see 'Advanced usage with configuration and custom queue' above for how to create a configuration object.)
+*Optionally you can  pass a **requestConfiguration** object to make all requests inherit the configuration settings.*
 
 #### TodosRouter.swift
 
