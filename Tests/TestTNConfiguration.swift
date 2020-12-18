@@ -17,6 +17,8 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// swiftlint:disable compiler_protocol_init
+
 import XCTest
 import TermiNetwork
 
@@ -42,6 +44,8 @@ class TestTNConfiguration: XCTestCase {
         conf.certificatePaths = [certPath]
         conf.headers = ["test": "123", "test2": "abcdefg"]
         conf.keyDecodingStrategy = .convertFromSnakeCase
+        conf.errorHandlers = [GlobalErrorHandler.self]
+        conf.requestMiddlewares = []
 
         return conf
     }()
@@ -55,6 +59,8 @@ class TestTNConfiguration: XCTestCase {
         conf.certificatePaths = ["test"]
         conf.headers = ["test": "test", "afb": "fff"]
         conf.keyDecodingStrategy = .useDefaultKeys
+        conf.errorHandlers = []
+        conf.requestMiddlewares = [CryptoMiddleware.self]
 
         return conf
     }()
@@ -103,6 +109,14 @@ class TestTNConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
+        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: TestTNConfiguration
+                            .envConfiguration
+                            .errorHandlers.map { String(describing: $0) }))
+        XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: TestTNConfiguration
+                            .envConfiguration
+                            .requestMiddlewares.map { String(describing: $0) }))
     }
 
     func testEnvConfigurationWithTNEnvironmentObject() {
@@ -124,6 +138,14 @@ class TestTNConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
+        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: TestTNConfiguration
+                            .envConfiguration
+                            .errorHandlers.map { String(describing: $0) }))
+        XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: TestTNConfiguration
+                            .envConfiguration
+                            .requestMiddlewares.map { String(describing: $0) }))
     }
 
     func testRouteConfiguration() {
@@ -149,5 +171,9 @@ class TestTNConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
+        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: routeConf.errorHandlers.map { String(describing: $0) }))
+        XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: routeConf.requestMiddlewares.map { String(describing: $0) }))
     }
 }

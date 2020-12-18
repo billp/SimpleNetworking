@@ -32,6 +32,7 @@ public class TNOperation: Operation {
         }
     }
 
+    /// Overrides the default isExecuting variable inherited from Operation.
     override open var isExecuting: Bool {
         return _executing
     }
@@ -46,6 +47,7 @@ public class TNOperation: Operation {
         }
     }
 
+    /// Overrides the default isFinished variable inherited from Operation.
     override open var isFinished: Bool {
         return _finished
     }

@@ -88,7 +88,7 @@ class TNMultipartFormDataHelpers {
         return "application/octet-stream"
     }
 
-    public static func fileSize(withURL url: URL) -> Int {
+    static func fileSize(withURL url: URL) -> Int {
         var attributes: [FileAttributeKey: Any]? {
             do {
                 return try FileManager.default.attributesOfItem(atPath: url.path)
@@ -101,8 +101,8 @@ class TNMultipartFormDataHelpers {
         return attributes?[.size] as? Int ?? 0
     }
 
-    public static func contentLength(forParams params: [String: TNMultipartFormDataPartType],
-                                     boundary: String) throws -> Int {
+    static func contentLength(forParams params: [String: TNMultipartFormDataPartType],
+                              boundary: String) throws -> Int {
         var contentLength = openBodyPart(boundary: boundary).count
 
         try params.keys.enumerated().forEach { (index, key) in

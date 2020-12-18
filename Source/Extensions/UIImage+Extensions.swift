@@ -61,7 +61,7 @@ extension TNImageType {
             height: size.height * scaleFactor
         )
 
-        #if os(watchOS)
+        #if os(watchOS) || os(iOS)
         UIGraphicsBeginImageContextWithOptions(targetSize, true, scale)
         defer { UIGraphicsEndImageContext() }
         let context = UIGraphicsGetCurrentContext()!

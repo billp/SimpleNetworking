@@ -19,6 +19,9 @@
 
 import Foundation
 
+/// Use this protocol to define routers as enums.
 public protocol TNRouteProtocol {
+    /// Configure your router by setting this function. See Examples/Routers/CityRoute.swift for an example.
+    /// - returns: A TNRouteConfiguration object for each route.
     func configure() -> TNRouteConfiguration
 }

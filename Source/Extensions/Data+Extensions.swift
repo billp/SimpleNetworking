@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// Data extension for JSON deserialization.
 public extension Data {
     ///
     /// Deserializes the JSON Data to the given type.

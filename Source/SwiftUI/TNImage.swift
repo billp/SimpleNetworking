@@ -21,15 +21,26 @@ import Foundation
 import Combine
 import SwiftUI
 
+/// The Image type depending on platform: UIImage for iOS or NSImage for macOS.
 #if os(macOS)
 public typealias TNImageType = NSImage
 #elseif os(iOS) || os(watchOS) || os(tvOS)
 public typealias TNImageType = UIImage
 #endif
 
+/// Callback type for image preprocess used in UIImageView/TNImage helpers
+/// - parameters:
+///     - image: The downloaded image.
+/// - returns: The new transformed image.
 public typealias ImagePreprocessType = (TNImageType) -> (TNImageType)
+/// Callback type for image downloaded event.
+/// - parameters:
+///     - image: The downloaded image.
+///     - error: A TNError object if it fails to download.
+/// - returns: The new transformed image.
 public typealias ImageOnFinishType = (TNImageType?, TNError?) -> Void
 
+@available(iOS 13.0, *)
 final public class ImageLoader: ObservableObject {
     var request: TNRequest
     var url: String?
@@ -45,12 +56,12 @@ final public class ImageLoader: ObservableObject {
         }
     }
 
-    public init(with url: String,
-                configuration: TNConfiguration? = nil,
-                defaultImage: TNImageType? = nil,
-                resize: CGSize? = nil,
-                preprocessImage: ImagePreprocessType? = nil,
-                onFinish: ImageOnFinishType? = nil) {
+    init(with url: String,
+         configuration: TNConfiguration? = nil,
+         defaultImage: TNImageType? = nil,
+         resize: CGSize? = nil,
+         preprocessImage: ImagePreprocessType? = nil,
+         onFinish: ImageOnFinishType? = nil) {
         self.url = url
         self.request = TNRequest(method: .get,
                                  url: url,
@@ -61,11 +72,11 @@ final public class ImageLoader: ObservableObject {
         self.onFinishImageClosure = onFinish
     }
 
-    public init(with request: TNRequest,
-                defaultImage: TNImageType? = nil,
-                resize: CGSize? = nil,
-                preprocessImage: ImagePreprocessType? = nil,
-                onFinish: ImageOnFinishType? = nil) {
+    init(with request: TNRequest,
+         defaultImage: TNImageType? = nil,
+         resize: CGSize? = nil,
+         preprocessImage: ImagePreprocessType? = nil,
+         onFinish: ImageOnFinishType? = nil) {
         self.request = request
         self.defaultImage = defaultImage
         self.resize = resize
@@ -132,10 +143,13 @@ final public class ImageLoader: ObservableObject {
     }
 }
 
+@available(iOS 13.0, *)
+/// TNImage is a SwiftUI component for downloading images.
 public struct TNImage: View {
     @ObservedObject public var imageLoader: ImageLoader
     @State var image = TNImageType()
 
+    /// Main body
     public var body: some View {
         #if os(macOS)
         let imageView = Image(nsImage: image)

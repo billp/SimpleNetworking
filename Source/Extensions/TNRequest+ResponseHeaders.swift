@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// TNRequest extension for response headers.
 public extension TNRequest {
     ///
     /// Reads the response headers from request after its completion.

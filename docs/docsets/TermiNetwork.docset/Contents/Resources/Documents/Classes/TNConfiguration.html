@@ -23,7 +23,7 @@
         <a class="header-link" href="../index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (82% documented)
+         (87% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -114,9 +114,6 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Extensions/Decodable.html">Decodable</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Extensions/UIImageView.html">UIImageView</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -170,6 +167,12 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork17TNFailureCallbacka">TNFailureCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/TNImageType">TNImageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork11TNImageTypea">TNImageType</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork15TNMockDelayTypea">TNMockDelayType</a>
@@ -311,7 +314,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The certificate file paths used for pining.</p>
+                        <p>The certificate file paths used for certificate pining.</p>
 
                       </div>
                       <div class="declaration">
@@ -365,7 +368,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration.</p>
+                        <p>Additional headers of the request. Will be merged with the headers specified in TNRouteConfiguration.</p>
 
                       </div>
                       <div class="declaration">
@@ -419,7 +422,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Enables or disables  request mocking.</p>
+                        <p>Enables or disables request mocking.</p>
 
                       </div>
                       <div class="declaration">
@@ -558,9 +561,9 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle0oP7Enabled0O5Delay19keyDecodingStrategy13errorHandlersACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAXSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyuV0OSgSayAA22TNErrorHandlerProtocol_pXpGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:mockDataEnabled:mockDelay:keyDecodingStrategy:errorHandlers:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle0oP7Enabled0O5Delay19keyDecodingStrategy13errorHandlersACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAXSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyuV0OSgSayAA22TNErrorHandlerProtocol_pXpGSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePaths:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>mockDataEnabled:<wbr>mockDelay:<wbr>keyDecodingStrategy:<wbr>errorHandlers:<wbr>)</a>
+                    <a name="/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle0oP7Enabled0O5Delay19keyDecodingStrategy13errorHandlers0H11MiddlewaresACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAYSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyuV0OSgSayAA22TNErrorHandlerProtocol_pXpGSgSayAA27TNRequestMiddlewareProtocol_pXpGSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(cachePolicy:timeoutInterval:requestBodyType:certificatePaths:verbose:headers:mockDataBundle:mockDataEnabled:mockDelay:keyDecodingStrategy:errorHandlers:requestMiddlewares:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork15TNConfigurationC11cachePolicy15timeoutInterval15requestBodyType16certificatePaths7verbose7headers14mockDataBundle0oP7Enabled0O5Delay19keyDecodingStrategy13errorHandlers0H11MiddlewaresACSo017NSURLRequestCacheE0VSg_SdSgAA09TNRequestiJ0OSgSaySSGSgSbSgSDyS2SGSgSo8NSBundleCSgAYSd3min_Sd3maxtSg10Foundation11JSONDecoderC03KeyuV0OSgSayAA22TNErrorHandlerProtocol_pXpGSgSayAA27TNRequestMiddlewareProtocol_pXpGSgtcfc">init(cachePolicy:<wbr>timeoutInterval:<wbr>requestBodyType:<wbr>certificatePaths:<wbr>verbose:<wbr>headers:<wbr>mockDataBundle:<wbr>mockDataEnabled:<wbr>mockDelay:<wbr>keyDecodingStrategy:<wbr>errorHandlers:<wbr>requestMiddlewares:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -568,7 +571,7 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Default initializer of TNConfiguration</p>
 
                       </div>
                       <div class="declaration">
@@ -585,9 +588,164 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
             <span class="nv">mockDataEnabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">mockDelay</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15TNMockDelayTypea">TNMockDelayType</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
             <span class="nv">keyDecodingStrategy</span><span class="p">:</span> <span class="kt">JSONDecoder</span><span class="o">.</span><span class="kt">KeyDecodingStrategy</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-            <span class="nv">errorHandlers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a></span><span class="o">.</span><span class="k">Type</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+            <span class="nv">errorHandlers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a></span><span class="o">.</span><span class="k">Type</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">requestMiddlewares</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Protocols/TNRequestMiddlewareProtocol.html">TNRequestMiddlewareProtocol</a></span><span class="o">.</span><span class="k">Type</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cachePolicy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The cache policy of the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timeoutInterval</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The timeout interval of the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>requestBodyType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>certificatePaths</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The certificate file paths used for certificate pining.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>verbose</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Enables or disables debug mode.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Additional headers of the request. Will be merged with the headers specified
+in TNRouteConfiguration.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mockDataBundle</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Bundle object of mock data used when useMockData is true.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mockDataEnabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Enables or disables request mocking.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>mockDelay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies a delay when mock data is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyDecodingStrategy</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>// Specifies a key decoding strategy. Take a look,
+at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy">https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy</a></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>errorHandlers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Error handlers that will be used as a fallback after request failure.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>requestMiddlewares</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Request middlewares. For example see
+Examples/Communication/Middlewares/CryptoMiddleware.swift</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -627,7 +785,7 @@ at: <a href="https://developer.apple.com/documentation/foundation/jsondecoder/ke
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-14)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-18)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

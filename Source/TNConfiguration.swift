@@ -34,7 +34,7 @@ public final class TNConfiguration {
     public var timeoutInterval: TimeInterval?
     /// The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.
     public var requestBodyType: TNRequestBodyType?
-    /// The certificate file paths used for pining.
+    /// The certificate file paths used for certificate pining.
     public var certificatePaths: [String]? {
         didSet {
             if let certPaths = certificatePaths {
@@ -46,11 +46,11 @@ public final class TNConfiguration {
     internal var certificateData: [NSData]?
     /// Enables or disables debug mode.
     public var verbose: Bool?
-    /// Additional headers of the request. Those headers will be merged with those of TNRouteConfiguration.
+    /// Additional headers of the request. Will be merged with the headers specified in TNRouteConfiguration.
     public var headers: [String: String]?
     /// The Bundle object of mock data used when useMockData is true.
     public var mockDataBundle: Bundle?
-    /// Enables or disables  request mocking.
+    /// Enables or disables request mocking.
     public var mockDataEnabled: Bool?
     /// Specifies a delay when mock data is used.
     public var mockDelay: TNMockDelayType?
@@ -64,6 +64,23 @@ public final class TNConfiguration {
 
     // MARK: Initializers
 
+    /// Default initializer of TNConfiguration
+    /// - parameters:
+    ///     - cachePolicy: The cache policy of the request.
+    ///     - timeoutInterval: The timeout interval of the request.
+    ///     - requestBodyType: The request body type of the request. Can be either .xWWWFormURLEncoded or .JSON.
+    ///     - certificatePaths: The certificate file paths used for certificate pining.
+    ///     - verbose: Enables or disables debug mode.
+    ///     - headers: Additional headers of the request. Will be merged with the headers specified
+    ///         in TNRouteConfiguration.
+    ///     - mockDataBundle: The Bundle object of mock data used when useMockData is true.
+    ///     - mockDataEnabled: Enables or disables request mocking.
+    ///     - mockDelay: Specifies a delay when mock data is used.
+    ///     - keyDecodingStrategy: // Specifies a key decoding strategy. Take a look,
+    ///         at: https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy
+    ///     - errorHandlers: Error handlers that will be used as a fallback after request failure.
+    ///     - requestMiddlewares: Request middlewares. For example see
+    ///         Examples/Communication/Middlewares/CryptoMiddleware.swift
     public init(cachePolicy: URLRequest.CachePolicy? = nil,
                 timeoutInterval: TimeInterval? = nil,
                 requestBodyType: TNRequestBodyType? = nil,
@@ -74,7 +91,8 @@ public final class TNConfiguration {
                 mockDataEnabled: Bool? = nil,
                 mockDelay: TNMockDelayType? = nil,
                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil,
-                errorHandlers: [TNErrorHandlerProtocol.Type]? = nil) {
+                errorHandlers: [TNErrorHandlerProtocol.Type]? = nil,
+                requestMiddlewares: [TNRequestMiddlewareProtocol.Type]? = nil) {
 
         self.cachePolicy = cachePolicy
         self.timeoutInterval = timeoutInterval
@@ -86,6 +104,7 @@ public final class TNConfiguration {
         self.mockDelay = mockDelay
         self.keyDecodingStrategy = keyDecodingStrategy
         self.errorHandlers = errorHandlers
+        self.requestMiddlewares = requestMiddlewares
 
         if let certPaths = certificatePaths {
             setCertificateData(with: certPaths)
@@ -121,6 +140,7 @@ extension TNConfiguration: NSCopying {
         configuration.mockDataEnabled = mockDataEnabled
         configuration.keyDecodingStrategy = keyDecodingStrategy
         configuration.errorHandlers = errorHandlers
+        configuration.requestMiddlewares = requestMiddlewares
         return configuration
     }
 }

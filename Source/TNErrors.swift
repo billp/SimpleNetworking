@@ -66,6 +66,7 @@ public enum TNError: Error {
 }
 
 extension TNError: LocalizedError {
+    /// A localized description for TNError.
     public var localizedDescription: String? {
         switch self {
         case .invalidURL:

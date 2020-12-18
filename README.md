@@ -1,3 +1,4 @@
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
@@ -13,21 +14,28 @@
 
 ## Features
 <p align="center">
-🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transofmers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File upload/download 🔸 Pretty printed debug information in console 🔸
+🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console 🔸
 </p>
 
 #### Table of contents
 - [Installation](#installation)
+	- [CocoaPods](#cocoapods)
+- [Demo Application](#demo_app)
 - [Usage](#usage)
-  - [Simple usage](#simple_usage)
-  - [Advanced usage](#advanced_usage)
+  - [Simple usage of TNRequest](#simple_usage)
+	  - [Parameters](#parameters)
+  - [Advanced usage of TNRequest with Configuration and custom Queue](#advanced_usage)
+	  - [Additional Parameters](#parameters)
 - [Debug Logging](#debug_logging)
 
 <a name="installation" />
 
 ## Installation
+<a name="cocoapods" />
 
-TermiNetwork is available via [CocoaPods](http://cocoapods.org).  Simply add the following lines to your Podfile and run **pod install** from your terminal:
+### CocoaPods
+
+Add the following lines to your Podfile and run **pod install** from your terminal:
 
 ```ruby
 platform :ios, '9.0'
@@ -38,15 +46,20 @@ target 'YourTarget' do
 end
 ```
 
+<a name="demo_app" />
+
+## Demo Application
+To see all the features of TermiNetwork in action, download the source code and run the **TermiNetworkExamples** scheme.
+
 <a name="usage" />
 
 ## Usage
 
 <a name="simple_usage" />
 
-### Simple usage
+### Simple usage (TNRequest)
 
-Imagine that you have the following Codable model
+Let's say you have the following Codable model
 
 ```swift
 struct Todo: Codable {
@@ -55,52 +68,46 @@ struct Todo: Codable {
 }
 ```
 
-You can call the **TNRequest(...).start(...)** to add a new Todo with the title "Go shopping." like this:
+You construct the request to add a new Todo with title "Go shopping." like this:
 
 ```swift
 let params = ["title": "Go shopping."]
 let headers = ["x-auth": "abcdef1234"]
 
-TNRequest(method: .post, url: "https://myweb.com/api/todos", headers: headers, params: params).start(responseType: Todo.self, onSuccess: { todo in
-    print(todo)
+TNRequest(method: .post,
+          url: "https://myweb.com/api/todos",
+          headers: headers,
+          params: params).start(responseType: Todo.self, onSuccess: { todo in
+	print(todo)
 }) { (error, data) in
     print(error)
 }
 ```
-
-If the request completes successfully (2xx), a new instance of Todo is being created and passed in onSuccess callback. If the deserialization fails for any reason, the onFailure callback is being called with the appropriate error. See more information about errors in *Error Handling* section.
-
-
-The JSON response of the service is the following:
-
-```swift
-{
-   "id": 5,
-   "title": "Go shopping."
-}
-```
-
+<a name="parameters" />
 
 #### Parameters
 
-**method**: one of the following supported HTTP methods
-
+##### method
+One of the following supported HTTP methods:
 ```
 .get, .head, .post, .put, .delete, .connect, .options, .trace or .patch
 ```
 
-**responseType**: one of the following supported response types
+##### responseType
+One of the following supported response types
 ```
 JSON.self, Codable.self, UIImage.self, Data.self or String.self
 ```
 
-**onSuccess**: a callback returning an object with the data type specified by
+##### onSuccess
+A callback returning an object of type specified in responseType.
 
-**onFailure**: a callback returning an error+data on failure. There are two cases when this callback being called: the first is that the http status code is different than 2xx and the second is that there is an error with data conversion, e.g. it fails on deserialization of the *responseType*.
+##### onFailure
+a callback returning **TNError** and optionally the response data **Data**.
 
 <a name="advanced_usage" />
 
-### Advanced usage with configuration and custom queue
+### Advanced usage of TNRequest with Configuration and custom Queue
 
 ```swift
 let myQueue = TNQueue(failureMode: .continue)
@@ -119,8 +126,10 @@ TNRequest(method: .post,
           url: "https://myweb.com/todos",
           headers: headers,
           params: params,
-          configuration: configuration).start(queue: myQueue, responseType: JSON.self, onSuccess: { json in
-    print(json)
+          configuration: configuration).start(queue: myQueue,
+									          responseType: String.self,
+									          onSuccess: { response in
+    print(response)
 }) { (error, data) in
     print(error)
 }
@@ -129,14 +138,16 @@ The request above uses a custom queue *myQueue* with a failure mode of value *.c
 
 #### Additional parameters
 
-**configuration (optional)**: The configuration object to use. The available configuration properties are:
-- *cachePolicy*: The NSURLRequest.CachePolicy used by NSURLRequest internally. Default value: *.useProtocolCachePolicy* (see apple docs for available values)
+##### configuration (optional)
+The configuration object to use.
+- *cachePolicy*: The **NSURLRequest.CachePolicy** used by **NSURLRequest**. Default value: *.useProtocolCachePolicy* (see apple docs for available values)
 - *timeoutInterval*: The timeout interval used by NSURLRequest internally. Default value: 60 (see apple docs for more info)
 - *requestBodyType*: It specifies the content type of request params. Available values:
   - .xWWWFormURLEncoded (default): The params are being sent with 'application/x-www-form-urlencoded' content type.
   - .JSON: The params are being sent with 'application/json' content type.
 
-**queue (optional):** Specify the queue in which the request will be  added. If you omit this argument, the request will be added to a shared queue (TNQueue.shared).
+##### queue (optional)
+Specifies the queue in which the request will be added. If you omit this argument, the request will be added to a shared queue **TNQueue.shared**.
 
 ## Router
 You can organize your requests by creating an Environment (class) and a Router (enum) that conform TNEnvironmentProtocol and TNRouterProtocol respectively. To do so, create an environment enum and at least one router class as shown bellow:
@@ -296,20 +307,17 @@ imageView.setRemoteImage(url: "http://www.website.com/image.jpg", defaultImage: 
 
 ## Debug Logging
 
-To enable the debug logging just set the **verbose** of a TNConfigurration instance to **true**.
+You enable the debug logging by setting the **verbose** to **true** in your configuration
+```swift
+let configuration = TNConfiguration()
+configuration.verbose = true
+```
+And you will see a beautiful pretty-printed debug output in your console.
+<img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png">
 
 ## Tests
 
 To run the tests open the Sample project, select Product -> Test or simply press ⌘U on keyboard.
-
-
-## Contribution
-
-Feel free to contribute to the project by creating a pull request and/or by reporting any issue(s) you find
-
-## Author
-
-Bill Panagiotopoulos, billp.dev@gmail.com
 
 ## Contributors
 

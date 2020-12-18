@@ -43,6 +43,7 @@ open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
     required public override init() { }
 }
 
+/// Decodable extension for Transformers
 public extension Decodable {
     /// Transforms the decodable object with the specified transformer.
     ///
