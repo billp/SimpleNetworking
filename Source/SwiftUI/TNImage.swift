@@ -96,8 +96,12 @@ final public class ImageLoader: ObservableObject {
         self.image = defaultImage ?? TNImageType()
 
         request.start(responseType: TNImageType.self, onSuccess: { image in
-            self.handleResizeImage(image: image)
-            self.handlePreprocessImage(image: image)
+            self.handlePreprocessImage(image: image) { preprocessedImage in
+                // Resize image only if preprocess image function is not present
+                if preprocessedImage == nil {
+                    self.handleResizeImage(image: image)
+                }
+            }
         }, onFailure: { (error, _) in
             self.onFinishImageClosure?(nil, error)
         })
@@ -108,14 +112,19 @@ final public class ImageLoader: ObservableObject {
         self.image = image
         if let url = url {
             #if os(macOS)
-
+            if let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) {
+                let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+                bitmapRep.size = image.size
+                TNCache.shared[url] = bitmapRep.representation(using: .png, properties: [:])
+            }
             #else
                 TNCache.shared[url] = image.pngData()
             #endif
         }
     }
 
-    private func handlePreprocessImage(image: TNImageType) {
+    private func handlePreprocessImage(image: TNImageType,
+                                       onFinish: ((TNImageType?) -> Void)? = nil) {
         var image = image
         if let preprocessImage = self.preprocessImageClosure {
             DispatchQueue.global(qos: .background).async {
@@ -124,19 +133,22 @@ final public class ImageLoader: ObservableObject {
                 DispatchQueue.main.async {
                     self.updateImage(image)
                     self.onFinishImageClosure?(image, nil)
+                    onFinish?(image)
                 }
             }
         } else {
-            updateImage(image)
+            onFinish?(nil)
         }
     }
-    private func handleResizeImage(image: TNImageType) {
+    private func handleResizeImage(image: TNImageType,
+                                   onFinish: ((TNImageType) -> Void)? = nil) {
         if let size = self.resize {
             var image = image
             DispatchQueue.global(qos: .background).async {
                 image = image.tn_resize(size) ?? image
                 DispatchQueue.main.async {
                     self.updateImage(image)
+                    onFinish?(image)
                 }
             }
         }

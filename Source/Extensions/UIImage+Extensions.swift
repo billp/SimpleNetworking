@@ -61,13 +61,11 @@ extension TNImageType {
             height: size.height * scaleFactor
         )
 
-        #if os(watchOS) || os(iOS)
-        UIGraphicsBeginImageContextWithOptions(targetSize, true, scale)
+        #if os(watchOS)
+        UIGraphicsBeginImageContextWithOptions(targetSize, false, self.scale)
         defer { UIGraphicsEndImageContext() }
-        let context = UIGraphicsGetCurrentContext()!
-        if let cgImage = self.cgImage {
-            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: scaledImageSize.width, height: scaledImageSize.height))
-        }
+        _ = UIGraphicsGetCurrentContext()!
+        self.draw(in: CGRect(x: 0, y: 0, width: scaledImageSize.width, height: scaledImageSize.height))
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()!
         #else
         // Draw and return the resized UIImage
