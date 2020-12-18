@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
 
-<p align="center"><b>TermiNetwork is a zero-dependency networking solution for building modern and secure iOS applications.</b>
+<p align="center"><b>A zero-dependency networking solution for building modern and secure iOS applications.</b>
   <br /><br />
   <img src="https://img.shields.io/badge/Language-Swift%205-blue" />
   <img src="https://travis-ci.org/billp/TermiNetwork.svg?branch=1.0.0-new-structure" />
@@ -15,7 +15,7 @@
 
 ## Features
 <p align="center">
-🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console 🔸
+🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b>) helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console 🔸
 </p>
 
 #### Table of contents
