@@ -17,6 +17,8 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+import Foundation
+
 /// This is a custom implementation of URLSessionDelegate, used to handle certification pinning
 internal final class TNSession<ResultType>: NSObject, URLSessionDataDelegate, URLSessionDownloadDelegate {
     weak var request: TNRequest?

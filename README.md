@@ -15,7 +15,7 @@
 
 ## Features
 <p align="center">
-🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b>) helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console 🔸
+Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console
 </p>
 
 #### Table of contents
