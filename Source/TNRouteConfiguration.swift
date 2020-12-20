@@ -19,27 +19,33 @@
 
 import Foundation
 
-/// Route configuration
+/// Route configuration class which is used in TNRoute protocol implementations.
 public final class TNRouteConfiguration {
+    /// A TNMethod to use, for example .get, .post, etc.
     var method: TNMethod
+    /// A path of the request (will be appended to the base URL, for example .path(["user", "13"]).
     var path: TNPath
+    /// The parameters of the request.
     var params: [String: Any?]?
+    /// The headers of the request. They will override (if needed) those from configuration objects.
     var headers: [String: String]?
+    /// A configuration object (Optional, e.g. if you want ot use custom configuration for a specific route).
     var configuration: TNConfiguration?
+    /// A path of the file in the mock data bundle specified in configuration object.
+    /// This will be used only if useMockData is set to true in the configuration object.
     var mockFilePath: TNPath?
 
     /// Route configuration initializer
     /// 
     /// - parameters:
     ///   - method: A TNMethod to use, for example .get, .post, etc.
-    ///   - path: A path that will be appended to the base url speficified in the environment,
-    ///         for example .path(["user", "13"])
-    ///   - params: The params that will be send to server based on the request body type
-    ///   - headers: The headers that will be send to server, this will be merged with the existed headers if specified
-    ///         in condiguration object
+    ///   - path: A path of the request (will be appended to the base URL, for example .path(["user", "13"]).
+    ///   - params: The parameters of the request.
+    ///   - headers: A configuration object (Optional, e.g. if you want ot use custom
+    ///   configuration for a specific route).
     ///   - configuration: The configuration object of the request.
-    ///   - mockFilePath: A path of the response in the mock data bundle specified in configuration object.
-    ///         This will be used only if useMockData is set to true in the configuration object
+    ///   - mockFilePath: A path of the file in the mock data bundle specified in configuration object.
+    ///         This will be used only if useMockData is set to true in the configuration object.
     public init(method: TNMethod,
                 path: TNPath,
                 params: [String: Any?]? = nil,

@@ -23,7 +23,7 @@
         <a class="header-link" href="index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (87% documented)
+         (92% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -47,9 +47,6 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ImageLoader.html">ImageLoader</a>
-              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TNCache.html">TNCache</a>
               </li>
@@ -214,9 +211,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Use this class as super class to create your transformers.
-You should pass FromType and ToType in your subclass definition.
-Those types are used in transform function.</p>
+                        <p>Inherit this class as to create your transformers.
+You should pass FromType and ToType (generic types) in your subclass definition.</p>
 
                         <a href="Classes/TNTransformer.html" class="slightly-smaller">See more</a>
                       </div>
@@ -257,7 +253,7 @@ Those types are used in transform function.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The core class of TermiNetwork. It uses all</p>
+                        <p>The core class of TermiNetwork. It handles the request creation as well as the request execution.</p>
 
                         <a href="Classes/TNRequest.html" class="slightly-smaller">See more</a>
                       </div>
@@ -266,34 +262,6 @@ Those types are used in transform function.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">TNRequest</span> <span class="p">:</span> <span class="kt"><a href="Classes/TNOperation.html">TNOperation</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork11ImageLoaderC"></a>
-                    <a name="//apple_ref/swift/Class/ImageLoader" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork11ImageLoaderC">ImageLoader</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                        <a href="Classes/ImageLoader.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">public</span> <span class="kd">class</span> <span class="kt">ImageLoader</span> <span class="p">:</span> <span class="kt">ObservableObject</span></code></pre>
 
                         </div>
                       </div>
@@ -314,7 +282,7 @@ Those types are used in transform function.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>TNCache is used internally for various tasks such as in-memory caching image data.
-(Used in UIImageView and Image extensions)</p>
+Primarily used in UIImageView and Image helpers.</p>
 
                         <a href="Classes/TNCache.html" class="slightly-smaller">See more</a>
                       </div>
@@ -342,9 +310,14 @@ Those types are used in transform function.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
-If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
-Also, each request can have its own TNConfiguration whose settings will override those from environment.</p>
+                        <p>A configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
+A configuration object follows the following rules:</p>
+
+<ol>
+<li>When a TNConfiguration object is passed to a TNEnvironment,
+each TNRouter (with its routes) will inherit this configuration.</li>
+<li>When a TNConfiguration object is passed to TNRouter, all its routes will inherit this configuration.</li>
+</ol>
 
                         <a href="Classes/TNConfiguration.html" class="slightly-smaller">See more</a>
                       </div>
@@ -429,7 +402,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>This class can be used to create custom queues</p>
+                        <p>Use this class to create custom queues.</p>
 
                         <a href="Classes/TNQueue.html" class="slightly-smaller">See more</a>
                       </div>
@@ -457,7 +430,7 @@ Also, each request can have its own TNConfiguration whose settings will override
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Route configuration</p>
+                        <p>Route configuration class which is used in TNRoute protocol implementations.</p>
 
                         <a href="Classes/TNRouteConfiguration.html" class="slightly-smaller">See more</a>
                       </div>
@@ -508,7 +481,7 @@ Also, each request can have its own TNConfiguration whose settings will override
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-18)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-20)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

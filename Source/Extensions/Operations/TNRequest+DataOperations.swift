@@ -24,7 +24,7 @@ import UIKit
 #endif
 
 extension TNRequest {
-    /// Adds a request to a queue and starts its execution for Decodable types.
+    /// Adds a request to a queue and starts a download process for Decodable types.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
@@ -70,7 +70,7 @@ extension TNRequest {
         return self
     }
 
-    /// Adds a request to a queue and starts its execution for Decodable types.
+    /// Adds a request to a queue and starts its execution for Transformer types.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.

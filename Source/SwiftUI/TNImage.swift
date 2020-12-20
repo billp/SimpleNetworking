@@ -21,10 +21,11 @@ import Foundation
 import Combine
 import SwiftUI
 
-/// The Image type depending on platform: UIImage for iOS or NSImage for macOS.
 #if os(macOS)
+/// The Image type depending on platform: UIImage for iOS or NSImage for macOS.
 public typealias TNImageType = NSImage
 #elseif os(iOS) || os(watchOS) || os(tvOS)
+/// The Image type depending on platform: UIImage for iOS or NSImage for macOS.
 public typealias TNImageType = UIImage
 #endif
 
@@ -41,6 +42,7 @@ public typealias ImagePreprocessType = (TNImageType) -> (TNImageType)
 public typealias ImageOnFinishType = (TNImageType?, TNError?) -> Void
 
 @available(iOS 13.0, *)
+/// :nodoc:
 final public class ImageLoader: ObservableObject {
     var request: TNRequest
     var url: String?

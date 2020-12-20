@@ -20,8 +20,9 @@
 import Foundation
 
 /// TNCache is used internally for various tasks such as in-memory caching image data.
-/// (Used in UIImageView and Image extensions)
+/// Primarily used in UIImageView and Image helpers.
 public final class TNCache {
+    /// Singleton object.
     public static let shared = TNCache()
 
     /// Singleton definition
@@ -29,8 +30,8 @@ public final class TNCache {
 
     /// Configures the cache.
     /// - Parameters:
-    ///     - countLimit: The maximum number of objects the cache should hold.
-    ///     - size: The maximum total size (in bytes) that the cache can hold before it starts removing objects.
+    ///     - countLimit: The maximum number of objects the cache will hold.
+    ///     - size: The maximum total size (in bytes) the cache will hold before it starts removing objects.
     public func configureCache(countLimit: Int, size: Int) {
         cache.countLimit = countLimit
         cache.totalCostLimit = size

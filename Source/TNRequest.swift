@@ -47,7 +47,7 @@ internal enum RequestType {
     case download(String)
 }
 
-/// The core class of TermiNetwork. It uses all
+/// The core class of TermiNetwork. It handles the request creation as well as the request execution.
 public final class TNRequest: TNOperation {
     // MARK: Internal properties
 
@@ -66,18 +66,16 @@ public final class TNRequest: TNOperation {
     internal var pinningErrorOccured: Bool = false
 
     /// The start date of the request.
-    public var startedAt: Date?
+    var startedAt: Date?
     /// The duration of the request.
-    public var duration: TimeInterval?
+    var duration: TimeInterval?
 
     // MARK: Public properties
 
-    /// The configuration of the request. This will be merged with  environment configuration and will override
-    /// values if needed.
+    /// The configuration of the request. This will be merged with the environment configuration if needed.
     public var configuration: TNConfiguration = TNConfiguration.makeDefaultConfiguration()
 
-    /// An associated object with the request. Use this variable to assign an object in order to use it later.
-    /// (e.g. an object to be handled by TNErrorHandlerProtocol implementations).
+    /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use
     weak public var associatedObject: AnyObject?
 
     // MARK: Private properties
@@ -86,15 +84,15 @@ public final class TNRequest: TNOperation {
 
     // MARK: Initializers
 
-    /// Initializes a TNRequest request.
+    /// Initializes a TNRequest.
     ///
-    /// parameters:
-    ///  - method: The http method of request, e.g. .get, .post, .head, etc.
-    ///  - url: The URL of the request.
-    ///  - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
-    ///  - params: A Dictionary as request params. If method is .get, it automatically appends
-    ///     them to url, otherwise it is seting them as request body.
-    ///  - configuration: A TNConfiguration object.
+    /// - parameters:
+    ///   - method: A TNMethod to use, for example: .get, .post, etc.
+    ///   - url: The URL of the request.
+    ///   - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
+    ///   - params: The parameters of the request. (optional)
+    ///   - configuration: A configuration object (optional, e.g. if you want ot use custom
+    ///   configuration for the request).
     public init(method: TNMethod,
                 url: String,
                 headers: [String: String]? = nil,
@@ -108,10 +106,10 @@ public final class TNRequest: TNOperation {
         self.configuration = configuration ?? TNConfiguration.makeDefaultConfiguration()
     }
 
-    /// Initializes a TNRequest request
+    /// Initializes a TNRequest.
     ///
     /// - parameters:
-    ///     - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///     - method: The method of request, e.g. .get, .post, .head, etc.
     ///     - url: The URL of the request
     ///     - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
     convenience init(method: TNMethod,
@@ -120,10 +118,10 @@ public final class TNRequest: TNOperation {
         self.init(method: method, url: url, headers: nil, params: nil)
     }
 
-    /// Initializes a TNRequest request
+    /// Initializes a TNRequest.
     ///
     /// - parameters:
-    ///    - method: The http method of request, e.g. .get, .post, .head, etc.
+    ///    - method: The method of request, e.g. .get, .post, .head, etc.
     ///    - url: The URL of the request
     ///    - headers: A Dictionary of header values, etc. ["Content-type": "text/html"] (optional)
     ///    - configuration: A TNConfiguration object
@@ -134,7 +132,7 @@ public final class TNRequest: TNOperation {
         self.init(method: method, url: url, headers: nil, params: nil, configuration: configuration)
     }
 
-    /// Initializes a TNRequest request
+    /// Initializes a TNRequest.
     ///
     /// - parameters:
     ///   - route: a TNRouteProtocol enum value
@@ -163,6 +161,11 @@ public final class TNRequest: TNOperation {
         }
     }
 
+    /// Initializes a TNRequest.
+    ///
+    /// - parameters:
+    ///   - route: a TNRouteProtocol enum value
+    ///   - environment: Specifies a different environment to use than the global setted environment.
     public convenience init(route: TNRouteProtocol,
                             environment: TNEnvironment? = TNEnvironment.current) {
         self.init(route: route,
@@ -172,14 +175,14 @@ public final class TNRequest: TNOperation {
 
     // MARK: Public methods
 
-    /// Converts a TNRequest instance to asRequest
+    /// Converts a TNRequest instance an URLRequest instance.
     public func asRequest() throws -> URLRequest {
         let params = try handleMiddlewareBodyBeforeSendIfNeeded(params: self.params)
         let urlString = NSMutableString()
 
         if pathType == .relative {
             guard let currentEnvironment = environment else { throw TNError.environmentNotSet }
-            urlString.setString(currentEnvironment.stringUrl + "/" + path)
+            urlString.setString(currentEnvironment.stringURL + "/" + path)
         } else {
             urlString.setString(path)
         }
@@ -272,6 +275,10 @@ public final class TNRequest: TNOperation {
     }
 
     // MARK: Operation
+
+    /// Overrides the start() function from Operation class.
+    /// You should never call this function directly. If you want to start a request without callbacks
+    /// use startEmpty() instead.
     public override func start() {
         // Prevent from calling this function directly.
         guard dataTask != nil else {

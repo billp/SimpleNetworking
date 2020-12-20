@@ -26,9 +26,8 @@ private protocol TNTransformerProtocol: NSObject {
     func transform(_ object: FromType) throws -> ToType
 }
 
-/// Use this class as super class to create your transformers.
-/// You should pass FromType and ToType in your subclass definition.
-/// Those types are used in transform function.
+/// Inherit this class as to create your transformers.
+/// You should pass FromType and ToType (generic types) in your subclass definition.
 open class TNTransformer<FromType, ToType>: NSObject, TNTransformerProtocol {
     /// This is the default transform method. This method should be overriden by subclass
     ///

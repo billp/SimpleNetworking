@@ -22,7 +22,7 @@ import TermiNetwork
 import SwiftUI
 
 class TestExtensions: XCTestCase {
-    lazy var sampleImageURL = TNEnvironment.current.stringUrl + "/sample.jpeg"
+    lazy var sampleImageURL = TNEnvironment.current.stringURL + "/sample.jpeg"
 
     override func setUp() {
         super.setUp()

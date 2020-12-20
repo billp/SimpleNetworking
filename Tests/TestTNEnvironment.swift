@@ -34,18 +34,18 @@ class TestTNEnvironment: XCTestCase {
 
     func testEnvironments() {
         TNEnvironment.set(Environment.httpHost)
-        XCTAssert(TNEnvironment.current.stringUrl == "http://localhost")
+        XCTAssert(TNEnvironment.current.stringURL == "http://localhost")
 
         TNEnvironment.set(Environment.httpHostWithPort)
-        XCTAssert(TNEnvironment.current.stringUrl == "http://localhost:8080")
+        XCTAssert(TNEnvironment.current.stringURL == "http://localhost:8080")
 
-        TNEnvironment.set(TNEnvironment(url: "http://www.google.com:8009/test/2"))
-        XCTAssert(TNEnvironment.current.stringUrl == "http://www.google.com:8009/test/2")
+        TNEnvironment.set(environmentObject: TNEnvironment(url: "http://www.google.com:8009/test/2"))
+        XCTAssert(TNEnvironment.current.stringURL == "http://www.google.com:8009/test/2")
 
         TNEnvironment.set(Environment.httpHostWithPortAndSuffix)
-        XCTAssert(TNEnvironment.current.stringUrl == "http://localhost:8080/v1/json")
+        XCTAssert(TNEnvironment.current.stringURL == "http://localhost:8080/v1/json")
 
         TNEnvironment.set(Environment.httpsHostWithPortAndSuffix)
-        XCTAssert(TNEnvironment.current.stringUrl == "https://google.com:8080/v3/test/foo/bar")
+        XCTAssert(TNEnvironment.current.stringURL == "https://google.com:8080/v3/test/foo/bar")
     }
 }

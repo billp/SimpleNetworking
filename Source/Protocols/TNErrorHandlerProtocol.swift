@@ -20,7 +20,7 @@
 import Foundation
 
 /// Use this protocol to create error handlers that can be passed to TNConfiguration instances.
-/// Every class that implements this protocol will be used to handle errors when a request is failed.
+/// Every class that implements this protocol will be used to handle errors when a request is failing.
 public protocol TNErrorHandlerProtocol: class {
     /// This function is called when a request is failed.
     ///   - parameters:

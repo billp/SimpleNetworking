@@ -27,7 +27,7 @@ import Foundation
 public typealias TNProgressCallbackType = (Int, Int, Float) -> Void
 
 extension TNRequest {
-    /// Adds a request to a queue and starts its execution for Decodable types.
+    /// Adds a request to a queue and starts an upload process for Decodable types.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
@@ -76,7 +76,7 @@ extension TNRequest {
         return self
     }
 
-    /// Adds a request to a queue and starts its execution for Decodable types.
+    /// Adds a request to a queue and starts its execution for Transformer types.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.
@@ -138,7 +138,7 @@ extension TNRequest {
         return self
     }
 
-    /// Adds a request to a queue and starts its execution for Decodable types.
+    /// Adds a request to a queue and starts its execution for String types.
     ///
     /// - parameters:
     ///    - queue: A TNQueue instance. If no queue is specified it uses the default one.

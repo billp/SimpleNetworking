@@ -24,7 +24,7 @@ import Foundation
 public protocol TNRequestMiddlewareProtocol {
     /// Modifies body params before they are sent to server
     ///   - parameters:
-    ///     - params:  The body params that are constructed by TNRequest initializers
+    ///     - params:  The body params that are constructed by TNRequest initializers.
     ///   - returns:
     ///     - the new modified params
     func modifyBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]?

@@ -49,12 +49,11 @@ public typealias TNAfterEachRequestCallbackType = (
     _ response: URLResponse?,
     _ error: Error?) -> Void
 
-/// This class can be used to create custom queues
+/// Use this class to create custom queues.
 public final class TNQueue: OperationQueue {
     // MARK: Static properties
 
-    /// The global queue of TermiNetwork. If no queue is specified to TNRequest instances,
-    /// they are added to this instance.
+    /// The default queue of TermiNetwork used in all TNRequest objects.
     public static var shared = TNQueue()
 
     // MARK: Private properties
@@ -63,13 +62,13 @@ public final class TNQueue: OperationQueue {
 
     // MARK: Hooks
 
-    /// Hooks  with a block of code to run before the queue is started.
+    /// A closure which is executing before the queue starts to execute its requests.
     public var beforeAllRequestsCallback: TNBeforeQueueStartCallbackType?
-    /// Hooks with a block of code to run after the queue is finished.
+    /// A closure which is executing after the queue finishes the execution of all its requests.
     public var afterAllRequestsCallback: TNAfterAllRequestsCallbackType?
-    /// Hooks with a block of code to run before each request execution in the queue.
+    /// A closure which is executing before a request is going to be executed in queue.
     public var beforeEachRequestCallback: TNBeforeEachRequestCallbackType?
-    /// Hooks with a block of code to run after the completion of request execution in the queue
+    /// A closure which is executing after a request finishes its execution in queue.
     public var afterEachRequestCallback: TNAfterEachRequestCallbackType?
 
     internal var failureMode: TNQueueFailureMode = .continue

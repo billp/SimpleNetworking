@@ -19,12 +19,17 @@
 
 import Foundation
 
-/// Type for mock delay randomizer
+/// Type for mock delay randomizer.
+/// - parameters:
+///   - min: The lower bound of interval.
+///   - max: The upper bound of interval.
 public typealias TNMockDelayType = (min: TimeInterval, max: TimeInterval)
 
-/// A generic configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
-/// If a TNConfiguration is passed to a TNEnvironment, each TNRequest will inherit this configuration.
-/// Also, each request can have its own TNConfiguration whose settings will override those from environment.
+/// A configuration class that can be used with TNEnvironment, TNRouteConfiguration and TNRequest.
+/// A configuration object follows the following rules:
+/// 1. When a TNConfiguration object is passed to a TNEnvironment,
+/// each TNRouter (with its routes) will inherit this configuration.
+/// 2. When a TNConfiguration object is passed to TNRouter, all its routes will inherit this configuration.
 public final class TNConfiguration {
     // MARK: Public properties
 
@@ -46,7 +51,7 @@ public final class TNConfiguration {
     internal var certificateData: [NSData]?
     /// Enables or disables debug mode.
     public var verbose: Bool?
-    /// Additional headers of the request. Will be merged with the headers specified in TNRouteConfiguration.
+    /// Additional headers of the request. They will be merged with the headers specified in TNRouteConfiguration.
     public var headers: [String: String]?
     /// The Bundle object of mock data used when useMockData is true.
     public var mockDataBundle: Bundle?
@@ -126,6 +131,7 @@ public final class TNConfiguration {
 }
 
 extension TNConfiguration: NSCopying {
+    /// NSCopying implementation, used for cloning TNConfiguration objects.
     public func copy(with zone: NSZone? = nil) -> Any {
         let configuration = TNConfiguration()
         configuration.cachePolicy = cachePolicy

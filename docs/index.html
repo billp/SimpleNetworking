@@ -22,7 +22,7 @@
         <a class="header-link" href="index.html">
           TermiNetwork 1.0.0 Docs
         </a>
-         (87% documented)
+         (92% documented)
       </p>
     
       <p class="header-col--secondary">
@@ -46,9 +46,6 @@
           <li class="nav-group-name">
             <a class="nav-group-name-link" href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Classes/ImageLoader.html">ImageLoader</a>
-              </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Classes/TNCache.html">TNCache</a>
               </li>
@@ -191,11 +188,13 @@
         <section class="section">
           <div class="section-content top-matter">
             
-            <p align="center">
+            <p></p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
 
-<p align="center"><b>TermiNetwork is a zero-dependency networking solution for building modern and secure iOS applications.</b>
+<p align="center"><b>A zero-dependency networking solution for building modern and secure iOS applications.</b>
   <br /><br />
   <img src="https://img.shields.io/badge/Language-Swift%205-blue" />
   <img src="https://travis-ci.org/billp/TermiNetwork.svg?branch=1.0.0-new-structure" />
@@ -206,81 +205,108 @@
 <h2 id='features' class='heading'>Features</h2>
 
 <p align="center">
-🔸 Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transofmers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File upload/download 🔸 Pretty printed debug information in console 🔸
+Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console
 </p>
 <h4 id='table-of-contents' class='heading'>Table of contents</h4>
 
 <ul>
 <li><a href="#installation">Installation</a></li>
+<li><a href="#demo_app">Demo Application</a></li>
 <li><a href="#usage">Usage</a>
 
 <ul>
-<li><a href="#simple_usage">Simple usage</a></li>
-<li><a href="#advanced_usage">Advanced usage</a></li>
+<li><a href="#simple_usage">Simple usage of <b>TNRequest</b></a>
+
+<ul>
+<li><a href="#parameters">Parameters</a></li>
+</ul></li>
+<li><a href="#advanced_usage">Advanced usage of <b>TNRequest</b> with <b>Configuration</b> and custom <b>Queue</b></a>
+
+<ul>
+<li><a href="#parameters">Additional Parameters</a></li>
+</ul></li>
+<li><a href="#complete_setup">Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)</a>
+
+<ul>
+<li><a href="#setup_environments">Setup your Environments</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#debug_logging">Debug Logging</a></li>
 </ul>
 
-<p><a name="installation" /></p>
+<p><a name="installation"></a></p>
 <h2 id='installation' class='heading'>Installation</h2>
 
-<p>TermiNetwork is available via <a href="http://cocoapods.org">CocoaPods</a>.  Simply add the following lines to your Podfile and run <strong>pod install</strong> from your terminal:</p>
-<pre class="highlight ruby"><code><span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'9.0'</span>
-<span class="n">use_frameworks!</span>
+<p>You can install <strong>TermiNetwork</strong> with one of the following ways&hellip;</p>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
 
-<span class="n">target</span> <span class="s1">'YourTarget'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'TermiNetwork'</span><span class="p">,</span> <span class="s1">'~&gt; 0.3'</span>
-<span class="k">end</span>
+<p>Add the following line to your <strong>Podfile</strong> and run <strong>pod install</strong> in your terminal:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'TermiNetwork'</span><span class="p">,</span> <span class="s1">'~&gt; 1.0.0'</span>
+</code></pre>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>Add the following line to your <strong>Carthage</strong> and run <strong>carthage update</strong> in your terminal:</p>
+<pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"billp/TermiNetwork"</span> <span class="o">~&gt;</span> <span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span>
+</code></pre>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Go to <strong>File</strong> &gt; <strong>Swift Packages</strong> &gt; <strong>Add Package Dependency</strong> and add the following URL :</p>
+<pre class="highlight plaintext"><code>https://github.com/billp/TermiNetwork
 </code></pre>
 
-<p><a name="usage" /></p>
+<p><a name="demo_app"></a></p>
+<h2 id='demo-application' class='heading'>Demo Application</h2>
+
+<p>To see all the features of TermiNetwork in action, download the source code and run the <strong>TermiNetworkExamples</strong> scheme.</p>
+
+<p><a name="usage"></a></p>
 <h2 id='usage' class='heading'>Usage</h2>
 
-<p><a name="simple_usage" /></p>
-<h3 id='simple-usage' class='heading'>Simple usage</h3>
+<p><a name="simple_usage"></a></p>
+<h3 id='simple-usage-tnrequest' class='heading'>Simple usage (TNRequest)</h3>
 
-<p>Imagine that you have the following Codable model</p>
+<p>Let&rsquo;s say you have the following Codable model</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Todo</span><span class="p">:</span> <span class="kt">Codable</span> <span class="p">{</span>
    <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span>
    <span class="k">let</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>You can call the <strong>TNRequest(&hellip;).start(&hellip;)</strong> to add a new Todo with the title &ldquo;Go shopping.&rdquo; like this:</p>
+<p>You construct the request to add a new Todo with title &ldquo;Go shopping.&rdquo; like this:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span><span class="p">]</span>
 <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
 
-<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span> <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span> <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
+<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
+          <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span>
+          <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+          <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span>
 <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>If the request completes successfully (2xx), a new instance of Todo is being created and passed in onSuccess callback. If the deserialization fails for any reason, the onFailure callback is being called with the appropriate error. See more information about errors in <em>Error Handling</em> section.</p>
-
-<p>The JSON response of the service is the following:</p>
-<pre class="highlight swift"><code><span class="p">{</span>
-   <span class="s">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-   <span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span>
-<span class="p">}</span>
-</code></pre>
+<p><a name="parameters"></a></p>
 <h4 id='parameters' class='heading'>Parameters</h4>
+<h5 id='method' class='heading'>method</h5>
 
-<p><strong>method</strong>: one of the following supported HTTP methods</p>
+<p>One of the following supported HTTP methods:</p>
 <pre class="highlight plaintext"><code>.get, .head, .post, .put, .delete, .connect, .options, .trace or .patch
 </code></pre>
+<h5 id='responsetype' class='heading'>responseType</h5>
 
-<p><strong>responseType</strong>: one of the following supported response types</p>
+<p>One of the following supported response types</p>
 <pre class="highlight plaintext"><code>JSON.self, Codable.self, UIImage.self, Data.self or String.self
 </code></pre>
+<h5 id='onsuccess' class='heading'>onSuccess</h5>
 
-<p><strong>onSuccess</strong>: a callback returning an object with the data type specified by</p>
+<p>A callback returning an object of type specified in responseType.</p>
+<h5 id='onfailure' class='heading'>onFailure</h5>
 
-<p><strong>onFailure</strong>: a callback returning an error+data on failure. There are two cases when this callback being called: the first is that the http status code is different than 2xx and the second is that there is an error with data conversion, e.g. it fails on deserialization of the <em>responseType</em>.</p>
+<p>a callback returning <strong>TNError</strong> and optionally the response data <strong>Data</strong>.</p>
 
-<p><a name="advanced_usage" /></p>
-<h3 id='advanced-usage-with-configuration-and-custom-queue' class='heading'>Advanced usage with configuration and custom queue</h3>
+<p><a name="advanced_usage"></a></p>
+<h3 id='advanced-usage-of-tnrequest-with-configuration-and-custom-queue' class='heading'>Advanced usage of TNRequest with Configuration and custom Queue</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">myQueue</span> <span class="o">=</span> <span class="kt">TNQueue</span><span class="p">(</span><span class="nv">failureMode</span><span class="p">:</span> <span class="o">.</span><span class="k">continue</span><span class="p">)</span>
 <span class="n">myQueue</span><span class="o">.</span><span class="n">maxConcurrentOperationCount</span> <span class="o">=</span> <span class="mi">2</span>
 
@@ -297,8 +323,10 @@
           <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">,</span>
           <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
           <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
-          <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">myQueue</span><span class="p">,</span> <span class="nv">responseType</span><span class="p">:</span> <span class="kt">JSON</span><span class="o">.</span><span class="k">self</span><span class="p">,</span> <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">json</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+          <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">myQueue</span><span class="p">,</span>
+                                              <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                                              <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
@@ -306,11 +334,12 @@
 
 <p>The request above uses a custom queue <em>myQueue</em> with a failure mode of value <em>.continue</em> (default), which means that the queue continues its execution even if a request fails, and also sets the maximum concurrent operation count to 2. Finally, it uses a TNRequestConfiguration object to provide some additional settings.</p>
 <h4 id='additional-parameters' class='heading'>Additional parameters</h4>
+<h5 id='configuration-optional' class='heading'>configuration (optional)</h5>
 
-<p><strong>configuration (optional)</strong>: The configuration object to use. The available configuration properties are:</p>
+<p>The configuration object to use.</p>
 
 <ul>
-<li><em>cachePolicy</em>: The NSURLRequest.CachePolicy used by NSURLRequest internally. Default value: <em>.useProtocolCachePolicy</em> (see apple docs for available values)</li>
+<li><em>cachePolicy</em>: The <strong>NSURLRequest.CachePolicy</strong> used by <strong>NSURLRequest</strong>. Default value: <em>.useProtocolCachePolicy</em> (see apple docs for available values)</li>
 <li><em>timeoutInterval</em>: The timeout interval used by NSURLRequest internally. Default value: 60 (see apple docs for more info)</li>
 <li><em>requestBodyType</em>: It specifies the content type of request params. Available values:
 
@@ -319,12 +348,19 @@
 <li>.JSON: The params are being sent with &lsquo;application/json&rsquo; content type.</li>
 </ul></li>
 </ul>
+<h5 id='queue-optional' class='heading'>queue (optional)</h5>
 
-<p><strong>queue (optional):</strong> Specify the queue in which the request will be  added. If you omit this argument, the request will be added to a shared queue (TNQueue.shared).</p>
-<h2 id='router' class='heading'>Router</h2>
+<p>Specifies the queue in which the request will be added. If you omit this argument, the request will be added to a shared queue <strong>TNQueue.shared</strong>.</p>
 
-<p>You can organize your requests by creating an Environment (class) and a Router (enum) that conform TNEnvironmentProtocol and TNRouterProtocol respectively. To do so, create an environment enum and at least one router class as shown bellow:</p>
-<h4 id='environment-swift' class='heading'>Environment.swift</h4>
+<p><a name="complete_setup"></a></p>
+<h2 id='complete-setup-with-b-environments-b-and-routers-b-routers-b' class='heading'>Complete setup with <b>Environments</b> and routers <b>Routers</b></h2>
+
+<p>The complete and recommended usage of TermiNetwork library consists of creating your environments and define your routers.  </p>
+
+<p><a name="setup_environments"></a></p>
+<h4 id='setup-your-environments' class='heading'>Setup your Environments</h4>
+
+<p>Create a swift class that implements the <strong>TNEnvironmentProtocol</strong> and define your environments. See bellow for an example:</p>
 <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">TNEnvironmentProtocol</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">localhost</span>
     <span class="k">case</span> <span class="n">dev</span>
@@ -355,7 +391,7 @@
 <span class="p">}</span>
 </code></pre>
 
-<p>You can optionally pass a requestConfiguration object to make all requests inherit the specified settings. (see &lsquo;Advanced usage with configuration and custom queue&rsquo; above for how to create a configuration object.)</p>
+<p><em>Optionally you can  pass a **requestConfiguration</em>* object to make all requests inherit the configuration settings.*</p>
 <h4 id='todosrouter-swift' class='heading'>TodosRouter.swift</h4>
 <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TodosRouter</span><span class="p">:</span> <span class="kt">TNRouterProtocol</span> <span class="p">{</span>
     <span class="c1">// Define your routes</span>
@@ -464,19 +500,19 @@
 <span class="p">}</span>
 </code></pre>
 
-<p><a name="debug_logging" /></p>
+<p><a name="debug_logging"></a></p>
 <h2 id='debug-logging' class='heading'>Debug Logging</h2>
 
-<p>To enable the debug logging just set the <strong>verbose</strong> of a TNConfigurration instance to <strong>true</strong>.</p>
+<p>You enable the debug logging by setting the <strong>verbose</strong> to <strong>true</strong> in your configuration</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">()</span>
+<span class="n">configuration</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">true</span>
+</code></pre>
+
+<p>And you will see a beautiful pretty-printed debug output in your console.
+<img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png"></p>
 <h2 id='tests' class='heading'>Tests</h2>
 
 <p>To run the tests open the Sample project, select Product -&gt; Test or simply press ⌘U on keyboard.</p>
-<h2 id='contribution' class='heading'>Contribution</h2>
-
-<p>Feel free to contribute to the project by creating a pull request and/or by reporting any issue(s) you find</p>
-<h2 id='author' class='heading'>Author</h2>
-
-<p>Bill Panagiotopoulos, <a href="mailto:billp.dev@gmail.com">billp.dev@gmail.com</a></p>
 <h2 id='contributors' class='heading'>Contributors</h2>
 
 <p>Alex Athanasiadis, <a href="mailto:alexanderathan@gmail.com">alexanderathan@gmail.com</a></p>
@@ -491,7 +527,7 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-18)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-20)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

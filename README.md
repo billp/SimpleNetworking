@@ -29,7 +29,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 	  - [Setup your Environments](#setup_environments)
 - [Debug Logging](#debug_logging)
 
-<a name="installation" />
+<a name="installation"></a>
 
 ## Installation
 You can install **TermiNetwork** with one of the following ways...
@@ -54,12 +54,12 @@ Go to **File** > **Swift Packages** > **Add Package Dependency** and add the fol
 https://github.com/billp/TermiNetwork
 ```
 
-<a name="demo_app" />
+<a name="demo_app"></a>
 
 ## Demo Application
 To see all the features of TermiNetwork in action, download the source code and run the **TermiNetworkExamples** scheme.
 
-<a name="usage" />
+<a name="usage"></a>
 
 ## Usage
 
@@ -91,7 +91,7 @@ TNRequest(method: .post,
     print(error)
 }
 ```
-<a name="parameters" />
+<a name="parameters"></a>
 
 #### Parameters
 
@@ -113,7 +113,7 @@ A callback returning an object of type specified in responseType.
 ##### onFailure
 a callback returning **TNError** and optionally the response data **Data**.
 
-<a name="advanced_usage" />
+<a name="advanced_usage"></a>
 
 ### Advanced usage of TNRequest with Configuration and custom Queue
 
@@ -157,12 +157,12 @@ The configuration object to use.
 ##### queue (optional)
 Specifies the queue in which the request will be added. If you omit this argument, the request will be added to a shared queue **TNQueue.shared**.
 
-<a name="complete_setup" />
+<a name="complete_setup"></a>
 
 ## Complete setup with <b>Environments</b> and routers <b>Routers</b>
 The complete and recommended usage of TermiNetwork library consists of creating your environments and define your routers.  
 
-<a name="setup_environments" />
+<a name="setup_environments"></a>
 
 #### Setup your Environments
 Create a swift class that implements the **TNEnvironmentProtocol** and define your environments. See bellow for an example:
@@ -315,7 +315,7 @@ imageView.setRemoteImage(url: "http://www.website.com/image.jpg", defaultImage: 
 }
 ```
 
-<a name="debug_logging" />
+<a name="debug_logging"></a>
 
 ## Debug Logging
 

@@ -25,11 +25,11 @@ public protocol TNEnvironmentProtocol {
     func configure() -> TNEnvironment
 }
 
-/// The url scheme that will be used in an environment
+/// The url scheme that will be used in an environment.
 public enum TNURLScheme: String {
-    /// HTTP Schema
+    /// HTTP Schema.
     case http
-    /// HTTPS Schema
+    /// HTTPS Schema.
     case https
 }
 
@@ -43,10 +43,13 @@ open class TNEnvironment {
     // MARK: Private Properties
     private var type: EnvironmentType
 
+    // MARK: Public Properties
+
     /// The configuration object.
     public var configuration: TNConfiguration?
 
     // MARK: Static members
+    /// The current global environment. Use this property to set your environment globally.
     public static var current: TNEnvironment!
 
     /// Set a global environment for TermiNetwork.
@@ -56,11 +59,11 @@ open class TNEnvironment {
         current = environment.configure()
     }
 
-    /// Set a global environment for TermiNetwork with a given String URL.
+    /// Set a global environment for TermiNetwork with a given environment object.
     /// - parameters:
     ///     - environment: A TNEnvironment object.
-    public static func set(_ environment: TNEnvironment) {
-        current = environment
+    public static func set(environmentObject: TNEnvironment) {
+        current = environmentObject
     }
 
     // MARK: Initializers
@@ -69,7 +72,7 @@ open class TNEnvironment {
     ///
     /// - parameters:
     ///     - scheme: The scheme of the host (.http or .https)
-    ///     - host: The actual host, e.g. s1.example.com
+    ///     - host: The host name, e.g. s1.example.com
     ///     - suffix: The path after the host name, e.g. .path["api","v1"]
     ///     - port: The port the environment is using, e.g. 8080
     ///     - configuration: A configuration instance that will be inherited by each request and route
@@ -82,7 +85,7 @@ open class TNEnvironment {
         self.configuration = configuration
     }
 
-    /// Initializes an environment with an URL.
+    /// Initializes an environment with an URL string.
     ///
     /// - parameters:
     ///     - url: The scheme of the host (.http or .https)
@@ -96,7 +99,7 @@ open class TNEnvironment {
 // MARK: Extensions
 extension TNEnvironment {
     /// Get the String value of the environment.
-    public var stringUrl: String {
+    public var stringURL: String {
         switch type {
         case let .normal(scheme, host, port, suffix):
             var urlComponents = [String]()

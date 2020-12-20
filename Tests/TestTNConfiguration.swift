@@ -120,8 +120,8 @@ class TestTNConfiguration: XCTestCase {
     }
 
     func testEnvConfigurationWithTNEnvironmentObject() {
-        TNEnvironment.set(TNEnvironment(url: "http://www.google.com/abc/def",
-                                        configuration: TestTNConfiguration.envConfiguration))
+        TNEnvironment.set(environmentObject: TNEnvironment(url: "http://www.google.com/abc/def",
+                                                           configuration: TestTNConfiguration.envConfiguration))
 
         let request = router.request(for: .testHeaders)
         let reqConf = request.configuration

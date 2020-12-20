@@ -46,7 +46,8 @@ public enum TNError: Error {
     case pinningError
     /// Thrown when a request is mocked but the data is invalid (e.g. cannot parse JSON).
     case invalidMockData(String)
-    /// Thrown when a middleware reports an error. It contains a custom type
+    /// Thrown when a middleware reports an error. Throw this error in your custom middleware
+    /// implementations if needed. It contains a custom type.
     case middlewareError(Any)
     /// Thrown when TNMultipartFormDataPartType param is expected but passed something else.
     case invalidMultipartParams
