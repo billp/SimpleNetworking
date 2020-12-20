@@ -1,5 +1,6 @@
 
 
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
@@ -20,12 +21,11 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 
 #### Table of contents
 - [Installation](#installation)
-	- [CocoaPods](#cocoapods)
 - [Demo Application](#demo_app)
 - [Usage](#usage)
-  - [Simple usage of TNRequest](#simple_usage)
+  - [Simple usage of <b>TNRequest</b>](#simple_usage)
 	  - [Parameters](#parameters)
-  - [Advanced usage of TNRequest with Configuration and custom Queue](#advanced_usage)
+  - [Advanced usage of <b>TNRequest</b> with <b>Configuration</b> and custom <b>Queue</b>](#advanced_usage)
 	  - [Additional Parameters](#parameters)
   - [Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)](#complete_setup)
 	  - [Setup your Environments](#setup_environments)
@@ -34,19 +34,26 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <a name="installation" />
 
 ## Installation
-<a name="cocoapods" />
-
+You can install **TermiNetwork** with one of the following ways...
 ### CocoaPods
 
-Add the following lines to your Podfile and run **pod install** from your terminal:
-
+Add the following line to your **Podfile** and run **pod install** in your terminal:
 ```ruby
-platform :ios, '9.0'
-use_frameworks!
+pod 'TermiNetwork', '~> 1.0.0'
+```
 
-target 'YourTarget' do
-    pod 'TermiNetwork', '~> 0.3'
-end
+### Carthage
+
+Add the following line to your **Carthage** and run **carthage update** in your terminal:
+```ruby
+github "billp/TermiNetwork" ~> 1.0.0
+```
+
+### Swift Package Manager
+
+Go to **File** > **Swift Packages** > **Add Package Dependency** and add the following URL :
+```
+https://github.com/billp/TermiNetwork
 ```
 
 <a name="demo_app" />
