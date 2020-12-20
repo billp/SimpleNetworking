@@ -48,7 +48,7 @@ class TestTNTransformers: XCTestCase {
 
         wait(for: [expectation], timeout: 60)
 
-        XCTAssert(!failed && testModel?.name == "true")
+        XCTAssert(!failed && testModel?.value == "true")
     }
 
 }

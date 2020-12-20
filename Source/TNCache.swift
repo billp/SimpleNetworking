@@ -42,6 +42,7 @@ public final class TNCache {
         cache.removeAllObjects()
     }
 
+    /// :nodoc:
     subscript(key: String) -> Data? {
         get {
             cache.object(forKey: key as NSString) as Data?

@@ -11,8 +11,8 @@ import TermiNetwork
 
 class TestUploadTrasnformer: TNTransformer<FileResponse, TestModel> {
     override func transform(_ object: FileResponse) -> TestModel {
-        let testModel = TestModel()
-        testModel.name = object.checksum
+        let testModel = TestModel(value: object.checksum,
+                                  param: object.param)
         return testModel
     }
 }

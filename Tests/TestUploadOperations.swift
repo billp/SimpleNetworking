@@ -34,7 +34,6 @@ class TestUploadOperations: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkLocal)
     }
 
     override func tearDown() {
@@ -60,7 +59,9 @@ class TestUploadOperations: XCTestCase {
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
-                failed = !(response.success && response.checksum == checksum)
+                failed = !(response.success &&
+                            response.checksum == checksum &&
+                            response.param == "bhbbrbrbrhbh")
                 expectation.fulfill()
             }, onFailure: { (error, _) in
                 print(String(describing: error.localizedDescription))
@@ -90,7 +91,7 @@ class TestUploadOperations: XCTestCase {
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in
-                failed = !(response.name == checksum)
+                failed = !(response.value == checksum && response.param == "bhbbrbrbrhbh")
                 expectation.fulfill()
             }, onFailure: { (error, _) in
                 print(String(describing: error.localizedDescription))

@@ -11,8 +11,8 @@ import TermiNetwork
 
 class TestTransformer: TNTransformer<TestParams, TestModel> {
     override func transform(_ object: TestParams) -> TestModel {
-        let model = TestModel()
-        model.name = object.param1
+        let model = TestModel(value: object.param1,
+                              param: nil)
 
         return model
     }

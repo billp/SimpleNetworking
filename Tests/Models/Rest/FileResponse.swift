@@ -11,4 +11,5 @@ import Foundation
 class FileResponse: Codable {
     var success: Bool
     var checksum: String
+    var param: String
 }

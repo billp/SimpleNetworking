@@ -152,6 +152,7 @@ extension TNConfiguration: NSCopying {
 }
 
 extension TNConfiguration {
+    /// Generates a default configuration
     static func makeDefaultConfiguration() -> TNConfiguration {
         return TNConfiguration(cachePolicy: .useProtocolCachePolicy,
                                timeoutInterval: 60,

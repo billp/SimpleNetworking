@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TestModel: NSObject {
-    var name: String?
-    override init() { }
+struct TestModel {
+    var value: String
+    var param: String?
 }

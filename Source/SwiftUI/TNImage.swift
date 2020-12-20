@@ -39,7 +39,7 @@ public typealias ImagePreprocessType = (TNImageType) -> (TNImageType)
 ///     - image: The downloaded image.
 ///     - error: A TNError object if it fails to download.
 /// - returns: The new transformed image.
-public typealias ImageOnFinishType = (TNImageType?, TNError?) -> Void
+public typealias ImageOnFinishCallbackType = (TNImageType?, TNError?) -> Void
 
 @available(iOS 13.0, *)
 /// :nodoc:
@@ -49,7 +49,7 @@ final public class ImageLoader: ObservableObject {
     var defaultImage: TNImageType?
     var resize: CGSize?
     var preprocessImageClosure: ImagePreprocessType?
-    var onFinishImageClosure: ImageOnFinishType?
+    var onFinishImageClosure: ImageOnFinishCallbackType?
 
     var didChange = PassthroughSubject<TNImageType, Never>()
     var image = TNImageType() {
@@ -63,7 +63,7 @@ final public class ImageLoader: ObservableObject {
          defaultImage: TNImageType? = nil,
          resize: CGSize? = nil,
          preprocessImage: ImagePreprocessType? = nil,
-         onFinish: ImageOnFinishType? = nil) {
+         onFinish: ImageOnFinishCallbackType? = nil) {
         self.url = url
         self.request = TNRequest(method: .get,
                                  url: url,
@@ -78,7 +78,7 @@ final public class ImageLoader: ObservableObject {
          defaultImage: TNImageType? = nil,
          resize: CGSize? = nil,
          preprocessImage: ImagePreprocessType? = nil,
-         onFinish: ImageOnFinishType? = nil) {
+         onFinish: ImageOnFinishCallbackType? = nil) {
         self.request = request
         self.defaultImage = defaultImage
         self.resize = resize
@@ -194,7 +194,7 @@ public struct TNImage: View {
                 defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
-                onFinish: ImageOnFinishType? = nil) {
+                onFinish: ImageOnFinishCallbackType? = nil) {
         self.imageLoader = ImageLoader(with: url,
                                        configuration: configuration,
                                        defaultImage: defaultImage,
@@ -217,7 +217,7 @@ public struct TNImage: View {
                 defaultImage: TNImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,
-                onFinish: ImageOnFinishType? = nil) {
+                onFinish: ImageOnFinishCallbackType? = nil) {
         self.imageLoader = ImageLoader(with: request,
                                        defaultImage: defaultImage,
                                        resize: resize,

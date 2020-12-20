@@ -63,15 +63,19 @@ extension TNImageViewType {
                                   defaultImage: TNImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
-                                  onFinish: ImageOnFinishType? = nil) throws {
+                                  onFinish: ImageOnFinishCallbackType? = nil) {
 
-        try makeRequest(with: TNRequest.init(method: .get,
-                                             url: url,
-                                             configuration: configuration),
-                        defaultImage: defaultImage,
-                        resize: resize,
-                        preprocessImage: preprocessImage,
-                        onFinish: onFinish)
+        do {
+            try makeRequest(with: TNRequest.init(method: .get,
+                                                 url: url,
+                                                 configuration: configuration),
+                            defaultImage: defaultImage,
+                            resize: resize,
+                            preprocessImage: preprocessImage,
+                            onFinish: onFinish)
+        } catch let error {
+            onFinish?(nil, error as? TNError)
+        }
     }
 
     ///
@@ -89,13 +93,16 @@ extension TNImageViewType {
                                   defaultImage: TNImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
-                                  onFinish: ImageOnFinishType? = nil) throws {
-
-        try makeRequest(with: request,
-                        defaultImage: defaultImage,
-                        resize: resize,
-                        preprocessImage: preprocessImage,
-                        onFinish: onFinish)
+                                  onFinish: ImageOnFinishCallbackType? = nil) {
+        do {
+            try makeRequest(with: request,
+                            defaultImage: defaultImage,
+                            resize: resize,
+                            preprocessImage: preprocessImage,
+                            onFinish: onFinish)
+        } catch let error {
+            onFinish?(nil, error as? TNError)
+        }
     }
 
     // MARK: Helpers
@@ -103,7 +110,7 @@ extension TNImageViewType {
                              defaultImage: TNImageType? = nil,
                              resize: CGSize? = nil,
                              preprocessImage: ImagePreprocessType? = nil,
-                             onFinish: ImageOnFinishType? = nil) throws {
+                             onFinish: ImageOnFinishCallbackType? = nil) throws {
         cancelActiveCallInImageView()
         #if os(watchOS)
         self.setImage(defaultImage)

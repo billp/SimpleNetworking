@@ -40,11 +40,30 @@ class TestExtensions: XCTestCase {
         var failed = true
 
         let imageView = UIImageView()
-        try? imageView.tn_setRemoteImage(url: sampleImageURL,
-                                         defaultImage: nil, preprocessImage: { image in
+        imageView.tn_setRemoteImage(url: sampleImageURL,
+                                    defaultImage: nil,
+                                    preprocessImage: { image in
             return image
         }, onFinish: { image, error in
             failed = !(image != nil && error == nil)
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testImageViewRemoteInvalidURL() {
+        let expectation = XCTestExpectation(description: "Test testImageViewRemoteInvalidURL")
+        var failed = true
+
+        let imageView = UIImageView()
+        imageView.tn_setRemoteImage(url: "abcdef",
+                                    defaultImage: nil,
+                                    preprocessImage: { image in
+            return image
+        }, onFinish: { _, error in
+            failed = error == nil
             expectation.fulfill()
         })
 
@@ -58,13 +77,33 @@ class TestExtensions: XCTestCase {
         var tmp = 0
 
         let imageView = UIImageView()
-        try? imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: sampleImageURL),
-                                         defaultImage: nil,
-                                         preprocessImage: { image in
+        imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: sampleImageURL),
+                                    defaultImage: nil,
+                                    preprocessImage: { image in
             tmp += 1
             return image
         }, onFinish: { image, error in
             failed = !(tmp == 1 && image != nil && error == nil)
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 60)
+        XCTAssert(!failed)
+    }
+
+    func testImageViewRemoteInvalidRequest() {
+        let expectation = XCTestExpectation(description: "Test testImageViewRemoteInvalidRequest")
+        var failed = true
+        var tmp = 0
+
+        let imageView = UIImageView()
+        imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: "dtest!@#"),
+                                    defaultImage: nil,
+                                    preprocessImage: { image in
+            tmp += 1
+            return image
+        }, onFinish: { _, error in
+            failed = error == nil
             expectation.fulfill()
         })
 
