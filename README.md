@@ -1,6 +1,4 @@
-
-
-
+<p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
 </p>
@@ -65,7 +63,7 @@ To see all the features of TermiNetwork in action, download the source code and 
 
 ## Usage
 
-<a name="simple_usage" />
+<a name="simple_usage"></a>
 
 ### Simple usage (TNRequest)
 
