@@ -44,33 +44,11 @@ internal final class TNSession<ResultType>: NSObject, URLSessionDataDelegate, UR
                     didReceive challenge: URLAuthenticationChallenge,
                     completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
-        var challengeDisposition: URLSession.AuthChallengeDisposition = .cancelAuthenticationChallenge
-        guard let serverTrust = challenge.protectionSpace.serverTrust else {
-            completionHandler(.performDefaultHandling, nil)
-            return
-        }
-
-        if let certData = request?.configuration.certificateData,
-            let remoteCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
-            let policies = NSMutableArray()
-            policies.add(SecPolicyCreateSSL(true, (challenge.protectionSpace.host as CFString)))
-            SecTrustSetPolicies(serverTrust, policies)
-
-            // Evaluate server certificate
-            var error: CFError?
-            let isServerTrusted = SecTrustEvaluateWithError(serverTrust, &error)
-
-            let remoteCertificateData: NSData = SecCertificateCopyData(remoteCert)
-            if isServerTrusted && error == nil && certData.contains(remoteCertificateData) {
-                challengeDisposition = .useCredential
-            } else {
-                request?.pinningErrorOccured = true
-            }
-        } else {
-            challengeDisposition = .performDefaultHandling
-        }
-        completionHandler(challengeDisposition,
-                          URLCredential(trust: serverTrust))
+        // Certificate pinning handling.
+        let pinningManager = TNCertificatePinningManager(challenge: challenge,
+                                                         completionHandler: completionHandler,
+                                                         tnRequest: request)
+        pinningManager.handleDidReceiveChallenge()
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

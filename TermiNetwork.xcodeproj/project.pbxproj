@@ -51,6 +51,7 @@
 		F33ACF4D2587F904004DAC46 /* TNRequest+ResponseHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */; };
 		F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5325880A0F004DAC46 /* FileDownloader.swift */; };
 		F33ACF6225880B34004DAC46 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */; };
+		F34BA6722590E63D007CE8D6 /* TNCertificatePinningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */; };
 		F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556064257401330047D46D /* TestDownloadOperations.swift */; };
 		F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */; };
 		F355608D257527C40047D46D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355607A257527C20047D46D /* ContentView.swift */; };
@@ -187,6 +188,7 @@
 		F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+ResponseHeaders.swift"; sourceTree = "<group>"; };
 		F33ACF5325880A0F004DAC46 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
+		F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNCertificatePinningManager.swift; sourceTree = "<group>"; };
 		F3556064257401330047D46D /* TestDownloadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDownloadOperations.swift; sourceTree = "<group>"; };
 		F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermiNetworkExamplesApp.swift; sourceTree = "<group>"; };
 		F355607A257527C20047D46D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -555,22 +557,23 @@
 				F3116AA12460A04B00DFE453 /* Helpers */,
 				F3116AA62460A06600DFE453 /* Protocols */,
 				F3116AAB2460A09E00DFE453 /* Extensions */,
+				F3850CA3243D104900F7CC13 /* TNEnvironment.swift */,
+				F3850CA0243D104900F7CC13 /* TNRequest.swift */,
+				F3850C9E243D104900F7CC13 /* TNConfiguration.swift */,
 				F3850C96243D104900F7CC13 /* TNRouter.swift */,
-				F3850C98243D104900F7CC13 /* TNSession.swift */,
 				F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */,
-				F3850C9A243D104900F7CC13 /* TNPath.swift */,
+				F3850C9F243D104900F7CC13 /* TNQueue.swift */,
+				F3850C98243D104900F7CC13 /* TNSession.swift */,
 				F3850C9B243D104900F7CC13 /* TNErrors.swift */,
 				F3850C9C243D104900F7CC13 /* TNOperation.swift */,
-				F3850C9D243D104900F7CC13 /* TNLog.swift */,
-				F3850C9E243D104900F7CC13 /* TNConfiguration.swift */,
-				F3850C9F243D104900F7CC13 /* TNQueue.swift */,
-				F3850CA0243D104900F7CC13 /* TNRequest.swift */,
-				F3850CA3243D104900F7CC13 /* TNEnvironment.swift */,
+				F3850C9A243D104900F7CC13 /* TNPath.swift */,
 				F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */,
 				F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */,
 				F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */,
+				F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */,
 				F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */,
 				F31F88AE257C040600D9A802 /* TNCache.swift */,
+				F3850C9D243D104900F7CC13 /* TNLog.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -915,6 +918,7 @@
 				F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */,
 				F3116ABD2460A09E00DFE453 /* Dictionary+Extensions.swift in Sources */,
 				F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */,
+				F34BA6722590E63D007CE8D6 /* TNCertificatePinningManager.swift in Sources */,
 				F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */,
 				F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */,
 			);

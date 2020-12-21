@@ -116,7 +116,7 @@ extension TNError: LocalizedError {
         case .cannotReadResponseHeaders:
             return NSLocalizedString("Cannot read response headers. Did you forget to call to call the start() method?", comment: "TNError")
         case .pinningError:
-            return NSLocalizedString("Certificate pinning failed validation", comment: "TNError")
+            return NSLocalizedString("Certificate pinning failed validation.", comment: "TNError")
         }
     }
 }
