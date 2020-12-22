@@ -28,7 +28,7 @@ class TNMultipartFormDataHelpers {
         static let crlf = "\r\n"
     }
     /// Generates a random string that will be used as multipart boundary.
-    public static func generateBoundary() -> String {
+    static func generateBoundary() -> String {
         let randomString = String(Double.random(in: 0..<65535)).replacingOccurrences(of: ".", with: "")
         return randomString
     }

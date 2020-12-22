@@ -62,13 +62,13 @@ public final class TNQueue: OperationQueue {
 
     // MARK: Hooks
 
-    /// A closure which is executing before the queue starts to execute its requests.
+    /// A closure to be executed before the queue starts executing its requests.
     public var beforeAllRequestsCallback: TNBeforeQueueStartCallbackType?
-    /// A closure which is executing after the queue finishes the execution of all its requests.
+    /// A closure to be executed after the queue finishes the execution of all its requests.
     public var afterAllRequestsCallback: TNAfterAllRequestsCallbackType?
-    /// A closure which is executing before a request is going to be executed in queue.
+    /// A closure to be executed before a request execution in queue.
     public var beforeEachRequestCallback: TNBeforeEachRequestCallbackType?
-    /// A closure which is executing after a request finishes its execution in queue.
+    /// A closure to be executed after a request finishes its execution in queue.
     public var afterEachRequestCallback: TNAfterEachRequestCallbackType?
 
     internal var failureMode: TNQueueFailureMode = .continue
