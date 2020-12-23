@@ -1,6 +1,4 @@
 
-
-
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -33,6 +31,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 	  - [Make a request](#construct_request)
 - [Queue Hooks](#queue_hooks)
 - [Error Handling](#error_handling)
+	- [Global Error Handlers](#global_error_handlers)
 - [Debug Logging](#debug_logging)
 
 <a name="installation"></a>
@@ -281,9 +280,7 @@ TNQueue.shared.afterEachRequestCallback = { request, data, urlResponse, error
 
 ## Error Handling
 
-TermiNetwork provides its own error types (TNError) for all the possible cases. Those errors are typically returned by onFailure callbacks in requests.
-
-You can use the **localizedDescription** property to get a localized error message.
+TermiNetwork provides its own error types (TNError) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the **localizedDescription** property to get a localized error message.
 
 To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/TNError.html" target="_blank">TNError</a> in documentation.
 
@@ -311,6 +308,35 @@ TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
         debugPrint("Error: " + error.localizedDescription)
     }
 })
+```
+<a name="global_error_handlers"></a>
+### Global Error Handlers
+TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **TNErrorHandlerProtocol**
+
+#### Example
+```swift 
+class GlobalNetworkErrorHandler: TNErrorHandlerProtocol {
+    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+        if case .networkError(let error) = error {
+	        /// Do something with the network error
+        }
+    }
+
+    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
+        return true
+    }
+
+    // Add default initializer
+    required init() { }
+}
+```
+
+Then you have to pass them to your configuration object:
+
+#### Example
+```swift
+let configuration = TNConfiguration()
+configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
 ```
 
 ## UIImageView Extension
