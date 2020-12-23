@@ -32,6 +32,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 - [Queue Hooks](#queue_hooks)
 - [Error Handling](#error_handling)
 	- [Global Error Handlers](#global_error_handlers)
+- [Image Helpers](#image_helpers)
 - [Debug Logging](#debug_logging)
 
 <a name="installation"></a>
@@ -311,7 +312,7 @@ TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
 ```
 <a name="global_error_handlers"></a>
 ### Global Error Handlers
-TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **TNErrorHandlerProtocol**
+TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **TNErrorHandlerProtocol**.
 
 #### Example
 ```swift 
@@ -339,19 +340,39 @@ let configuration = TNConfiguration()
 configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
 ```
 
-## UIImageView Extension
-You can use the *setRemoteImage* method of UIImageView to download an image from a remote server
+<a name="image_helpers"></a>
 
-Example:
+## SwiftUI/UIKit Image Helpers 
+TermiNetwork provides two different helpers for setting remote images:
+### TNImage helper (SwiftUI) 
+#### Example
+
+
+### UIImageView/NSImageView/WKInterfaceImage Extensions
+
+1. **Example with URL**
 ```swift
-imageView.setRemoteImage(url: "http://www.website.com/image.jpg", defaultImage: UIImage(named: "DefaultImage"), beforeStart: {
-	imageView.activityIndicator.startAnimating()
-}, preprocessImage: { image in // This block will run in background
-	let newImage = image.resize(100, 100)
-	return newImage
-}) { image, error in
-	imageView.activityIndicator.stopAnimating()
-}
+let imageView = UIImageView() // or NSImageView (macOS), or WKInterfaceImage (watchOS)
+imageView.tn_setRemoteImage(url: sampleImageURL,
+                            defaultImage: UIImage(named: "DefaultThumbImage"),
+                            preprocessImage: { image in
+    // Optionally pre-process image and return the new image.
+    return image
+}, onFinish: { image, error in
+    // Optionally handle response
+})
+```
+2. **Example with TNRequest and Route**
+```swift
+let imageView = UIImageView() // or NSImageView (macOS), or WKInterfaceImage (watchOS)
+imageView.tn_setRemoteImage(request: TNRouter<CityRoute>().request(for: .thumb(withID: "3125")),
+                            defaultImage: UIImage(named: "DefaultThumbImage"),
+                            preprocessImage: { image in
+    // Optionally pre-process image and return the new image.
+    return image
+}, onFinish: { image, error in
+    // Optionally handle response
+})
 ```
 
 <a name="debug_logging"></a>
