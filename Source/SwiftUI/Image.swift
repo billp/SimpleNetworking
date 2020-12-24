@@ -29,7 +29,7 @@ public typealias ImageType = NSImage
 public typealias ImageType = UIImage
 #endif
 
-/// Callback type for image preprocess used in UIImageView/Image helpers
+/// Callback type for image preprocess used in UIImageView|NSImage|WKInterfaceImage and Image (SwiftUI) helpers
 /// - parameters:
 ///     - image: The downloaded image.
 /// - returns: The new transformed image.

@@ -20,7 +20,7 @@
 import Foundation
 
 /// Cache is used internally for various tasks such as in-memory caching image data.
-/// Primarily used in UIImageView and Image helpers.
+/// Primarily used in UIImageView|NSImageView|WKInterfaceImage and Image (SwiftUI) helpers.
 public final class Cache {
     /// Singleton object.
     public static let shared = Cache()

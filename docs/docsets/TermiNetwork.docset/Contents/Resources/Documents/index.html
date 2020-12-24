@@ -216,8 +216,8 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <li><a href="#usage">Usage</a>
 
 <ul>
-<li><a href="#simple_usage">Simple usage of <b>TNRequest</b></a></li>
-<li><a href="#advanced_usage">Advanced usage of <b>TNRequest</b> with <b>Configuration</b> and custom <b>Queue</b></a></li>
+<li><a href="#simple_usage">Simple usage of <b>Request</b></a></li>
+<li><a href="#advanced_usage">Advanced usage of <b>Request</b> with <b>Configuration</b> and custom <b>Queue</b></a></li>
 <li><a href="#complete_setup">Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)</a>
 
 <ul>
@@ -265,7 +265,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <h2 id='usage' class='heading'>Usage</h2>
 
 <p><a name="simple_usage"></a></p>
-<h3 id='simple-usage-tnrequest' class='heading'>Simple usage (TNRequest)</h3>
+<h3 id='simple-usage-request' class='heading'>Simple usage (Request)</h3>
 
 <p>Let&rsquo;s say you have the following Codable model:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Todo</span><span class="p">:</span> <span class="kt">Codable</span> <span class="p">{</span>
@@ -278,7 +278,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span><span class="p">]</span>
 <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
 
-<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
+<span class="kt">Request</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
           <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span>
           <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
           <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
@@ -304,13 +304,13 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <p>A callback that returns an object of the given type (specified in responseType parameter).</p>
 <h5 id='onfailure' class='heading'>onFailure</h5>
 
-<p>a callback that returns a <strong>TNError</strong> and optionally the response <strong>Data</strong>.</p>
+<p>a callback that returns a <strong>Error</strong> and optionally the response <strong>Data</strong>.</p>
 
 <p><a name="advanced_usage"></a></p>
-<h3 id='advanced-usage-of-tnrequest-with-configuration-and-custom-queue' class='heading'>Advanced usage of TNRequest with Configuration and custom Queue</h3>
+<h3 id='advanced-usage-of-request-with-configuration-and-custom-queue' class='heading'>Advanced usage of Request with Configuration and custom Queue</h3>
 
-<p>The following example uses a custom queue that specifies the <strong>maxConcurrentOperationCount</strong> (how many requests run in parallel) and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/TNConfiguration.html#/Public%20properties" target="_blank">TNConfiguration properties</a> in documentation.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">(</span>
+<p>The following example uses a custom queue that specifies the <strong>maxConcurrentOperationCount</strong> (how many requests run in parallel) and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Configuration.html#/Public%20properties" target="_blank">Configuration properties</a> in documentation.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">(</span>
     <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
     <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span>
@@ -319,7 +319,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <span class="k">let</span> <span class="nv">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="s">"Go shopping."</span><span class="p">]</span>
 <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
 
-<span class="kt">TNRequest</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
+<span class="kt">Request</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
           <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">,</span>
           <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
           <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
@@ -342,32 +342,32 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <p><a name="setup_environments"></a></p>
 <h4 id='setup-your-environment' class='heading'>Setup your Environment</h4>
 
-<p>Create a swift class that implements the <strong>TNEnvironmentProtocol</strong> and define your environments. See bellow for an example:</p>
-<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">TNEnvironmentProtocol</span> <span class="p">{</span>
+<p>Create a swift class that implements the <strong>EnvironmentProtocol</strong> and define your environments. See bellow for an example:</p>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">EnvironmentProtocol</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">localhost</span>
     <span class="k">case</span> <span class="n">dev</span>
     <span class="k">case</span> <span class="n">production</span>
 
-    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">TNEnvironment</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">(</span><span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Environment</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">(</span><span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
                                             <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
                                             <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span>
         <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
         <span class="k">case</span> <span class="o">.</span><span class="nv">localhost</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
-                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"localhost"</span><span class="p">,</span>
-                                 <span class="nv">port</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
-                                 <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
+                               <span class="nv">host</span><span class="p">:</span> <span class="s">"localhost"</span><span class="p">,</span>
+                               <span class="nv">port</span><span class="p">:</span> <span class="mi">8080</span><span class="p">,</span>
+                               <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nv">dev</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
-                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"mydevserver.com"</span><span class="p">,</span>
-                                 <span class="nv">suffix</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"v1"</span><span class="p">]),</span>
-                                 <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
+                               <span class="nv">host</span><span class="p">:</span> <span class="s">"mydevserver.com"</span><span class="p">,</span>
+                               <span class="nv">suffix</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"v1"</span><span class="p">]),</span>
+                               <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nv">production</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">TNEnvironment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">http</span><span class="p">,</span>
-                                 <span class="nv">host</span><span class="p">:</span> <span class="s">"myprodserver.com"</span><span class="p">,</span>
-                                 <span class="nv">suffix</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"v1"</span><span class="p">]),</span>
-                                 <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">http</span><span class="p">,</span>
+                               <span class="nv">host</span><span class="p">:</span> <span class="s">"myprodserver.com"</span><span class="p">,</span>
+                               <span class="nv">suffix</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"v1"</span><span class="p">]),</span>
+                               <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -379,7 +379,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <h4 id='setup-your-routes' class='heading'>Setup your Routes</h4>
 
 <p>The following code creates a TodosRoute enumeration with all the required routes in order to create the requests later.</p>
-<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TodosRoute</span><span class="p">:</span> <span class="kt">TNRouteProtocol</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TodosRoute</span><span class="p">:</span> <span class="kt">RouteProtocol</span> <span class="p">{</span>
     <span class="c1">// Define your routes</span>
     <span class="k">case</span> <span class="n">list</span>
     <span class="k">case</span> <span class="nf">show</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
@@ -388,36 +388,37 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
     <span class="k">case</span> <span class="nf">setCompleted</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">completed</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span>
 
     <span class="c1">// Set method, path, params, headers for each route</span>
-    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">TNRouteConfiguration</span> <span class="p">{</span>
-        <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">(</span><span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">,</span>
-                                            <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">])</span>
+    <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">RouteConfiguration</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">(</span><span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">,</span>
+                                          <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">])</span>
 
         <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
         <span class="k">case</span> <span class="o">.</span><span class="nv">list</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span>
-                                        <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todos"</span><span class="p">]),</span> <span class="c1">// GET /todos</span>
-                                        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">RouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span>
+                                      <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todos"</span><span class="p">]),</span> <span class="c1">// GET /todos</span>
+                                      <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nf">show</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span>
-                                        <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// GET /todos/[id]</span>
-                                        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">RouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="k">get</span><span class="p">,</span>
+                                      <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// GET /todos/[id]</span>
+                                      <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="k">let</span> <span class="nv">title</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
-                                        <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todos"</span><span class="p">]),</span> <span class="c1">// POST /todos</span>
-                                        <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="n">title</span><span class="p">],</span>
-                                        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">RouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
+                                      <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todos"</span><span class="p">]),</span> <span class="c1">// POST /todos</span>
+                                      <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"title"</span><span class="p">:</span> <span class="n">title</span><span class="p">],</span>
+                                      <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">delete</span><span class="p">,</span>
-                                        <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// DELETE /todo/[id]</span>
-                                        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">RouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">delete</span><span class="p">,</span>
+                                      <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// DELETE /todo/[id]</span>
+                                      <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="k">case</span> <span class="o">.</span><span class="nf">setCompleted</span><span class="p">(</span><span class="k">let</span> <span class="nv">id</span><span class="p">,</span> <span class="k">let</span> <span class="nv">completed</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kt">TNRouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">patch</span><span class="p">,</span>
-                                        <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// PATCH /todo/[id]</span>
-                                        <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"completed"</span><span class="p">:</span> <span class="n">completed</span><span class="p">],</span>
-                                        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">RouteConfiguration</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">patch</span><span class="p">,</span>
+                                      <span class="nv">path</span><span class="p">:</span> <span class="o">.</span><span class="nf">path</span><span class="p">([</span><span class="s">"todo"</span><span class="p">,</span> <span class="kt">String</span><span class="p">(</span><span class="n">id</span><span class="p">)]),</span> <span class="c1">// PATCH /todo/[id]</span>
+                                      <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"completed"</span><span class="p">:</span> <span class="n">completed</span><span class="p">],</span>
+                                      <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
+
 </code></pre>
 
 <p>You can optionally pass a <strong>configuration</strong> object to specify settings for each route.</p>
@@ -425,8 +426,8 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <p><a name="construct_request"></a></p>
 <h4 id='make-a-request' class='heading'>Make a request</h4>
 
-<p>Use <strong>TNRouter</strong> instance by specializing it with <strong>TodosRoute</strong> to create and execute the request:</p>
-<pre class="highlight swift"><code><span class="kt">TNRouter</span><span class="o">&lt;</span><span class="kt">TodosRoute</span><span class="o">&gt;</span><span class="p">()</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Go shopping!"</span><span class="p">))</span>
+<p>Use <strong>Router</strong> instance by specializing it with <strong>TodosRoute</strong> to create and execute the request:</p>
+<pre class="highlight swift"><code><span class="kt">Router</span><span class="o">&lt;</span><span class="kt">TodosRoute</span><span class="o">&gt;</span><span class="p">()</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Go shopping!"</span><span class="p">))</span>
     <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
            <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
     <span class="c1">// do something with todo</span>
@@ -439,33 +440,33 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <h2 id='queue-hooks' class='heading'>Queue Hooks</h2>
 
 <p>You can define closures that  run before and/or after a request execution in a queue. The following hooks are available:</p>
-<pre class="highlight swift"><code><span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kt">Queue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// e.g. show progress loader</span>
 <span class="p">}</span>
 
-<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">completedWithError</span> <span class="k">in</span>
+<span class="kt">Queue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterAllRequestsCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">completedWithError</span> <span class="k">in</span>
     <span class="c1">// e.g. hide progress loader</span>
 <span class="p">}</span>
 
-<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span> <span class="k">in</span>
+<span class="kt">Queue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">beforeEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span> <span class="k">in</span>
     <span class="c1">// do something with request</span>
 <span class="p">}</span>
 
-<span class="kt">TNQueue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">urlResponse</span><span class="p">,</span> <span class="n">error</span>
+<span class="kt">Queue</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">afterEachRequestCallback</span> <span class="o">=</span> <span class="p">{</span> <span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">urlResponse</span><span class="p">,</span> <span class="n">error</span>
     <span class="c1">// do something with request, data, urlResponse, error</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>For more information take a look at <a href="https://billp.github.io/TermiNetwork/Classes/TNQueue.html" target="_blank">TNQueue</a> in documentation.</p>
+<p>For more information take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Queue.html" target="_blank">Queue</a> in documentation.</p>
 
 <p><a name="error_handling"></a></p>
 <h2 id='error-handling' class='heading'>Error Handling</h2>
 
-<p>TermiNetwork provides its own error types (TNError) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the <strong>localizedDescription</strong> property to get a localized error message.</p>
+<p>TermiNetwork provides its own error types (Error) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the <strong>localizedDescription</strong> property to get a localized error message.</p>
 
-<p>To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/TNError.html" target="_blank">TNError</a> in documentation.</p>
+<p>To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/Error.html" target="_blank">Error</a> in documentation.</p>
 <h4 id='example' class='heading'>Example</h4>
-<pre class="highlight swift"><code><span class="kt">TNRouter</span><span class="o">&lt;</span><span class="kt">TodosRoute</span><span class="o">&gt;</span><span class="p">()</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Go shopping!"</span><span class="p">))</span>
+<pre class="highlight swift"><code><span class="kt">Router</span><span class="o">&lt;</span><span class="kt">TodosRoute</span><span class="o">&gt;</span><span class="p">()</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">title</span><span class="p">:</span> <span class="s">"Go shopping!"</span><span class="p">))</span>
             <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
    <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
     <span class="c1">// do something with todo</span>
@@ -490,16 +491,16 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <p><a name="global_error_handlers"></a></p>
 <h3 id='global-error-handlers' class='heading'>Global Error Handlers</h3>
 
-<p>TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the <strong>TNErrorHandlerProtocol</strong>.</p>
+<p>TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the <strong>ErrorHandlerProtocol</strong>.</p>
 <h4 id='example' class='heading'>Example</h4>
-<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GlobalNetworkErrorHandler</span><span class="p">:</span> <span class="kt">TNErrorHandlerProtocol</span> <span class="p">{</span>
-    <span class="kd">func</span> <span class="nf">requestFailed</span><span class="p">(</span><span class="n">withResponse</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">TNError</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">TNRequest</span><span class="p">)</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">GlobalNetworkErrorHandler</span><span class="p">:</span> <span class="kt">ErrorHandlerProtocol</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">requestFailed</span><span class="p">(</span><span class="n">withResponse</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">Request</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="k">case</span> <span class="o">.</span><span class="nf">networkError</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">)</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
             <span class="c1">/// Do something with the network error</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="kd">func</span> <span class="nf">shouldHandleRequestFailure</span><span class="p">(</span><span class="n">withResponse</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">TNError</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">TNRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">shouldHandleRequestFailure</span><span class="p">(</span><span class="n">withResponse</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="nv">request</span><span class="p">:</span> <span class="kt">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
         <span class="k">return</span> <span class="kc">true</span>
     <span class="p">}</span>
 
@@ -510,7 +511,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 
 <p>Then you have to pass them to your configuration object:</p>
 <h4 id='example' class='heading'>Example</h4>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">()</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">()</span>
 <span class="n">configuration</span><span class="o">.</span><span class="n">errorHandlers</span> <span class="o">=</span> <span class="p">[</span><span class="kt">GlobalNetworkErrorHandler</span><span class="o">.</span><span class="k">self</span><span class="p">]</span>
 </code></pre>
 
@@ -518,7 +519,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <h2 id='swiftui-uikit-image-helpers' class='heading'>SwiftUI/UIKit Image Helpers</h2>
 
 <p>TermiNetwork provides two different helpers for setting remote images:</p>
-<h3 id='tnimage-helper-swiftui' class='heading'>TNImage helper (SwiftUI)</h3>
+<h3 id='image-helper-swiftui' class='heading'>Image helper (SwiftUI)</h3>
 <h4 id='example' class='heading'>Example</h4>
 <h3 id='uiimageview-nsimageview-wkinterfaceimage-extensions' class='heading'>UIImageView/NSImageView/WKInterfaceImage Extensions</h3>
 
@@ -535,10 +536,10 @@ return image
 // Optionally handle response
 })
 </code></li>
-<li><strong>Example with TNRequest and Route</strong>
+<li><strong>Example with Request and Route</strong>
 <code>swift
 let imageView = UIImageView() // or NSImageView (macOS), or WKInterfaceImage (watchOS)
-imageView.tn_setRemoteImage(request: TNRouter&lt;CityRoute&gt;().request(for: .thumb(withID: &quot;3125&quot;)),
+imageView.tn_setRemoteImage(request: Router&lt;CityRoute&gt;().request(for: .thumb(withID: &quot;3125&quot;)),
                         defaultImage: UIImage(named: &quot;DefaultThumbImage&quot;),
                         preprocessImage: { image in
 // Optionally pre-process image and return the new image.
@@ -553,7 +554,7 @@ return image
 <h2 id='debug-logging' class='heading'>Debug Logging</h2>
 
 <p>You enable the debug logging by setting the <strong>verbose</strong> to <strong>true</strong> in your configuration</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">TNConfiguration</span><span class="p">()</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">()</span>
 <span class="n">configuration</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
 

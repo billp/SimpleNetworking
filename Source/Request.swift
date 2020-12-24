@@ -47,7 +47,7 @@ internal enum RequestType {
     case download(String)
 }
 
-/// The core class of TermiNetwork. It handles the request creation as well as the request execution.
+/// The core class of TermiNetwork. It handles the request creation and its execution.
 public final class Request: Operation {
     // MARK: Internal properties
 

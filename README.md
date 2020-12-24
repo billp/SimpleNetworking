@@ -1,4 +1,5 @@
 
+
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -16,7 +17,7 @@
 
 ## Features
 <p align="center">
-Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console
+Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Convert Rest models to Domain models with Transformers 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File and Data Upload/Download 🔸 Pretty printed debug information in console
 </p>
 
 #### Table of contents
@@ -159,7 +160,7 @@ The complete and recommended usage of TermiNetwork library consists of creating 
 #### Setup your Environment
 Create a swift class that implements the **EnvironmentProtocol** and define your environments. See bellow for an example:
 ```swift
-enum Environment: EnvironmentProtocol {
+enum Env: EnvironmentProtocol {
     case localhost
     case dev
     case production
@@ -347,7 +348,20 @@ configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
 TermiNetwork provides two different helpers for setting remote images:
 ### Image helper (SwiftUI) 
 #### Example
-
+1.  **Example with URL**
+```swift
+var body: some View {
+	TermiNetwork.Image(withURL: "https://example.com/path/to/image.png",
+	                   defaultImage: UIImage(named: "DefaultThumbImage"))
+}
+```
+2.  **Example with Request**
+```swift
+var body: some View {
+	TermiNetwork.Image(withRequest: Router<CityRoute>().request(for: .image(city: city)),
+                           defaultImage: UIImage(named: "DefaultThumbImage"))
+}
+```
 
 ### UIImageView/NSImageView/WKInterfaceImage Extensions
 
