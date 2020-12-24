@@ -15,43 +15,43 @@
 		F31126A5257A55E000775D7E /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A4257A55E000775D7E /* TestModel.swift */; };
 		F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A8257A560200775D7E /* TestUploadTransformer.swift */; };
 		F31126AD257A563600775D7E /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126AC257A563600775D7E /* FileResponse.swift */; };
-		F3116AA42460A04B00DFE453 /* TNRequestBodyGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */; };
-		F3116AA52460A04B00DFE453 /* TNRequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA32460A04B00DFE453 /* TNRequestHelpers.swift */; };
-		F3116AA92460A06600DFE453 /* TNRouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */; };
-		F3116AAA2460A06600DFE453 /* TNRequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA82460A06600DFE453 /* TNRequestMiddlewareProtocol.swift */; };
+		F3116AA42460A04B00DFE453 /* RequestBodyGenerators.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA22460A04B00DFE453 /* RequestBodyGenerators.swift */; };
+		F3116AA52460A04B00DFE453 /* RequestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA32460A04B00DFE453 /* RequestHelpers.swift */; };
+		F3116AA92460A06600DFE453 /* RouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA72460A06600DFE453 /* RouteProtocol.swift */; };
+		F3116AAA2460A06600DFE453 /* RequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */; };
 		F3116AB62460A09E00DFE453 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */; };
 		F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAD2460A09E00DFE453 /* String+Extensions.swift */; };
-		F3116AB82460A09E00DFE453 /* TNRequest+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */; };
+		F3116AB82460A09E00DFE453 /* Request+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAE2460A09E00DFE453 /* Request+Mock.swift */; };
 		F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */; };
-		F3116ABA2460A09E00DFE453 /* TNRequest+FileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */; };
-		F3116ABB2460A09E00DFE453 /* TNRequest+DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */; };
-		F3116ABC2460A09E00DFE453 /* TNRequest+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */; };
+		F3116ABA2460A09E00DFE453 /* Request+FileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB12460A09E00DFE453 /* Request+FileOperations.swift */; };
+		F3116ABB2460A09E00DFE453 /* Request+DataOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB22460A09E00DFE453 /* Request+DataOperations.swift */; };
+		F3116ABC2460A09E00DFE453 /* Request+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB32460A09E00DFE453 /* Request+Middleware.swift */; };
 		F3116ABD2460A09E00DFE453 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */; };
 		F3116ABE2460A09E00DFE453 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB52460A09E00DFE453 /* Data+Extensions.swift */; };
-		F3116AC32460A91B00DFE453 /* TNMultipartFormDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AC22460A91B00DFE453 /* TNMultipartFormDataHelpers.swift */; };
+		F3116AC32460A91B00DFE453 /* MultipartFormDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AC22460A91B00DFE453 /* MultipartFormDataHelpers.swift */; };
 		F3196837243D01E1008725CE /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F319683E243D01E1008725CE /* TermiNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = F3196830243D01E1008725CE /* TermiNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F31F889F257A80EE00D9A802 /* CitiesTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8899257A80E100D9A802 /* CitiesTransformer.swift */; };
 		F31F88A4257A816400D9A802 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F8895257A809600D9A802 /* City.swift */; };
-		F31F88A8257AD39400D9A802 /* TNImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88A7257AD39400D9A802 /* TNImage.swift */; };
-		F31F88B4257C056200D9A802 /* TNCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88AE257C040600D9A802 /* TNCache.swift */; };
+		F31F88A8257AD39400D9A802 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88A7257AD39400D9A802 /* Image.swift */; };
+		F31F88B4257C056200D9A802 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88AE257C040600D9A802 /* Cache.swift */; };
 		F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */; };
 		F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */; };
 		F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88D3257CDA7700D9A802 /* DemoApp.swift */; };
 		F3211EC6258019280085E873 /* EncryptedCommunicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3211EC5258019280085E873 /* EncryptedCommunicationView.swift */; };
-		F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */; };
+		F32195B325782E1A000941F1 /* ErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */; };
 		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3309DB4258AA05700BB018D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3309DB3258AA05700BB018D /* Launch Screen.storyboard */; };
 		F3309DBF258ABF1200BB018D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F3309DBE258ABF1200BB018D /* CryptoSwift */; };
 		F3309DE7258AC45800BB018D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F3309DE6258AC45800BB018D /* CryptoSwift */; };
-		F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */; };
+		F3319E9C246AD71C00D94AFE /* MultipartFormDataPartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3319E9B246AD71C00D94AFE /* MultipartFormDataPartType.swift */; };
 		F333429A25792E9D0087BDBA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333429925792E9D0087BDBA /* ErrorModel.swift */; };
 		F33684D52466939200C64471 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F33684D3246692E400C64471 /* photo.jpg */; };
 		F33ACF4D2587F904004DAC46 /* TNRequest+ResponseHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */; };
 		F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5325880A0F004DAC46 /* FileDownloader.swift */; };
 		F33ACF6225880B34004DAC46 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */; };
-		F34BA6722590E63D007CE8D6 /* TNCertificatePinningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */; };
+		F34BA6722590E63D007CE8D6 /* CertificatePinningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34BA6712590E63D007CE8D6 /* CertificatePinningManager.swift */; };
 		F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556064257401330047D46D /* TestDownloadOperations.swift */; };
 		F355608B257527C40047D46D /* TermiNetworkExamplesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */; };
 		F355608D257527C40047D46D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F355607A257527C20047D46D /* ContentView.swift */; };
@@ -63,7 +63,7 @@
 		F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */; };
 		F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F9257D2A83003EFB1F /* CityTransformer.swift */; };
 		F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F37A17FD257D49A8003EFB1F /* MockData.bundle */; };
-		F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */; };
+		F37C5F6324589E26005BF48B /* SessionTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37C5F6224589E26005BF48B /* SessionTaskFactory.swift */; };
 		F383AEA8257ECC8300DE43FA /* CertificatePinningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F383AE9A257ECC0700DE43FA /* CertificatePinningView.swift */; };
 		F383AEAD257ED51500DE43FA /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAB257ED51500DE43FA /* forums.swift.org.cer */; };
 		F383AEAE257ED51500DE43FA /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAC257ED51500DE43FA /* herokuapp.com.cer */; };
@@ -78,16 +78,16 @@
 		F3850C90243D103700F7CC13 /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3850C83243D103700F7CC13 /* forums.swift.org.cer */; };
 		F3850C91243D103700F7CC13 /* TestTNRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C84243D103700F7CC13 /* TestTNRequest.swift */; };
 		F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C86243D103700F7CC13 /* TestTNErrors.swift */; };
-		F3850CA6243D104900F7CC13 /* TNRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C96243D104900F7CC13 /* TNRouter.swift */; };
-		F3850CA8243D104900F7CC13 /* TNSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C98243D104900F7CC13 /* TNSession.swift */; };
-		F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9A243D104900F7CC13 /* TNPath.swift */; };
-		F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9B243D104900F7CC13 /* TNErrors.swift */; };
-		F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9C243D104900F7CC13 /* TNOperation.swift */; };
-		F3850CAD243D104900F7CC13 /* TNLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9D243D104900F7CC13 /* TNLog.swift */; };
-		F3850CAE243D104900F7CC13 /* TNConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9E243D104900F7CC13 /* TNConfiguration.swift */; };
-		F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9F243D104900F7CC13 /* TNQueue.swift */; };
-		F3850CB0243D104900F7CC13 /* TNRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA0243D104900F7CC13 /* TNRequest.swift */; };
-		F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA3243D104900F7CC13 /* TNEnvironment.swift */; };
+		F3850CA6243D104900F7CC13 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C96243D104900F7CC13 /* Router.swift */; };
+		F3850CA8243D104900F7CC13 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C98243D104900F7CC13 /* Session.swift */; };
+		F3850CAA243D104900F7CC13 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9A243D104900F7CC13 /* Path.swift */; };
+		F3850CAB243D104900F7CC13 /* TNError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9B243D104900F7CC13 /* TNError.swift */; };
+		F3850CAC243D104900F7CC13 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9C243D104900F7CC13 /* Operation.swift */; };
+		F3850CAD243D104900F7CC13 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9D243D104900F7CC13 /* Log.swift */; };
+		F3850CAE243D104900F7CC13 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9E243D104900F7CC13 /* Configuration.swift */; };
+		F3850CAF243D104900F7CC13 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C9F243D104900F7CC13 /* Queue.swift */; };
+		F3850CB0243D104900F7CC13 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA0243D104900F7CC13 /* Request.swift */; };
+		F3850CB3243D104900F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850CA3243D104900F7CC13 /* Environment.swift */; };
 		F387B0E82579501000A8C0C7 /* Decodable+Transformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0E72579501000A8C0C7 /* Decodable+Transformer.swift */; };
 		F387B0ED2579531200A8C0C7 /* TestTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0EC2579531200A8C0C7 /* TestTransformer.swift */; };
 		F387B0F7257958EB00A8C0C7 /* TestTNTransformers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F387B0F6257958EB00A8C0C7 /* TestTNTransformers.swift */; };
@@ -97,18 +97,18 @@
 		F38F34A225896ED500D5BB17 /* FileUploaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
-		F3A0BC0F25769385005139D5 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* Environment.swift */; };
+		F3A0BC0F25769385005139D5 /* DemoEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* DemoEnvironment.swift */; };
 		F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC12257693D2005139D5 /* AppDelegate.swift */; };
 		F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC1B25769453005139D5 /* CityRoute.swift */; };
 		F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC23257694F7005139D5 /* RSCity.swift */; };
-		F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */; };
+		F3AA5132256EA13E00D64D31 /* FileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* FileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
 		F3D16EC82575299900F7B523 /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F3D16EC92575299900F7B523 /* TermiNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */; };
+		F3F255E9244C33B800517BF7 /* RouteConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F255E8244C33B800517BF7 /* RouteConfiguration.swift */; };
 		F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F48287245EBE8000656449 /* TestUploadOperations.swift */; };
-		F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */; };
+		F3F4828D245EE58C00656449 /* MultipartFormDataStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F4828C245EE58C00656449 /* MultipartFormDataStream.swift */; };
 		F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3F9709425758C0B0045138A /* CityExplorerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -152,43 +152,43 @@
 		F31126A4257A55E000775D7E /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		F31126A8257A560200775D7E /* TestUploadTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadTransformer.swift; sourceTree = "<group>"; };
 		F31126AC257A563600775D7E /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
-		F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestBodyGenerators.swift; sourceTree = "<group>"; };
-		F3116AA32460A04B00DFE453 /* TNRequestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestHelpers.swift; sourceTree = "<group>"; };
-		F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouteProtocol.swift; sourceTree = "<group>"; };
-		F3116AA82460A06600DFE453 /* TNRequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
+		F3116AA22460A04B00DFE453 /* RequestBodyGenerators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestBodyGenerators.swift; sourceTree = "<group>"; };
+		F3116AA32460A04B00DFE453 /* RequestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestHelpers.swift; sourceTree = "<group>"; };
+		F3116AA72460A06600DFE453 /* RouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProtocol.swift; sourceTree = "<group>"; };
+		F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
 		F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		F3116AAD2460A09E00DFE453 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+Mock.swift"; sourceTree = "<group>"; };
+		F3116AAE2460A09E00DFE453 /* Request+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Mock.swift"; sourceTree = "<group>"; };
 		F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
-		F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+FileOperations.swift"; sourceTree = "<group>"; };
-		F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+DataOperations.swift"; sourceTree = "<group>"; };
-		F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TNRequest+Middleware.swift"; sourceTree = "<group>"; };
+		F3116AB12460A09E00DFE453 /* Request+FileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+FileOperations.swift"; sourceTree = "<group>"; };
+		F3116AB22460A09E00DFE453 /* Request+DataOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+DataOperations.swift"; sourceTree = "<group>"; };
+		F3116AB32460A09E00DFE453 /* Request+Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Middleware.swift"; sourceTree = "<group>"; };
 		F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		F3116AB52460A09E00DFE453 /* Data+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		F3116AC22460A91B00DFE453 /* TNMultipartFormDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataHelpers.swift; sourceTree = "<group>"; };
+		F3116AC22460A91B00DFE453 /* MultipartFormDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataHelpers.swift; sourceTree = "<group>"; };
 		F319682D243D01E1008725CE /* TermiNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TermiNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3196830243D01E1008725CE /* TermiNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TermiNetwork.h; sourceTree = "<group>"; };
 		F3196831243D01E1008725CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3196836243D01E1008725CE /* TermiNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TermiNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F31F8895257A809600D9A802 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F31F8899257A80E100D9A802 /* CitiesTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTransformer.swift; sourceTree = "<group>"; };
-		F31F88A7257AD39400D9A802 /* TNImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNImage.swift; sourceTree = "<group>"; };
-		F31F88AE257C040600D9A802 /* TNCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNCache.swift; sourceTree = "<group>"; };
+		F31F88A7257AD39400D9A802 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		F31F88AE257C040600D9A802 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNetworkErrorHandler.swift; sourceTree = "<group>"; };
 		F31F88D3257CDA7700D9A802 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		F3211EC5258019280085E873 /* EncryptedCommunicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedCommunicationView.swift; sourceTree = "<group>"; };
-		F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNErrorHandlerProtocol.swift; sourceTree = "<group>"; };
+		F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerProtocol.swift; sourceTree = "<group>"; };
 		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
 		F3309DB3258AA05700BB018D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataPartType.swift; sourceTree = "<group>"; };
+		F3319E9B246AD71C00D94AFE /* MultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataPartType.swift; sourceTree = "<group>"; };
 		F333429925792E9D0087BDBA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		F33684D3246692E400C64471 /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
 		F33ACF4C2587F904004DAC46 /* TNRequest+ResponseHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TNRequest+ResponseHeaders.swift"; sourceTree = "<group>"; };
 		F33ACF5325880A0F004DAC46 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
-		F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNCertificatePinningManager.swift; sourceTree = "<group>"; };
+		F34BA6712590E63D007CE8D6 /* CertificatePinningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatePinningManager.swift; sourceTree = "<group>"; };
 		F3556064257401330047D46D /* TestDownloadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDownloadOperations.swift; sourceTree = "<group>"; };
 		F3556079257527C20047D46D /* TermiNetworkExamplesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermiNetworkExamplesApp.swift; sourceTree = "<group>"; };
 		F355607A257527C20047D46D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerDetails.swift; sourceTree = "<group>"; };
 		F37A17F9257D2A83003EFB1F /* CityTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformer.swift; sourceTree = "<group>"; };
 		F37A17FD257D49A8003EFB1F /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
-		F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNSessionTaskFactory.swift; sourceTree = "<group>"; };
+		F37C5F6224589E26005BF48B /* SessionTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTaskFactory.swift; sourceTree = "<group>"; };
 		F383AE9A257ECC0700DE43FA /* CertificatePinningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatePinningView.swift; sourceTree = "<group>"; };
 		F383AEAB257ED51500DE43FA /* forums.swift.org.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = forums.swift.org.cer; path = Tests/forums.swift.org.cer; sourceTree = SOURCE_ROOT; };
 		F383AEAC257ED51500DE43FA /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = herokuapp.com.cer; path = Tests/herokuapp.com.cer; sourceTree = SOURCE_ROOT; };
@@ -218,16 +218,16 @@
 		F3850C84243D103700F7CC13 /* TestTNRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNRequest.swift; sourceTree = "<group>"; };
 		F3850C85243D103700F7CC13 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3850C86243D103700F7CC13 /* TestTNErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNErrors.swift; sourceTree = "<group>"; };
-		F3850C96243D104900F7CC13 /* TNRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRouter.swift; sourceTree = "<group>"; };
-		F3850C98243D104900F7CC13 /* TNSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNSession.swift; sourceTree = "<group>"; };
-		F3850C9A243D104900F7CC13 /* TNPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNPath.swift; sourceTree = "<group>"; };
-		F3850C9B243D104900F7CC13 /* TNErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNErrors.swift; sourceTree = "<group>"; };
-		F3850C9C243D104900F7CC13 /* TNOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNOperation.swift; sourceTree = "<group>"; };
-		F3850C9D243D104900F7CC13 /* TNLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNLog.swift; sourceTree = "<group>"; };
-		F3850C9E243D104900F7CC13 /* TNConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNConfiguration.swift; sourceTree = "<group>"; };
-		F3850C9F243D104900F7CC13 /* TNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNQueue.swift; sourceTree = "<group>"; };
-		F3850CA0243D104900F7CC13 /* TNRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNRequest.swift; sourceTree = "<group>"; };
-		F3850CA3243D104900F7CC13 /* TNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNEnvironment.swift; sourceTree = "<group>"; };
+		F3850C96243D104900F7CC13 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		F3850C98243D104900F7CC13 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		F3850C9A243D104900F7CC13 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		F3850C9B243D104900F7CC13 /* TNError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TNError.swift; sourceTree = "<group>"; };
+		F3850C9C243D104900F7CC13 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		F3850C9D243D104900F7CC13 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		F3850C9E243D104900F7CC13 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		F3850C9F243D104900F7CC13 /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		F3850CA0243D104900F7CC13 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		F3850CA3243D104900F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		F387B0E72579501000A8C0C7 /* Decodable+Transformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Transformer.swift"; sourceTree = "<group>"; };
 		F387B0EC2579531200A8C0C7 /* TestTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTransformer.swift; sourceTree = "<group>"; };
 		F387B0F6257958EB00A8C0C7 /* TestTNTransformers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTNTransformers.swift; sourceTree = "<group>"; };
@@ -237,16 +237,16 @@
 		F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploaderUtils.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
-		F3A0BC07257692E6005139D5 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F3A0BC07257692E6005139D5 /* DemoEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoEnvironment.swift; sourceTree = "<group>"; };
 		F3A0BC12257693D2005139D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3A0BC1B25769453005139D5 /* CityRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRoute.swift; sourceTree = "<group>"; };
 		F3A0BC23257694F7005139D5 /* RSCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSCity.swift; sourceTree = "<group>"; };
-		F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNFileStreamer.swift; sourceTree = "<group>"; };
+		F3AA5131256EA13E00D64D31 /* FileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStreamer.swift; sourceTree = "<group>"; };
 		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
-		F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNRouteConfiguration.swift; sourceTree = "<group>"; };
+		F3F255E8244C33B800517BF7 /* RouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
-		F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNMultipartFormDataStream.swift; sourceTree = "<group>"; };
+		F3F4828C245EE58C00656449 /* MultipartFormDataStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataStream.swift; sourceTree = "<group>"; };
 		F3F9709425758C0B0045138A /* CityExplorerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,9 +311,9 @@
 		F3116AA12460A04B00DFE453 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F3116AA22460A04B00DFE453 /* TNRequestBodyGenerators.swift */,
-				F3116AA32460A04B00DFE453 /* TNRequestHelpers.swift */,
-				F3116AC22460A91B00DFE453 /* TNMultipartFormDataHelpers.swift */,
+				F3116AA22460A04B00DFE453 /* RequestBodyGenerators.swift */,
+				F3116AA32460A04B00DFE453 /* RequestHelpers.swift */,
+				F3116AC22460A91B00DFE453 /* MultipartFormDataHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -321,9 +321,9 @@
 		F3116AA62460A06600DFE453 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				F3116AA72460A06600DFE453 /* TNRouteProtocol.swift */,
-				F3116AA82460A06600DFE453 /* TNRequestMiddlewareProtocol.swift */,
-				F32195B225782E1A000941F1 /* TNErrorHandlerProtocol.swift */,
+				F3116AA72460A06600DFE453 /* RouteProtocol.swift */,
+				F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */,
+				F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -333,9 +333,9 @@
 			children = (
 				F3116AB02460A09E00DFE453 /* Operations */,
 				F3116AAD2460A09E00DFE453 /* String+Extensions.swift */,
-				F3116AAE2460A09E00DFE453 /* TNRequest+Mock.swift */,
+				F3116AAE2460A09E00DFE453 /* Request+Mock.swift */,
 				F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */,
-				F3116AB32460A09E00DFE453 /* TNRequest+Middleware.swift */,
+				F3116AB32460A09E00DFE453 /* Request+Middleware.swift */,
 				F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */,
 				F3116AB52460A09E00DFE453 /* Data+Extensions.swift */,
 				F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */,
@@ -348,8 +348,8 @@
 		F3116AB02460A09E00DFE453 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				F3116AB12460A09E00DFE453 /* TNRequest+FileOperations.swift */,
-				F3116AB22460A09E00DFE453 /* TNRequest+DataOperations.swift */,
+				F3116AB12460A09E00DFE453 /* Request+FileOperations.swift */,
+				F3116AB22460A09E00DFE453 /* Request+DataOperations.swift */,
 				F387B0E72579501000A8C0C7 /* Decodable+Transformer.swift */,
 			);
 			path = Operations;
@@ -428,7 +428,7 @@
 		F31F88AB257AEB3800D9A802 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				F31F88A7257AD39400D9A802 /* TNImage.swift */,
+				F31F88A7257AD39400D9A802 /* Image.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -557,23 +557,23 @@
 				F3116AA12460A04B00DFE453 /* Helpers */,
 				F3116AA62460A06600DFE453 /* Protocols */,
 				F3116AAB2460A09E00DFE453 /* Extensions */,
-				F3850CA3243D104900F7CC13 /* TNEnvironment.swift */,
-				F3850CA0243D104900F7CC13 /* TNRequest.swift */,
-				F3850C9E243D104900F7CC13 /* TNConfiguration.swift */,
-				F3850C96243D104900F7CC13 /* TNRouter.swift */,
-				F3F255E8244C33B800517BF7 /* TNRouteConfiguration.swift */,
-				F3850C9F243D104900F7CC13 /* TNQueue.swift */,
-				F3850C98243D104900F7CC13 /* TNSession.swift */,
-				F3850C9B243D104900F7CC13 /* TNErrors.swift */,
-				F3850C9C243D104900F7CC13 /* TNOperation.swift */,
-				F3850C9A243D104900F7CC13 /* TNPath.swift */,
-				F37C5F6224589E26005BF48B /* TNSessionTaskFactory.swift */,
-				F3F4828C245EE58C00656449 /* TNMultipartFormDataStream.swift */,
-				F3319E9B246AD71C00D94AFE /* TNMultipartFormDataPartType.swift */,
-				F34BA6712590E63D007CE8D6 /* TNCertificatePinningManager.swift */,
-				F3AA5131256EA13E00D64D31 /* TNFileStreamer.swift */,
-				F31F88AE257C040600D9A802 /* TNCache.swift */,
-				F3850C9D243D104900F7CC13 /* TNLog.swift */,
+				F3850CA3243D104900F7CC13 /* Environment.swift */,
+				F3850CA0243D104900F7CC13 /* Request.swift */,
+				F3850C9E243D104900F7CC13 /* Configuration.swift */,
+				F3850C96243D104900F7CC13 /* Router.swift */,
+				F3F255E8244C33B800517BF7 /* RouteConfiguration.swift */,
+				F3850C9F243D104900F7CC13 /* Queue.swift */,
+				F3850C98243D104900F7CC13 /* Session.swift */,
+				F3850C9B243D104900F7CC13 /* TNError.swift */,
+				F3850C9C243D104900F7CC13 /* Operation.swift */,
+				F3850C9A243D104900F7CC13 /* Path.swift */,
+				F37C5F6224589E26005BF48B /* SessionTaskFactory.swift */,
+				F3F4828C245EE58C00656449 /* MultipartFormDataStream.swift */,
+				F3319E9B246AD71C00D94AFE /* MultipartFormDataPartType.swift */,
+				F34BA6712590E63D007CE8D6 /* CertificatePinningManager.swift */,
+				F3AA5131256EA13E00D64D31 /* FileStreamer.swift */,
+				F31F88AE257C040600D9A802 /* Cache.swift */,
+				F3850C9D243D104900F7CC13 /* Log.swift */,
 			);
 			path = Source;
 			sourceTree = SOURCE_ROOT;
@@ -623,7 +623,7 @@
 				F30A2985258783970046C8E6 /* Middlewares */,
 				F31F8890257A807300D9A802 /* Transformers */,
 				F3A0BC21257694DC005139D5 /* Routers */,
-				F3A0BC07257692E6005139D5 /* Environment.swift */,
+				F3A0BC07257692E6005139D5 /* DemoEnvironment.swift */,
 			);
 			path = Communication;
 			sourceTree = "<group>";
@@ -885,42 +885,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3850CA8243D104900F7CC13 /* TNSession.swift in Sources */,
-				F3850CAD243D104900F7CC13 /* TNLog.swift in Sources */,
-				F3116AA92460A06600DFE453 /* TNRouteProtocol.swift in Sources */,
-				F3116AB82460A09E00DFE453 /* TNRequest+Mock.swift in Sources */,
-				F31F88B4257C056200D9A802 /* TNCache.swift in Sources */,
-				F3850CB3243D104900F7CC13 /* TNEnvironment.swift in Sources */,
-				F3F4828D245EE58C00656449 /* TNMultipartFormDataStream.swift in Sources */,
-				F3116ABA2460A09E00DFE453 /* TNRequest+FileOperations.swift in Sources */,
+				F3850CA8243D104900F7CC13 /* Session.swift in Sources */,
+				F3850CAD243D104900F7CC13 /* Log.swift in Sources */,
+				F3116AA92460A06600DFE453 /* RouteProtocol.swift in Sources */,
+				F3116AB82460A09E00DFE453 /* Request+Mock.swift in Sources */,
+				F31F88B4257C056200D9A802 /* Cache.swift in Sources */,
+				F3850CB3243D104900F7CC13 /* Environment.swift in Sources */,
+				F3F4828D245EE58C00656449 /* MultipartFormDataStream.swift in Sources */,
+				F3116ABA2460A09E00DFE453 /* Request+FileOperations.swift in Sources */,
 				F3116ABE2460A09E00DFE453 /* Data+Extensions.swift in Sources */,
-				F3850CA6243D104900F7CC13 /* TNRouter.swift in Sources */,
+				F3850CA6243D104900F7CC13 /* Router.swift in Sources */,
 				F33ACF4D2587F904004DAC46 /* TNRequest+ResponseHeaders.swift in Sources */,
-				F3850CAF243D104900F7CC13 /* TNQueue.swift in Sources */,
-				F3116ABC2460A09E00DFE453 /* TNRequest+Middleware.swift in Sources */,
+				F3850CAF243D104900F7CC13 /* Queue.swift in Sources */,
+				F3116ABC2460A09E00DFE453 /* Request+Middleware.swift in Sources */,
 				F387B0E82579501000A8C0C7 /* Decodable+Transformer.swift in Sources */,
-				F3116AC32460A91B00DFE453 /* TNMultipartFormDataHelpers.swift in Sources */,
-				F3319E9C246AD71C00D94AFE /* TNMultipartFormDataPartType.swift in Sources */,
-				F3116AAA2460A06600DFE453 /* TNRequestMiddlewareProtocol.swift in Sources */,
-				F31F88A8257AD39400D9A802 /* TNImage.swift in Sources */,
-				F3F255E9244C33B800517BF7 /* TNRouteConfiguration.swift in Sources */,
-				F3850CB0243D104900F7CC13 /* TNRequest.swift in Sources */,
-				F3116AA42460A04B00DFE453 /* TNRequestBodyGenerators.swift in Sources */,
-				F3850CAB243D104900F7CC13 /* TNErrors.swift in Sources */,
+				F3116AC32460A91B00DFE453 /* MultipartFormDataHelpers.swift in Sources */,
+				F3319E9C246AD71C00D94AFE /* MultipartFormDataPartType.swift in Sources */,
+				F3116AAA2460A06600DFE453 /* RequestMiddlewareProtocol.swift in Sources */,
+				F31F88A8257AD39400D9A802 /* Image.swift in Sources */,
+				F3F255E9244C33B800517BF7 /* RouteConfiguration.swift in Sources */,
+				F3850CB0243D104900F7CC13 /* Request.swift in Sources */,
+				F3116AA42460A04B00DFE453 /* RequestBodyGenerators.swift in Sources */,
+				F3850CAB243D104900F7CC13 /* TNError.swift in Sources */,
 				F3116AB62460A09E00DFE453 /* UIImageView+Extensions.swift in Sources */,
-				F3AA5132256EA13E00D64D31 /* TNFileStreamer.swift in Sources */,
+				F3AA5132256EA13E00D64D31 /* FileStreamer.swift in Sources */,
 				F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */,
-				F3850CAE243D104900F7CC13 /* TNConfiguration.swift in Sources */,
-				F3850CAA243D104900F7CC13 /* TNPath.swift in Sources */,
-				F32195B325782E1A000941F1 /* TNErrorHandlerProtocol.swift in Sources */,
-				F3116AA52460A04B00DFE453 /* TNRequestHelpers.swift in Sources */,
-				F3116ABB2460A09E00DFE453 /* TNRequest+DataOperations.swift in Sources */,
+				F3850CAE243D104900F7CC13 /* Configuration.swift in Sources */,
+				F3850CAA243D104900F7CC13 /* Path.swift in Sources */,
+				F32195B325782E1A000941F1 /* ErrorHandlerProtocol.swift in Sources */,
+				F3116AA52460A04B00DFE453 /* RequestHelpers.swift in Sources */,
+				F3116ABB2460A09E00DFE453 /* Request+DataOperations.swift in Sources */,
 				F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */,
 				F3116ABD2460A09E00DFE453 /* Dictionary+Extensions.swift in Sources */,
 				F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */,
-				F34BA6722590E63D007CE8D6 /* TNCertificatePinningManager.swift in Sources */,
-				F3850CAC243D104900F7CC13 /* TNOperation.swift in Sources */,
-				F37C5F6324589E26005BF48B /* TNSessionTaskFactory.swift in Sources */,
+				F34BA6722590E63D007CE8D6 /* CertificatePinningManager.swift in Sources */,
+				F3850CAC243D104900F7CC13 /* Operation.swift in Sources */,
+				F37C5F6324589E26005BF48B /* SessionTaskFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,7 +971,7 @@
 				F31F88A4257A816400D9A802 /* City.swift in Sources */,
 				F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */,
 				F30A298A258787320046C8E6 /* MiscRoute.swift in Sources */,
-				F3A0BC0F25769385005139D5 /* Environment.swift in Sources */,
+				F3A0BC0F25769385005139D5 /* DemoEnvironment.swift in Sources */,
 				F33ACF5B25880A5E004DAC46 /* FileDownloader.swift in Sources */,
 				F38F349225896AFF00D5BB17 /* FileUploadTransformer.swift in Sources */,
 				F3F9709525758C0B0045138A /* CityExplorerView.swift in Sources */,

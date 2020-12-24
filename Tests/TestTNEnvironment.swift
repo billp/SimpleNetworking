@@ -1,4 +1,4 @@
-// TestTNEnvironment.swift
+// TestEnvironment.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -20,7 +20,7 @@
 import XCTest
 import TermiNetwork
 
-class TestTNEnvironment: XCTestCase {
+class TestEnvironment: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -33,19 +33,19 @@ class TestTNEnvironment: XCTestCase {
     }
 
     func testEnvironments() {
-        TNEnvironment.set(Environment.httpHost)
-        XCTAssert(TNEnvironment.current.stringURL == "http://localhost")
+        Environment.set(TestsEnvironment.httpHost)
+        XCTAssert(Environment.current.stringURL == "http://localhost")
 
-        TNEnvironment.set(Environment.httpHostWithPort)
-        XCTAssert(TNEnvironment.current.stringURL == "http://localhost:8080")
+        Environment.set(TestsEnvironment.httpHostWithPort)
+        XCTAssert(Environment.current.stringURL == "http://localhost:8080")
 
-        TNEnvironment.set(environmentObject: TNEnvironment(url: "http://www.google.com:8009/test/2"))
-        XCTAssert(TNEnvironment.current.stringURL == "http://www.google.com:8009/test/2")
+        Environment.set(environmentObject: Environment(url: "http://www.google.com:8009/test/2"))
+        XCTAssert(Environment.current.stringURL == "http://www.google.com:8009/test/2")
 
-        TNEnvironment.set(Environment.httpHostWithPortAndSuffix)
-        XCTAssert(TNEnvironment.current.stringURL == "http://localhost:8080/v1/json")
+        Environment.set(TestsEnvironment.httpHostWithPortAndSuffix)
+        XCTAssert(Environment.current.stringURL == "http://localhost:8080/v1/json")
 
-        TNEnvironment.set(Environment.httpsHostWithPortAndSuffix)
-        XCTAssert(TNEnvironment.current.stringURL == "https://google.com:8080/v3/test/foo/bar")
+        Environment.set(TestsEnvironment.httpsHostWithPortAndSuffix)
+        XCTAssert(Environment.current.stringURL == "https://google.com:8080/v3/test/foo/bar")
     }
 }

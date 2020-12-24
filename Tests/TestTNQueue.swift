@@ -1,4 +1,4 @@
-// TestTNQueue.swift
+// TestQueue.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -20,12 +20,12 @@
 import XCTest
 import TermiNetwork
 
-class TestTNQueue: XCTestCase {
+class TestQueue: XCTestCase {
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -35,7 +35,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueue() {
         var numberOfRequests = 8
-        let queue = TNQueue()
+        let queue = Queue()
         let expectation = XCTestExpectation(description: "testQueue")
 
         queue.afterAllRequestsCallback = { error in
@@ -43,7 +43,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for _ in 1...numberOfRequests {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: "http://google.com",
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -59,7 +59,7 @@ class TestTNQueue: XCTestCase {
     }
 
     func testQueueCompletionBlockWithoutErrorContinue() {
-        let queue = TNQueue(failureMode: .continue)
+        let queue = Queue(failureMode: .continue)
         let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithoutErrorContinue")
         var completedWithError = false
         let urls = ["http://google.com",
@@ -77,7 +77,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for index in 0...numberOfRequests-1 {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: urls[index],
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -93,7 +93,7 @@ class TestTNQueue: XCTestCase {
     }
 
     func testQueueCompletionBlockWithoutErrorCancelAll() {
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithoutErrorCancelAll")
         var completedWithError = false
         let urls = ["http://google.com",
@@ -111,7 +111,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for index in 0...numberOfRequests-1 {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: urls[index],
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -127,7 +127,7 @@ class TestTNQueue: XCTestCase {
     }
 
     func testQueueCompletionBlockWithErrorContinue() {
-        let queue = TNQueue(failureMode: .continue)
+        let queue = Queue(failureMode: .continue)
         let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithErrorContinue")
         let urls = ["http://google.com",
                     "http://google.com",
@@ -146,7 +146,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for index in 0...numberOfRequests-1 {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: urls[index],
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -161,7 +161,7 @@ class TestTNQueue: XCTestCase {
     }
 
     func testQueueCompletionBlockWithErrorCancelAll() {
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         let expectation = XCTestExpectation(description: "testQueueCompletionBlockWithErrorCancelAll")
         let urls = ["http://google.com",
                     "http://google.com",
@@ -180,7 +180,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for index in 0...numberOfRequests-1 {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: urls[index],
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -194,7 +194,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueCancellation() {
         var numberOfRequests = 8
-        let queue = TNQueue()
+        let queue = Queue()
         let expectation = XCTestExpectation(description: "testQueueCancellation")
 
         queue.afterAllRequestsCallback = { error in
@@ -204,7 +204,7 @@ class TestTNQueue: XCTestCase {
         }
 
         for _ in 1...numberOfRequests {
-            TNRequest(method: .get,
+            Request(method: .get,
                       url: "http://google.com",
                       headers: nil,
                       params: nil).start(queue: queue, responseType: Data.self, onSuccess: { _ in
@@ -223,7 +223,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueFailureModeCancelAll() {
         var numberOfRequests = 8
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         let expectation = XCTestExpectation(description: "testQueueFailureModeCancelAll")
 
         queue.maxConcurrentOperationCount = 1
@@ -231,7 +231,7 @@ class TestTNQueue: XCTestCase {
         for index in 1...8 {
             let url = index == 5 ? "http://localhost.unkownhost" : "http://google.com"
 
-            let call = TNRequest(method: .get, url: url, headers: nil, params: nil)
+            let call = Request(method: .get, url: url, headers: nil, params: nil)
 
             call.start(queue: queue, responseType: Data.self, onSuccess: { _ in
                 numberOfRequests -= 1
@@ -256,7 +256,7 @@ class TestTNQueue: XCTestCase {
 
     func testQueueFailureModeContinue() {
         var numberOfRequests = 8
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         let expectation = XCTestExpectation(description: "testQueueFailureModeContinue")
         queue.maxConcurrentOperationCount = 1
 
@@ -269,7 +269,7 @@ class TestTNQueue: XCTestCase {
         for index in 1...8 {
             let url = index == 1 ? "http://localhost.unkownhost" : "http://google.com"
 
-            let call = TNRequest(method: .get, url: url, headers: nil, params: nil)
+            let call = Request(method: .get, url: url, headers: nil, params: nil)
 
             call.start(queue: queue, responseType: Data.self, onSuccess: { _ in
                 numberOfRequests -= 1

@@ -9,7 +9,7 @@
 import Foundation
 import TermiNetwork
 
-class TestTransformer: TNTransformer<TestParams, TestModel> {
+class TestTransformer: Transformer<TestParams, TestModel> {
     override func transform(_ object: TestParams) -> TestModel {
         let model = TestModel(value: object.param1,
                               param: nil)

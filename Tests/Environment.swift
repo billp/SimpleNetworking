@@ -1,4 +1,4 @@
-// TNQueue.swift
+// TestsEnvironment.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,7 +22,7 @@ import TermiNetwork
 
 // swiftlint:disable function_body_length
 
-enum Environment: TNEnvironmentProtocol {
+enum TestsEnvironment: EnvironmentProtocol {
     case httpHost
     case httpHostWithPort
     case httpHostWithPortAndSuffix
@@ -32,13 +32,13 @@ enum Environment: TNEnvironmentProtocol {
     case invalidHost
     case google
 
-    func configure() -> TNEnvironment {
-        let requestConfiguration = TNConfiguration(cachePolicy: .returnCacheDataElseLoad,
+    func configure() -> Environment {
+        let requestConfiguration = Configuration(cachePolicy: .returnCacheDataElseLoad,
                                                           timeoutInterval: 32,
                                                           requestBodyType: .JSON)
 
-        let requestConfiguration2: TNConfiguration = {
-            let config = TNConfiguration(cachePolicy: .useProtocolCachePolicy,
+        let requestConfiguration2: Configuration = {
+            let config = Configuration(cachePolicy: .useProtocolCachePolicy,
                                          timeoutInterval: 60,
                                          requestBodyType: .xWWWFormURLEncoded)
             config.verbose = true
@@ -49,41 +49,41 @@ enum Environment: TNEnvironmentProtocol {
 
         switch self {
         case .httpHost:
-            return TNEnvironment(scheme: .http,
-                                 host: "localhost")
+            return Environment(scheme: .http,
+                               host: "localhost")
         case .httpHostWithPort:
-            return TNEnvironment(scheme: .http,
-                                 host: "localhost",
-                                 suffix: nil,
-                                 port: 8080)
+            return Environment(scheme: .http,
+                               host: "localhost",
+                               suffix: nil,
+                               port: 8080)
         case .httpHostWithPortAndSuffix:
-            return TNEnvironment(scheme: .http,
-                                 host: "localhost",
-                                 suffix: .path(["v1", "json"]),
-                                 port: 8080)
+            return Environment(scheme: .http,
+                               host: "localhost",
+                               suffix: .path(["v1", "json"]),
+                               port: 8080)
         case .httpsHostWithPortAndSuffix:
-            return TNEnvironment(scheme: .https,
-                                 host: "google.com",
-                                 suffix: .path(["v3", "test", "foo", "bar"]),
-                                 port: 8080)
+            return Environment(scheme: .https,
+                               host: "google.com",
+                               suffix: .path(["v3", "test", "foo", "bar"]),
+                               port: 8080)
         case .termiNetworkLocal:
-            return TNEnvironment(scheme: .http,
-                                 host: "localhost",
-                                 suffix: nil,
-                                 port: 3000,
-                                 configuration: requestConfiguration)
+            return Environment(scheme: .http,
+                               host: "localhost",
+                               suffix: nil,
+                               port: 3000,
+                               configuration: requestConfiguration)
         case .termiNetworkRemote:
-            return TNEnvironment(scheme: .https,
-                                 host: "terminetwork-rails-app.herokuapp.com",
-                                 configuration: requestConfiguration2)
+            return Environment(scheme: .https,
+                               host: "terminetwork-rails-app.herokuapp.com",
+                               configuration: requestConfiguration2)
         case .invalidHost:
-            return TNEnvironment(scheme: .http,
-                                 host: "localhostt",
-                                 suffix: nil,
-                                 port: 1234,
-                                 configuration: requestConfiguration2)
+            return Environment(scheme: .http,
+                               host: "localhostt",
+                               suffix: nil,
+                               port: 1234,
+                               configuration: requestConfiguration2)
         case .google:
-            return TNEnvironment(scheme: .https, host: "google.com")
+            return Environment(scheme: .https, host: "google.com")
         }
     }
 }

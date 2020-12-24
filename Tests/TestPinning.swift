@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -43,7 +43,7 @@ class TestPinning: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -55,7 +55,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "testValidCertificate")
            var failed = true
 
-            let request = TNRequest(route: APIRoute.testPinning(certPath: validCertPath))
+            let request = Request(route: APIRoute.testPinning(certPath: validCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                failed = false
                expectation.fulfill()
@@ -73,7 +73,7 @@ class TestPinning: XCTestCase {
            let expectation = XCTestExpectation(description: "testInvalidCertificate")
            var failed = true
 
-           let request = TNRequest(route: APIRoute.testPinning(certPath: invalidCertPath))
+           let request = Request(route: APIRoute.testPinning(certPath: invalidCertPath))
            request.start(responseType: String.self, onSuccess: { _ in
                 failed = true
                 expectation.fulfill()

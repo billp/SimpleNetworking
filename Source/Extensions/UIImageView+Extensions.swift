@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -21,25 +21,25 @@ import Foundation
 
 #if os(macOS)
 import AppKit
-typealias TNImageViewType = NSImageView
+typealias ImageViewType = NSImageView
 #elseif os(iOS) || os(tvOS)
 import UIKit
-typealias TNImageViewType = UIImageView
+typealias ImageViewType = UIImageView
 #elseif os(watchOS)
 import UIKit
 import WatchKit
-typealias TNImageViewType = WKInterfaceImage
+typealias ImageViewType = WKInterfaceImage
 #endif
 
-extension TNImageViewType {
-    private static var activeRequestsDictionary: [String: TNRequest] = [:]
-    private static var imageViewQueue: TNQueue = TNQueue()
+extension ImageViewType {
+    private static var activeRequestsDictionary: [String: Request] = [:]
+    private static var imageViewQueue: Queue = Queue()
 
-    fileprivate static func downloadImage(request: TNRequest,
-                                          onSuccess: @escaping TNSuccessCallback<TNImageType>,
-                                          onFailure: @escaping TNFailureCallback) throws -> TNRequest {
+    fileprivate static func downloadImage(request: Request,
+                                          onSuccess: @escaping SuccessCallback<ImageType>,
+                                          onFailure: @escaping FailureCallback) throws -> Request {
         request.start(queue: imageViewQueue,
-                      responseType: TNImageType.self,
+                      responseType: ImageType.self,
                       onSuccess: onSuccess,
                       onFailure: onFailure)
 
@@ -51,7 +51,7 @@ extension TNImageViewType {
     ///
     /// - parameters:
     ///     - url: The url of the image.
-    ///     - configuration: A TNConfiguration object that will be used to make the request.
+    ///     - configuration: A Configuration object that will be used to make the request.
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
@@ -59,14 +59,14 @@ extension TNImageViewType {
     ///     - onFinish: A block of code to execute after the completion of the download image request.
     ///            If the request fails, an error will be returned (optional)
     public func tn_setRemoteImage(url: String,
-                                  configuration: TNConfiguration? = nil,
-                                  defaultImage: TNImageType? = nil,
+                                  configuration: Configuration? = nil,
+                                  defaultImage: ImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishCallbackType? = nil) {
 
         do {
-            try makeRequest(with: TNRequest.init(method: .get,
+            try makeRequest(with: Request.init(method: .get,
                                                  url: url,
                                                  configuration: configuration),
                             defaultImage: defaultImage,
@@ -82,15 +82,15 @@ extension TNImageViewType {
     /// Download a remote image with the specified url.
     ///
     /// - parameters:
-    ///     - request: A TNRequest instance.
+    ///     - request: A Request instance.
     ///     - defaultImage: A UIImage to show before the is downloaded (optional)
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread (optional)
     ///     - onFinish: A block of code to execute after the completion of the download image request.
     ///            If the request fails, an error will be returned (optional)
-    public func tn_setRemoteImage(request: TNRequest,
-                                  defaultImage: TNImageType? = nil,
+    public func tn_setRemoteImage(request: Request,
+                                  defaultImage: ImageType? = nil,
                                   resize: CGSize? = nil,
                                   preprocessImage: ImagePreprocessType? = nil,
                                   onFinish: ImageOnFinishCallbackType? = nil) {
@@ -106,8 +106,8 @@ extension TNImageViewType {
     }
 
     // MARK: Helpers
-    private func makeRequest(with request: TNRequest,
-                             defaultImage: TNImageType? = nil,
+    private func makeRequest(with request: Request,
+                             defaultImage: ImageType? = nil,
                              resize: CGSize? = nil,
                              preprocessImage: ImagePreprocessType? = nil,
                              onFinish: ImageOnFinishCallbackType? = nil) throws {
@@ -118,7 +118,7 @@ extension TNImageViewType {
         self.image = defaultImage
         #endif
 
-        setActiveCallInImageView(try TNImageViewType.downloadImage(request: request,
+        setActiveCallInImageView(try ImageViewType.downloadImage(request: request,
                                                                    onSuccess: { image in
             var image = image
 
@@ -153,10 +153,10 @@ extension TNImageViewType {
     }
 
     private func cancelActiveCallInImageView() {
-        TNImageViewType.activeRequestsDictionary[getAddress()]?.cancel()
+        ImageViewType.activeRequestsDictionary[getAddress()]?.cancel()
     }
 
-    private func setActiveCallInImageView(_ call: TNRequest) {
-        TNImageViewType.activeRequestsDictionary[getAddress()] = call
+    private func setActiveCallInImageView(_ call: Request) {
+        ImageViewType.activeRequestsDictionary[getAddress()] = call
     }
 }

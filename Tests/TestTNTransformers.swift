@@ -1,4 +1,4 @@
-// TestTNTransformers.swift
+// TestTransformers.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -20,13 +20,13 @@
 import XCTest
 import TermiNetwork
 
-class TestTNTransformers: XCTestCase {
-    lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(configuration: TNConfiguration(verbose: true))
+class TestTransformers: XCTestCase {
+    lazy var router: Router<APIRoute> = {
+        return Router<APIRoute>(configuration: Configuration(verbose: true))
     }()
 
     override class func setUp() {
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     func testGetParamsWithTransformer() {

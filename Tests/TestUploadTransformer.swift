@@ -9,7 +9,7 @@
 import Foundation
 import TermiNetwork
 
-class TestUploadTrasnformer: TNTransformer<FileResponse, TestModel> {
+class TestUploadTrasnformer: Transformer<FileResponse, TestModel> {
     override func transform(_ object: FileResponse) -> TestModel {
         let testModel = TestModel(value: object.checksum,
                                   param: object.param)

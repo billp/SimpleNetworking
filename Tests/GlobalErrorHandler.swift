@@ -13,11 +13,11 @@ class GlobalErrorHandler: TNErrorHandlerProtocol {
     static var failed = false
     static var skip = true
 
-    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+    func requestFailed(withResponse response: Data?, error: TNError, request: Request) {
         GlobalErrorHandler.failed = true
     }
 
-    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
+    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: Request) -> Bool {
         !GlobalErrorHandler.skip
     }
 

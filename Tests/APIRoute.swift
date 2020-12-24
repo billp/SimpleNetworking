@@ -1,4 +1,4 @@
-// TNQueue.swift
+// Queue.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,7 +22,7 @@ import TermiNetwork
 
 // swiftlint:disable function_body_length cyclomatic_complexity
 
-enum APIRoute: TNRouteProtocol {
+enum APIRoute: RouteProtocol {
     // Define your routes
     case testHeaders
     case testOverrideHeaders
@@ -33,7 +33,7 @@ enum APIRoute: TNRouteProtocol {
     case testStatusCode(code: Int)
     case testEmptyBody
     case testConfiguration
-    case testConfigurationParameterized(conf: TNConfiguration)
+    case testConfigurationParameterized(conf: Configuration)
     case testImage(imageName: String)
     case testPinning(certPath: String)
     case testEncryptParams(value: String?)
@@ -41,24 +41,24 @@ enum APIRoute: TNRouteProtocol {
     case fileUpload(url: URL, param: String)
     case fileDownload
 
-    func testPinningConfiguration(withCertPaths certPaths: [String]) -> TNConfiguration {
-        let configuration = TNConfiguration(certificatePaths: certPaths)
+    func testPinningConfiguration(withCertPaths certPaths: [String]) -> Configuration {
+        let configuration = Configuration(certificatePaths: certPaths)
         configuration.headers = ["Custom-Header": "1"]
         return configuration
     }
 
     // Set method, path, params, headers for each route
-    func configure() -> TNRouteConfiguration {
+    func configure() -> RouteConfiguration {
         switch self {
         case .testHeaders:
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_headers"]),
                 headers: ["Authorization": "XKJajkBXAUIbakbxjkasbxjkas", "Custom-Header": "test!!!!"],
                 mockFilePath: .path(["main-router", "headers.json"])
             )
         case .testOverrideHeaders:
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_headers"]),
                 headers: ["Authorization": "0",
@@ -66,91 +66,91 @@ enum APIRoute: TNRouteProtocol {
                           "User-Agent": "ios"]
             )
         case let .testGetParams(value1, value2, value3, value4, value5):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_params"]),
                 params: ["key1": value1, "key2": value2, "key3": value3, "key4": value4, "key5": value5]
             )
         case let .testPostParamsxWWWFormURLEncoded(value1, value2, value3, value4, value5):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["test_params"]),
                 params: ["key1": value1, "key2": value2, "key3": value3, "key4": value4, "key5": value5],
-                configuration: TNConfiguration(requestBodyType: .xWWWFormURLEncoded)
+                configuration: Configuration(requestBodyType: .xWWWFormURLEncoded)
             )
         case .testConfiguration:
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["test_params"]),
-                configuration: TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                configuration: Configuration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                                              timeoutInterval: 12,
                                                              requestBodyType: .JSON)
             )
         case .testConfigurationParameterized(let conf):
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path(["a"]),
                                         params: nil,
                                         headers: nil,
                                         configuration: conf)
         case let .testPostParams(value1, value2, value3, value4, value5):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["test_params"]),
                 params: ["key1": value1, "key2": value2, "key3": value3, "key4": value4, "key5": value5],
-                configuration: TNConfiguration(requestBodyType: .JSON)
+                configuration: Configuration(requestBodyType: .JSON)
             )
         case let .testInvalidParams(value1, value2):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_params"]),
                 params: ["fff": value1, "aaa": value2]
             )
         case .testStatusCode(let code):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_status_code"]),
                 params: ["status_code": code]
             )
         case .testEmptyBody:
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_empty_response"])
             )
         case .testImage(let imageName):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path([imageName])
             )
         case .testPinning(let certPath):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["test_empty_response"]),
                 configuration: testPinningConfiguration(withCertPaths: [certPath])
             )
         case .testEncryptParams(let value):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["test_encrypt_params"]),
                 params: ["value": value]
             )
         case .dataUpload(let data, let param):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["file_upload"]),
-                params: ["file": TNMultipartFormDataPartType.data(data: data,
+                params: ["file": MultipartFormDataPartType.data(data: data,
                                                                   filename: "test.jpg",
                                                                   contentType: "image/jpeg"),
-                         "test_param": TNMultipartFormDataPartType.value(value: param)]
+                         "test_param": MultipartFormDataPartType.value(value: param)]
             )
         case .fileUpload(let url, let param):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["file_upload"]),
-                params: ["file": TNMultipartFormDataPartType.url(url),
-                         "test_param": TNMultipartFormDataPartType.value(value: param)]
+                params: ["file": MultipartFormDataPartType.url(url),
+                         "test_param": MultipartFormDataPartType.value(value: param)]
             )
         case .fileDownload:
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path(["downloads", "3cwHqdwsRyuX"]))
         }
     }

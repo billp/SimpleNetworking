@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -21,8 +21,8 @@ import XCTest
 import TermiNetwork
 
 class TestMockRequests: XCTestCase {
-    static var envConfiguration: TNConfiguration = {
-        let conf = TNConfiguration()
+    static var envConfiguration: Configuration = {
+        let conf = Configuration()
         conf.verbose = true
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
@@ -30,7 +30,7 @@ class TestMockRequests: XCTestCase {
         conf.headers = ["test": "123", "test2": "abcdefg"]
         conf.verbose = true
 
-        if let bundlePath = Bundle(for: TestTNConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
+        if let bundlePath = Bundle(for: TestConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
             conf.mockDataBundle = Bundle(path: bundlePath)
             conf.mockDataEnabled = true
         }
@@ -38,8 +38,8 @@ class TestMockRequests: XCTestCase {
         return conf
     }()
 
-    static var mockDelayConfiguration: TNConfiguration = {
-        let conf = TNConfiguration()
+    static var mockDelayConfiguration: Configuration = {
+        let conf = Configuration()
         conf.verbose = true
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
@@ -47,40 +47,40 @@ class TestMockRequests: XCTestCase {
         conf.headers = ["test": "123", "test2": "abcdefg"]
         conf.verbose = true
 
-        if let bundlePath = Bundle(for: TestTNConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
+        if let bundlePath = Bundle(for: TestConfiguration.self).path(forResource: "MockData", ofType: "bundle") {
             conf.mockDataBundle = Bundle(path: bundlePath)
             conf.mockDataEnabled = true
-            conf.mockDelay = TNMockDelayType(min: 0.3, max: 2.05)
+            conf.mockDelay = MockDelayType(min: 0.3, max: 2.05)
         }
 
         return conf
     }()
 
-    enum Env: TNEnvironmentProtocol {
+    enum Env: EnvironmentProtocol {
         case test
 
-        func configure() -> TNEnvironment {
+        func configure() -> Environment {
             switch self {
             case .test:
-                return TNEnvironment(scheme: .https,
+                return Environment(scheme: .https,
                                      host: "terminetwork-rails-app.herokuapp.com",
                                      configuration: envConfiguration)
             }
         }
     }
 
-    var router: TNRouter<APIRoute> {
-       return TNRouter<APIRoute>()
+    var router: Router<APIRoute> {
+       return Router<APIRoute>()
     }
 
-    var router2: TNRouter<APIRoute> {
-        return TNRouter<APIRoute>(configuration: TestMockRequests.mockDelayConfiguration)
+    var router2: Router<APIRoute> {
+        return Router<APIRoute>(configuration: TestMockRequests.mockDelayConfiguration)
     }
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Env.test)
+        Environment.set(Env.test)
     }
 
     override func tearDown() {

@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,12 +22,12 @@ import TermiNetwork
 import SwiftUI
 
 class TestExtensions: XCTestCase {
-    lazy var sampleImageURL = TNEnvironment.current.stringURL + "/sample.jpeg"
+    lazy var sampleImageURL = Environment.current.stringURL + "/sample.jpeg"
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -77,7 +77,7 @@ class TestExtensions: XCTestCase {
         var tmp = 0
 
         let imageView = UIImageView()
-        imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: sampleImageURL),
+        imageView.tn_setRemoteImage(request: Request.init(method: .get, url: sampleImageURL),
                                     defaultImage: nil,
                                     preprocessImage: { image in
             tmp += 1
@@ -97,7 +97,7 @@ class TestExtensions: XCTestCase {
         var tmp = 0
 
         let imageView = UIImageView()
-        imageView.tn_setRemoteImage(request: TNRequest.init(method: .get, url: "dtest!@#"),
+        imageView.tn_setRemoteImage(request: Request.init(method: .get, url: "dtest!@#"),
                                     defaultImage: nil,
                                     preprocessImage: { image in
             tmp += 1
@@ -112,13 +112,13 @@ class TestExtensions: XCTestCase {
     }
 
     func testSwiftUIImageViewRemoteRequest() {
-        TNCache.shared.clearCache()
+        Cache.shared.clearCache()
 
         let expectation = XCTestExpectation(description: "Test testSwiftUIImageViewRemoteRequest")
         var failed = true
         var tmp = 1
 
-        let image = TNImage(with: TNRequest.init(method: .get, url: sampleImageURL),
+        let image = Image(with: Request.init(method: .get, url: sampleImageURL),
                     defaultImage: nil,
                     resize: nil,
                     preprocessImage: { image in
@@ -139,13 +139,13 @@ class TestExtensions: XCTestCase {
     }
 
     func testSwiftUIImageViewRemoteURL() {
-        TNCache.shared.clearCache()
+        Cache.shared.clearCache()
 
         let expectation = XCTestExpectation(description: "testSwiftUIImageViewRemoteURL")
         var failed = true
         var tmp = 1
 
-        let image = TNImage(with: sampleImageURL,
+        let image = Image(with: sampleImageURL,
                     defaultImage: nil,
                     resize: nil,
                     preprocessImage: { image in

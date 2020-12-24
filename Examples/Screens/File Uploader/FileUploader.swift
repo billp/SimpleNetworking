@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -32,7 +32,7 @@ struct FileUploader: View {
     @State var uploadFinished: Bool = false
     @State var error: String?
     @State var outputFile: String = ""
-    @State var request: TNRequest?
+    @State var request: Request?
     @State var imageUrl: URL?
     @State var showCaptureImageView: Bool = false
 
@@ -138,7 +138,7 @@ struct FileUploader: View {
         }
 
         // Enable verbose
-        let configuration = TNConfiguration()
+        let configuration = Configuration()
         configuration.verbose = true
 
         // Construct the final path of the uploaded file
@@ -155,7 +155,7 @@ struct FileUploader: View {
 
         // Start the request
 
-        request = TNRouter<MiscRoute>().request(for: .upload(fileUrl: imageUrl))
+        request = Router<MiscRoute>().request(for: .upload(fileUrl: imageUrl))
                     .startUpload(transformer: FileUploadTransformer.self,
                                  progressUpdate: { (bytesUploaded, bytesTotal, progress) in
                                                 self.progress = progress * 100

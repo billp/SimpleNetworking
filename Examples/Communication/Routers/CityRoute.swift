@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,37 +22,37 @@
 import Foundation
 import TermiNetwork
 
-enum CityRoute: TNRouteProtocol {
+enum CityRoute: RouteProtocol {
     case cities
     case city(id: Int)
     case thumb(city: City)
     case image(city: City)
-    case pinning(configuration: TNConfiguration)
+    case pinning(configuration: Configuration)
 
-    func configure() -> TNRouteConfiguration {
+    func configure() -> RouteConfiguration {
         switch self {
         case .cities:
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path(["cities"]),
                                         mockFilePath:
                                             .path(["Cities", "cities.json"]))
         case .city(let id):
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path(["city", String(id)]),
                                         mockFilePath:
                                             .path(["Cities", "Details", String(format: "%i.json", id)]))
         case .thumb(let city):
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path([city.thumb ?? ""]),
                                         mockFilePath:
                                             .path(["Cities", "Thumbs", String(format: "%i.jpg", city.cityID)]))
         case .image(let city):
-            return TNRouteConfiguration(method: .get,
+            return RouteConfiguration(method: .get,
                                         path: .path([city.image ?? ""]),
                                         mockFilePath:
                                             .path(["Cities", "Images", String(format: "%i.jpg", city.cityID)]))
         case .pinning(let configuration):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .get,
                 path: .path(["cities"]),
                 configuration: configuration

@@ -1,4 +1,4 @@
-// TestTNRequest.swift
+// TestRequest.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,22 +22,22 @@ import TermiNetwork
 
 // swiftlint:disable file_length type_body_length
 
-class TestTNRequest: XCTestCase {
-    lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(configuration: TNConfiguration(verbose: true))
+class TestRequest: XCTestCase {
+    lazy var router: Router<APIRoute> = {
+        return Router<APIRoute>(configuration: Configuration(verbose: true))
     }()
 
-    lazy var router2: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.google)
+    lazy var router2: Router<APIRoute> = {
+        return Router<APIRoute>(environment: TestsEnvironment.google)
     }()
 
-    lazy var routerWithMiddleware: TNRouter<APIRoute> = {
-        let configuration = TNConfiguration()
+    lazy var routerWithMiddleware: Router<APIRoute> = {
+        let configuration = Configuration()
         configuration.requestMiddlewares = [CryptoMiddleware.self]
         configuration.verbose = true
         configuration.requestBodyType = .JSON
 
-        let router = TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
+        let router = Router<APIRoute>(environment: TestsEnvironment.termiNetworkRemote,
                                         configuration: configuration)
 
         return router
@@ -46,7 +46,7 @@ class TestTNRequest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -195,7 +195,7 @@ class TestTNRequest: XCTestCase {
 
     func testBeforeAllRequests() {
         let expectation = XCTestExpectation(description: "testBeforeAllRequests")
-        let queue = TNQueue()
+        let queue = Queue()
         queue.beforeAllRequestsCallback = {
             expectation.fulfill()
         }
@@ -211,7 +211,7 @@ class TestTNRequest: XCTestCase {
 
     func testAfterAllRequests() {
         let expectation = XCTestExpectation(description: "testAfterAllRequests")
-        let queue = TNQueue()
+        let queue = Queue()
         var failed = true
 
         queue.afterAllRequestsCallback = { error in
@@ -231,7 +231,7 @@ class TestTNRequest: XCTestCase {
     func testBeforeEachRequest() {
         let expectation = XCTestExpectation(description: "testBeforeEachRequest")
         var failed = true
-        let queue = TNQueue()
+        let queue = Queue()
 
         queue.beforeEachRequestCallback = { _ in
             expectation.fulfill()
@@ -247,9 +247,9 @@ class TestTNRequest: XCTestCase {
     func testAfterEachRequest() {
         let expectation = XCTestExpectation(description: "testAfterEachRequest")
         var failed = true
-        TNQueue.shared.cancelAllOperations()
+        Queue.shared.cancelAllOperations()
 
-        TNQueue.shared.afterEachRequestCallback = { call, data, URLResponse, error in
+        Queue.shared.afterEachRequestCallback = { call, data, URLResponse, error in
             failed = false
             expectation.fulfill()
         }
@@ -263,9 +263,9 @@ class TestTNRequest: XCTestCase {
     func testStringResponse() {
         let expectation = XCTestExpectation(description: "testStringResponse")
         var failed = true
-        TNQueue.shared.cancelAllOperations()
+        Queue.shared.cancelAllOperations()
 
-        let request = TNRequest(route: APIRoute.testPostParams(value1: true,
+        let request = Request(route: APIRoute.testPostParams(value1: true,
                                                                value2: 3,
                                                                value3: 5.13453124189,
                                                                value4: "test",
@@ -281,21 +281,21 @@ class TestTNRequest: XCTestCase {
     }
 
     func testConfiguration() {
-        var request = TNRequest(route: APIRoute.testInvalidParams(value1: "a", value2: "b"))
+        var request = Request(route: APIRoute.testInvalidParams(value1: "a", value2: "b"))
         var urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 60)
         XCTAssert(request.configuration.cachePolicy == .useProtocolCachePolicy)
         XCTAssert(request.configuration.requestBodyType == .xWWWFormURLEncoded)
 
-        TNEnvironment.set(Environment.termiNetworkLocal)
-        request = TNRequest(route: APIRoute.testHeaders)
+        Environment.set(TestsEnvironment.termiNetworkLocal)
+        request = Request(route: APIRoute.testHeaders)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 32)
         XCTAssert(request.configuration.cachePolicy == .returnCacheDataElseLoad)
         XCTAssert(request.configuration.requestBodyType == .JSON)
 
-        TNEnvironment.set(Environment.termiNetworkRemote)
-        request = TNRequest(route: APIRoute.testConfiguration)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
+        request = Request(route: APIRoute.testConfiguration)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 12)
         XCTAssert(request.configuration.cachePolicy == .reloadIgnoringLocalAndRemoteCacheData)
@@ -303,7 +303,7 @@ class TestTNRequest: XCTestCase {
     }
 
     func testOverrideEnvironment() {
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
 
         let expectation1 = XCTestExpectation(description: "testOverrideEnvironment1")
         let expectation2 = XCTestExpectation(description: "testOverrideEnvironment2")
@@ -368,9 +368,9 @@ class TestTNRequest: XCTestCase {
         XCTAssert(!failed)
     }
 
-    fileprivate func sampleRequest(queue: TNQueue? = TNQueue.shared,
-                                   onSuccess: TNSuccessCallback<TestJSONParams>? = nil) {
-        let call = TNRequest(route: APIRoute.testPostParams(value1: true,
+    fileprivate func sampleRequest(queue: Queue? = Queue.shared,
+                                   onSuccess: SuccessCallback<TestJSONParams>? = nil) {
+        let call = Request(route: APIRoute.testPostParams(value1: true,
                                                             value2: 3,
                                                             value3: 5.13453124189,
                                                             value4: "test",

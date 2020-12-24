@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -20,23 +20,23 @@
 import Foundation
 import TermiNetwork
 
-enum MiscRoute: TNRouteProtocol {
+enum MiscRoute: RouteProtocol {
     case testEncryptParams(param: String)
     case upload(fileUrl: URL)
 
-    func configure() -> TNRouteConfiguration {
+    func configure() -> RouteConfiguration {
         switch self {
         case .testEncryptParams(let value):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["test_encrypt_params"]),
                 params: ["value": value]
             )
         case .upload(fileUrl: let fileUrl):
-            return TNRouteConfiguration(
+            return RouteConfiguration(
                 method: .post,
                 path: .path(["file_upload"]),
-                params: ["file": TNMultipartFormDataPartType.url(fileUrl)]
+                params: ["file": MultipartFormDataPartType.url(fileUrl)]
             )
         }
     }

@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -27,8 +27,8 @@ struct EncryptedCommunicationView: View {
     @State var text: String = "Hello!!!"
     @State var responseString: String = "Press Start Request..."
 
-    var configuration: TNConfiguration {
-        let configuration = TNConfiguration()
+    var configuration: Configuration {
+        let configuration = Configuration()
         configuration.requestBodyType = .JSON
         configuration.requestMiddlewares = [CryptoMiddleware.self]
         return configuration
@@ -66,7 +66,7 @@ struct EncryptedCommunicationView: View {
     func startRequest() {
         responseString = "fetching..."
 
-        TNRouter<MiscRoute>(configuration: configuration).request(for: .testEncryptParams(param: text))
+        Router<MiscRoute>(configuration: configuration).request(for: .testEncryptParams(param: text))
             .start(transformer: EncryptedModelTransformer.self, onSuccess: { model in
             responseString = model.text
         }, onFailure: { (error, _) in

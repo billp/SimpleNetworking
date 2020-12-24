@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -20,19 +20,19 @@
 import Foundation
 
 #if os(macOS)
-extension TNImageType {
+extension ImageType {
     // MARK: Resizing
     /// Resize the image to the given size.
     ///
     /// - Parameter
     ///     - size: The size to resize the image to.
     /// - Returns: The resized image.
-    func tn_resize(_ targetSize: NSSize) -> TNImageType? {
+    func tn_resize(_ targetSize: NSSize) -> ImageType? {
         let frame = NSRect(x: 0, y: 0, width: targetSize.width, height: targetSize.height)
         guard let representation = self.bestRepresentation(for: frame, context: nil, hints: nil) else {
             return nil
         }
-        let image = TNImageType(size: targetSize, flipped: false, drawingHandler: { (_) -> Bool in
+        let image = ImageType(size: targetSize, flipped: false, drawingHandler: { (_) -> Bool in
             return representation.draw(in: frame)
         })
 
@@ -42,14 +42,14 @@ extension TNImageType {
 #elseif os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
 
-extension TNImageType {
+extension ImageType {
     ///
     /// Resizes an UIImage object.
     ///
     /// - parameters:
     ///     - size: The size of the new image.
     /// - returns: The new resized UIImage object.
-    func tn_resize(_ targetSize: CGSize) -> TNImageType? {
+    func tn_resize(_ targetSize: CGSize) -> ImageType? {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height

@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -25,9 +25,9 @@ struct CityExplorerView: View {
     var usesMockData: Bool = false
 
     @State var cities: [City] = []
-    @State var request: TNRequest?
+    @State var request: Request?
     @State var errorMessage: String?
-    @State var activeRequest: TNRequest?
+    @State var activeRequest: Request?
 
     var body: some View {
         VStack {
@@ -53,9 +53,9 @@ struct CityExplorerView: View {
     }
 
     func loadCities() {
-        TNEnvironment.current.configuration?.mockDataEnabled = usesMockData
+        Environment.current.configuration?.mockDataEnabled = usesMockData
 
-        activeRequest = TNRouter<CityRoute>()
+        activeRequest = Router<CityRoute>()
             .request(for: .cities)
             .start(transformer: CitiesTransformer.self,
                    onSuccess: { cities in
@@ -72,7 +72,7 @@ struct CityExplorerView: View {
 
     func onDisappear() {
         activeRequest?.cancel()
-        TNEnvironment.current.configuration?.mockDataEnabled = false
+        Environment.current.configuration?.mockDataEnabled = false
     }
 }
 
@@ -92,9 +92,9 @@ struct CityRow: View {
     }
 
     var thumbView: AnyView {
-        let request = TNRouter<CityRoute>().request(for: .thumb(city: city))
+        let request = Router<CityRoute>().request(for: .thumb(city: city))
         return AnyView(
-            TNImage(with: request, resize: CGSize(width: thumbWidth * UIScreen.main.scale,
+            Image(with: request, resize: CGSize(width: thumbWidth * UIScreen.main.scale,
                                                   height: thumbHeight * UIScreen.main.scale))
                 .aspectRatio(contentMode: .fill))
     }

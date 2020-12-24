@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Request Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/Request" class="dashAnchor"></a>
+
+    <a title="Request Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          TermiNetwork 1.0.0 Docs
+        </a>
+         (92% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">TermiNetwork Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      Request Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Cache.html">Cache</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Configuration.html">Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Operation.html">Operation</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Queue.html">Queue</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Request.html">Request</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/RouteConfiguration.html">RouteConfiguration</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Router.html">Router</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/Transformer.html">Transformer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Method.html">Method</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/MultipartFormDataPartType.html">MultipartFormDataPartType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/Path.html">Path</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/QueueFailureMode.html">QueueFailureMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/RequestBodyType.html">RequestBodyType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TNError.html">TNError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/URLScheme.html">URLScheme</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Decodable.html">Decodable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/EnvironmentProtocol.html">EnvironmentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RequestMiddlewareProtocol.html">RequestMiddlewareProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/RouteProtocol.html">RouteProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Image.html">Image</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork28AfterAllRequestsCallbackTypea">AfterAllRequestsCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork28AfterEachRequestCallbackTypea">AfterEachRequestCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork29BeforeEachRequestCallbackTypea">BeforeEachRequestCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork28BeforeQueueStartCallbackTypea">BeforeQueueStartCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork23DownloadSuccessCallbacka">DownloadSuccessCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork25ImageOnFinishCallbackTypea">ImageOnFinishCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork19ImagePreprocessTypea">ImagePreprocessType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/ImageType">ImageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork9ImageTypea">ImageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork13MockDelayTypea">MockDelayType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork20ProgressCallbackTypea">ProgressCallbackType</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>Request</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Request</span> <span class="p">:</span> <span class="kt"><a href="../Classes/Operation.html">Operation</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>The core class of TermiNetwork. It handles the request creation as well as the request execution.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20properties"></a>
+                <a name="//apple_ref/swift/Section/Public properties" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20properties"></a>
+                  <h3 class="section-name"><p>Public properties</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC13configurationAA13ConfigurationCvp"></a>
+                    <a name="//apple_ref/swift/Property/configuration" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC13configurationAA13ConfigurationCvp">configuration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The configuration of the request. This will be merged with the environment configuration if needed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/Configuration.html">Configuration</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC16associatedObjectyXlSgvp"></a>
+                    <a name="//apple_ref/swift/Property/associatedObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC16associatedObjectyXlSgvp">associatedObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An associated object with the request. Use this variable to optionaly assign an object to it, for later use</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">weak</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">associatedObject</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Initializers"></a>
+                <a name="//apple_ref/swift/Section/Initializers" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Initializers"></a>
+                  <h3 class="section-name"><p>Initializers</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC6method3url7headers6params13configurationAcA6MethodO_SSSDyS2SGSgSDySSypSgGSgAA13ConfigurationCSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(method:url:headers:params:configuration:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC6method3url7headers6params13configurationAcA6MethodO_SSSDyS2SGSgSDySSypSgGSgAA13ConfigurationCSgtcfc">init(method:<wbr>url:<wbr>headers:<wbr>params:<wbr>configuration:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a Request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="kt"><a href="../Enums/Method.html">Method</a></span><span class="p">,</span>
+            <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+            <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">?]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Classes/Configuration.html">Configuration</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>method</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Method to use, for example: .get, .post, etc.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>url</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL of the request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Dictionary of header values, etc. <a href="optional">&ldquo;Content-type&rdquo;: &ldquo;text/html&rdquo;</a></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>params</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The parameters of the request. (optional)</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configuration</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A configuration object (optional, e.g. if you want ot use custom
+configuration for the request).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5route11environmentAcA13RouteProtocol_p_AA11EnvironmentCSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(route:environment:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5route11environmentAcA13RouteProtocol_p_AA11EnvironmentCSgtcfc">init(route:<wbr>environment:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a Request.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">route</span><span class="p">:</span> <span class="kt"><a href="../Protocols/RouteProtocol.html">RouteProtocol</a></span><span class="p">,</span>
+                        <span class="nv">environment</span><span class="p">:</span> <span class="kt"><a href="../Classes/Environment.html">Environment</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Environment.html">Environment</a></span><span class="o">.</span><span class="n">current</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>route</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a RouteProtocol enum value</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>environment</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies a different environment to use than the global setted environment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Public%20methods"></a>
+                <a name="//apple_ref/swift/Section/Public methods" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Public%20methods"></a>
+                  <h3 class="section-name"><p>Public methods</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC02asC010Foundation10URLRequestVyKF"></a>
+                    <a name="//apple_ref/swift/Method/asRequest()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC02asC010Foundation10URLRequestVyKF">asRequest()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Converts a Request instance an URLRequest instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">asRequest</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">URLRequest</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@TermiNetwork@objc(cs)Request(im)cancel"></a>
+                    <a name="//apple_ref/swift/Method/cancel()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@TermiNetwork@objc(cs)Request(im)cancel">cancel()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Cancels a request</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">cancel</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Operation"></a>
+                <a name="//apple_ref/swift/Section/Operation" class="dashAnchor"></a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Operation"></a>
+                  <h3 class="section-name"><p>Operation</p>
+</h3>
+                </div>
+              </div>
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@TermiNetwork@objc(cs)Request(im)start"></a>
+                    <a name="//apple_ref/swift/Method/start()" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@TermiNetwork@objc(cs)Request(im)start">start()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Overrides the start() function from Operation class.
+You should never call this function directly. If you want to start a request without callbacks
+use startEmpty() instead.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">override</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC10startEmptyyAcA5QueueCSgF"></a>
+                    <a name="//apple_ref/swift/Method/startEmpty(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC10startEmptyyAcA5QueueCSgF">startEmpty(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Starts a request without callbacks.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">startEmpty</span><span class="p">(</span><span class="n">_</span> <span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts a download process for Decodable types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                                <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
+                                <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the model that will be deserialized and will be passed to the success block.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5start5queue11transformer9onSuccess0G7FailureAcA5QueueCSg_AA11TransformerCyxq_Gmyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:transformer:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5start5queue11transformer9onSuccess0G7FailureAcA5QueueCSg_AA11TransformerCyxq_Gmyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF">start(queue:<wbr>transformer:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Transformer types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">:</span> <span class="kt">Decodable</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                               <span class="nv">transformer</span><span class="p">:</span> <span class="kt"><a href="../Classes/Transformer.html">Transformer</a></span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">,</span>
+                                               <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">ToType</span><span class="o">&gt;</span><span class="p">?,</span>
+                                               <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transformer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transformer object that handles the transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7NSImageCRbzlF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_xmyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSo7NSImageCRbzlF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for UIImage|NSImage responses.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">start</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork9ImageTypea">ImageType</a></span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                                <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
+                                <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is UIImage.self or NSImage.self.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_SSmySScSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for String responses.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                  <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                  <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">?,</span>
+                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is String.self.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF"></a>
+                    <a name="//apple_ref/swift/Method/start(queue:responseType:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC5start5queue12responseType9onSuccess0H7FailureAcA5QueueCSg_10Foundation4DataVmyANcSgyAA7TNErrorO_ANSgtcSgtF">start(queue:<wbr>responseType:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Data responses.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                  <span class="nv">responseType</span><span class="p">:</span> <span class="kt">Data</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                  <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span>
+                  <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The response type is Data.self.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T></p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureAcA5QueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF"></a>
+                    <a name="//apple_ref/swift/Method/startUpload(queue:responseType:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC11startUpload5queue12responseType14progressUpdate9onSuccess0K7FailureAcA5QueueCSg_xmySi_SiSftcSgyxcSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzlF">startUpload(queue:<wbr>responseType:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts an upload process for Decodable types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">startUpload</span><span class="o">&lt;</span><span class="kt">T</span><span class="p">:</span> <span class="kt">Decodable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                      <span class="nv">responseType</span><span class="p">:</span> <span class="kt">T</span><span class="o">.</span><span class="k">Type</span><span class="p">,</span>
+                                      <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork20ProgressCallbackTypea">ProgressCallbackType</a></span><span class="p">?,</span>
+                                      <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">T</span><span class="o">&gt;</span><span class="p">?,</span>
+                                      <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the model that will be deserialized and will be passed to the success block.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a progress callback to get upload progress updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC11startUpload5queue11transformer14progressUpdate9onSuccess0J7FailureAcA5QueueCSg_AA11TransformerCyxq_GmySi_SiSftcSgyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF"></a>
+                    <a name="//apple_ref/swift/Method/startUpload(queue:transformer:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC11startUpload5queue11transformer14progressUpdate9onSuccess0J7FailureAcA5QueueCSg_AA11TransformerCyxq_GmySi_SiSftcSgyq_cSgyAA7TNErrorO_10Foundation4DataVSgtcSgtSeRzr0_lF">startUpload(queue:<wbr>transformer:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for Transformer types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="n">startUpload</span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">:</span> <span class="kt">Decodable</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                                                     <span class="nv">transformer</span><span class="p">:</span> <span class="kt"><a href="../Classes/Transformer.html">Transformer</a></span><span class="o">&lt;</span><span class="kt">FromType</span><span class="p">,</span> <span class="kt">ToType</span><span class="o">&gt;.</span><span class="k">Type</span><span class="p">,</span>
+                                                     <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork20ProgressCallbackTypea">ProgressCallbackType</a></span><span class="p">?,</span>
+                                                     <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15SuccessCallbacka">SuccessCallback</a></span><span class="o">&lt;</span><span class="kt">ToType</span><span class="o">&gt;</span><span class="p">?,</span>
+                                                     <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transformer</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The transformer object that handles the transformation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a progress callback to get upload progress updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureAcA5QueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF"></a>
+                    <a name="//apple_ref/swift/Method/startDownload(queue:filePath:progressUpdate:onSuccess:onFailure:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC13startDownload5queue8filePath14progressUpdate9onSuccess0K7FailureAcA5QueueCSg_SSySi_SiSftcSgyycSgyAA7TNErrorO_10Foundation4DataVSgtcSgtF">startDownload(queue:<wbr>filePath:<wbr>progressUpdate:<wbr>onSuccess:<wbr>onFailure:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Adds a request to a queue and starts its execution for String types.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@discardableResult</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">startDownload</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="p">?</span> <span class="o">=</span> <span class="kt"><a href="../Classes/Queue.html">Queue</a></span><span class="o">.</span><span class="n">shared</span><span class="p">,</span>
+                          <span class="nv">filePath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                          <span class="nv">progressUpdate</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork20ProgressCallbackTypea">ProgressCallbackType</a></span><span class="p">?,</span>
+                          <span class="nv">onSuccess</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork23DownloadSuccessCallbacka">DownloadSuccessCallback</a></span><span class="p">?,</span>
+                          <span class="nv">onFailure</span><span class="p">:</span> <span class="kt"><a href="../Typealiases.html#/s:12TermiNetwork15FailureCallbacka">FailureCallback</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Request</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>queue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A Queue instance. If no queue is specified it uses the default one.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filePath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The destination file path to save the file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>responseType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of the model that will be deserialized and will be passed to the success block.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>progress</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a progress callback to get upload progress updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onSuccess</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a success callback of type SuccessCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>onFailure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>specifies a failure callback of type FailureCallback<T>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>The Request object.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12TermiNetwork7RequestC15responseHeadersyyySDyS2SGSg_AA7TNErrorOSgtcF"></a>
+                    <a name="//apple_ref/swift/Method/responseHeaders(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork7RequestC15responseHeadersyyySDyS2SGSg_AA7TNErrorOSgtcF">responseHeaders(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Reads the response headers from request after its completion.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">responseHeaders</span><span class="p">(</span><span class="n">_</span> <span class="nv">headersCallback</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]?,</span> <span class="kt"><a href="../Enums/TNError.html">TNError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headersCallback</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that provides the response headers or an error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-24)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

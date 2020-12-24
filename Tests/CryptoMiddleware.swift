@@ -9,7 +9,7 @@
 import TermiNetwork
 import CryptoSwift
 
-class CryptoMiddleware: TNRequestMiddlewareProtocol {
+class CryptoMiddleware: RequestMiddlewareProtocol {
     fileprivate static let key = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
 
     required init() { }

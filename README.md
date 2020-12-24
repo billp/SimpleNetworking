@@ -23,8 +23,8 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 - [Installation](#installation)
 - [Demo Application](#demo_app)
 - [Usage](#usage)
-  - [Simple usage of <b>TNRequest</b>](#simple_usage)
-  - [Advanced usage of <b>TNRequest</b> with <b>Configuration</b> and custom <b>Queue</b>](#advanced_usage)
+  - [Simple usage of <b>Request</b>](#simple_usage)
+  - [Advanced usage of <b>Request</b> with <b>Configuration</b> and custom <b>Queue</b>](#advanced_usage)
   - [Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)](#complete_setup)
 	  - [Setup your Environment](#setup_environments)
 	  - [Setup your Routes](#setup_routers)
@@ -71,7 +71,7 @@ To see all the features of TermiNetwork in action, download the source code and 
 
 <a name="simple_usage"></a>
 
-### Simple usage (TNRequest)
+### Simple usage (Request)
 
 Let's say you have the following Codable model:
 
@@ -88,7 +88,7 @@ To construct a request which adds a new todo using a REST API, do the following:
 let params = ["title": "Go shopping."]
 let headers = ["x-auth": "abcdef1234"]
 
-TNRequest(method: .post,
+Request(method: .post,
           url: "https://myweb.com/api/todos",
           headers: headers,
           params: params).start(responseType: Todo.self,
@@ -117,16 +117,16 @@ JSON.self, Codable.self (subclasses), UIImage.self, Data.self or String.self
 A callback that returns an object of the given type (specified in responseType parameter).
 
 ##### onFailure
-a callback that returns a **TNError** and optionally the response **Data**.
+a callback that returns a **Error** and optionally the response **Data**.
 
 <a name="advanced_usage"></a>
 
-### Advanced usage of TNRequest with Configuration and custom Queue
+### Advanced usage of Request with Configuration and custom Queue
 
-The following example uses a custom queue that specifies the **maxConcurrentOperationCount** (how many requests run in parallel) and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/TNConfiguration.html#/Public%20properties" target="_blank">TNConfiguration properties</a> in documentation.
+The following example uses a custom queue that specifies the **maxConcurrentOperationCount** (how many requests run in parallel) and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Configuration.html#/Public%20properties" target="_blank">Configuration properties</a> in documentation.
 
 ```swift
-let configuration = TNConfiguration(
+let configuration = Configuration(
     cachePolicy: .useProtocolCachePolicy,
     timeoutInterval: 30,
     requestBodyType: .JSON
@@ -135,7 +135,7 @@ let configuration = TNConfiguration(
 let params = ["title": "Go shopping."]
 let headers = ["x-auth": "abcdef1234"]
 
-TNRequest(method: .post,
+Request(method: .post,
           url: "https://myweb.com/todos",
           headers: headers,
           params: params,
@@ -157,33 +157,33 @@ The complete and recommended usage of TermiNetwork library consists of creating 
 <a name="setup_environments"></a>
 
 #### Setup your Environment
-Create a swift class that implements the **TNEnvironmentProtocol** and define your environments. See bellow for an example:
+Create a swift class that implements the **EnvironmentProtocol** and define your environments. See bellow for an example:
 ```swift
-enum Environment: TNEnvironmentProtocol {
+enum Environment: EnvironmentProtocol {
     case localhost
     case dev
     case production
 
-    func configure() -> TNEnvironment {
-        let configuration = TNConfiguration(cachePolicy: .useProtocolCachePolicy,
+    func configure() -> Environment {
+        let configuration = Configuration(cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 30,
                                             requestBodyType: .JSON)
         switch self {
         case .localhost:
-            return TNEnvironment(scheme: .https,
-                                 host: "localhost",
-                                 port: 8080,
-                                 configuration: configuration)
+            return Environment(scheme: .https,
+                               host: "localhost",
+                               port: 8080,
+                               configuration: configuration)
         case .dev:
-            return TNEnvironment(scheme: .https,
-                                 host: "mydevserver.com",
-                                 suffix: .path(["v1"]),
-                                 configuration: configuration)
+            return Environment(scheme: .https,
+                               host: "mydevserver.com",
+                               suffix: .path(["v1"]),
+                               configuration: configuration)
         case .production:
-            return TNEnvironment(scheme: .http,
-                                 host: "myprodserver.com",
-                                 suffix: .path(["v1"]),
-                                 configuration: configuration)
+            return Environment(scheme: .http,
+                               host: "myprodserver.com",
+                               suffix: .path(["v1"]),
+                               configuration: configuration)
         }
     }
 }
@@ -196,7 +196,7 @@ enum Environment: TNEnvironmentProtocol {
 The following code creates a TodosRoute enumeration with all the required routes in order to create the requests later.
 
 ```swift
-enum TodosRoute: TNRouteProtocol {
+enum TodosRoute: RouteProtocol {
     // Define your routes
     case list
     case show(id: Int)
@@ -205,45 +205,46 @@ enum TodosRoute: TNRouteProtocol {
     case setCompleted(id: Int, completed: Bool)
 
     // Set method, path, params, headers for each route
-    func configure() -> TNRouteConfiguration {
-        let configuration = TNConfiguration(requestBodyType: .JSON,
-                                            headers: ["x-auth": "abcdef1234"])
+    func configure() -> RouteConfiguration {
+        let configuration = Configuration(requestBodyType: .JSON,
+                                          headers: ["x-auth": "abcdef1234"])
 
         switch self {
         case .list:
-            return TNRouteConfiguration(method: .get,
-                                        path: .path(["todos"]), // GET /todos
-                                        configuration: configuration)
+            return RouteConfiguration(method: .get,
+                                      path: .path(["todos"]), // GET /todos
+                                      configuration: configuration)
         case .show(let id):
-            return TNRouteConfiguration(method: .get,
-                                        path: .path(["todo", String(id)]), // GET /todos/[id]
-                                        configuration: configuration)
+            return RouteConfiguration(method: .get,
+                                      path: .path(["todo", String(id)]), // GET /todos/[id]
+                                      configuration: configuration)
         case .add(let title):
-            return TNRouteConfiguration(method: .post,
-                                        path: .path(["todos"]), // POST /todos
-                                        params: ["title": title],
-                                        configuration: configuration)
+            return RouteConfiguration(method: .post,
+                                      path: .path(["todos"]), // POST /todos
+                                      params: ["title": title],
+                                      configuration: configuration)
         case .remove(let id):
-            return TNRouteConfiguration(method: .delete,
-                                        path: .path(["todo", String(id)]), // DELETE /todo/[id]
-                                        configuration: configuration)
+            return RouteConfiguration(method: .delete,
+                                      path: .path(["todo", String(id)]), // DELETE /todo/[id]
+                                      configuration: configuration)
         case .setCompleted(let id, let completed):
-            return TNRouteConfiguration(method: .patch,
-                                        path: .path(["todo", String(id)]), // PATCH /todo/[id]
-                                        params: ["completed": completed],
-                                        configuration: configuration)
+            return RouteConfiguration(method: .patch,
+                                      path: .path(["todo", String(id)]), // PATCH /todo/[id]
+                                      params: ["completed": completed],
+                                      configuration: configuration)
         }
     }
 }
+
 ```
 You can optionally pass a **configuration** object to specify settings for each route.
 
 <a name="construct_request"></a>
 
 #### Make a request
-Use **TNRouter** instance by specializing it with **TodosRoute** to create and execute the request:
+Use **Router** instance by specializing it with **TodosRoute** to create and execute the request:
 ```swift
-TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
+Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
     .start(responseType: Todo.self,
            onSuccess: { todo in
     // do something with todo
@@ -258,38 +259,38 @@ TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
 You can define closures that  run before and/or after a request execution in a queue. The following hooks are available:
 
 ```swift
-TNQueue.shared.beforeAllRequestsCallback = {
+Queue.shared.beforeAllRequestsCallback = {
     // e.g. show progress loader
 }
 
-TNQueue.shared.afterAllRequestsCallback = { completedWithError in
+Queue.shared.afterAllRequestsCallback = { completedWithError in
     // e.g. hide progress loader
 }
 
-TNQueue.shared.beforeEachRequestCallback = { request in
+Queue.shared.beforeEachRequestCallback = { request in
     // do something with request
 }
 
-TNQueue.shared.afterEachRequestCallback = { request, data, urlResponse, error
+Queue.shared.afterEachRequestCallback = { request, data, urlResponse, error
     // do something with request, data, urlResponse, error
 }
 ```
 
- For more information take a look at <a href="https://billp.github.io/TermiNetwork/Classes/TNQueue.html" target="_blank">TNQueue</a> in documentation.
+ For more information take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Queue.html" target="_blank">Queue</a> in documentation.
 
 <a name="error_handling"></a>
 
 ## Error Handling
 
-TermiNetwork provides its own error types (TNError) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the **localizedDescription** property to get a localized error message.
+TermiNetwork provides its own error types (Error) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the **localizedDescription** property to get a localized error message.
 
-To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/TNError.html" target="_blank">TNError</a> in documentation.
+To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/Error.html" target="_blank">Error</a> in documentation.
 
 
 #### Example
 
 ```swift
-TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
+Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
             .start(responseType: Todo.self,
    onSuccess: { todo in
     // do something with todo
@@ -312,18 +313,18 @@ TNRouter<TodosRoute>().request(for: .add(title: "Go shopping!"))
 ```
 <a name="global_error_handlers"></a>
 ### Global Error Handlers
-TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **TNErrorHandlerProtocol**.
+TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **ErrorHandlerProtocol**.
 
 #### Example
 ```swift 
-class GlobalNetworkErrorHandler: TNErrorHandlerProtocol {
-    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+class GlobalNetworkErrorHandler: ErrorHandlerProtocol {
+    func requestFailed(withResponse response: Data?, error: Error, request: Request) {
         if case .networkError(let error) = error {
 	        /// Do something with the network error
         }
     }
 
-    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
+    func shouldHandleRequestFailure(withResponse response: Data?, error: Error, request: Request) -> Bool {
         return true
     }
 
@@ -336,7 +337,7 @@ Then you have to pass them to your configuration object:
 
 #### Example
 ```swift
-let configuration = TNConfiguration()
+let configuration = Configuration()
 configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
 ```
 
@@ -344,7 +345,7 @@ configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
 
 ## SwiftUI/UIKit Image Helpers 
 TermiNetwork provides two different helpers for setting remote images:
-### TNImage helper (SwiftUI) 
+### Image helper (SwiftUI) 
 #### Example
 
 
@@ -362,10 +363,10 @@ imageView.tn_setRemoteImage(url: sampleImageURL,
     // Optionally handle response
 })
 ```
-2. **Example with TNRequest and Route**
+2. **Example with Request and Route**
 ```swift
 let imageView = UIImageView() // or NSImageView (macOS), or WKInterfaceImage (watchOS)
-imageView.tn_setRemoteImage(request: TNRouter<CityRoute>().request(for: .thumb(withID: "3125")),
+imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(withID: "3125")),
                             defaultImage: UIImage(named: "DefaultThumbImage"),
                             preprocessImage: { image in
     // Optionally pre-process image and return the new image.
@@ -381,7 +382,7 @@ imageView.tn_setRemoteImage(request: TNRouter<CityRoute>().request(for: .thumb(w
 
 You enable the debug logging by setting the **verbose** to **true** in your configuration
 ```swift
-let configuration = TNConfiguration()
+let configuration = Configuration()
 configuration.verbose = true
 ```
 And you will see a beautiful pretty-printed debug output in your console.

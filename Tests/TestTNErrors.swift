@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -23,35 +23,35 @@ import XCTest
 import TermiNetwork
 
 class TestTNErrors: XCTestCase {
-    var router: TNRouter<APIRoute> {
-       return TNRouter<APIRoute>()
+    var router: Router<APIRoute> {
+       return Router<APIRoute>()
     }
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
     }
 
-    func testEnvironmentNotSetFullUrl() {
-        TNEnvironment.current = nil
-        let expectation = XCTestExpectation(description: "testEnvironmentNotSetFullUrl")
+    func testEnvironmenotSetFullUrl() {
+        Environment.current = nil
+        let expectation = XCTestExpectation(description: "testEnvironmenotSetFullUrl")
         var failed = true
 
-        TNRequest(method: .get,
+        Request(method: .get,
                   url: "http://www.google.com",
                   headers: nil,
                   params: nil).start(responseType: Data.self, onSuccess: { _ in
                     failed = false
                     expectation.fulfill()
                   }, onFailure: { error, _ in
-                    if case TNError.environmentNotSet = error {
+                    if case TNError.environmenotSet = error {
                         failed = true
                     } else {
                         failed = false
@@ -64,9 +64,9 @@ class TestTNErrors: XCTestCase {
         XCTAssert(!failed)
     }
 
-    func testEnvironmentNotSetWithRoute() {
-        TNEnvironment.current = nil
-        let expectation = XCTestExpectation(description: "testEnvironmentNotSetWithRoute")
+    func testEnvironmenotSetWithRoute() {
+        Environment.current = nil
+        let expectation = XCTestExpectation(description: "testEnvironmenotSetWithRoute")
         var failed = true
 
         router.request(for: .testPostParams(value1: true,
@@ -78,7 +78,7 @@ class TestTNErrors: XCTestCase {
                            onSuccess: { _ in
                                 expectation.fulfill()
                     }, onFailure: { error, _ in
-                        if case TNError.environmentNotSet = error {
+                        if case TNError.environmenotSet = error {
                             failed = false
                         }
                         expectation.fulfill()
@@ -91,7 +91,7 @@ class TestTNErrors: XCTestCase {
 
     func testInvalidURL() {
         do {
-            try _ = TNRequest(method: .get, url: "http://εεε.google.κωμ", headers: nil, params: nil).asRequest()
+            try _ = Request(method: .get, url: "http://εεε.google.κωμ", headers: nil, params: nil).asRequest()
             XCTAssert(false)
         } catch TNError.invalidURL {
             XCTAssert(true)
@@ -102,7 +102,7 @@ class TestTNErrors: XCTestCase {
 
     func testValidURL() {
         do {
-            try _ = TNRequest(method: .get, url: "http://www.google.com", headers: nil, params: nil).asRequest()
+            try _ = Request(method: .get, url: "http://www.google.com", headers: nil, params: nil).asRequest()
             XCTAssert(true)
         } catch {
             XCTAssert(false)
@@ -173,7 +173,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseErrorHandlers() {
-        TNEnvironment.set(Environment.invalidHost)
+        Environment.set(TestsEnvironment.invalidHost)
         GlobalErrorHandler.failed = false
         GlobalErrorHandler.skip = false
 
@@ -201,7 +201,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseErrorHandlersSkip() {
-        TNEnvironment.set(Environment.termiNetworkRemote)
+        Environment.set(TestsEnvironment.termiNetworkRemote)
         GlobalErrorHandler.failed = false
         GlobalErrorHandler.skip = true
 
@@ -277,10 +277,10 @@ class TestTNErrors: XCTestCase {
         XCTAssert(!failed)
     }
 
-    func testNetworkError() {
-        TNEnvironment.set(Environment.invalidHost)
+    func tesetworkError() {
+        Environment.set(TestsEnvironment.invalidHost)
 
-        let expectation = XCTestExpectation(description: "testNetworkError")
+        let expectation = XCTestExpectation(description: "tesetworkError")
         var failed = true
 
         router.request(for: .testInvalidParams(value1: "a", value2: "b")).start(responseType: Data.self,
@@ -304,8 +304,8 @@ class TestTNErrors: XCTestCase {
         XCTAssert(!failed)
     }
 
-    func testNotSuccess() {
-        let expectation = XCTestExpectation(description: "testNotSuccess")
+    func tesotSuccess() {
+        let expectation = XCTestExpectation(description: "tesotSuccess")
         var failed = true
 
         router.request(for: .testStatusCode(code: 404))
@@ -334,7 +334,7 @@ class TestTNErrors: XCTestCase {
         let expectation = XCTestExpectation(description: "testCancelled")
         var failed = true
 
-        let request = TNRequest(route: APIRoute.testStatusCode(code: 404))
+        let request = Request(route: APIRoute.testStatusCode(code: 404))
         request.start(responseType: Data.self, onSuccess: { _ in
             expectation.fulfill()
         }, onFailure: { error, _ in

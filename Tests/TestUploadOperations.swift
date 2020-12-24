@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -21,14 +21,14 @@ import XCTest
 import TermiNetwork
 
 class TestUploadOperations: XCTestCase {
-    lazy var configuration: TNConfiguration = {
-        return TNConfiguration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+    lazy var configuration: Configuration = {
+        return Configuration(cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                verbose: true)
     }()
 
-    lazy var router: TNRouter<APIRoute> = {
-        return TNRouter<APIRoute>(environment: Environment.termiNetworkRemote,
-                                  configuration: configuration)
+    lazy var router: Router<APIRoute> = {
+        return Router<APIRoute>(environment: TestsEnvironment.termiNetworkRemote,
+                                configuration: configuration)
     }()
 
     override func setUp() {
@@ -116,7 +116,7 @@ class TestUploadOperations: XCTestCase {
         var successCount = 0
         let iterations = 1
 
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         queue.maxConcurrentOperationCount = 1
 
         for _ in 0..<iterations {
@@ -151,7 +151,7 @@ class TestUploadOperations: XCTestCase {
         var successCount = 0
         let iterations = 12
 
-        let queue = TNQueue(failureMode: .cancelAll)
+        let queue = Queue(failureMode: .cancelAll)
         queue.maxConcurrentOperationCount = 1
 
         let urls = (0..<iterations).map { TestHelpers.createDummyFile(String($0)) }

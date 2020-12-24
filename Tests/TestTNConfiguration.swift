@@ -1,4 +1,4 @@
-// TestTNConfiguration.swift
+// TestConfiguration.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,7 +22,7 @@
 import XCTest
 import TermiNetwork
 
-class TestTNConfiguration: XCTestCase {
+class TestConfiguration: XCTestCase {
 
     static var bundle: Bundle = {
         return Bundle(for: TestPinning.self)
@@ -35,8 +35,8 @@ class TestTNConfiguration: XCTestCase {
                            forLocalization: nil) ?? ""
     }
 
-    static var envConfiguration: TNConfiguration = {
-        let conf = TNConfiguration()
+    static var envConfiguration: Configuration = {
+        let conf = Configuration()
         conf.verbose = true
         conf.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         conf.timeoutInterval = 111
@@ -50,8 +50,8 @@ class TestTNConfiguration: XCTestCase {
         return conf
     }()
 
-    static var routeConfiguration: TNConfiguration = {
-        let conf = TNConfiguration()
+    static var routeConfiguration: Configuration = {
+        let conf = Configuration()
         conf.verbose = false
         conf.cachePolicy = .returnCacheDataDontLoad
         conf.timeoutInterval = 231
@@ -65,27 +65,27 @@ class TestTNConfiguration: XCTestCase {
         return conf
     }()
 
-    enum Env: TNEnvironmentProtocol {
+    enum Env: EnvironmentProtocol {
         case test
 
-        func configure() -> TNEnvironment {
+        func configure() -> Environment {
             switch self {
             case .test:
-                return TNEnvironment(scheme: .http,
+                return Environment(scheme: .http,
                                      host: "google.com",
-                                     configuration: TestTNConfiguration.envConfiguration)
+                                     configuration: TestConfiguration.envConfiguration)
             }
         }
     }
 
-    var router: TNRouter<APIRoute> {
-       return TNRouter<APIRoute>()
+    var router: Router<APIRoute> {
+       return Router<APIRoute>()
     }
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        TNEnvironment.set(Env.test)
+        Environment.set(Env.test)
     }
 
     override func tearDown() {
@@ -97,64 +97,64 @@ class TestTNConfiguration: XCTestCase {
         let request = router.request(for: .testHeaders)
         let reqConf = request.configuration
 
-        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
-        XCTAssert(reqConf.cachePolicy == TestTNConfiguration.envConfiguration.cachePolicy)
-        XCTAssert(reqConf.timeoutInterval == TestTNConfiguration.envConfiguration.timeoutInterval)
-        XCTAssert(reqConf.requestBodyType == TestTNConfiguration.envConfiguration.requestBodyType)
-        XCTAssert(reqConf.certificatePaths == TestTNConfiguration.envConfiguration.certificatePaths)
-        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
-        XCTAssert(reqConf.headers == TestTNConfiguration.envConfiguration.headers)
+        XCTAssert(reqConf.verbose == TestConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.cachePolicy == TestConfiguration.envConfiguration.cachePolicy)
+        XCTAssert(reqConf.timeoutInterval == TestConfiguration.envConfiguration.timeoutInterval)
+        XCTAssert(reqConf.requestBodyType == TestConfiguration.envConfiguration.requestBodyType)
+        XCTAssert(reqConf.certificatePaths == TestConfiguration.envConfiguration.certificatePaths)
+        XCTAssert(reqConf.verbose == TestConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.headers == TestConfiguration.envConfiguration.headers)
         if case .convertFromSnakeCase = reqConf.keyDecodingStrategy {
             XCTAssert(true)
         } else {
             XCTAssert(false)
         }
         XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
-                    Set(arrayLiteral: TestTNConfiguration
+                    Set(arrayLiteral: TestConfiguration
                             .envConfiguration
                             .errorHandlers.map { String(describing: $0) }))
         XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
-                    Set(arrayLiteral: TestTNConfiguration
+                    Set(arrayLiteral: TestConfiguration
                             .envConfiguration
                             .requestMiddlewares.map { String(describing: $0) }))
     }
 
-    func testEnvConfigurationWithTNEnvironmentObject() {
-        TNEnvironment.set(environmentObject: TNEnvironment(url: "http://www.google.com/abc/def",
-                                                           configuration: TestTNConfiguration.envConfiguration))
+    func testEnvConfigurationWithEnvironmentObject() {
+        Environment.set(environmentObject: Environment(url: "http://www.google.com/abc/def",
+                                                           configuration: TestConfiguration.envConfiguration))
 
         let request = router.request(for: .testHeaders)
         let reqConf = request.configuration
 
-        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
-        XCTAssert(reqConf.cachePolicy == TestTNConfiguration.envConfiguration.cachePolicy)
-        XCTAssert(reqConf.timeoutInterval == TestTNConfiguration.envConfiguration.timeoutInterval)
-        XCTAssert(reqConf.requestBodyType == TestTNConfiguration.envConfiguration.requestBodyType)
-        XCTAssert(reqConf.certificatePaths == TestTNConfiguration.envConfiguration.certificatePaths)
-        XCTAssert(reqConf.verbose == TestTNConfiguration.envConfiguration.verbose)
-        XCTAssert(reqConf.headers == TestTNConfiguration.envConfiguration.headers)
+        XCTAssert(reqConf.verbose == TestConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.cachePolicy == TestConfiguration.envConfiguration.cachePolicy)
+        XCTAssert(reqConf.timeoutInterval == TestConfiguration.envConfiguration.timeoutInterval)
+        XCTAssert(reqConf.requestBodyType == TestConfiguration.envConfiguration.requestBodyType)
+        XCTAssert(reqConf.certificatePaths == TestConfiguration.envConfiguration.certificatePaths)
+        XCTAssert(reqConf.verbose == TestConfiguration.envConfiguration.verbose)
+        XCTAssert(reqConf.headers == TestConfiguration.envConfiguration.headers)
         if case .convertFromSnakeCase = reqConf.keyDecodingStrategy {
             XCTAssert(true)
         } else {
             XCTAssert(false)
         }
         XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
-                    Set(arrayLiteral: TestTNConfiguration
+                    Set(arrayLiteral: TestConfiguration
                             .envConfiguration
                             .errorHandlers.map { String(describing: $0) }))
         XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
-                    Set(arrayLiteral: TestTNConfiguration
+                    Set(arrayLiteral: TestConfiguration
                             .envConfiguration
                             .requestMiddlewares.map { String(describing: $0) }))
     }
 
     func testRouteConfiguration() {
         let request = router.request(for:
-            .testConfigurationParameterized(conf: TestTNConfiguration.routeConfiguration))
+            .testConfigurationParameterized(conf: TestConfiguration.routeConfiguration))
         let reqConf = request.configuration
-        let routeConf = TestTNConfiguration.routeConfiguration
+        let routeConf = TestConfiguration.routeConfiguration
 
-        var allHeaders = TestTNConfiguration.envConfiguration.headers ?? [:]
+        var allHeaders = TestConfiguration.envConfiguration.headers ?? [:]
         let routeHeaders = routeConf.headers ?? [:]
 
         allHeaders.merge(routeHeaders, uniquingKeysWith: { _, new in new})

@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,7 +22,7 @@ import SwiftUI
 import TermiNetwork
 
 struct CityExplorerDetails: View {
-    @State var activeRequest: TNRequest?
+    @State var activeRequest: Request?
     @State var city: City
     @State var errorMessage: String?
     @State var cityFetched: Bool = false
@@ -51,7 +51,7 @@ struct CityExplorerDetails: View {
     }
 
     func loadCity() {
-        activeRequest = TNRouter<CityRoute>()
+        activeRequest = Router<CityRoute>()
             .request(for: .city(id: city.cityID))
             .start(transformer: CityTransformer.self, onSuccess: { city in
                 self.city = city
@@ -87,7 +87,7 @@ struct CityDetailsEntry: View {
     }
 
     var thumbView: AnyView {
-        AnyView(TNImage(with: TNRouter<CityRoute>().request(for: .image(city: city)),
+        AnyView(Image(with: Router<CityRoute>().request(for: .image(city: city)),
                         resize: CGSize(width: imageWidth * UIScreen.main.scale,
                                        height: imageHeight * UIScreen.main.scale))
                     .aspectRatio(contentMode: .fill))

@@ -12,7 +12,7 @@
 // or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIESS FOR A PARTICULAR
 // PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -22,7 +22,7 @@ import UIKit
 import TermiNetwork
 
 class GlobalNetworkErrorHandler: TNErrorHandlerProtocol {
-    func requestFailed(withResponse response: Data?, error: TNError, request: TNRequest) {
+    func requestFailed(withResponse response: Data?, error: TNError, request: Request) {
         if case .networkError(let error) = error {
             let alert = UIAlertController(title: NSLocalizedString("Network Error", comment: ""),
                                           message: error.localizedDescription, preferredStyle: .alert)
@@ -33,7 +33,7 @@ class GlobalNetworkErrorHandler: TNErrorHandlerProtocol {
         }
     }
 
-    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: TNRequest) -> Bool {
+    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: Request) -> Bool {
         return true
     }
 
