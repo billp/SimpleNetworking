@@ -22,26 +22,33 @@ import Foundation
 /// This protocol is used to register a middleware in order to modify body and headers of a request. (e.g.  it can be
 /// used with  Crypto Swift library to encrypt or decrypt the data.
 public protocol RequestMiddlewareProtocol {
-    /// Modifies body params before they are sent to server
+    /// Processes body params before they are sent to server.
     ///   - parameters:
     ///     - params:  The body params that are constructed by Request initializers.
     ///   - returns:
     ///     - the new modified params
-    func modifyBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]?
+    func processBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]?
 
-    /// Modifies data response before they are sent to callbacks
+    /// Processes data after they have been received.
     ///   - parameters:
     ///     - data: The data
     ///   - returns:
     ///     - the new modified data
-    func modifyBodyAfterReceive(with data: Data?) throws -> Data?
+    func processBodyAfterReceive(with data: Data?) throws -> Data?
 
-    /// Modifies the headers of the response before they are sent to server
+    /// Processes the response headers before they are sent to server.
     ///   - parameters:
     ///     - headers: the headers cosntructed by initializers and configuration
     ///   - returns:
     ///     - the new modified headers
-    func modifyHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]?
+    func processHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]?
+
+    /// Processes response headers after they have been received.
+    ///   - parameters:
+    ///     - headers: the headers cosntructed by initializers and configuration.
+    ///   - returns:
+    ///     - the new modified headers
+    func processHeadersAfterReceive(with headers: [String: String]?) throws -> [String: String]?
 
     /// Required initializer
     init()

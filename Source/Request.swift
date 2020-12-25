@@ -63,6 +63,7 @@ public final class Request: Operation {
     internal var requestType: RequestType = .data
     internal var urlRequestLogInitiated: Bool = false
     internal var responseHeadersClosure: ((URLResponse?) -> Void)?
+    internal var processedHeaders: [String: String]?
     internal var pinningErrorOccured: Bool = false
 
     /// The start date of the request.

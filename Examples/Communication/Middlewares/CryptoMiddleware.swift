@@ -26,14 +26,14 @@ class CryptoMiddleware: RequestMiddlewareProtocol {
     static var encryptionKey = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
     static var decryptionKey = "aaaaaaaaaaaaaaaaaaaaaaabcdefg123"
 
-    func modifyBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]? {
+    func processBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]? {
         if let params = params, let jsonString = params.toJSONString() {
             return ["data": try encryptedBase64(jsonString: jsonString)]
         }
         return nil
     }
 
-    func modifyBodyAfterReceive(with data: Data?) throws -> Data? {
+    func processBodyAfterReceive(with data: Data?) throws -> Data? {
         guard let jsonDict = data?.toJSONDictionary(),
             let cipher = jsonDict["data"] as? String else {
             throw TNError.middlewareError("Invalid data")
@@ -41,7 +41,11 @@ class CryptoMiddleware: RequestMiddlewareProtocol {
         return try decryptedData(base64StringCipher: cipher)
     }
 
-    func modifyHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]? {
+    func processHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]? {
+        headers
+    }
+
+    func processHeadersAfterReceive(with headers: [String: String]?) throws -> [String: String]? {
         return headers
     }
 

@@ -92,10 +92,12 @@ struct CityRow: View {
     }
 
     var thumbView: AnyView {
+
+
         let request = Router<CityRoute>().request(for: .thumb(city: city))
         return AnyView(
-            Image(with: request, resize: CGSize(width: thumbWidth * UIScreen.main.scale,
-                                                  height: thumbHeight * UIScreen.main.scale))
+            TermiNetwork.Image(withRequest: request, resize: CGSize(width: thumbWidth * UIScreen.main.scale,
+                                                                    height: thumbHeight * UIScreen.main.scale))
                 .aspectRatio(contentMode: .fill))
     }
 }

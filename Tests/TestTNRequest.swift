@@ -354,15 +354,19 @@ class TestRequest: XCTestCase {
 
         let expectation = XCTestExpectation(description: "testMiddleware")
 
-        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Hola!!!"))
             .start(responseType: EncryptedModel.self,
                    onSuccess: { model in
-                        failed = model.value != "Yoooo"
+                        failed = model.value != "Hola!!!"
                         expectation.fulfill()
                    }, onFailure: { (_, _) in
                         failed = true
                         expectation.fulfill()
                    })
+            .responseHeaders { (headers, _) in
+                failed = !(headers?["X-Test-Header"] == "test123!")
+                expectation.fulfill()
+            }
 
         wait(for: [expectation], timeout: 60)
         XCTAssert(!failed)
@@ -387,7 +391,7 @@ class TestRequest: XCTestCase {
 
         let expectation = XCTestExpectation(description: "testResponseHeaders")
 
-        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Hola!!!"))
             .startEmpty()
             .responseHeaders { (headers, _) in
                 failed = headers?["Content-Type"] != "application/json; charset=utf-8"
@@ -403,7 +407,7 @@ class TestRequest: XCTestCase {
 
         let expectation = XCTestExpectation(description: "testMiddleware")
 
-        routerWithMiddleware.request(for: .testEncryptParams(value: "Yoooo"))
+        routerWithMiddleware.request(for: .testEncryptParams(value: "Hola!!!"))
             .responseHeaders { (_, error) in
                 if case .cannotReadResponseHeaders = error {
                     failed = false

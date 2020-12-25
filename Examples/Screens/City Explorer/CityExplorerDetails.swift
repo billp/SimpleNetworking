@@ -87,9 +87,9 @@ struct CityDetailsEntry: View {
     }
 
     var thumbView: AnyView {
-        AnyView(Image(with: Router<CityRoute>().request(for: .image(city: city)),
-                        resize: CGSize(width: imageWidth * UIScreen.main.scale,
-                                       height: imageHeight * UIScreen.main.scale))
-                    .aspectRatio(contentMode: .fill))
+        AnyView(TermiNetwork.Image(withRequest: Router<CityRoute>().request(for: .image(city: city)),
+                                   resize: CGSize(width: imageWidth * UIScreen.main.scale,
+                                              height: imageHeight * UIScreen.main.scale))
+                               .aspectRatio(contentMode: .fill))
     }
 }

@@ -189,7 +189,7 @@ public struct Image: View {
     ///     This block will run in the background thread
     ///     - onFinish: A block of code to execute after the completion of the request.
     ///            If the request fails, an error will be returned
-    public init(with url: String,
+    public init(withURL url: String,
                 configuration: Configuration? = nil,
                 defaultImage: ImageType? = nil,
                 resize: CGSize? = nil,
@@ -213,7 +213,7 @@ public struct Image: View {
     ///     - resize: Resizes the image to the given CGSize
     ///     - preprocessImage: A block of code that preprocesses the after the download.
     ///     This block will run in the background thread (optional)
-    public init(with request: Request,
+    public init(withRequest request: Request,
                 defaultImage: ImageType? = nil,
                 resize: CGSize? = nil,
                 preprocessImage: ImagePreprocessType? = nil,

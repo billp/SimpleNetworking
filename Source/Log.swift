@@ -90,9 +90,8 @@ internal class Log {
                     print(String(format: "📃 Request Headers: %@", headers.toJSONString() ?? ""))
                 }
             case .finished:
-                if let httpURLResponse = urlResponse as? HTTPURLResponse {
-                    print(String(format: "📃 Response Headers: %@",
-                                 (httpURLResponse.allHeaderFields as? [String: String])?.toJSONString() ?? ""))
+                request.responseHeaders { (headers, _) in
+                    print(String(format: "📃 Response Headers: %@", headers?.toJSONString() ?? ""))
                 }
             default:
                 break

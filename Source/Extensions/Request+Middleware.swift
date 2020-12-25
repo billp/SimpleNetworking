@@ -28,26 +28,51 @@ extension Request {
     }
 
     func handleMiddlewareBodyBeforeSendIfNeeded(params: [String: Any?]?) throws -> [String: Any?]? {
+        guard shouldHandleMiddlewares() else {
+            return params
+        }
+
         var newParams = params
         try configuration.requestMiddlewares?.forEach { middleware in
-            newParams = try middleware.init().modifyBodyBeforeSend(with: newParams)
+            newParams = try middleware.init().processBodyBeforeSend(with: newParams)
         }
         return newParams
     }
 
     func handleMiddlewareBodyAfterReceiveIfNeeded(responseData: Data?) throws -> Data? {
+        guard shouldHandleMiddlewares() else {
+            return responseData
+        }
+
         var newResponseData = responseData
         try configuration.requestMiddlewares?.forEach { middleware in
-            newResponseData = try middleware.init().modifyBodyAfterReceive(with: newResponseData)
+            newResponseData = try middleware.init().processBodyAfterReceive(with: newResponseData)
         }
         return newResponseData
     }
 
     func handleMiddlewareHeadersBeforeSendIfNeeded(headers: [String: String]?) throws -> [String: String]? {
+        guard shouldHandleMiddlewares() else {
+            return headers
+        }
+
         var newHeaders = headers
         try configuration.requestMiddlewares?.forEach { middleware in
-            newHeaders = try middleware.init().modifyHeadersBeforeSend(with: newHeaders)
+            newHeaders = try middleware.init().processHeadersBeforeSend(with: newHeaders)
         }
         return newHeaders
     }
+
+    func handleMiddlewareHeadersAfterReceiveIfNeeded(headers: [String: String]?) throws -> [String: String]? {
+        guard shouldHandleMiddlewares() else {
+            return headers
+        }
+
+        var newHeaders = headers
+        try configuration.requestMiddlewares?.forEach { middleware in
+            newHeaders = try middleware.init().processHeadersAfterReceive(with: newHeaders)
+        }
+        return newHeaders
+    }
+
 }

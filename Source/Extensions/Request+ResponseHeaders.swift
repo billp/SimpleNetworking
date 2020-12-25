@@ -27,17 +27,23 @@ public extension Request {
     ///     - headersCallback: A closure that provides the response headers or an error.
     func responseHeaders(_ headersCallback: @escaping ([String: String]?, TNError?) -> Void) {
         guard dataTask != nil else {
-            headersCallback(nil, TNError.cannotReadResponseHeaders)
+            headersCallback(nil, .cannotReadResponseHeaders)
             return
         }
 
-        self.responseHeadersClosure = { urlResponse in
-            guard let headers = (urlResponse as? HTTPURLResponse)?.allHeaderFields as? [String: String] else {
-                headersCallback(nil, TNError.cannotReadResponseHeaders)
+        guard processedHeaders == nil else {
+            headersCallback(processedHeaders, nil)
+            return
+        }
+
+        self.responseHeadersClosure = { [weak self] urlResponse in
+            guard let headers = (urlResponse as? HTTPURLResponse)?.allHeaderFields as? [String: String],
+                  let processedHeaders = try? self?.handleMiddlewareHeadersAfterReceiveIfNeeded(headers: headers) else {
+                headersCallback(nil, .cannotReadResponseHeaders)
                 return
             }
-
-            headersCallback(headers, nil)
+            self?.processedHeaders = processedHeaders
+            headersCallback(processedHeaders, nil)
         }
     }
 }
