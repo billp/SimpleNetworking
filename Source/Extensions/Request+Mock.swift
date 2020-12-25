@@ -20,13 +20,13 @@
 import Foundation
 
 extension Request {
-    internal func shouldMockRequest() -> Bool {
+    internal func shouldMockResponse() -> Bool {
         return self.configuration.mockDataEnabled ?? false
     }
 
-    internal func createMockRequest(request: URLRequest,
-                                    completionHandler: ((Data, URLResponse?) -> Void)?,
-                                    onFailure: FailureCallback? = nil) -> URLSessionDataTask {
+    internal func createMockResponse(request: URLRequest,
+                                     completionHandler: ((Data, URLResponse?) -> Void)?,
+                                     onFailure: FailureCallback? = nil) -> URLSessionDataTask {
         let fakeSession = URLSession(configuration: URLSession.shared.configuration)
                             .dataTask(with: request)
 

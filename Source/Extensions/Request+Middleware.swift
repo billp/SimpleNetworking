@@ -27,26 +27,26 @@ extension Request {
         return middlewares.count > 0
     }
 
-    func handleMiddlewareBodyBeforeSendIfNeeded(params: [String: Any?]?) throws -> [String: Any?]? {
+    func handleMiddlewareParamsIfNeeded(params: [String: Any?]?) throws -> [String: Any?]? {
         guard shouldHandleMiddlewares() else {
             return params
         }
 
         var newParams = params
         try configuration.requestMiddlewares?.forEach { middleware in
-            newParams = try middleware.init().processBodyBeforeSend(with: newParams)
+            newParams = try middleware.init().processParams(with: newParams)
         }
         return newParams
     }
 
-    func handleMiddlewareBodyAfterReceiveIfNeeded(responseData: Data?) throws -> Data? {
+    func handleMiddlewareProcessResponseIfNeeded(responseData: Data?) throws -> Data? {
         guard shouldHandleMiddlewares() else {
             return responseData
         }
 
         var newResponseData = responseData
         try configuration.requestMiddlewares?.forEach { middleware in
-            newResponseData = try middleware.init().processBodyAfterReceive(with: newResponseData)
+            newResponseData = try middleware.init().processResponse(with: newResponseData)
         }
         return newResponseData
     }

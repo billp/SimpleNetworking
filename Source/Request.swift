@@ -49,13 +49,14 @@ internal enum RequestType {
 
 /// The core class of TermiNetwork. It handles the request creation and its execution.
 public final class Request: Operation {
+
     // MARK: Internal properties
 
     internal var method: Method!
     internal var currentQueue: Queue!
     internal var dataTask: URLSessionTask?
     internal var params: [String: Any?]?
-    internal var path: String
+    internal var path: String!
     internal var pathType: SNPathType = .relative
     internal var mockFilePath: Path?
     internal var multipartBoundary: String?
@@ -65,25 +66,27 @@ public final class Request: Operation {
     internal var responseHeadersClosure: ((URLResponse?) -> Void)?
     internal var processedHeaders: [String: String]?
     internal var pinningErrorOccured: Bool = false
-
+    internal var headers: [String: String]?
+    internal var environment: Environment?
     /// The start date of the request.
-    var startedAt: Date?
+    internal var startedAt: Date?
     /// The duration of the request.
-    var duration: TimeInterval?
+    internal var duration: TimeInterval?
+    /// Interceptors chain
+    internal var interceptors: [InterceptorProtocol]?
 
     // MARK: Public properties
 
     /// The configuration of the request. This will be merged with the environment configuration if needed.
     public var configuration: Configuration = Configuration.makeDefaultConfiguration()
-
     /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use
     weak public var associatedObject: AnyObject?
 
-    // MARK: Private properties
-    private var headers: [String: String]?
-    private var environment: Environment?
-
     // MARK: Initializers
+    /// Default initializer
+    override init() {
+        super.init()
+    }
 
     /// Initializes a Request.
     ///
@@ -178,7 +181,7 @@ public final class Request: Operation {
 
     /// Converts a Request instance an URLRequest instance.
     public func asRequest() throws -> URLRequest {
-        let params = try handleMiddlewareBodyBeforeSendIfNeeded(params: self.params)
+        let params = try handleMiddlewareParamsIfNeeded(params: self.params)
         let urlString = NSMutableString()
 
         if pathType == .relative {
@@ -287,16 +290,17 @@ public final class Request: Operation {
         }
 
         currentQueue.beforeEachRequestCallback?(self)
+        initializeInterceptorsIfNeeded()
 
         _executing = true
         _finished = false
         startedAt = Date()
 
         Log.logRequest(request: self,
-                         data: nil,
-                         state: .started,
-                         urlResponse: nil,
-                         tnError: nil)
+                       data: nil,
+                       state: .started,
+                       urlResponse: nil,
+                       error: nil)
 
         dataTask?.resume()
     }
@@ -311,11 +315,11 @@ public final class Request: Operation {
                                                      completionHandler: { data, urlResponse in
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         tnError: nil)
+                                         error: nil)
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: nil)
         })
 
@@ -325,63 +329,56 @@ public final class Request: Operation {
 
     func handleDataTaskCompleted(with data: Data?,
                                  urlResponse: URLResponse?,
-                                 tnError: TNError?) {
+                                 error: TNError?) {
+        self.processNextInterceptorIfNeeded(data: data,
+                                            error: error) { data in
+            self.duration = startedAt?.distance(to: Date())
+            self.responseHeadersClosure?(urlResponse)
 
-        self.duration = startedAt?.distance(to: Date())
-        self.responseHeadersClosure?(urlResponse)
+            Log.logRequest(request: self,
+                           data: data,
+                           state: .finished,
+                           urlResponse: urlResponse,
+                           error: nil)
 
-        Log.logRequest(request: self,
-                         data: data,
-                         state: .finished,
-                         urlResponse: urlResponse,
-                         tnError: nil)
+            _executing = false
+            _finished = true
 
-        _executing = false
-        _finished = true
-
-        currentQueue.afterOperationFinished(request: self,
-                                            data: data,
-                                            response: urlResponse,
-                                            tnError: tnError)
+            currentQueue.afterOperationFinished(request: self,
+                                                data: data,
+                                                response: urlResponse,
+                                                tnError: error)
+        }
     }
 
     func handleDataTaskFailure(with data: Data?,
                                urlResponse: URLResponse?,
-                               tnError: TNError,
+                               error: TNError,
                                onFailure: FailureCallback?) {
-        self.responseHeadersClosure?(urlResponse)
+        self.processNextInterceptorIfNeeded(data: data,
+                                            error: error) { data in
+            self.responseHeadersClosure?(urlResponse)
 
-        configuration.errorHandlers?.forEach({ errorHandlerType in
-            let errorHandler = errorHandlerType.init()
-            if errorHandler.shouldHandleRequestFailure(withResponse: data,
-                                                       error: tnError,
-                                                       request: self) {
-                errorHandler.requestFailed(withResponse: data,
-                                           error: tnError,
-                                           request: self)
+            onFailure?(error, data)
+
+            switch currentQueue.failureMode {
+            case .continue:
+                break
+            case .cancelAll:
+                currentQueue.cancelAllOperations()
             }
-        })
 
-        onFailure?(tnError, data)
+            _executing = false
+            _finished = true
 
-        switch currentQueue.failureMode {
-        case .continue:
-            break
-        case .cancelAll:
-            currentQueue.cancelAllOperations()
+            currentQueue.afterOperationFinished(request: self,
+                                                data: data,
+                                                response: urlResponse,
+                                                tnError: error)
+            Log.logRequest(request: self,
+                           data: data,
+                           urlResponse: nil,
+                           error: error)
         }
-
-        _executing = false
-        _finished = true
-
-        currentQueue.afterOperationFinished(request: self,
-                                            data: data,
-                                            response: urlResponse,
-                                            tnError: tnError)
-
-        Log.logRequest(request: self,
-                         data: data,
-                         urlResponse: nil,
-                         tnError: tnError)
     }
 }

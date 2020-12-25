@@ -12,6 +12,7 @@
 		F30A29922587884B0046C8E6 /* EncryptedModelTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */; };
 		F30A2998258788880046C8E6 /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A2997258788880046C8E6 /* EncryptedModel.swift */; };
 		F30A299B25878C5F0046C8E6 /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30A2986258783B40046C8E6 /* CryptoMiddleware.swift */; };
+		F30B77D625967FE600681359 /* Request+Interceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30B77D525967FE600681359 /* Request+Interceptors.swift */; };
 		F31126A5257A55E000775D7E /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A4257A55E000775D7E /* TestModel.swift */; };
 		F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126A8257A560200775D7E /* TestUploadTransformer.swift */; };
 		F31126AD257A563600775D7E /* FileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31126AC257A563600775D7E /* FileResponse.swift */; };
@@ -39,8 +40,8 @@
 		F31F88CE257CCF6F00D9A802 /* GlobalNetworkErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */; };
 		F31F88D9257CDAFA00D9A802 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31F88D3257CDA7700D9A802 /* DemoApp.swift */; };
 		F3211EC6258019280085E873 /* EncryptedCommunicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3211EC5258019280085E873 /* EncryptedCommunicationView.swift */; };
-		F32195B325782E1A000941F1 /* ErrorHandlerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */; };
-		F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */; };
+		F32195B325782E1A000941F1 /* InterceptorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B225782E1A000941F1 /* InterceptorProtocol.swift */; };
+		F32195BD25783F29000941F1 /* GlobalInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32195B725783ED0000941F1 /* GlobalInterceptor.swift */; };
 		F32C3D13243E499E004497BC /* TestPinning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32C3D12243E499E004497BC /* TestPinning.swift */; };
 		F3309DB4258AA05700BB018D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F3309DB3258AA05700BB018D /* Launch Screen.storyboard */; };
 		F3309DBF258ABF1200BB018D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F3309DBE258ABF1200BB018D /* CryptoSwift */; };
@@ -101,6 +102,8 @@
 		F3A0BC1825769434005139D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC12257693D2005139D5 /* AppDelegate.swift */; };
 		F3A0BC1C25769453005139D5 /* CityRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC1B25769453005139D5 /* CityRoute.swift */; };
 		F3A0BC24257694F7005139D5 /* RSCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC23257694F7005139D5 /* RSCity.swift */; };
+		F3A4B14825968ED0004812B6 /* Request+NSCopying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B14725968ED0004812B6 /* Request+NSCopying.swift */; };
+		F3A4B15125969694004812B6 /* TestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B14B2596963C004812B6 /* TestInterceptors.swift */; };
 		F3AA5132256EA13E00D64D31 /* FileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* FileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
@@ -149,6 +152,7 @@
 		F30A298D258788180046C8E6 /* RSEncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSEncryptedModel.swift; sourceTree = "<group>"; };
 		F30A29912587884B0046C8E6 /* EncryptedModelTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModelTransformer.swift; sourceTree = "<group>"; };
 		F30A2997258788880046C8E6 /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
+		F30B77D525967FE600681359 /* Request+Interceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+Interceptors.swift"; sourceTree = "<group>"; };
 		F31126A4257A55E000775D7E /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		F31126A8257A560200775D7E /* TestUploadTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadTransformer.swift; sourceTree = "<group>"; };
 		F31126AC257A563600775D7E /* FileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileResponse.swift; sourceTree = "<group>"; };
@@ -178,8 +182,8 @@
 		F31F88C6257CCF5E00D9A802 /* GlobalNetworkErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalNetworkErrorHandler.swift; sourceTree = "<group>"; };
 		F31F88D3257CDA7700D9A802 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		F3211EC5258019280085E873 /* EncryptedCommunicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedCommunicationView.swift; sourceTree = "<group>"; };
-		F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerProtocol.swift; sourceTree = "<group>"; };
-		F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalErrorHandler.swift; sourceTree = "<group>"; };
+		F32195B225782E1A000941F1 /* InterceptorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProtocol.swift; sourceTree = "<group>"; };
+		F32195B725783ED0000941F1 /* GlobalInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalInterceptor.swift; sourceTree = "<group>"; };
 		F32C3D12243E499E004497BC /* TestPinning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestPinning.swift; sourceTree = "<group>"; };
 		F3309DB3258AA05700BB018D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F3319E9B246AD71C00D94AFE /* MultipartFormDataPartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormDataPartType.swift; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 		F3A0BC12257693D2005139D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3A0BC1B25769453005139D5 /* CityRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityRoute.swift; sourceTree = "<group>"; };
 		F3A0BC23257694F7005139D5 /* RSCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSCity.swift; sourceTree = "<group>"; };
+		F3A4B14725968ED0004812B6 /* Request+NSCopying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request+NSCopying.swift"; sourceTree = "<group>"; };
+		F3A4B14B2596963C004812B6 /* TestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInterceptors.swift; sourceTree = "<group>"; };
 		F3AA5131256EA13E00D64D31 /* FileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStreamer.swift; sourceTree = "<group>"; };
 		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
@@ -323,7 +329,7 @@
 			children = (
 				F3116AA72460A06600DFE453 /* RouteProtocol.swift */,
 				F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */,
-				F32195B225782E1A000941F1 /* ErrorHandlerProtocol.swift */,
+				F32195B225782E1A000941F1 /* InterceptorProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -341,6 +347,8 @@
 				F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */,
 				F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */,
 				F33ACF4C2587F904004DAC46 /* Request+ResponseHeaders.swift */,
+				F30B77D525967FE600681359 /* Request+Interceptors.swift */,
+				F3A4B14725968ED0004812B6 /* Request+NSCopying.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,12 +457,12 @@
 			path = "Encrypted Communication";
 			sourceTree = "<group>";
 		};
-		F32195B625783EBB000941F1 /* ErrorHandlers */ = {
+		F32195B625783EBB000941F1 /* Interceptors */ = {
 			isa = PBXGroup;
 			children = (
-				F32195B725783ED0000941F1 /* GlobalErrorHandler.swift */,
+				F32195B725783ED0000941F1 /* GlobalInterceptor.swift */,
 			);
-			name = ErrorHandlers;
+			name = Interceptors;
 			sourceTree = "<group>";
 		};
 		F32C3D14243E49D0004497BC /* Supporting Files */ = {
@@ -521,7 +529,7 @@
 			children = (
 				F387B0FA2579590C00A8C0C7 /* Communication */,
 				F387B0EB257952FB00A8C0C7 /* Transformers */,
-				F32195B625783EBB000941F1 /* ErrorHandlers */,
+				F32195B625783EBB000941F1 /* Interceptors */,
 				F3F48286245EBE6800656449 /* Data Operations */,
 				F397EC97244F60E10082E12D /* Middlewares */,
 				F32C3D14243E49D0004497BC /* Supporting Files */,
@@ -536,6 +544,7 @@
 				F35B533F24439FAC00C1853A /* TestMockRequest.swift */,
 				F32C3D12243E499E004497BC /* TestPinning.swift */,
 				F387B0F6257958EB00A8C0C7 /* TestTNTransformers.swift */,
+				F3A4B14B2596963C004812B6 /* TestInterceptors.swift */,
 				F3AA5146256EF53000D64D31 /* TestHelpers.swift */,
 			);
 			path = Tests;
@@ -891,6 +900,7 @@
 				F3116AB82460A09E00DFE453 /* Request+Mock.swift in Sources */,
 				F31F88B4257C056200D9A802 /* Cache.swift in Sources */,
 				F3850CB3243D104900F7CC13 /* Environment.swift in Sources */,
+				F30B77D625967FE600681359 /* Request+Interceptors.swift in Sources */,
 				F3F4828D245EE58C00656449 /* MultipartFormDataStream.swift in Sources */,
 				F3116ABA2460A09E00DFE453 /* Request+FileOperations.swift in Sources */,
 				F3116ABE2460A09E00DFE453 /* Data+Extensions.swift in Sources */,
@@ -912,7 +922,7 @@
 				F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */,
 				F3850CAE243D104900F7CC13 /* Configuration.swift in Sources */,
 				F3850CAA243D104900F7CC13 /* Path.swift in Sources */,
-				F32195B325782E1A000941F1 /* ErrorHandlerProtocol.swift in Sources */,
+				F32195B325782E1A000941F1 /* InterceptorProtocol.swift in Sources */,
 				F3116AA52460A04B00DFE453 /* RequestHelpers.swift in Sources */,
 				F3116ABB2460A09E00DFE453 /* Request+DataOperations.swift in Sources */,
 				F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */,
@@ -920,6 +930,7 @@
 				F31F88BC257C11C900D9A802 /* UIImage+Extensions.swift in Sources */,
 				F34BA6722590E63D007CE8D6 /* CertificatePinningManager.swift in Sources */,
 				F3850CAC243D104900F7CC13 /* Operation.swift in Sources */,
+				F3A4B14825968ED0004812B6 /* Request+NSCopying.swift in Sources */,
 				F37C5F6324589E26005BF48B /* SessionTaskFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -933,10 +944,11 @@
 				F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */,
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,
+				F3A4B15125969694004812B6 /* TestInterceptors.swift in Sources */,
 				F31126A5257A55E000775D7E /* TestModel.swift in Sources */,
 				F31126A9257A560200775D7E /* TestUploadTransformer.swift in Sources */,
 				F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */,
-				F32195BD25783F29000941F1 /* GlobalErrorHandler.swift in Sources */,
+				F32195BD25783F29000941F1 /* GlobalInterceptor.swift in Sources */,
 				F3556065257401330047D46D /* TestDownloadOperations.swift in Sources */,
 				F3850C8B243D103700F7CC13 /* APIRoute.swift in Sources */,
 				F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */,

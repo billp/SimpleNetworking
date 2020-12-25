@@ -14,14 +14,14 @@ class CryptoMiddleware: RequestMiddlewareProtocol {
 
     required init() { }
 
-    func processBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]? {
+    func processParams(with params: [String: Any?]?) throws -> [String: Any?]? {
         if let params = params, let jsonString = params.toJSONString() {
             return ["data": try encryptedBase64(jsonString: jsonString)]
         }
         return nil
     }
 
-    func processBodyAfterReceive(with data: Data?) throws -> Data? {
+    func processResponse(with data: Data?) throws -> Data? {
         guard let jsonDict = data?.toJSONDictionary(),
             let cipher = jsonDict["data"] as? String else {
             throw TNError.middlewareError("Invalid data")

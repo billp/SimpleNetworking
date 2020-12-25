@@ -21,7 +21,14 @@ import Foundation
 import UIKit
 import TermiNetwork
 
-class GlobalNetworkErrorHandler: TNErrorHandlerProtocol {
+class GlobalInterceptor: InterceptorProtocol {
+    func requestFinished(responseData data: Data?,
+                         error: TNError?,
+                         request: Request,
+                         proceed: (InteceptionActionType) -> Void) {
+        proceed(.continue)
+    }
+
     func requestFailed(withResponse response: Data?, error: TNError, request: Request) {
         if case .networkError(let error) = error {
             let alert = UIAlertController(title: NSLocalizedString("Network Error", comment: ""),

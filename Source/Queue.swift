@@ -116,7 +116,7 @@ public final class Queue: OperationQueue {
         }
 
         if let request = operation as? Request {
-            guard !request.shouldMockRequest() else {
+            guard !request.shouldMockResponse() else {
                 return
             }
             guard request.dataTask != nil else {

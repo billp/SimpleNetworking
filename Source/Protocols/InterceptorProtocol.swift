@@ -1,4 +1,4 @@
-// ContentView.swift
+// InterceptorProtocol.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -17,34 +17,29 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import SwiftUI
-import Combine
+import Foundation
 
-struct DemoAppRow: View {
-    var app: DemoApp
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(app.name).font(.system(size: 18))
-            Text(app.description).font(.system(size: 15))
-        }
-    }
+/// This will be used in interceptor callback as an action to inteceptors chain.
+public enum InteceptionActionType {
+    /// Continue with the next interceptor or final callbacks if there is no other interceptor in chain.
+    case `continue`
+    /// Retry the request
+    case retry
 }
 
-struct ContentView: View {
-    var body: some View {
-        NavigationView {
-            List(DemoApp.Apps) { app in
-                NavigationLink(destination: app.destination) {
-                    DemoAppRow(app: app)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar(content: {
-                ToolbarItem(placement: .principal, content: {
-                    Text("TermiNetwork").bold()
-                })
-            })
-        }
-    }
+/// Use this protocol to create interceptors that can be passed to Configuration instances.
+/// Every class which implements this protocol will intercept between request completion and callbacks.
+public protocol InterceptorProtocol: class {
+    /// This function is called when a request is failed.
+    ///   - parameters:
+    ///     - responseData: The response data of request.
+    ///     - error: The TNError provided by TermiNetwork on request failure, otherwise nil value is passed.
+    ///     - request: The Request object.
+    func requestFinished(responseData data: Data?,
+                         error: TNError?,
+                         request: Request,
+                         proceed: (InteceptionActionType) -> Void)
+
+    /// Default initializer
+    init()
 }

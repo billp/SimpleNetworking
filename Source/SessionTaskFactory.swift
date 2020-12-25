@@ -40,16 +40,16 @@ internal class SessionTaskFactory {
 
             request.handleDataTaskFailure(with: nil,
                                           urlResponse: nil,
-                                          tnError: tnError,
+                                          error: tnError,
                                           onFailure: onFailure)
             return nil
         }
 
-        /// Create mock request if needed
-        if request.shouldMockRequest() {
-            return request.createMockRequest(request: urlRequest,
-                                             completionHandler: completionHandler,
-                                             onFailure: onFailure)
+        /// Create mock response if needed
+        if request.shouldMockResponse() {
+            return request.createMockResponse(request: urlRequest,
+                                              completionHandler: completionHandler,
+                                              onFailure: onFailure)
         }
 
         let session = URLSession(configuration: URLSessionConfiguration.default,
@@ -120,7 +120,7 @@ internal class SessionTaskFactory {
             if let tnError = dataResult.tnError {
                 request.handleDataTaskFailure(with: dataResult.data,
                                               urlResponse: nil,
-                                              tnError: tnError,
+                                              error: tnError,
                                               onFailure: onFailure)
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
@@ -154,9 +154,9 @@ internal class SessionTaskFactory {
             }
 
             request.handleDataTaskFailure(with: nil,
-                                            urlResponse: nil,
-                                            tnError: tnError,
-                                            onFailure: onFailure)
+                                          urlResponse: nil,
+                                          error: tnError,
+                                          onFailure: onFailure)
             return nil
         }
 

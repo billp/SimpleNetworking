@@ -25,29 +25,25 @@ public protocol RequestMiddlewareProtocol {
     /// Processes body params before they are sent to server.
     ///   - parameters:
     ///     - params:  The body params that are constructed by Request initializers.
-    ///   - returns:
-    ///     - the new modified params
-    func processBodyBeforeSend(with params: [String: Any?]?) throws -> [String: Any?]?
+    ///   - returns: The new modified params.
+    func processParams(with params: [String: Any?]?) throws -> [String: Any?]?
 
-    /// Processes data after they have been received.
+    /// Processes response data after they have been received.
     ///   - parameters:
-    ///     - data: The data
-    ///   - returns:
-    ///     - the new modified data
-    func processBodyAfterReceive(with data: Data?) throws -> Data?
+    ///     - data: The response data.
+    ///   - returns: The new modified data
+    func processResponse(with data: Data?) throws -> Data?
 
     /// Processes the response headers before they are sent to server.
     ///   - parameters:
     ///     - headers: the headers cosntructed by initializers and configuration
-    ///   - returns:
-    ///     - the new modified headers
+    ///   - returns: The new modified headers.
     func processHeadersBeforeSend(with headers: [String: String]?) throws -> [String: String]?
 
     /// Processes response headers after they have been received.
     ///   - parameters:
     ///     - headers: the headers cosntructed by initializers and configuration.
-    ///   - returns:
-    ///     - the new modified headers
+    ///   - returns: The new modified headers.
     func processHeadersAfterReceive(with headers: [String: String]?) throws -> [String: String]?
 
     /// Required initializer

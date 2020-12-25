@@ -1,4 +1,4 @@
-// TNErrorHandlerProtocol.swift
+// GlobalInterceptor.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -18,24 +18,26 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
+import TermiNetwork
 
-/// Use this protocol to create error handlers that can be passed to Configuration instances.
-/// Every class that implements this protocol will be used to handle errors when a request is failing.
-public protocol TNErrorHandlerProtocol: class {
-    /// This function is called when a request is failed.
-    ///   - parameters:
-    ///     - response: The deserialized error object
-    ///     - error: The TNError provided by Terminetwork
-    ///     - request: The Request object
-    func requestFailed(withResponse response: Data?, error: TNError, request: Request)
+class GlobalInterceptor: InterceptorProtocol {
+    static var numberOfRetries = 5
 
-    /// This function returns a Boolean for whether the requestFailed function will be executed.
-    ///   - parameters:
-    ///     - response: The deserialized error object
-    ///     - error: The TNError provided by Terminetwork
-    ///     - request: The Request object
-    func shouldHandleRequestFailure(withResponse response: Data?, error: TNError, request: Request) -> Bool
+    func requestFinished(responseData data: Data?,
+                         error: TNError?,
+                         request: Request,
+                         proceed: (InteceptionActionType) -> Void) {
 
-    /// Default initializer
-    init()
+        if case .networkError = error, GlobalInterceptor.numberOfRetries > 0 {
+            if GlobalInterceptor.numberOfRetries == 1 {
+                Environment.set(Env.termiNetworkRemote)
+            }
+            GlobalInterceptor.numberOfRetries -= 1
+            proceed(.retry)
+        } else {
+            proceed(.continue)
+        }
+    }
+
+    required init() { }
 }

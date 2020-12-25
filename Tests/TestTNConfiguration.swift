@@ -44,7 +44,7 @@ class TestConfiguration: XCTestCase {
         conf.certificatePaths = [certPath]
         conf.headers = ["test": "123", "test2": "abcdefg"]
         conf.keyDecodingStrategy = .convertFromSnakeCase
-        conf.errorHandlers = [GlobalErrorHandler.self]
+        conf.interceptors = [GlobalInterceptor.self]
         conf.requestMiddlewares = []
 
         return conf
@@ -59,7 +59,7 @@ class TestConfiguration: XCTestCase {
         conf.certificatePaths = ["test"]
         conf.headers = ["test": "test", "afb": "fff"]
         conf.keyDecodingStrategy = .useDefaultKeys
-        conf.errorHandlers = []
+        conf.interceptors = []
         conf.requestMiddlewares = [CryptoMiddleware.self]
 
         return conf
@@ -109,10 +109,10 @@ class TestConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
-        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
+        XCTAssert(Set(arrayLiteral: reqConf.interceptors.map { String(describing: $0) }) ==
                     Set(arrayLiteral: TestConfiguration
                             .envConfiguration
-                            .errorHandlers.map { String(describing: $0) }))
+                            .interceptors.map { String(describing: $0) }))
         XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
                     Set(arrayLiteral: TestConfiguration
                             .envConfiguration
@@ -138,10 +138,10 @@ class TestConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
-        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
+        XCTAssert(Set(arrayLiteral: reqConf.interceptors.map { String(describing: $0) }) ==
                     Set(arrayLiteral: TestConfiguration
                             .envConfiguration
-                            .errorHandlers.map { String(describing: $0) }))
+                            .interceptors.map { String(describing: $0) }))
         XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
                     Set(arrayLiteral: TestConfiguration
                             .envConfiguration
@@ -171,8 +171,8 @@ class TestConfiguration: XCTestCase {
         } else {
             XCTAssert(false)
         }
-        XCTAssert(Set(arrayLiteral: reqConf.errorHandlers.map { String(describing: $0) }) ==
-                    Set(arrayLiteral: routeConf.errorHandlers.map { String(describing: $0) }))
+        XCTAssert(Set(arrayLiteral: reqConf.interceptors.map { String(describing: $0) }) ==
+                    Set(arrayLiteral: routeConf.interceptors.map { String(describing: $0) }))
         XCTAssert(Set(arrayLiteral: reqConf.requestMiddlewares.map { String(describing: $0) }) ==
                     Set(arrayLiteral: routeConf.requestMiddlewares.map { String(describing: $0) }))
     }

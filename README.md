@@ -1,5 +1,3 @@
-
-
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -27,13 +25,14 @@ Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 
   - [Simple usage of <b>Request</b>](#simple_usage)
   - [Advanced usage of <b>Request</b> with <b>Configuration</b> and custom <b>Queue</b>](#advanced_usage)
   - [Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)](#complete_setup)
-	  - [Setup your Environment](#setup_environments)
-	  - [Setup your Routes](#setup_routers)
+	  - [Setup Environment](#setup_environments)
+	  - [Setup Routes](#setup_routers)
 	  - [Make a request](#construct_request)
 - [Queue Hooks](#queue_hooks)
 - [Error Handling](#error_handling)
 	- [Global Error Handlers](#global_error_handlers)
 - [Image Helpers](#image_helpers)
+- [Middlewares](#middlewares)
 - [Debug Logging](#debug_logging)
 
 <a name="installation"></a>
@@ -359,7 +358,7 @@ var body: some View {
 ```swift
 var body: some View {
 	TermiNetwork.Image(withRequest: Router<CityRoute>().request(for: .image(city: city)),
-                           defaultImage: UIImage(named: "DefaultThumbImage"))
+                       defaultImage: UIImage(named: "DefaultThumbImage"))
 }
 ```
 
@@ -390,6 +389,11 @@ imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(wit
 })
 ```
 
+<a name="middlewares"></a>
+
+## Middlewares
+With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middleware by implementing the **RequestMiddlewareProtocol**. Please see **CryptoMiddleware.swift** for an example middleware implementation.
+
 <a name="debug_logging"></a>
 
 ## Debug Logging
@@ -404,7 +408,7 @@ And you will see a beautiful pretty-printed debug output in your console.
 
 ## Tests
 
-To run the tests open the Sample project, select Product -> Test or simply press ⌘U on keyboard.
+To run the tests open the Xcode Project > TermiNetwork scheme, select Product -> Test or simply press ⌘U on keyboard.
 
 ## Contributors
 

@@ -43,7 +43,7 @@ enum Env: EnvironmentProtocol {
                                          requestBodyType: .xWWWFormURLEncoded)
             config.verbose = true
             config.headers = ["Custom-Header": "dsadas"]
-            config.errorHandlers = [GlobalErrorHandler.self]
+            config.interceptors = [GlobalInterceptor.self]
             return config
         }()
 

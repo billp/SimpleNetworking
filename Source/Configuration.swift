@@ -63,7 +63,7 @@ public final class Configuration {
     /// at: https://developer.apple.com/documentation/foundation/jsondecoder/keydecodingstrategy
     public var keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy?
     /// Error handlers that will be used as a fallback after request failure.
-    public var errorHandlers: [TNErrorHandlerProtocol.Type]?
+    public var interceptors: [InterceptorProtocol.Type]?
     /// Request middlewares
     public var requestMiddlewares: [RequestMiddlewareProtocol.Type]?
 
@@ -96,7 +96,7 @@ public final class Configuration {
                 mockDataEnabled: Bool? = nil,
                 mockDelay: MockDelayType? = nil,
                 keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy? = nil,
-                errorHandlers: [TNErrorHandlerProtocol.Type]? = nil,
+                interceptors: [InterceptorProtocol.Type]? = nil,
                 requestMiddlewares: [RequestMiddlewareProtocol.Type]? = nil) {
 
         self.cachePolicy = cachePolicy
@@ -108,7 +108,7 @@ public final class Configuration {
         self.mockDataEnabled = mockDataEnabled
         self.mockDelay = mockDelay
         self.keyDecodingStrategy = keyDecodingStrategy
-        self.errorHandlers = errorHandlers
+        self.interceptors = interceptors
         self.requestMiddlewares = requestMiddlewares
 
         if let certPaths = certificatePaths {
@@ -145,7 +145,7 @@ extension Configuration: NSCopying {
         configuration.mockDelay = mockDelay
         configuration.mockDataEnabled = mockDataEnabled
         configuration.keyDecodingStrategy = keyDecodingStrategy
-        configuration.errorHandlers = errorHandlers
+        configuration.interceptors = interceptors
         configuration.requestMiddlewares = requestMiddlewares
         return configuration
     }
@@ -211,8 +211,8 @@ extension Configuration {
         if let keyDecodingStrategy = overrideConfiguration.keyDecodingStrategy {
             clone.keyDecodingStrategy = keyDecodingStrategy
         }
-        if let errorHandlers = overrideConfiguration.errorHandlers {
-            clone.errorHandlers = errorHandlers
+        if let interceptors = overrideConfiguration.interceptors {
+            clone.interceptors = interceptors
         }
         return clone
     }

@@ -79,6 +79,9 @@
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/InteceptionActionType.html">InteceptionActionType</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/Method.html">Method</a>
               </li>
               <li class="nav-group-task">
@@ -119,13 +122,13 @@
                 <a class="nav-group-task-link" href="Protocols/EnvironmentProtocol.html">EnvironmentProtocol</a>
               </li>
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/InterceptorProtocol.html">InterceptorProtocol</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RequestMiddlewareProtocol.html">RequestMiddlewareProtocol</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Protocols/RouteProtocol.html">RouteProtocol</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/TNErrorHandlerProtocol.html">TNErrorHandlerProtocol</a>
               </li>
             </ul>
           </li>
@@ -206,7 +209,7 @@
 <h2 id='features' class='heading'>Features</h2>
 
 <p align="center">
-Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 🔸 Convert responses to the given type (<b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b>) 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Request fragmentation with Routers (perfect for modular environments) 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock requests 🔸 Certificate pinning 🔸 Flexible configuration 🔸 Middlewares 🔸 File/Data Upload/Download 🔸 Pretty printed debug information in console
+Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Convert Rest models to Domain models with Transformers 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File and Data Upload/Download 🔸 Pretty printed debug information in console
 </p>
 <h4 id='table-of-contents' class='heading'>Table of contents</h4>
 
@@ -221,8 +224,8 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <li><a href="#complete_setup">Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)</a>
 
 <ul>
-<li><a href="#setup_environments">Setup your Environment</a></li>
-<li><a href="#setup_routers">Setup your Routes</a></li>
+<li><a href="#setup_environments">Setup Environment</a></li>
+<li><a href="#setup_routers">Setup Routes</a></li>
 <li><a href="#construct_request">Make a request</a></li>
 </ul></li>
 </ul></li>
@@ -233,6 +236,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <li><a href="#global_error_handlers">Global Error Handlers</a></li>
 </ul></li>
 <li><a href="#image_helpers">Image Helpers</a></li>
+<li><a href="#middlewares">Middlewares</a></li>
 <li><a href="#debug_logging">Debug Logging</a></li>
 </ul>
 
@@ -343,7 +347,7 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <h4 id='setup-your-environment' class='heading'>Setup your Environment</h4>
 
 <p>Create a swift class that implements the <strong>EnvironmentProtocol</strong> and define your environments. See bellow for an example:</p>
-<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Environment</span><span class="p">:</span> <span class="kt">EnvironmentProtocol</span> <span class="p">{</span>
+<pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Env</span><span class="p">:</span> <span class="kt">EnvironmentProtocol</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">localhost</span>
     <span class="k">case</span> <span class="n">dev</span>
     <span class="k">case</span> <span class="n">production</span>
@@ -521,6 +525,23 @@ Model deserialization with <b>Codables</b> 🔸 Multi-Environment configuration 
 <p>TermiNetwork provides two different helpers for setting remote images:</p>
 <h3 id='image-helper-swiftui' class='heading'>Image helper (SwiftUI)</h3>
 <h4 id='example' class='heading'>Example</h4>
+
+<ol>
+<li><strong>Example with URL</strong>
+<code>swift
+var body: some View {
+TermiNetwork.Image(withURL: &quot;https://example.com/path/to/image.png&quot;,
+                   defaultImage: UIImage(named: &quot;DefaultThumbImage&quot;))
+}
+</code></li>
+<li><strong>Example with Request</strong>
+<code>swift
+var body: some View {
+TermiNetwork.Image(withRequest: Router&lt;CityRoute&gt;().request(for: .image(city: city)),
+                   defaultImage: UIImage(named: &quot;DefaultThumbImage&quot;))
+}
+</code></li>
+</ol>
 <h3 id='uiimageview-nsimageview-wkinterfaceimage-extensions' class='heading'>UIImageView/NSImageView/WKInterfaceImage Extensions</h3>
 
 <ol>
@@ -550,6 +571,11 @@ return image
 </code></li>
 </ol>
 
+<p><a name="middlewares"></a></p>
+<h2 id='middlewares' class='heading'>Middlewares</h2>
+
+<p>With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middleware by implementing the <strong>RequestMiddlewareProtocol</strong>. Please see <strong>CryptoMiddleware.swift</strong> for an example middleware implementation.</p>
+
 <p><a name="debug_logging"></a></p>
 <h2 id='debug-logging' class='heading'>Debug Logging</h2>
 
@@ -562,7 +588,7 @@ return image
 <img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png"></p>
 <h2 id='tests' class='heading'>Tests</h2>
 
-<p>To run the tests open the Sample project, select Product -&gt; Test or simply press ⌘U on keyboard.</p>
+<p>To run the tests open the Xcode Project &gt; TermiNetwork scheme, select Product -&gt; Test or simply press ⌘U on keyboard.</p>
 <h2 id='contributors' class='heading'>Contributors</h2>
 
 <p>Alex Athanasiadis, <a href="mailto:alexanderathan@gmail.com">alexanderathan@gmail.com</a></p>
@@ -577,7 +603,7 @@ return image
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-24)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-25)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

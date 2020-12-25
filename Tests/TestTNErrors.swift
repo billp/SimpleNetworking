@@ -137,16 +137,16 @@ class TestTNErrors: XCTestCase {
                                             value4: "",
                                             value5: nil)).start(responseType: UIImage.self,
                                                                 onSuccess: { _ in
-            expectation.fulfill()
             failed = true
-        }, onFailure: { error, _ in
             expectation.fulfill()
+        }, onFailure: { error, _ in
             switch error {
             case .responseInvalidImageData:
                 failed = false
             default:
                 failed = true
             }
+            expectation.fulfill()
         })
 
         wait(for: [expectation], timeout: 60)
@@ -170,64 +170,6 @@ class TestTNErrors: XCTestCase {
         wait(for: [expectation], timeout: 60)
 
         XCTAssert(!failed)
-    }
-
-    func testResponseErrorHandlers() {
-        Environment.set(Env.invalidHost)
-        GlobalErrorHandler.failed = false
-        GlobalErrorHandler.skip = false
-
-        let expectation = XCTestExpectation(description: "testResponseErrorHandlers")
-        var failed = true
-        let request = router.request(for: .testInvalidParams(value1: "a", value2: "b"))
-        request.start(responseType: Data.self, onSuccess: { _ in
-            failed = true
-            expectation.fulfill()
-        }, onFailure: { error, _ in
-            switch error {
-            case .networkError:
-                failed = false
-            default:
-                debugPrint("failed with: " + error.localizedDescription)
-                failed = true
-            }
-
-            expectation.fulfill()
-        })
-
-        wait(for: [expectation], timeout: 60)
-
-        XCTAssert(!failed && GlobalErrorHandler.failed)
-    }
-
-    func testResponseErrorHandlersSkip() {
-        Environment.set(Env.termiNetworkRemote)
-        GlobalErrorHandler.failed = false
-        GlobalErrorHandler.skip = true
-
-        let expectation = XCTestExpectation(description: "testResponseErrorHandlersSkip")
-        var failed = true
-
-        router.request(for: .testStatusCode(code: 404))
-            .start(responseType: String.self,
-                        onSuccess: { _ in
-                                    expectation.fulfill()
-                                    failed = true
-
-                        }, onFailure: { error, _ in
-                                    switch error {
-                                    case .notSuccess(let code):
-                                        failed = code != 404
-                                    default:
-                                        failed = true
-                        }
-
-            expectation.fulfill()
-        })
-
-        wait(for: [expectation], timeout: 60)
-
-        XCTAssert(!failed && !GlobalErrorHandler.failed)
     }
 
     func testResponseCannotDeserialize() {

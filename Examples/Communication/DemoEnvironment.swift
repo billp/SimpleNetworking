@@ -36,7 +36,7 @@ enum DemoEnvironment: EnvironmentProtocol {
         let configuration = Configuration()
         configuration.keyDecodingStrategy = .convertFromSnakeCase
         configuration.verbose = true
-        configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
+        configuration.interceptors = [GlobalInterceptor.self]
         if let path = Bundle.main.path(forResource: "MockData", ofType: "bundle") {
             configuration.mockDataBundle = Bundle(path: path)
         }

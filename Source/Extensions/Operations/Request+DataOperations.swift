@@ -50,7 +50,7 @@ extension Request {
                 let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: urlResponse,
-                                           tnError: tnError,
+                                           error: tnError,
                                            onFailure: onFailure)
                 return
             }
@@ -58,11 +58,11 @@ extension Request {
             onSuccess?(object)
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         tnError: nil)
+                                         error: nil)
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: onFailure)
         })
 
@@ -96,7 +96,7 @@ extension Request {
                 let tnError = TNError.cannotDeserialize(String(describing: FromType.self), error)
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: urlResponse,
-                                           tnError: tnError,
+                                           error: tnError,
                                            onFailure: onFailure)
                 return
             }
@@ -110,18 +110,18 @@ extension Request {
                 }
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: nil,
-                                           tnError: tnError,
+                                           error: tnError,
                                            onFailure: onFailure)
                 return
             }
 
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         tnError: nil)
+                                         error: nil)
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: onFailure)
         })
 
@@ -152,18 +152,18 @@ extension Request {
                 let tnError = TNError.responseInvalidImageData
                 self.handleDataTaskFailure(with: data,
                                            urlResponse: nil,
-                                           tnError: tnError,
+                                           error: tnError,
                                            onFailure: onFailure)
             } else {
                 onSuccess?(image ?? T())
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: nil,
-                                             tnError: nil)
+                                             error: nil)
             }
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: onFailure)
         })
 
@@ -192,12 +192,12 @@ extension Request {
                     onSuccess?(string)
                     self.handleDataTaskCompleted(with: data,
                                                  urlResponse: urlResponse,
-                                                 tnError: nil)
+                                                 error: nil)
                 } else {
                     let tnError = TNError.cannotConvertToString
                     self.handleDataTaskFailure(with: data,
                                                urlResponse: nil,
-                                               tnError: tnError,
+                                               error: tnError,
                                                onFailure: onFailure)
                 }
 
@@ -205,7 +205,7 @@ extension Request {
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: onFailure)
         })
 
@@ -233,12 +233,12 @@ extension Request {
                 onSuccess?(data)
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
-                                             tnError: nil)
+                                             error: nil)
             }
         }, onFailure: { tnError, data in
             self.handleDataTaskFailure(with: data,
                                        urlResponse: nil,
-                                       tnError: tnError,
+                                       error: tnError,
                                        onFailure: onFailure)
         })
 

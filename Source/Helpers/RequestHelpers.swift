@@ -55,7 +55,7 @@ class RequestHelpers {
         }
 
         do {
-            data = try request.handleMiddlewareBodyAfterReceiveIfNeeded(responseData: data)
+            data = try request.handleMiddlewareProcessResponseIfNeeded(responseData: data)
         } catch {
             if let error = error as? TNError {
                 customError = error

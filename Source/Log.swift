@@ -33,13 +33,13 @@ internal class Log {
                            data: Data?,
                            state: State = .unknown,
                            urlResponse: URLResponse?,
-                           tnError: TNError?) {
+                           error: TNError?) {
                 guard let request = request else { return }
         guard request.configuration.verbose == true else { return }
         guard let urlRequest = try? request.asRequest() else {
             if !request.urlRequestLogInitiated {
                 request.urlRequestLogInitiated = true
-                Log.printSimpleErrorIfNeeded(tnError)
+                Log.printSimpleErrorIfNeeded(error)
             }
             return
         }
@@ -49,7 +49,7 @@ internal class Log {
 
             print(String(format: "🌎 URL: %@", url))
 
-            if let customError = tnError {
+            if let customError = error {
                 print(String(format: "❌ Error: %@", (customError.localizedDescription ?? "")))
             } else if let response = urlResponse as? HTTPURLResponse {
                 print(String(format: "✅ Status: %@", String(response.statusCode)))
@@ -107,7 +107,7 @@ internal class Log {
                     print("📦 Response: [non-printable]")
                 }
             } else if case .download(let destinationPath) = request.requestType,
-                      case .finished = state, tnError == nil {
+                      case .finished = state, error == nil {
                 print(String(format: "📦 File saved to: '%@'", destinationPath))
             }
 

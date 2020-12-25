@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>MultipartFormDataPartType Enumeration Reference</title>
+    <title>InterceptorProtocol Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Enum/MultipartFormDataPartType" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Protocol/InterceptorProtocol" class="dashAnchor"></a>
 
-    <a title="MultipartFormDataPartType Enumeration Reference"></a>
+    <a title="InterceptorProtocol Protocol Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -38,7 +38,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">TermiNetwork Reference</a>
       <img class="carat" src="../img/carat.png" />
-      MultipartFormDataPartType Enumeration Reference
+      InterceptorProtocol Protocol Reference
     </p>
 
     <div class="content-wrapper">
@@ -191,15 +191,16 @@
 
         <section class="section">
           <div class="section-content top-matter">
-            <h1>MultipartFormDataPartType</h1>
+            <h1>InterceptorProtocol</h1>
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">MultipartFormDataPartType</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">InterceptorProtocol</span> <span class="p">:</span> <span class="kt">AnyObject</span></code></pre>
 
                 </div>
               </div>
-            <p>Enum to specify multipart/form-data parameters that can be used in upload tasks.</p>
+            <p>Use this protocol to create interceptors that can be passed to Configuration instances.
+Every class which implements this protocol will intercept between request completion and callbacks.</p>
 
           </div>
         </section>
@@ -211,9 +212,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork25MultipartFormDataPartTypeO5valueyACSS_tcACmF"></a>
-                    <a name="//apple_ref/swift/Element/value(value:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork25MultipartFormDataPartTypeO5valueyACSS_tcACmF">value(value:<wbr>)</a>
+                    <a name="/s:12TermiNetwork19InterceptorProtocolP15requestFinished12responseData5error0E07proceedy10Foundation0H0VSg_AA7TNErrorOSgAA7RequestCyAA21InteceptionActionTypeOXEtF"></a>
+                    <a name="//apple_ref/swift/Method/requestFinished(responseData:error:request:proceed:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork19InterceptorProtocolP15requestFinished12responseData5error0E07proceedy10Foundation0H0VSg_AA7TNErrorOSgAA7RequestCyAA21InteceptionActionTypeOXEtF">requestFinished(responseData:<wbr>error:<wbr>request:<wbr>proceed:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,14 +222,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Simple key-value case.</p>
+                        <p>This function is called when a request is failed.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">value</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">requestFinished</span><span class="p">(</span><span class="n">responseData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span>
+                     <span class="nv">error</span><span class="p">:</span> <span class="kt"><a href="../Enums/TNError.html">TNError</a></span><span class="p">?,</span>
+                     <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Classes/Request.html">Request</a></span><span class="p">,</span>
+                     <span class="nv">proceed</span><span class="p">:</span> <span class="p">(</span><span class="kt"><a href="../Enums/InteceptionActionType.html">InteceptionActionType</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -239,12 +243,36 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>value</em>
+                                <em>responseData</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The value of the multipart/form-data parameter.</p>
+                                  <p>The response data of request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>error</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The TNError provided by TermiNetwork on request failure, otherwise nil value is passed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>request</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Request object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -257,9 +285,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12TermiNetwork25MultipartFormDataPartTypeO4datayAC10Foundation0E0V_SSSgAHtcACmF"></a>
-                    <a name="//apple_ref/swift/Element/data(data:filename:contentType:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork25MultipartFormDataPartTypeO4datayAC10Foundation0E0V_SSSgAHtcACmF">data(data:<wbr>filename:<wbr>contentType:<wbr>)</a>
+                    <a name="/s:12TermiNetwork19InterceptorProtocolPxycfc"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12TermiNetwork19InterceptorProtocolPxycfc">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,129 +295,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Data case.</p>
+                        <p>Default initializer</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">data</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">()</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>data</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The data  to upload of the multipart/form-data parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>filename</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The filename value of the multipart/form-data parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The Content-Type of the multipart/form-data parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:12TermiNetwork25MultipartFormDataPartTypeO3urlyAC10Foundation3URLVcACmF"></a>
-                    <a name="//apple_ref/swift/Element/url(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12TermiNetwork25MultipartFormDataPartTypeO3urlyAC10Foundation3URLVcACmF">url(_:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>URL case.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="nf">url</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>file</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The file URL that contains the data that will be uploaded.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>filename</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The filename value of the multipart/form-data parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The Content-Type of the multipart/form-data parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
