@@ -1,5 +1,3 @@
-
-
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -34,6 +32,7 @@ Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 
 - [Error Handling](#error_handling)
 	- [Global Error Handlers](#global_error_handlers)
 - [Image Helpers](#image_helpers)
+- [Middlewares](#middlewares)
 - [Debug Logging](#debug_logging)
 
 <a name="installation"></a>
@@ -389,6 +388,11 @@ imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(wit
     // Optionally handle response
 })
 ```
+
+<a name="middlewares"></a>
+
+## Middlewares
+With Middlewares you are able to modify headers, params and response data before they reach the success callback/failure callbacks. You can create your own middleware by implementing the **RequestMiddlewareProtocol**. Please see **CryptoMiddleware.swift** for an example middleware implementation.
 
 <a name="debug_logging"></a>
 
