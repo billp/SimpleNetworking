@@ -1,3 +1,4 @@
+
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -15,7 +16,7 @@
 
 ## Features
 <p align="center">
-Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Convert Rest models to Domain models with Transformers 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File and Data Upload/Download 🔸 Pretty printed debug information in console
+Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File/Data Upload/Download 🔸 Pretty printed debug information
 </p>
 
 #### Table of contents
@@ -89,10 +90,10 @@ let params = ["title": "Go shopping."]
 let headers = ["x-auth": "abcdef1234"]
 
 Request(method: .post,
-          url: "https://myweb.com/api/todos",
-          headers: headers,
-          params: params).start(responseType: Todo.self,
-                                onSuccess: { todo in
+        url: "https://myweb.com/api/todos",
+        headers: headers,
+        params: params).start(responseType: Todo.self,
+                              onSuccess: { todo in
     print(todo)
 }) { (error, data) in
     print(error)
@@ -136,12 +137,12 @@ let params = ["title": "Go shopping."]
 let headers = ["x-auth": "abcdef1234"]
 
 Request(method: .post,
-          url: "https://myweb.com/todos",
-          headers: headers,
-          params: params,
-          configuration: configuration).start(queue: myQueue,
-                                              responseType: String.self,
-                                              onSuccess: { response in
+        url: "https://myweb.com/todos",
+        headers: headers,
+        params: params,
+        configuration: configuration).start(queue: myQueue,
+                                            responseType: String.self,
+                                            onSuccess: { response in
     print(response)
 }) { (error, data) in
     print(error)
@@ -166,8 +167,8 @@ enum Env: EnvironmentProtocol {
 
     func configure() -> Environment {
         let configuration = Configuration(cachePolicy: .useProtocolCachePolicy,
-                                            timeoutInterval: 30,
-                                            requestBodyType: .JSON)
+                                          timeoutInterval: 30,
+                                          requestBodyType: .JSON)
         switch self {
         case .localhost:
             return Environment(scheme: .https,
@@ -398,12 +399,12 @@ With Middlewares you are able to modify headers, params and response data before
 
 ## Debug Logging
 
-You enable the debug logging by setting the **verbose** to **true** in your configuration
+You can enable the debug logging by setting the **verbose** to **true** in your configuration
 ```swift
 let configuration = Configuration()
 configuration.verbose = true
 ```
-And you will see a beautiful pretty-printed debug output in your console.
+And you will see a beautiful pretty-printed debug output in debug window.
 <img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png">
 
 ## Tests
