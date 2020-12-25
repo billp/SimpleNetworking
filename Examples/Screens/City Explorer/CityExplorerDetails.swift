@@ -82,7 +82,7 @@ struct CityDetailsEntry: View {
                 Text(city.description ?? "")
                     .font(.body)
             }
-            .padding([.leading, .trailing, .bottom], 20)
+            .padding([.leading, .trailing, .bottom, .top], 20)
         }
     }
 

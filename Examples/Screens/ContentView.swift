@@ -39,7 +39,12 @@ struct ContentView: View {
                     DemoAppRow(app: app)
                 }
             }
-            .navigationTitle(Text("TermiNetwork"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(content: {
+                ToolbarItem(placement: .principal, content: {
+                    Text("Widget").bold()
+                })
+            })
         }
     }
 }

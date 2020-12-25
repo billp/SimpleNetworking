@@ -30,13 +30,13 @@ class TestTNErrors: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
     }
 
     func testEnvironmenotSetFullUrl() {
@@ -173,7 +173,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseErrorHandlers() {
-        Environment.set(TestsEnvironment.invalidHost)
+        Environment.set(Env.invalidHost)
         GlobalErrorHandler.failed = false
         GlobalErrorHandler.skip = false
 
@@ -201,7 +201,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func testResponseErrorHandlersSkip() {
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
         GlobalErrorHandler.failed = false
         GlobalErrorHandler.skip = true
 
@@ -278,7 +278,7 @@ class TestTNErrors: XCTestCase {
     }
 
     func tesetworkError() {
-        Environment.set(TestsEnvironment.invalidHost)
+        Environment.set(Env.invalidHost)
 
         let expectation = XCTestExpectation(description: "tesetworkError")
         var failed = true

@@ -26,7 +26,7 @@ class TestTransformers: XCTestCase {
     }()
 
     override class func setUp() {
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
     }
 
     func testGetParamsWithTransformer() {

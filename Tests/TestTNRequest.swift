@@ -28,7 +28,7 @@ class TestRequest: XCTestCase {
     }()
 
     lazy var router2: Router<APIRoute> = {
-        return Router<APIRoute>(environment: TestsEnvironment.google)
+        return Router<APIRoute>(environment: Env.google)
     }()
 
     lazy var routerWithMiddleware: Router<APIRoute> = {
@@ -37,7 +37,7 @@ class TestRequest: XCTestCase {
         configuration.verbose = true
         configuration.requestBodyType = .JSON
 
-        let router = Router<APIRoute>(environment: TestsEnvironment.termiNetworkRemote,
+        let router = Router<APIRoute>(environment: Env.termiNetworkRemote,
                                         configuration: configuration)
 
         return router
@@ -46,7 +46,7 @@ class TestRequest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -287,14 +287,14 @@ class TestRequest: XCTestCase {
         XCTAssert(request.configuration.cachePolicy == .useProtocolCachePolicy)
         XCTAssert(request.configuration.requestBodyType == .xWWWFormURLEncoded)
 
-        Environment.set(TestsEnvironment.termiNetworkLocal)
+        Environment.set(Env.termiNetworkLocal)
         request = Request(route: APIRoute.testHeaders)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 32)
         XCTAssert(request.configuration.cachePolicy == .returnCacheDataElseLoad)
         XCTAssert(request.configuration.requestBodyType == .JSON)
 
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
         request = Request(route: APIRoute.testConfiguration)
         urlRequest = try? request.asRequest()
         XCTAssert(urlRequest?.timeoutInterval == 12)
@@ -303,7 +303,7 @@ class TestRequest: XCTestCase {
     }
 
     func testOverrideEnvironment() {
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
 
         let expectation1 = XCTestExpectation(description: "testOverrideEnvironment1")
         let expectation2 = XCTestExpectation(description: "testOverrideEnvironment2")

@@ -1,4 +1,4 @@
-// TestsEnvironment.swift
+// Env.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -22,7 +22,7 @@ import TermiNetwork
 
 // swiftlint:disable function_body_length
 
-enum TestsEnvironment: EnvironmentProtocol {
+enum Env: EnvironmentProtocol {
     case httpHost
     case httpHostWithPort
     case httpHostWithPortAndSuffix

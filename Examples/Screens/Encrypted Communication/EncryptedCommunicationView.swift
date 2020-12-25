@@ -58,7 +58,7 @@ struct EncryptedCommunicationView: View {
                 .padding(.bottom, 20)
 
         }
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing, .top], 20)
         .navigationTitle("Encryption Layer")
     }
 

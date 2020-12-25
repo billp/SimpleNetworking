@@ -33,19 +33,19 @@ class TestEnvironment: XCTestCase {
     }
 
     func testEnvironments() {
-        Environment.set(TestsEnvironment.httpHost)
+        Environment.set(Env.httpHost)
         XCTAssert(Environment.current.stringURL == "http://localhost")
 
-        Environment.set(TestsEnvironment.httpHostWithPort)
+        Environment.set(Env.httpHostWithPort)
         XCTAssert(Environment.current.stringURL == "http://localhost:8080")
 
         Environment.set(environmentObject: Environment(url: "http://www.google.com:8009/test/2"))
         XCTAssert(Environment.current.stringURL == "http://www.google.com:8009/test/2")
 
-        Environment.set(TestsEnvironment.httpHostWithPortAndSuffix)
+        Environment.set(Env.httpHostWithPortAndSuffix)
         XCTAssert(Environment.current.stringURL == "http://localhost:8080/v1/json")
 
-        Environment.set(TestsEnvironment.httpsHostWithPortAndSuffix)
+        Environment.set(Env.httpsHostWithPortAndSuffix)
         XCTAssert(Environment.current.stringURL == "https://google.com:8080/v3/test/foo/bar")
     }
 }

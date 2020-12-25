@@ -27,7 +27,7 @@ class TestExtensions: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Environment.set(TestsEnvironment.termiNetworkRemote)
+        Environment.set(Env.termiNetworkRemote)
     }
 
     override func tearDown() {
@@ -118,20 +118,20 @@ class TestExtensions: XCTestCase {
         var failed = true
         var tmp = 1
 
-        let image = Image(with: Request.init(method: .get, url: sampleImageURL),
-                    defaultImage: nil,
-                    resize: nil,
-                    preprocessImage: { image in
-                        tmp += 1
-                        if tmp != 2 {
-                            failed = true
-                            expectation.fulfill()
-                        }
-                        return image
-                    }, onFinish: { image, error in
-                        failed = !(tmp == 2 && image != nil && error == nil)
-                        expectation.fulfill()
-                    })
+        let image = Image(withRequest: Request.init(method: .get, url: sampleImageURL),
+                          defaultImage: nil,
+                          resize: nil,
+                          preprocessImage: { image in
+                              tmp += 1
+                              if tmp != 2 {
+                                  failed = true
+                                  expectation.fulfill()
+                              }
+                              return image
+                          }, onFinish: { image, error in
+                              failed = !(tmp == 2 && image != nil && error == nil)
+                              expectation.fulfill()
+                          })
         image.imageLoader.loadImage()
 
         wait(for: [expectation], timeout: 60)
@@ -145,20 +145,20 @@ class TestExtensions: XCTestCase {
         var failed = true
         var tmp = 1
 
-        let image = Image(with: sampleImageURL,
-                    defaultImage: nil,
-                    resize: nil,
-                    preprocessImage: { image in
-                        tmp += 1
-                        if tmp != 2 {
-                            failed = true
-                            expectation.fulfill()
-                        }
-                        return image
-                    }, onFinish: { image, error in
-                        failed = !(tmp == 2 && image != nil && error == nil)
-                        expectation.fulfill()
-                    })
+        let image = Image(withURL: sampleImageURL,
+                          defaultImage: nil,
+                          resize: nil,
+                          preprocessImage: { image in
+                              tmp += 1
+                              if tmp != 2 {
+                                  failed = true
+                                  expectation.fulfill()
+                              }
+                              return image
+                          }, onFinish: { image, error in
+                              failed = !(tmp == 2 && image != nil && error == nil)
+                              expectation.fulfill()
+                          })
         image.imageLoader.loadImage()
 
         wait(for: [expectation], timeout: 60)

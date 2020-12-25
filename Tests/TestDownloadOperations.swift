@@ -27,14 +27,14 @@ class TestDownloadOperations: XCTestCase {
     }()
 
     lazy var router: Router<APIRoute> = {
-        return Router<APIRoute>(environment: TestsEnvironment.termiNetworkRemote,
+        return Router<APIRoute>(environment: Env.termiNetworkRemote,
                                 configuration: configuration)
     }()
 
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Environment.set(TestsEnvironment.termiNetworkLocal)
+        Environment.set(Env.termiNetworkLocal)
     }
 
     override func tearDown() {

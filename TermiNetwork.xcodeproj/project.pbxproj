@@ -68,7 +68,7 @@
 		F383AEAD257ED51500DE43FA /* forums.swift.org.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAB257ED51500DE43FA /* forums.swift.org.cer */; };
 		F383AEAE257ED51500DE43FA /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F383AEAC257ED51500DE43FA /* herokuapp.com.cer */; };
 		F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C79243D103700F7CC13 /* TestExtensions.swift */; };
-		F3850C88243D103700F7CC13 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Environment.swift */; };
+		F3850C88243D103700F7CC13 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7A243D103700F7CC13 /* Env.swift */; };
 		F3850C89243D103700F7CC13 /* TestTNQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7B243D103700F7CC13 /* TestTNQueue.swift */; };
 		F3850C8A243D103700F7CC13 /* TestTNEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7C243D103700F7CC13 /* TestTNEnvironment.swift */; };
 		F3850C8B243D103700F7CC13 /* APIRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3850C7D243D103700F7CC13 /* APIRoute.swift */; };
@@ -207,7 +207,7 @@
 		F383AEAB257ED51500DE43FA /* forums.swift.org.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = forums.swift.org.cer; path = Tests/forums.swift.org.cer; sourceTree = SOURCE_ROOT; };
 		F383AEAC257ED51500DE43FA /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = herokuapp.com.cer; path = Tests/herokuapp.com.cer; sourceTree = SOURCE_ROOT; };
 		F3850C79243D103700F7CC13 /* TestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestExtensions.swift; sourceTree = "<group>"; };
-		F3850C7A243D103700F7CC13 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		F3850C7A243D103700F7CC13 /* Env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		F3850C7B243D103700F7CC13 /* TestTNQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNQueue.swift; sourceTree = "<group>"; };
 		F3850C7C243D103700F7CC13 /* TestTNEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTNEnvironment.swift; sourceTree = "<group>"; };
 		F3850C7D243D103700F7CC13 /* APIRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRoute.swift; sourceTree = "<group>"; };
@@ -441,12 +441,12 @@
 			path = "Error Handlers";
 			sourceTree = "<group>";
 		};
-		F3211EC4258018E40085E873 /* Middlewares */ = {
+		F3211EC4258018E40085E873 /* Encrypted Communication */ = {
 			isa = PBXGroup;
 			children = (
 				F3211EC5258019280085E873 /* EncryptedCommunicationView.swift */,
 			);
-			path = Middlewares;
+			path = "Encrypted Communication";
 			sourceTree = "<group>";
 		};
 		F32195B625783EBB000941F1 /* ErrorHandlers */ = {
@@ -478,7 +478,7 @@
 			children = (
 				F363507E25894A77002AF5DE /* File Uploader */,
 				F33ACF52258809FB004DAC46 /* File Downloader */,
-				F3211EC4258018E40085E873 /* Middlewares */,
+				F3211EC4258018E40085E873 /* Encrypted Communication */,
 				F383AE99257ECBF900DE43FA /* Pinning */,
 				F37A17F0257D2927003EFB1F /* City Explorer */,
 				F33ACF5E25880ABD004DAC46 /* UIHelpers.swift */,
@@ -601,7 +601,7 @@
 		F387B0FA2579590C00A8C0C7 /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				F3850C7A243D103700F7CC13 /* Environment.swift */,
+				F3850C7A243D103700F7CC13 /* Env.swift */,
 				F3850C7D243D103700F7CC13 /* APIRoute.swift */,
 			);
 			name = Communication;
@@ -944,7 +944,7 @@
 				F3850C8C243D103700F7CC13 /* TestParams.swift in Sources */,
 				F387B0ED2579531200A8C0C7 /* TestTransformer.swift in Sources */,
 				F31126AD257A563600775D7E /* FileResponse.swift in Sources */,
-				F3850C88243D103700F7CC13 /* Environment.swift in Sources */,
+				F3850C88243D103700F7CC13 /* Env.swift in Sources */,
 				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
 				F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */,
 				F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */,

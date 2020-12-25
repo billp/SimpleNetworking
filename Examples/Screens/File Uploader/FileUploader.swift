@@ -109,7 +109,7 @@ struct FileUploader: View {
                 .padding(.bottom, 20)
 
         }
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing, .top], 20)
         .navigationTitle("File Uploader")
         .onDisappear(perform: clearAndCancelUpload)
     }

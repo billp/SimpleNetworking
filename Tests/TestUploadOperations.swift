@@ -27,7 +27,7 @@ class TestUploadOperations: XCTestCase {
     }()
 
     lazy var router: Router<APIRoute> = {
-        return Router<APIRoute>(environment: TestsEnvironment.termiNetworkRemote,
+        return Router<APIRoute>(environment: Env.termiNetworkRemote,
                                 configuration: configuration)
     }()
 
