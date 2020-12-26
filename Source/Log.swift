@@ -36,7 +36,7 @@ internal class Log {
                            error: TNError?) {
             guard let request = request else { return }
             guard request.configuration.verbose == true else { return }
-            guard let urlRequest = try? request.asRequest() else {
+            guard let urlRequest = request.urlRequest else {
             if !request.urlRequestLogInitiated {
                 request.urlRequestLogInitiated = true
                 Log.printSimpleErrorIfNeeded(error)

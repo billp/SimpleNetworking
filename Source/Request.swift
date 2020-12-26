@@ -75,6 +75,7 @@ public final class Request: Operation {
     /// Hold the success completion handler of each start method,
     /// needed by interceptor retry action.
     internal var successCompletionHandler: ((Data, URLResponse?) -> Void)?
+    internal var urlRequest: URLRequest?
     internal var urlResponse: URLResponse?
 
     // MARK: Public properties
@@ -225,8 +226,11 @@ public final class Request: Operation {
         try addBodyParamsIfNeeded(withRequest: &request,
                                   params: params)
 
-        // Set http method
+        // Set http method.
         request.httpMethod = method.rawValue
+
+        // Hold reference to request.
+        urlRequest = request
 
         return request
     }
