@@ -43,10 +43,6 @@ extension Request {
                         continueCallback(data, error)
                     }
                 case .retry(let delay):
-                    Log.logRequest(request: self,
-                                   data: data,
-                                   urlResponse: urlResponse,
-                                   error: error)
                     retryRequest(withDelay: delay ?? 0,
                                  continueCallback: continueCallback)
                 }
@@ -76,14 +72,15 @@ extension Request {
 
         // Skip interceptors for cloned request, to prevent infinite loop.
         newRequest.configuration.skipInterceptors = true
-        newRequest.configuration.verbose = false
+
+        // Prevent duplicate log on completed
+        self.skipLogOnComplete = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             // Reset started at time.
             self.startedAt = Date()
 
             switch self.requestType {
-
             case .data:
                 newRequest.start(responseType: Data.self, onSuccess: { data in
                     self.processNextInterceptorIfNeeded(data: data,

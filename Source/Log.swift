@@ -32,7 +32,6 @@ internal class Log {
     static func logRequest(request: Request?,
                            data: Data?,
                            state: State = .unknown,
-                           urlResponse: URLResponse?,
                            error: TNError?) {
             guard let request = request else { return }
             guard request.configuration.verbose == true else { return }
@@ -51,7 +50,7 @@ internal class Log {
 
             if let customError = error {
                 print(String(format: "❌ Error: %@", (customError.localizedDescription ?? "")))
-            } else if let response = urlResponse as? HTTPURLResponse {
+            } else if let response = request.urlResponse as? HTTPURLResponse {
                 print(String(format: "✅ Status: %@", String(response.statusCode)))
             }
 

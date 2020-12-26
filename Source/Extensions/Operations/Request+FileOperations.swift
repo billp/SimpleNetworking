@@ -27,6 +27,41 @@ import Foundation
 public typealias ProgressCallbackType = (Int, Int, Float) -> Void
 
 extension Request {
+    /// Adds a request to a queue and starts an upload process for Data types.
+    ///
+    /// - parameters:
+    ///    - queue: A Queue instance. If no queue is specified it uses the default one.
+    ///    - responseType:The type of the model that will be deserialized and will be passed to the success block.
+    ///    - progress: specifies a progress callback to get upload progress updates.
+    ///    - onSuccess: specifies a success callback of type SuccessCallback<T>.
+    ///    - onFailure: specifies a failure callback of type FailureCallback<T>.
+    /// - returns: The Request object.
+    @discardableResult
+    public func startUpload(queue: Queue? = Queue.shared,
+                            responseType: Data.Type,
+                            progressUpdate: ProgressCallbackType?,
+                            onSuccess: SuccessCallback<Data>?,
+                            onFailure: FailureCallback? = nil) -> Request {
+        currentQueue = queue ?? Queue.shared
+
+        dataTask = SessionTaskFactory.makeUploadTask(with: self,
+                                                     progressUpdate: progressUpdate,
+                                                     completionHandler: { data, urlResponse in
+            self.handleDataTaskCompleted(with: data,
+                                         urlResponse: urlResponse,
+                                         error: nil,
+                                         onSuccessCallback: { onSuccess?(data) })
+        }, onFailure: { error, data in
+            self.handleDataTaskCompleted(with: data,
+                                         error: error,
+                                         onFailureCallback: { onFailure?(error, data) })
+
+        })
+
+        currentQueue.addOperation(self)
+        return self
+    }
+
     /// Adds a request to a queue and starts an upload process for Decodable types.
     ///
     /// - parameters:

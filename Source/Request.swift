@@ -78,6 +78,7 @@ public final class Request: Operation {
     internal var progressCallback: ProgressCallbackType?
     internal var urlRequest: URLRequest?
     internal var urlResponse: URLResponse?
+    internal var skipLogOnComplete: Bool = false
 
     // MARK: Public properties
 
@@ -310,7 +311,6 @@ public final class Request: Operation {
         Log.logRequest(request: self,
                        data: nil,
                        state: .started,
-                       urlResponse: nil,
                        error: nil)
 
         dataTask?.resume()
@@ -359,24 +359,25 @@ public final class Request: Operation {
     func handleDataTaskSuccess(with data: Data?,
                                urlResponse: URLResponse?,
                                onSuccess: @escaping (() -> Void)) {
-            onSuccess()
+        onSuccess()
 
-            self.duration = self.startedAt?.distance(to: Date())
-            self.responseHeadersClosure?(urlResponse)
+        self.duration = self.startedAt?.distance(to: Date())
+        self.responseHeadersClosure?(urlResponse)
 
+        if !skipLogOnComplete {
             Log.logRequest(request: self,
                            data: data,
                            state: .finished,
-                           urlResponse: urlResponse,
                            error: nil)
+        }
 
-            self._executing = false
-            self._finished = true
+        self._executing = false
+        self._finished = true
 
-            self.currentQueue.afterOperationFinished(request: self,
-                                                     data: data,
-                                                     response: urlResponse,
-                                                     tnError: nil)
+        self.currentQueue.afterOperationFinished(request: self,
+                                                 data: data,
+                                                 response: urlResponse,
+                                                 tnError: nil)
     }
 
     func handleDataTaskFailure(with data: Data?,
@@ -403,7 +404,6 @@ public final class Request: Operation {
                                                  tnError: error)
         Log.logRequest(request: self,
                        data: data,
-                       urlResponse: urlResponse,
                        error: error)
     }
 }
