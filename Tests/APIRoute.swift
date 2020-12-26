@@ -39,6 +39,7 @@ enum APIRoute: RouteProtocol {
     case testEncryptParams(value: String?)
     case dataUpload(data: Data, param: String)
     case fileUpload(url: URL, param: String)
+    case fileUploadWithStatusCode(url: URL, param: String, status: Int)
     case fileDownload
 
     func testPinningConfiguration(withCertPaths certPaths: [String]) -> Configuration {
@@ -152,6 +153,15 @@ enum APIRoute: RouteProtocol {
         case .fileDownload:
             return RouteConfiguration(method: .get,
                                         path: .path(["downloads", "3cwHqdwsRyuX"]))
+        case .fileUploadWithStatusCode(let url, let param, let status):
+            return RouteConfiguration(
+                method: .post,
+                path: .path(["file_upload"]),
+                params: ["file": MultipartFormDataPartType.url(url),
+                         "test_param": MultipartFormDataPartType.value(value: param),
+                         "status": status]
+            )
+
         }
     }
 }

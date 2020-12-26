@@ -86,8 +86,9 @@ internal class SessionTaskFactory {
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: FailureCallback?) -> URLSessionUploadTask? {
 
-        // Hold completionHandler for later use.
+        // Hold completionHandler and progressCallback for later use.
         request.successCompletionHandler = completionHandler
+        request.progressCallback = progressUpdate
 
         guard let params = request.params as? [String: MultipartFormDataPartType] else {
             onFailure?(.invalidMultipartParams, nil)

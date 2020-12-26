@@ -45,8 +45,8 @@ extension Request {
         currentQueue = queue ?? Queue.shared
 
         dataTask = SessionTaskFactory.makeUploadTask(with: self,
-                                                       progressUpdate: progressUpdate,
-                                                       completionHandler: { data, urlResponse in
+                                                     progressUpdate: progressUpdate,
+                                                     completionHandler: { data, urlResponse in
             let object: T!
 
             do {

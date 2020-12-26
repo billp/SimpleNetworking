@@ -76,4 +76,44 @@ class TestInterceptors: XCTestCase {
 
         XCTAssert(!failed)
     }
+
+    func testInterceptorRetryFileUpload() {
+        Environment.set(Env.invalidHost)
+
+        let expectation = XCTestExpectation(description: "testInterceptorRetry")
+        var failed = true
+
+        guard let url = Bundle(for: TestUploadOperations.self).url(forResource: "photo",
+                                                                   withExtension: "jpg") else {
+            XCTAssert(false)
+            return
+        }
+
+        let checksum = TestHelpers.sha256(url: url)
+        var progressSucceded = false
+        var successCount = 0
+
+        router.request(for: .fileUpload(url: url, param: "test")).startUpload(
+            responseType: FileResponse.self,
+            progressUpdate: { bytesSent, totalBytes, progress in
+                if bytesSent == totalBytes && progress == 1 {
+                    progressSucceded = true
+                }
+            },
+            onSuccess: { response in
+                if response.success && response.checksum == checksum {
+                    successCount  += 1
+                }
+                failed = !progressSucceded
+                expectation.fulfill()
+            },
+            onFailure: { _, _ in
+                failed = true
+                expectation.fulfill()
+            })
+
+        wait(for: [expectation], timeout: 60)
+
+        XCTAssert(!failed)
+    }
 }

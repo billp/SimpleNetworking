@@ -82,15 +82,36 @@ extension Request {
             // Reset started at time.
             self.startedAt = Date()
 
-            newRequest.start(responseType: Data.self, onSuccess: { data in
-                self.processNextInterceptorIfNeeded(data: data,
-                                                    error: nil,
-                                                    continueCallback: continueCallback)
-            }, onFailure: { error, data in
-                self.processNextInterceptorIfNeeded(data: data,
-                                                    error: error,
-                                                    continueCallback: continueCallback)
-            })
+            switch self.requestType {
+
+            case .data:
+                newRequest.start(responseType: Data.self, onSuccess: { data in
+                    self.processNextInterceptorIfNeeded(data: data,
+                                                        error: nil,
+                                                        continueCallback: continueCallback)
+                }, onFailure: { error, data in
+                    self.processNextInterceptorIfNeeded(data: data,
+                                                        error: error,
+                                                        continueCallback: continueCallback)
+                })
+            case .upload:
+                newRequest.startUpload(
+                    responseType: Data.self,
+                    progressUpdate: self.progressCallback,
+                    onSuccess: { data in
+                        self.processNextInterceptorIfNeeded(data: data,
+                                                            error: nil,
+                                                            continueCallback: continueCallback)
+
+                    }, onFailure: { error, data in
+                        self.processNextInterceptorIfNeeded(data: data,
+                                                            error: error,
+                                                            continueCallback: continueCallback)
+                    })
+            case .download(_):
+                break
+            }
+
         }
     }
 }

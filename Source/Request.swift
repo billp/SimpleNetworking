@@ -75,6 +75,7 @@ public final class Request: Operation {
     /// Hold the success completion handler of each start method,
     /// needed by interceptor retry action.
     internal var successCompletionHandler: ((Data, URLResponse?) -> Void)?
+    internal var progressCallback: ProgressCallbackType?
     internal var urlRequest: URLRequest?
     internal var urlResponse: URLResponse?
 
