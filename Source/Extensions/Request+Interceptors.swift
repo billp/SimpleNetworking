@@ -19,7 +19,7 @@
 
 import Foundation
 
-typealias InterceptorContinueCallbackType = (Data?, TNError?, (() -> Void)?, (() -> Void)?) -> Void
+typealias InterceptorContinueCallbackType = (Data?, TNError?) -> Void
 
 extension Request {
     /// Handles the interceptors if they are passed in configuration object.
@@ -28,8 +28,6 @@ extension Request {
     ///     - error: The TNError in case of failure.
     func processNextInterceptorIfNeeded(data: Data?,
                                         error: TNError?,
-                                        onSuccess: (() -> Void)? = nil,
-                                        onFailure: (() -> Void)? = nil,
                                         continueCallback: @escaping InterceptorContinueCallbackType) {
         if let nextInterceptor = interceptors?.first {
             nextInterceptor.requestFinished(responseData: data,
@@ -42,15 +40,19 @@ extension Request {
                         /// Call success completion handler directly
                         self.successCompletionHandler?(data, urlResponse)
                     } else {
-                        continueCallback(data, error, onSuccess, onFailure)
+                        continueCallback(data, error)
                     }
                 case .retry(let delay):
+                    Log.logRequest(request: self,
+                                   data: data,
+                                   urlResponse: urlResponse,
+                                   error: error)
                     retryRequest(withDelay: delay ?? 0,
                                  continueCallback: continueCallback)
                 }
             }
         } else {
-            continueCallback(data, error, onSuccess, onFailure)
+            continueCallback(data, error)
         }
     }
 
@@ -77,6 +79,9 @@ extension Request {
         newRequest.configuration.verbose = false
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            // Reset started at time.
+            self.startedAt = Date()
+
             newRequest.start(responseType: Data.self, onSuccess: { data in
                 self.processNextInterceptorIfNeeded(data: data,
                                                     error: nil,

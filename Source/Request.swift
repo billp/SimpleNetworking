@@ -337,18 +337,16 @@ public final class Request: Operation {
                                  onFailureCallback: (() -> Void)? = nil) {
         self.processNextInterceptorIfNeeded(
             data: data,
-            error: error,
-            onSuccess: onSuccessCallback,
-            onFailure: onFailureCallback) { processedData, processedError, processedOnSuccess, processedOnFailure in
+            error: error) { processedData, processedError in
             if let error = processedError {
                 self.handleDataTaskFailure(with: processedData,
                                            urlResponse: urlResponse,
                                            error: error,
-                                           onFailure: processedOnFailure ?? {})
+                                           onFailure: onFailureCallback ?? {})
             } else {
                 self.handleDataTaskSuccess(with: processedData,
                                            urlResponse: urlResponse,
-                                           onSuccess: processedOnSuccess ?? {})
+                                           onSuccess: onSuccessCallback ?? {})
             }
         }
     }
