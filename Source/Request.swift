@@ -72,6 +72,10 @@ public final class Request: Operation {
     internal var duration: TimeInterval?
     /// Interceptors chain
     internal var interceptors: [InterceptorProtocol]?
+    /// Hold the success completion handler of each start method,
+    /// needed by interceptor retry action.
+    internal var successCompletionHandler: ((Data, URLResponse?) -> Void)?
+    internal var urlResponse: URLResponse?
 
     // MARK: Public properties
 
@@ -331,17 +335,20 @@ public final class Request: Operation {
                                  error: TNError? = nil,
                                  onSuccess: (() -> Void)? = nil,
                                  onFailure: (() -> Void)? = nil) {
-        self.processNextInterceptorIfNeeded(data: data,
-                                            error: error) { processedData, processedError in
+        self.processNextInterceptorIfNeeded(
+            data: data,
+            error: error,
+            onSuccess: onSuccess,
+            onFailure: onFailure) { processedData, processedError, processedOnSuccess, processedOnFailure in
             if let error = processedError {
                 self.handleDataTaskFailure(with: processedData,
                                            urlResponse: urlResponse,
                                            error: error,
-                                           onFailure: onFailure ?? {})
+                                           onFailure: processedOnFailure ?? {})
             } else {
                 self.handleDataTaskSuccess(with: processedData,
                                            urlResponse: urlResponse,
-                                           onSuccess: onSuccess ?? {})
+                                           onSuccess: processedOnSuccess ?? {})
             }
         }
     }

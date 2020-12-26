@@ -34,9 +34,9 @@ internal class Log {
                            state: State = .unknown,
                            urlResponse: URLResponse?,
                            error: TNError?) {
-                guard let request = request else { return }
-        guard request.configuration.verbose == true else { return }
-        guard let urlRequest = try? request.asRequest() else {
+            guard let request = request else { return }
+            guard request.configuration.verbose == true else { return }
+            guard let urlRequest = try? request.asRequest() else {
             if !request.urlRequestLogInitiated {
                 request.urlRequestLogInitiated = true
                 Log.printSimpleErrorIfNeeded(error)

@@ -30,6 +30,9 @@ internal class SessionTaskFactory {
                              completionHandler: ((Data, URLResponse?) -> Void)?,
                              onFailure: FailureCallback?) -> URLSessionDataTask? {
 
+        // Hold completionHandler for later use.
+        request.successCompletionHandler = completionHandler
+
         let urlRequest: URLRequest!
         do {
             urlRequest = try request.asRequest()
@@ -56,6 +59,8 @@ internal class SessionTaskFactory {
                                  delegateQueue: OperationQueue.current)
 
         let dataTask = session.dataTask(with: urlRequest) { data, urlResponse, error in
+            request.urlResponse = urlResponse
+
             let dataResult = RequestHelpers.processData(with: request,
                                                         data: data,
                                                         urlResponse: urlResponse,
@@ -80,6 +85,9 @@ internal class SessionTaskFactory {
                                progressUpdate: ProgressCallbackType?,
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: FailureCallback?) -> URLSessionUploadTask? {
+
+        // Hold completionHandler for later use.
+        request.successCompletionHandler = completionHandler
 
         guard let params = request.params as? [String: MultipartFormDataPartType] else {
             onFailure?(.invalidMultipartParams, nil)
@@ -111,6 +119,8 @@ internal class SessionTaskFactory {
         let sessionDelegate = Session<Data>(with: request,
                                             progressCallback: progressUpdate,
                                             completedCallback: { (data, urlResponse, error) in
+            request.urlResponse = urlResponse
+
             let dataResult = RequestHelpers.processData(with: request,
                                                         data: data,
                                                         urlResponse: urlResponse,
@@ -143,6 +153,9 @@ internal class SessionTaskFactory {
                                  progressUpdate: ProgressCallbackType?,
                                  completionHandler: ((Data?, URLResponse?) -> Void)?,
                                  onFailure: FailureCallback?) -> URLSessionDownloadTask? {
+        // Hold completionHandler for later use.
+        request.successCompletionHandler = completionHandler
+
         let urlRequest: URLRequest!
         do {
             urlRequest = try request.asRequest()
@@ -161,6 +174,8 @@ internal class SessionTaskFactory {
         request.requestType = .download(destinationPath)
 
         let callback: ((URL?, URLResponse?, Error?) -> Void)? = { url, urlResponse, error in
+            request.urlResponse = urlResponse
+
             let dataResult = RequestHelpers.processData(with: request,
                                                         urlResponse: urlResponse,
                                                         serverError: error)

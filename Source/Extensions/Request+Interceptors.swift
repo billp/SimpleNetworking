@@ -19,6 +19,8 @@
 
 import Foundation
 
+typealias InterceptorContinueCallbackType = (Data?, TNError?, (() -> Void)?, (() -> Void)?) -> Void
+
 extension Request {
     /// Handles the interceptors if they are passed in configuration object.
     /// - parameters:
@@ -26,7 +28,9 @@ extension Request {
     ///     - error: The TNError in case of failure.
     func processNextInterceptorIfNeeded(data: Data?,
                                         error: TNError?,
-                                        continueCallback: @escaping (Data?, TNError?) -> Void) {
+                                        onSuccess: (() -> Void)? = nil,
+                                        onFailure: (() -> Void)? = nil,
+                                        continueCallback: @escaping InterceptorContinueCallbackType) {
         if let nextInterceptor = interceptors?.first {
             nextInterceptor.requestFinished(responseData: data,
                                             error: error,
@@ -34,14 +38,19 @@ extension Request {
                 switch action {
                 case .continue:
                     interceptors?.removeFirst()
-                    continueCallback(data, error)
+                    if let data = data {
+                        /// Call success completion handler directly
+                        self.successCompletionHandler?(data, urlResponse)
+                    } else {
+                        continueCallback(data, error, onSuccess, onFailure)
+                    }
                 case .retry(let delay):
                     retryRequest(withDelay: delay ?? 0,
                                  continueCallback: continueCallback)
                 }
             }
         } else {
-            continueCallback(data, error)
+            continueCallback(data, error, onSuccess, onFailure)
         }
     }
 
@@ -57,7 +66,7 @@ extension Request {
     // MARK: Helpers
 
     func retryRequest(withDelay delay: TimeInterval,
-                      continueCallback: @escaping (Data?, TNError?) -> Void) {
+                      continueCallback: @escaping InterceptorContinueCallbackType) {
         guard let newRequest = self.copy() as? Request else {
             return
         }

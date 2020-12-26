@@ -25,7 +25,7 @@ class GlobalInterceptor: InterceptorProtocol {
     func requestFinished(responseData data: Data?,
                          error: TNError?,
                          request: Request,
-                         proceed: (InteceptionActionType) -> Void) {
+                         proceed: (InterceptionAction) -> Void) {
         proceed(.continue)
     }
 
