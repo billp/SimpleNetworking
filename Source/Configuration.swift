@@ -47,8 +47,6 @@ public final class Configuration {
             }
         }
     }
-    /// The certificate data when certificate pinning is enabled.
-    internal var certificateData: [NSData]?
     /// Enables or disables debug mode.
     public var verbose: Bool?
     /// Additional headers of the request. They will be merged with the headers specified in RouteConfiguration.
@@ -66,6 +64,13 @@ public final class Configuration {
     public var interceptors: [InterceptorProtocol.Type]?
     /// Request middlewares
     public var requestMiddlewares: [RequestMiddlewareProtocol.Type]?
+
+    // MARK: Internal properties
+
+    /// The certificate data when certificate pinning is enabled.
+    internal var certificateData: [NSData]?
+    /// Skip Interceptors for being executed
+    internal var skipInterceptors = false
 
     // MARK: Initializers
 

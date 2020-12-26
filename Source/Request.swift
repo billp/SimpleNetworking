@@ -67,7 +67,6 @@ public final class Request: Operation {
     internal var processedHeaders: [String: String]?
     internal var pinningErrorOccured: Bool = false
     internal var headers: [String: String]?
-    internal var environment: Environment?
     /// The start date of the request.
     internal var startedAt: Date?
     /// The duration of the request.
@@ -79,6 +78,10 @@ public final class Request: Operation {
 
     /// The configuration of the request. This will be merged with the environment configuration if needed.
     public var configuration: Configuration = Configuration.makeDefaultConfiguration()
+    /// The number of the retries initiated by interceptor.
+    public var retryCount: Int = 0
+    /// The environment of the request.
+    public var environment: Environment?
     /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use
     weak public var associatedObject: AnyObject?
 
@@ -193,7 +196,7 @@ public final class Request: Operation {
 
         // Append query string to url in case of .get method
         if let params = params, method == .get {
-            try urlString.append("?" + RequestBodyGenerator.generateUrlEncodedString(with: params))
+            try urlString.append("?" + RequestBodyGenerator.generateURLEncodedString(with: params))
         }
 
         guard let url = URL(string: urlString as String) else {
@@ -257,7 +260,7 @@ public final class Request: Operation {
 
             switch requestBodyType {
             case .xWWWFormURLEncoded:
-                request.httpBody = try RequestBodyGenerator.generateUrlEncodedString(with: params)
+                request.httpBody = try RequestBodyGenerator.generateURLEncodedString(with: params)
                                         .data(using: .utf8)
             case .JSON:
                 request.httpBody = try RequestBodyGenerator.generateJSONBodyData(with: params)
@@ -331,8 +334,8 @@ public final class Request: Operation {
                                  urlResponse: URLResponse?,
                                  error: TNError?) {
         self.processNextInterceptorIfNeeded(data: data,
-                                            error: error) { data in
-            self.duration = startedAt?.distance(to: Date())
+                                            error: error) { data  in
+            self.duration = self.startedAt?.distance(to: Date())
             self.responseHeadersClosure?(urlResponse)
 
             Log.logRequest(request: self,
@@ -341,13 +344,13 @@ public final class Request: Operation {
                            urlResponse: urlResponse,
                            error: nil)
 
-            _executing = false
-            _finished = true
+            self._executing = false
+            self._finished = true
 
-            currentQueue.afterOperationFinished(request: self,
-                                                data: data,
-                                                response: urlResponse,
-                                                tnError: error)
+            self.currentQueue.afterOperationFinished(request: self,
+                                                     data: data,
+                                                     response: urlResponse,
+                                                     tnError: error)
         }
     }
 
@@ -361,23 +364,23 @@ public final class Request: Operation {
 
             onFailure?(error, data)
 
-            switch currentQueue.failureMode {
+            switch self.currentQueue.failureMode {
             case .continue:
                 break
             case .cancelAll:
-                currentQueue.cancelAllOperations()
+                self.currentQueue.cancelAllOperations()
             }
 
-            _executing = false
-            _finished = true
+            self._executing = false
+            self._finished = true
 
-            currentQueue.afterOperationFinished(request: self,
-                                                data: data,
-                                                response: urlResponse,
-                                                tnError: error)
+            self.currentQueue.afterOperationFinished(request: self,
+                                                     data: data,
+                                                     response: urlResponse,
+                                                     tnError: error)
             Log.logRequest(request: self,
                            data: data,
-                           urlResponse: nil,
+                           urlResponse: urlResponse,
                            error: error)
         }
     }

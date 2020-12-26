@@ -66,7 +66,8 @@ class TestInterceptors: XCTestCase {
                                                                 onSuccess: { response in
             failed = !(response.param3 == 2)
             expectation.fulfill()
-        }, onFailure: { _, _ in
+        }, onFailure: { error, _ in
+            print(error)
             failed = true
             expectation.fulfill()
         })

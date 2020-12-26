@@ -42,7 +42,7 @@ public enum RequestBodyType: Equatable {
 }
 
 class RequestBodyGenerator {
-    static func generateUrlEncodedString(with params: [String: Any?]) throws -> String {
+    static func generateURLEncodedString(with params: [String: Any?]) throws -> String {
         // Create query string from the given params
         let queryString = try params.filter({ $0.value != nil }).map { param -> String in
             if let value = String(describing: param.value!)

@@ -20,16 +20,18 @@
 import Foundation
 
 /// This will be used in interceptor callback as an action to inteceptors chain.
-public enum InteceptionActionType {
+public enum InterceptionAction {
     /// Continue with the next interceptor or final callbacks if there is no other interceptor in chain.
     case `continue`
     /// Retry the request
-    case retry
+    /// - Parameters
+    ///     - delay: The delay between retries in seconds. Pass nil value for no delay.
+    case retry(delay: TimeInterval?)
 }
 
 /// Use this protocol to create interceptors that can be passed to Configuration instances.
 /// Every class which implements this protocol will intercept between request completion and callbacks.
-public protocol InterceptorProtocol: class {
+public protocol InterceptorProtocol {
     /// This function is called when a request is failed.
     ///   - parameters:
     ///     - responseData: The response data of request.
@@ -38,7 +40,7 @@ public protocol InterceptorProtocol: class {
     func requestFinished(responseData data: Data?,
                          error: TNError?,
                          request: Request,
-                         proceed: (InteceptionActionType) -> Void)
+                         proceed: (InterceptionAction) -> Void)
 
     /// Default initializer
     init()

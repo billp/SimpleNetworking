@@ -26,7 +26,7 @@ extension Request {
     ///     - error: The TNError in case of failure.
     func processNextInterceptorIfNeeded(data: Data?,
                                         error: TNError?,
-                                        continueCallback: (Data?) -> Void) {
+                                        continueCallback: @escaping (Data?) -> Void) {
         if let nextInterceptor = interceptors?.first {
             nextInterceptor.requestFinished(responseData: data,
                                             error: error,
@@ -35,21 +35,9 @@ extension Request {
                 case .continue:
                     interceptors?.removeFirst()
                     continueCallback(data)
-                case .retry:
-                    guard let newRequest = self.copy() as? Request else {
-                        return
-                    }
-                    let group = DispatchGroup()
-                    var newData: Data?
-
-                    group.enter()
-                    newRequest.start(responseType: Data.self) { data in
-                        newData = data
-                        group.leave()
-                    }
-                    if let newData = newData {
-                        continueCallback(newData)
-                    }
+                case .retry(let delay):
+                    retryRequest(withDelay: delay ?? 0,
+                                 continueCallback: continueCallback)
                 }
             }
         } else {
@@ -59,9 +47,33 @@ extension Request {
 
     func initializeInterceptorsIfNeeded() {
         guard let interceptors = configuration.interceptors,
-              self.interceptors == nil else {
+              self.interceptors == nil,
+              !configuration.skipInterceptors else {
             return
         }
         self.interceptors = interceptors.map { $0.init() }
+    }
+
+    // MARK: Helpers
+
+    func retryRequest(withDelay delay: TimeInterval,
+                      continueCallback: @escaping (Data?) -> Void) {
+        guard let newRequest = self.copy() as? Request else {
+            return
+        }
+        retryCount += 1
+
+        // Skip interceptors for cloned request, to prevent infinite loop.
+        newRequest.configuration.skipInterceptors = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            newRequest.start(responseType: Data.self, onSuccess: { data in
+                continueCallback(data)
+            }, onFailure: { error, data in
+                self.processNextInterceptorIfNeeded(data: data,
+                                                    error: error,
+                                                    continueCallback: continueCallback)
+            })
+        }
     }
 }

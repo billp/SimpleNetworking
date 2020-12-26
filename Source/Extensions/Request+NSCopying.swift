@@ -23,8 +23,6 @@ extension Request: NSCopying {
         request.headers = headers
         request.environment = environment
         request.configuration = configuration
-        request.associatedObject = associatedObject
-        request.interceptors = interceptors
 
         return request
     }
