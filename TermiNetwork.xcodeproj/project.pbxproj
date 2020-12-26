@@ -339,16 +339,16 @@
 			children = (
 				F3116AB02460A09E00DFE453 /* Operations */,
 				F3116AAD2460A09E00DFE453 /* String+Extensions.swift */,
-				F3116AAE2460A09E00DFE453 /* Request+Mock.swift */,
 				F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */,
 				F3116AB32460A09E00DFE453 /* Request+Middleware.swift */,
+				F3116AAE2460A09E00DFE453 /* Request+Mock.swift */,
+				F33ACF4C2587F904004DAC46 /* Request+ResponseHeaders.swift */,
+				F30B77D525967FE600681359 /* Request+Interceptors.swift */,
+				F3A4B14725968ED0004812B6 /* Request+NSCopying.swift */,
 				F3116AB42460A09E00DFE453 /* Dictionary+Extensions.swift */,
 				F3116AB52460A09E00DFE453 /* Data+Extensions.swift */,
 				F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */,
 				F31F88BB257C11C900D9A802 /* UIImage+Extensions.swift */,
-				F33ACF4C2587F904004DAC46 /* Request+ResponseHeaders.swift */,
-				F30B77D525967FE600681359 /* Request+Interceptors.swift */,
-				F3A4B14725968ED0004812B6 /* Request+NSCopying.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -868,7 +868,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --path \"./Source\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --path \"./Source\" --config \"../.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		F3196885243D0904008725CE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -885,7 +885,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint --path \"./Tests\" --config \"../.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

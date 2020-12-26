@@ -21,16 +21,15 @@ import Foundation
 import TermiNetwork
 
 final class GlobalInterceptor: InterceptorProtocol {
-    var retryLimit = 5
+    var retryLimit = 1
     var delay: TimeInterval = 1.3
 
     func requestFinished(responseData data: Data?,
                          error: TNError?,
                          request: Request,
                          proceed: (InterceptionAction) -> Void) {
-
         if case .networkError = error, request.retryCount < retryLimit {
-            if request.retryCount == 4 {
+            if request.retryCount == 0 {
                 request.environment = Env.termiNetworkRemote.configure()
             }
             proceed(.retry(delay: delay))

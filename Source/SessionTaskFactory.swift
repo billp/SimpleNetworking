@@ -38,10 +38,9 @@ internal class SessionTaskFactory {
                 return nil
             }
 
-            request.handleDataTaskFailure(with: nil,
-                                          urlResponse: nil,
-                                          error: tnError,
-                                          onFailure: onFailure)
+            request.handleDataTaskCompleted(with: nil,
+                                            error: tnError,
+                                            onFailure: { onFailure?(tnError, nil) })
             return nil
         }
 
@@ -113,15 +112,14 @@ internal class SessionTaskFactory {
                                             progressCallback: progressUpdate,
                                             completedCallback: { (data, urlResponse, error) in
             let dataResult = RequestHelpers.processData(with: request,
-                                                          data: data,
-                                                          urlResponse: urlResponse,
-                                                          serverError: error)
+                                                        data: data,
+                                                        urlResponse: urlResponse,
+                                                        serverError: error)
 
             if let tnError = dataResult.tnError {
-                request.handleDataTaskFailure(with: dataResult.data,
-                                              urlResponse: nil,
-                                              error: tnError,
-                                              onFailure: onFailure)
+                request.handleDataTaskCompleted(with: dataResult.data,
+                                                error: tnError,
+                                                onFailure: { onFailure?(tnError, dataResult.data) })
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
@@ -153,10 +151,9 @@ internal class SessionTaskFactory {
                 return nil
             }
 
-            request.handleDataTaskFailure(with: nil,
-                                          urlResponse: nil,
-                                          error: tnError,
-                                          onFailure: onFailure)
+            request.handleDataTaskCompleted(with: nil,
+                                            error: tnError,
+                                            onFailure: { onFailure?(tnError, nil) })
             return nil
         }
 

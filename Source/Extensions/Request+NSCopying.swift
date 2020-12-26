@@ -22,7 +22,8 @@ extension Request: NSCopying {
         request.requestType = requestType
         request.headers = headers
         request.environment = environment
-        request.configuration = configuration
+        request.configuration = configuration.copy() as? Configuration
+            ?? Configuration.makeDefaultConfiguration()
 
         return request
     }

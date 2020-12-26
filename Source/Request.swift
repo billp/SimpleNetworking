@@ -49,7 +49,6 @@ internal enum RequestType {
 
 /// The core class of TermiNetwork. It handles the request creation and its execution.
 public final class Request: Operation {
-
     // MARK: Internal properties
 
     internal var method: Method!
@@ -315,15 +314,12 @@ public final class Request: Operation {
     public func startEmpty(_ queue: Queue? = nil) -> Request {
         currentQueue = queue ?? Queue.shared
         dataTask = SessionTaskFactory.makeDataTask(with: self,
-                                                     completionHandler: { data, urlResponse in
+                                                   completionHandler: { data, urlResponse in
             self.handleDataTaskCompleted(with: data,
-                                         urlResponse: urlResponse,
-                                         error: nil)
-        }, onFailure: { tnError, data in
-            self.handleDataTaskFailure(with: data,
-                                       urlResponse: nil,
-                                       error: tnError,
-                                       onFailure: nil)
+                                         urlResponse: urlResponse)
+        }, onFailure: { error, data in
+            self.handleDataTaskCompleted(with: data,
+                                         error: error)
         })
 
         currentQueue.addOperation(self)
@@ -331,10 +327,30 @@ public final class Request: Operation {
     }
 
     func handleDataTaskCompleted(with data: Data?,
-                                 urlResponse: URLResponse?,
-                                 error: TNError?) {
+                                 urlResponse: URLResponse? = nil,
+                                 error: TNError? = nil,
+                                 onSuccess: (() -> Void)? = nil,
+                                 onFailure: (() -> Void)? = nil) {
         self.processNextInterceptorIfNeeded(data: data,
-                                            error: error) { data  in
+                                            error: error) { processedData, processedError in
+            if let error = processedError {
+                self.handleDataTaskFailure(with: processedData,
+                                           urlResponse: urlResponse,
+                                           error: error,
+                                           onFailure: onFailure ?? {})
+            } else {
+                self.handleDataTaskSuccess(with: processedData,
+                                           urlResponse: urlResponse,
+                                           onSuccess: onSuccess ?? {})
+            }
+        }
+    }
+
+    func handleDataTaskSuccess(with data: Data?,
+                               urlResponse: URLResponse?,
+                               onSuccess: @escaping (() -> Void)) {
+            onSuccess()
+
             self.duration = self.startedAt?.distance(to: Date())
             self.responseHeadersClosure?(urlResponse)
 
@@ -350,38 +366,34 @@ public final class Request: Operation {
             self.currentQueue.afterOperationFinished(request: self,
                                                      data: data,
                                                      response: urlResponse,
-                                                     tnError: error)
-        }
+                                                     tnError: nil)
     }
 
     func handleDataTaskFailure(with data: Data?,
                                urlResponse: URLResponse?,
                                error: TNError,
-                               onFailure: FailureCallback?) {
-        self.processNextInterceptorIfNeeded(data: data,
-                                            error: error) { data in
-            self.responseHeadersClosure?(urlResponse)
+                               onFailure: @escaping () -> Void) {
+        onFailure()
 
-            onFailure?(error, data)
+        self.responseHeadersClosure?(urlResponse)
 
-            switch self.currentQueue.failureMode {
-            case .continue:
-                break
-            case .cancelAll:
-                self.currentQueue.cancelAllOperations()
-            }
-
-            self._executing = false
-            self._finished = true
-
-            self.currentQueue.afterOperationFinished(request: self,
-                                                     data: data,
-                                                     response: urlResponse,
-                                                     tnError: error)
-            Log.logRequest(request: self,
-                           data: data,
-                           urlResponse: urlResponse,
-                           error: error)
+        switch self.currentQueue.failureMode {
+        case .continue:
+            break
+        case .cancelAll:
+            self.currentQueue.cancelAllOperations()
         }
+
+        self._executing = false
+        self._finished = true
+
+        self.currentQueue.afterOperationFinished(request: self,
+                                                 data: data,
+                                                 response: urlResponse,
+                                                 tnError: error)
+        Log.logRequest(request: self,
+                       data: data,
+                       urlResponse: urlResponse,
+                       error: error)
     }
 }

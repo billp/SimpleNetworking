@@ -26,7 +26,7 @@ extension Request {
     ///     - error: The TNError in case of failure.
     func processNextInterceptorIfNeeded(data: Data?,
                                         error: TNError?,
-                                        continueCallback: @escaping (Data?) -> Void) {
+                                        continueCallback: @escaping (Data?, TNError?) -> Void) {
         if let nextInterceptor = interceptors?.first {
             nextInterceptor.requestFinished(responseData: data,
                                             error: error,
@@ -34,14 +34,14 @@ extension Request {
                 switch action {
                 case .continue:
                     interceptors?.removeFirst()
-                    continueCallback(data)
+                    continueCallback(data, error)
                 case .retry(let delay):
                     retryRequest(withDelay: delay ?? 0,
                                  continueCallback: continueCallback)
                 }
             }
         } else {
-            continueCallback(data)
+            continueCallback(data, error)
         }
     }
 
@@ -57,7 +57,7 @@ extension Request {
     // MARK: Helpers
 
     func retryRequest(withDelay delay: TimeInterval,
-                      continueCallback: @escaping (Data?) -> Void) {
+                      continueCallback: @escaping (Data?, TNError?) -> Void) {
         guard let newRequest = self.copy() as? Request else {
             return
         }
@@ -65,10 +65,13 @@ extension Request {
 
         // Skip interceptors for cloned request, to prevent infinite loop.
         newRequest.configuration.skipInterceptors = true
+        newRequest.configuration.verbose = false
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             newRequest.start(responseType: Data.self, onSuccess: { data in
-                continueCallback(data)
+                self.processNextInterceptorIfNeeded(data: data,
+                                                    error: nil,
+                                                    continueCallback: continueCallback)
             }, onFailure: { error, data in
                 self.processNextInterceptorIfNeeded(data: data,
                                                     error: error,

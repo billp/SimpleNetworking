@@ -54,22 +54,22 @@ extension Request {
                                                         self.configuration.keyDecodingStrategy) as T
             } catch let error {
                 let tnError = TNError.cannotDeserialize(String(describing: T.self), error)
-               self.handleDataTaskFailure(with: data,
-                                          urlResponse: urlResponse,
-                                          error: tnError,
-                                          onFailure: onFailure)
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: urlResponse,
+                                             error: tnError,
+                                             onFailure: { onFailure?(tnError, data) })
                return
             }
 
-            onSuccess?(object)
             self.handleDataTaskCompleted(with: data,
-                                        urlResponse: urlResponse,
-                                        error: nil)
-        }, onFailure: { tnError, data in
-            self.handleDataTaskFailure(with: data,
-                                       urlResponse: nil,
-                                       error: tnError,
-                                       onFailure: onFailure)
+                                         urlResponse: urlResponse,
+                                         error: nil,
+                                         onSuccess: { onSuccess?(object) })
+        }, onFailure: { error, data in
+            self.handleDataTaskCompleted(with: data,
+                                         error: error,
+                                         onFailure: { onFailure?(error, data) })
+
         })
 
         currentQueue.addOperation(self)
@@ -103,35 +103,35 @@ extension Request {
                                                         self.configuration.keyDecodingStrategy) as FromType
             } catch let error {
                 let tnError = TNError.cannotDeserialize(String(describing: FromType.self), error)
-               self.handleDataTaskFailure(with: data,
-                                          urlResponse: urlResponse,
-                                          error: tnError,
-                                          onFailure: onFailure)
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: urlResponse,
+                                             error: tnError,
+                                             onFailure: { onFailure?(tnError, data) })
+
                return
             }
 
             // Transformation
             do {
-                onSuccess?(try object.transform(with: transformer.init()))
+                let object = try object.transform(with: transformer.init())
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: urlResponse,
+                                             error: nil,
+                                             onSuccess: { onSuccess?(object) })
             } catch let error {
                 guard let tnError = error as? TNError else {
                     return
                 }
-                self.handleDataTaskFailure(with: data,
-                                           urlResponse: nil,
-                                           error: tnError,
-                                           onFailure: onFailure)
-                return
+                self.handleDataTaskCompleted(with: data,
+                                             urlResponse: urlResponse,
+                                             error: tnError,
+                                             onFailure: { onFailure?(tnError, data) })
             }
-
+        }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
-                                         urlResponse: urlResponse,
-                                         error: nil)
-        }, onFailure: { tnError, data in
-            self.handleDataTaskFailure(with: data,
-                                       urlResponse: nil,
-                                       error: tnError,
-                                       onFailure: onFailure)
+                                         error: error,
+                                         onFailure: { onFailure?(error, data) })
+
         })
 
         currentQueue.addOperation(self)
@@ -160,15 +160,14 @@ extension Request {
                                                          filePath: filePath,
                                                          progressUpdate: progressUpdate,
                                                          completionHandler: { data, urlResponse in
-            onSuccess?()
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         error: nil)
+                                         onSuccess: { onSuccess?() })
         }, onFailure: { tnError, data in
-            self.handleDataTaskFailure(with: data,
-                                       urlResponse: nil,
-                                       error: tnError,
-                                       onFailure: onFailure)
+            self.handleDataTaskCompleted(with: data,
+                                         error: tnError,
+                                         onFailure: { onFailure?(tnError, data) })
+
         })
 
         currentQueue.addOperation(self)
