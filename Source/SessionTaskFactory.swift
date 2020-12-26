@@ -43,7 +43,7 @@ internal class SessionTaskFactory {
 
             request.handleDataTaskCompleted(with: nil,
                                             error: tnError,
-                                            onFailure: { onFailure?(tnError, nil) })
+                                            onFailureCallback: { onFailure?(tnError, nil) })
             return nil
         }
 
@@ -129,7 +129,7 @@ internal class SessionTaskFactory {
             if let tnError = dataResult.tnError {
                 request.handleDataTaskCompleted(with: dataResult.data,
                                                 error: tnError,
-                                                onFailure: { onFailure?(tnError, dataResult.data) })
+                                                onFailureCallback: { onFailure?(tnError, dataResult.data) })
             } else {
                 completionHandler?(dataResult.data ?? Data(), urlResponse)
             }
@@ -166,7 +166,7 @@ internal class SessionTaskFactory {
 
             request.handleDataTaskCompleted(with: nil,
                                             error: tnError,
-                                            onFailure: { onFailure?(tnError, nil) })
+                                            onFailureCallback: { onFailure?(tnError, nil) })
             return nil
         }
 

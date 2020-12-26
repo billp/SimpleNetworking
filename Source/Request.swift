@@ -333,13 +333,13 @@ public final class Request: Operation {
     func handleDataTaskCompleted(with data: Data?,
                                  urlResponse: URLResponse? = nil,
                                  error: TNError? = nil,
-                                 onSuccess: (() -> Void)? = nil,
-                                 onFailure: (() -> Void)? = nil) {
+                                 onSuccessCallback: (() -> Void)? = nil,
+                                 onFailureCallback: (() -> Void)? = nil) {
         self.processNextInterceptorIfNeeded(
             data: data,
             error: error,
-            onSuccess: onSuccess,
-            onFailure: onFailure) { processedData, processedError, processedOnSuccess, processedOnFailure in
+            onSuccess: onSuccessCallback,
+            onFailure: onFailureCallback) { processedData, processedError, processedOnSuccess, processedOnFailure in
             if let error = processedError {
                 self.handleDataTaskFailure(with: processedData,
                                            urlResponse: urlResponse,

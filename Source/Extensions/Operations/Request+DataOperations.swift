@@ -52,17 +52,17 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
                 return
             }
 
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         onSuccess: { onSuccess?(object) })
+                                         onSuccessCallback: { onSuccess?(object) })
         }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
                                          error: error,
-                                         onFailure: { onFailure?(error, data) })
+                                         onFailureCallback: { onFailure?(error, data) })
         })
 
         currentQueue.addOperation(self)
@@ -96,7 +96,7 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
                 return
             }
 
@@ -106,7 +106,7 @@ extension Request {
 
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
-                                             onSuccess: { onSuccess?(object) })
+                                             onSuccessCallback: { onSuccess?(object) })
 
             } catch let error {
                 guard let tnError = error as? TNError else {
@@ -114,12 +114,12 @@ extension Request {
                 }
                 self.handleDataTaskCompleted(with: data,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
             }
         }, onFailure: { tnError, data in
             self.handleDataTaskCompleted(with: data,
                                          error: tnError,
-                                         onFailure: { onFailure?(tnError, data) })
+                                         onFailureCallback: { onFailure?(tnError, data) })
         })
 
         currentQueue.addOperation(self)
@@ -150,17 +150,17 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
 
             } else {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
-                                             onSuccess: { onSuccess?(image ?? T()) })
+                                             onSuccessCallback: { onSuccess?(image ?? T()) })
             }
         }, onFailure: { tnError, data in
             self.handleDataTaskCompleted(with: data,
                                          error: tnError,
-                                         onFailure: { onFailure?(tnError, data) })
+                                         onFailureCallback: { onFailure?(tnError, data) })
         })
 
         currentQueue.addOperation(self)
@@ -188,20 +188,20 @@ extension Request {
 
                     self.handleDataTaskCompleted(with: data,
                                                  urlResponse: urlResponse,
-                                                 onSuccess: { onSuccess?(string) })
+                                                 onSuccessCallback: { onSuccess?(string) })
                 } else {
                     let tnError: TNError = .cannotConvertToString
                     self.handleDataTaskCompleted(with: data,
                                                  urlResponse: urlResponse,
                                                  error: tnError,
-                                                 onFailure: { onFailure?(tnError, data) })
+                                                 onFailureCallback: { onFailure?(tnError, data) })
                 }
 
             }
         }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
                                          error: error,
-                                         onFailure: { onFailure?(error, data) })
+                                         onFailureCallback: { onFailure?(error, data) })
 
         })
 
@@ -228,12 +228,12 @@ extension Request {
             DispatchQueue.main.async {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
-                                             onSuccess: { onSuccess?(data) })
+                                             onSuccessCallback: { onSuccess?(data) })
             }
         }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
                                          error: error,
-                                         onFailure: { onFailure?(error, data) })
+                                         onFailureCallback: { onFailure?(error, data) })
 
         })
 

@@ -57,18 +57,18 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
                return
             }
 
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
                                          error: nil,
-                                         onSuccess: { onSuccess?(object) })
+                                         onSuccessCallback: { onSuccess?(object) })
         }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
                                          error: error,
-                                         onFailure: { onFailure?(error, data) })
+                                         onFailureCallback: { onFailure?(error, data) })
 
         })
 
@@ -106,7 +106,7 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
 
                return
             }
@@ -117,7 +117,7 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: nil,
-                                             onSuccess: { onSuccess?(object) })
+                                             onSuccessCallback: { onSuccess?(object) })
             } catch let error {
                 guard let tnError = error as? TNError else {
                     return
@@ -125,12 +125,12 @@ extension Request {
                 self.handleDataTaskCompleted(with: data,
                                              urlResponse: urlResponse,
                                              error: tnError,
-                                             onFailure: { onFailure?(tnError, data) })
+                                             onFailureCallback: { onFailure?(tnError, data) })
             }
         }, onFailure: { error, data in
             self.handleDataTaskCompleted(with: data,
                                          error: error,
-                                         onFailure: { onFailure?(error, data) })
+                                         onFailureCallback: { onFailure?(error, data) })
 
         })
 
@@ -162,11 +162,11 @@ extension Request {
                                                          completionHandler: { data, urlResponse in
             self.handleDataTaskCompleted(with: data,
                                          urlResponse: urlResponse,
-                                         onSuccess: { onSuccess?() })
+                                         onSuccessCallback: { onSuccess?() })
         }, onFailure: { tnError, data in
             self.handleDataTaskCompleted(with: data,
                                          error: tnError,
-                                         onFailure: { onFailure?(tnError, data) })
+                                         onFailureCallback: { onFailure?(tnError, data) })
 
         })
 

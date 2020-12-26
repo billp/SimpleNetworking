@@ -94,16 +94,16 @@ class TestDownloadOperations: XCTestCase {
                     failed = false
                 }
             }, onSuccess: {
-                failed = false
+                failed = true
                 expectation.fulfill()
             }, onFailure: { (error, _) in
-                failed = true
+                failed = false
                 print(String(describing: error.localizedDescription))
                 expectation.fulfill()
         })
 
         wait(for: [expectation], timeout: 500)
 
-        XCTAssert(failed)
+        XCTAssert(!failed)
     }
 }
