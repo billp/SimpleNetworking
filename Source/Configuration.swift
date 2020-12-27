@@ -170,55 +170,55 @@ extension Configuration {
     }
 
     // swiftlint:disable cyclomatic_complexity
-    static func override(configuration: Configuration,
-                         with overrideConfiguration: Configuration)
+    static func override(left: Configuration,
+                         right: Configuration)
                 -> Configuration {
 
-        let clone = configuration.copy() as? Configuration ?? Configuration()
+        let leftClone = left.copy() as? Configuration ?? Configuration()
 
-        if let cachePolicy = overrideConfiguration.cachePolicy {
-            clone.cachePolicy = cachePolicy
+        if let cachePolicy = right.cachePolicy {
+            leftClone.cachePolicy = cachePolicy
         }
-        if let timeoutInterval = overrideConfiguration.timeoutInterval {
-            clone.timeoutInterval = timeoutInterval
+        if let timeoutInterval = right.timeoutInterval {
+            leftClone.timeoutInterval = timeoutInterval
         }
-        if let requestBodyType = overrideConfiguration.requestBodyType {
-            clone.requestBodyType = requestBodyType
+        if let requestBodyType = right.requestBodyType {
+            leftClone.requestBodyType = requestBodyType
         }
-        if let certificatePaths = overrideConfiguration.certificatePaths {
-            clone.certificatePaths = certificatePaths
+        if let certificatePaths = right.certificatePaths {
+            leftClone.certificatePaths = certificatePaths
         }
-        if let certificateData = overrideConfiguration.certificateData {
-            clone.certificateData = certificateData
+        if let certificateData = right.certificateData {
+            leftClone.certificateData = certificateData
         }
-        if let verbose = overrideConfiguration.verbose {
-            clone.verbose = verbose
+        if let verbose = right.verbose {
+            leftClone.verbose = verbose
         }
-        if var cloneHeaders = clone.headers,
-            let headers = overrideConfiguration.headers {
-            cloneHeaders.merge(headers, uniquingKeysWith: { (_, new) in new })
-            clone.headers = cloneHeaders
-        } else {
-            clone.headers = overrideConfiguration.headers
+
+        // Merge headers
+        var cloneHeaders = leftClone.headers ?? [:]
+        let headers = right.headers ?? [:]
+        cloneHeaders.merge(headers, uniquingKeysWith: { (_, new) in new })
+        leftClone.headers = cloneHeaders
+
+        if let mockDataBundle = right.mockDataBundle {
+            leftClone.mockDataBundle = mockDataBundle
         }
-        if let mockDataBundle = overrideConfiguration.mockDataBundle {
-            clone.mockDataBundle = mockDataBundle
+        if let mockDataEnabled = right.mockDataEnabled {
+            leftClone.mockDataEnabled = mockDataEnabled
         }
-        if let mockDataEnabled = overrideConfiguration.mockDataEnabled {
-            clone.mockDataEnabled = mockDataEnabled
+        if let mockDelay = right.mockDelay {
+            leftClone.mockDelay = mockDelay
         }
-        if let mockDelay = overrideConfiguration.mockDelay {
-            clone.mockDelay = mockDelay
+        if let requestMiddlewares = right.requestMiddlewares {
+            leftClone.requestMiddlewares = requestMiddlewares
         }
-        if let requestMiddlewares = overrideConfiguration.requestMiddlewares {
-            clone.requestMiddlewares = requestMiddlewares
+        if let keyDecodingStrategy = right.keyDecodingStrategy {
+            leftClone.keyDecodingStrategy = keyDecodingStrategy
         }
-        if let keyDecodingStrategy = overrideConfiguration.keyDecodingStrategy {
-            clone.keyDecodingStrategy = keyDecodingStrategy
+        if let interceptors = right.interceptors {
+            leftClone.interceptors = interceptors
         }
-        if let interceptors = overrideConfiguration.interceptors {
-            clone.interceptors = interceptors
-        }
-        return clone
+        return leftClone
     }
 }

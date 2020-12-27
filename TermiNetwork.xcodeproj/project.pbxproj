@@ -61,6 +61,7 @@
 		F35B533E2443325400C1853A /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F35B533D2443325400C1853A /* MockData.bundle */; };
 		F35B534024439FAC00C1853A /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B533F24439FAC00C1853A /* TestMockRequest.swift */; };
 		F363508225894AC6002AF5DE /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F363507F25894A80002AF5DE /* FileUploader.swift */; };
+		F37014B32598FCC80022B7D6 /* UnauthorizedInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37014B22598FCC80022B7D6 /* UnauthorizedInterceptor.swift */; };
 		F37A17F4257D2953003EFB1F /* CityExplorerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */; };
 		F37A17FA257D2A83003EFB1F /* CityTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37A17F9257D2A83003EFB1F /* CityTransformer.swift */; };
 		F37A17FE257D49A8003EFB1F /* MockData.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F37A17FD257D49A8003EFB1F /* MockData.bundle */; };
@@ -204,6 +205,7 @@
 		F35B533D2443325400C1853A /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
 		F35B533F24439FAC00C1853A /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
 		F363507F25894A80002AF5DE /* FileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploader.swift; sourceTree = "<group>"; };
+		F37014B22598FCC80022B7D6 /* UnauthorizedInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedInterceptor.swift; sourceTree = "<group>"; };
 		F37A17F3257D2953003EFB1F /* CityExplorerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityExplorerDetails.swift; sourceTree = "<group>"; };
 		F37A17F9257D2A83003EFB1F /* CityTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTransformer.swift; sourceTree = "<group>"; };
 		F37A17FD257D49A8003EFB1F /* MockData.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MockData.bundle; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			children = (
 				F32195B725783ED0000941F1 /* GlobalInterceptor.swift */,
 				F3AF556825987256000E01D8 /* DoNothingInterceptor.swift */,
+				F37014B22598FCC80022B7D6 /* UnauthorizedInterceptor.swift */,
 			);
 			name = Interceptors;
 			sourceTree = "<group>";
@@ -967,6 +970,7 @@
 				F3850C91243D103700F7CC13 /* TestRequest.swift in Sources */,
 				F387B0F7257958EB00A8C0C7 /* TestTransformers.swift in Sources */,
 				F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */,
+				F37014B32598FCC80022B7D6 /* UnauthorizedInterceptor.swift in Sources */,
 				F3F48288245EBF6D00656449 /* TestUploadOperations.swift in Sources */,
 				F3850C89243D103700F7CC13 /* TestQueue.swift in Sources */,
 			);

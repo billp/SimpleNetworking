@@ -54,7 +54,6 @@ public final class Request: Operation {
     internal var method: Method!
     internal var currentQueue: Queue!
     internal var dataTask: URLSessionTask?
-    internal var params: [String: Any?]?
     internal var path: String!
     internal var pathType: SNPathType = .relative
     internal var mockFilePath: Path?
@@ -91,6 +90,8 @@ public final class Request: Operation {
     public var associatedObject: AnyObject?
     /// The headers of the request.
     public var headers: [String: String]?
+    /// The parameters of the request.
+    public var params: [String: Any?]?
 
     // MARK: Initializers
     /// Default initializer
@@ -162,16 +163,16 @@ public final class Request: Operation {
         self.mockFilePath = route.mockFilePath
 
         if let environmentConfiguration = environment?.configuration {
-            self.configuration = Configuration.override(configuration: self.configuration,
-                                                                 with: environmentConfiguration)
+            self.configuration = Configuration.override(left: self.configuration,
+                                                        right: environmentConfiguration)
         }
         if let routerConfiguration = configuration {
-            self.configuration = Configuration.override(configuration: self.configuration,
-                                                                 with: routerConfiguration)
+            self.configuration = Configuration.override(left: self.configuration,
+                                                        right: routerConfiguration)
         }
         if let routeConfiguration = route.configuration {
-            self.configuration = Configuration.override(configuration: self.configuration,
-                                                                 with: routeConfiguration)
+            self.configuration = Configuration.override(left: self.configuration,
+                                                        right: routeConfiguration)
         }
     }
 
@@ -403,8 +404,10 @@ public final class Request: Operation {
                                                  data: data,
                                                  response: urlResponse,
                                                  tnError: error)
-        Log.logRequest(request: self,
-                       data: data,
-                       error: error)
+        if !skipLogOnComplete {
+            Log.logRequest(request: self,
+                           data: data,
+                           error: error)
+        }
     }
 }

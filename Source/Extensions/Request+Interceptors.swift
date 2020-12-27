@@ -40,6 +40,9 @@ extension Request {
                                                    error: error,
                                                    finishCallback: finishCallback)
                 case .retry(let delay):
+                    Log.logRequest(request: self,
+                                   data: data,
+                                   error: error)
                     self.interceptorRetryAction(withDelay: delay ?? 0,
                                                 finishCallback: finishCallback)
                 }
@@ -110,11 +113,14 @@ extension Request {
         }
         retryCount += 1
 
+        // Update urlRequest
+        urlRequest = try? asRequest()
+
         // Skip interceptors for new request to prevent infinite loops.
         newRequest.configuration.skipInterceptors = true
 
         // Prevent duplicate print log on completed.
-        self.skipLogOnComplete = true
+        newRequest.skipLogOnComplete = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             // Reset the request start time.
@@ -146,10 +152,12 @@ extension Request {
             queue: request.currentQueue,
             responseType: Data.self,
             onSuccess: { data in
+            self.urlResponse = request.urlResponse
             self.processNextInterceptorIfNeeded(data: data,
                                                 error: nil,
                                                 finishCallback: finishCallback)
         }, onFailure: { error, data in
+            self.urlResponse = request.urlResponse
             self.processNextInterceptorIfNeeded(data: data,
                                                 error: error,
                                                 finishCallback: finishCallback)
@@ -167,11 +175,13 @@ extension Request {
             responseType: Data.self,
             progressUpdate: self.progressCallback,
             onSuccess: { data in
+                self.urlResponse = request.urlResponse
                 self.processNextInterceptorIfNeeded(data: data,
                                                     error: nil,
                                                     finishCallback: finishCallback)
 
             }, onFailure: { error, data in
+                self.urlResponse = request.urlResponse
                 self.processNextInterceptorIfNeeded(data: data,
                                                     error: error,
                                                     finishCallback: finishCallback)
@@ -190,10 +200,12 @@ extension Request {
             filePath: filePath,
             progressUpdate: self.progressCallback,
             onSuccess: {
+                self.urlResponse = request.urlResponse
                 self.processNextInterceptorIfNeeded(data: Data(),
                     error: nil,
                     finishCallback: finishCallback)
             }, onFailure: { error, data in
+                self.urlResponse = request.urlResponse
                 self.processNextInterceptorIfNeeded(data: data,
                                                     error: error,
                                                     finishCallback: finishCallback)

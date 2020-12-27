@@ -41,5 +41,6 @@ public final class Router<Route: RouteProtocol> {
     public func request(for route: Route) -> Request {
         return Request(route: route,
                        environment: environment,
-                       configuration: configuration)    }
+                       configuration: configuration)
+    }
 }

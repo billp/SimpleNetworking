@@ -492,12 +492,13 @@ Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Cho
 <p><a name="interceptors"></a></p>
 <h3 id='interceptors' class='heading'>Interceptors</h3>
 
-<p>Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh the access token when it is expired (got unauthorized status code 401) and retry the original request. </p>
+<p>Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh an expired access token (unauthorized status code 401) and then retry the original request. To do so, you just have to implement the <strong>InterceptorProtocol</strong></p>
 
-<p>To do so, you have to implement the <strong>InterceptorProtocol</strong>:</p>
+<p>The following Interceptor implementation does exactly that: it tries to refresh the access token with a retry limit (5):</p>
 <h4 id='example' class='heading'>Example</h4>
 <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">UnauthorizedInterceptor</span><span class="p">:</span> <span class="kt">InterceptorProtocol</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">retryDelay</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">let</span> <span class="nv">retryLimit</span> <span class="o">=</span> <span class="mi">5</span>
 
     <span class="kd">func</span> <span class="nf">requestFinished</span><span class="p">(</span><span class="n">responseData</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span>
                          <span class="nv">error</span><span class="p">:</span> <span class="kt">TNError</span><span class="p">?,</span>
@@ -505,24 +506,27 @@ Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Cho
                          <span class="nv">proceed</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">InterceptionAction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">switch</span> <span class="n">error</span> <span class="p">{</span>
         <span class="k">case</span> <span class="o">.</span><span class="nf">notSuccess</span><span class="p">(</span><span class="k">let</span> <span class="nv">statusCode</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">statusCode</span> <span class="o">==</span> <span class="mi">401</span> <span class="p">{</span>
-                <span class="c1">// Login to get a new token.</span>
+            <span class="k">if</span> <span class="n">statusCode</span> <span class="o">==</span> <span class="mi">401</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">retryCount</span> <span class="o">&lt;</span> <span class="n">retryLimit</span> <span class="p">{</span>
+                <span class="c1">// Login and get a new token.</span>
                 <span class="kt">Request</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
                         <span class="nv">url</span><span class="p">:</span> <span class="s">"https://www.myserviceapi.com/login"</span><span class="p">,</span>
                         <span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="s">"username"</span><span class="p">:</span> <span class="s">"johndoe"</span><span class="p">,</span>
                                  <span class="s">"password"</span><span class="p">:</span> <span class="s">"p@44w0rd"</span><span class="p">])</span>
-                    <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">LoginResponse</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">res</span> <span class="k">in</span>
-                        <span class="k">let</span> <span class="nv">authorizationValue</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="s">"Bearer %@"</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+                    <span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">LoginResponse</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+                        <span class="k">let</span> <span class="nv">authorizationValue</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="s">"Bearer %@"</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
 
-                        <span class="c1">// Update global header in configuration which is inherited by all requests.</span>
+                        <span class="c1">// Update the global header in configuration which is inherited by all requests.</span>
                         <span class="kt">Environment</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">configuration</span><span class="p">?</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="n">authorizationValue</span>
 
                         <span class="c1">// Update current request's header.</span>
                         <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">"Authorization"</span><span class="p">]</span> <span class="o">=</span> <span class="n">authorizationValue</span>
 
-                        <span class="c1">// Retry the original request.</span>
+                        <span class="c1">// Finally retry the original request.</span>
                         <span class="nf">proceed</span><span class="p">(</span><span class="o">.</span><span class="nf">retry</span><span class="p">(</span><span class="nv">delay</span><span class="p">:</span> <span class="n">retryDelay</span><span class="p">))</span>
                     <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Continue if the retry limit is reached</span>
+                <span class="nf">proceed</span><span class="p">(</span><span class="o">.</span><span class="k">continue</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="k">default</span><span class="p">:</span>
             <span class="nf">proceed</span><span class="p">(</span><span class="o">.</span><span class="k">continue</span><span class="p">)</span>
@@ -593,7 +597,7 @@ return image
 <p><a name="middlewares"></a></p>
 <h2 id='middlewares' class='heading'>Middlewares</h2>
 
-<p>With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middleware by implementing the <strong>RequestMiddlewareProtocol</strong>. Please see <strong>CryptoMiddleware.swift</strong> for an example middleware implementation.</p>
+<p>With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middlewares by implementing the <strong>RequestMiddlewareProtocol</strong>. Please see <strong>CryptoMiddleware.swift</strong> for an example middleware implementation.</p>
 
 <p><a name="debug_logging"></a></p>
 <h2 id='debug-logging' class='heading'>Debug Logging</h2>

@@ -191,7 +191,42 @@ class TestInterceptors: XCTestCase {
 
         wait(for: [expectation], timeout: 60)
 
+        router.configuration?.interceptors?.removeLast()
+
         XCTAssert(!failed)
     }
 
+    func testUnauthorizedInterceptor() {
+        Environment.set(Env.termiNetworkRemote)
+
+        let expectation = XCTestExpectation(description: "testUnauthorizedInterceptor")
+        var failed = true
+
+        router.configuration?.interceptors = [UnauthorizedInterceptor.self]
+        router.configuration?.cachePolicy = .reloadIgnoringLocalCacheData
+
+        let authValue = UnauthorizedInterceptor.authorizationValue
+        let request = router.request(for: .testStatusCode(code: 401))
+        request.start(responseType: Data.self,
+                      onSuccess: { _ in
+
+            let dummyRequest = try? self.router.request(for: .testStatusCode(code: 200)).asRequest()
+            failed = !(
+                Environment.current.configuration?.headers?["Authorization"] == authValue &&
+                    request.headers?["Authorization"] == authValue  &&
+                    dummyRequest?.allHTTPHeaderFields?["Authorization"] == authValue
+            )
+
+            expectation.fulfill()
+        }, onFailure: { _, _ in
+            failed = true
+            expectation.fulfill()
+        })
+
+        wait(for: [expectation], timeout: 60)
+
+        router.configuration?.interceptors?.removeLast()
+
+        XCTAssert(!failed)
+    }
 }

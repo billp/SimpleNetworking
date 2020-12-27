@@ -1,3 +1,4 @@
+
 <p></p>
 <p align="center">
   <img src="https://raw.githubusercontent.com/billp/TermiNetwork/master/TermiNetworkLogo.svg" alt="" data-canonical-src="" width="80%" />
@@ -312,15 +313,16 @@ Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
 })
 ```
 <a name="interceptors"></a>
-### Interceptors
-Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh the access token when it is expired (got unauthorized status code 401) and retry the original request. 
+## Interceptors
+Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh an expired access token (unauthorized status code 401) and then retry the original request. To do so, you just have to implement the **InterceptorProtocol**
 
-To do so, you have to implement the **InterceptorProtocol**:
+The following Interceptor implementation does exactly that: it tries to refresh the access token with a retry limit (5):
 
 #### Example
 ```swift
 final class UnauthorizedInterceptor: InterceptorProtocol {
     let retryDelay: TimeInterval = 0.1
+	let retryLimit = 5
 
     func requestFinished(responseData data: Data?,
                          error: TNError?,
@@ -328,24 +330,27 @@ final class UnauthorizedInterceptor: InterceptorProtocol {
                          proceed: @escaping (InterceptionAction) -> Void) {
         switch error {
         case .notSuccess(let statusCode):
-            if statusCode == 401 {
-                // Login to get a new token.
+            if statusCode == 401, request.retryCount < retryLimit {
+                // Login and get a new token.
                 Request(method: .post,
                         url: "https://www.myserviceapi.com/login",
                         params: ["username": "johndoe",
                                  "password": "p@44w0rd"])
-                    .start(responseType: LoginResponse.self) { res in
-                        let authorizationValue = String(format: "Bearer %@", res.token)
+                    .start(responseType: LoginResponse.self) { response in
+                        let authorizationValue = String(format: "Bearer %@", response.token)
 
-                        // Update global header in configuration which is inherited by all requests.
+                        // Update the global header in configuration which is inherited by all requests.
                         Environment.current.configuration?.headers["Authorization"] = authorizationValue
 
                         // Update current request's header.
                         request.headers["Authorization"] = authorizationValue
-                        
-                        // Retry the original request.
+
+                        // Finally retry the original request.
                         proceed(.retry(delay: retryDelay))
                     }
+            } else {
+	            // Continue if the retry limit is reached
+	            proceed(.continue)
             }
         default:
             proceed(.continue)
@@ -365,9 +370,9 @@ configuration.interceptors = [UnauthorizedInterceptor.self]
 
 <a name="image_helpers"></a>
 
-## SwiftUI/UIKit Image Helpers 
+## SwiftUI/UIKit Image Helpers
 TermiNetwork provides two different helpers for setting remote images:
-### Image helper (SwiftUI) 
+### Image helper (SwiftUI)
 #### Example
 1.  **Example with URL**
 ```swift
@@ -414,7 +419,7 @@ imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(wit
 <a name="middlewares"></a>
 
 ## Middlewares
-With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middleware by implementing the **RequestMiddlewareProtocol**. Please see **CryptoMiddleware.swift** for an example middleware implementation.
+With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middlewares by implementing the **RequestMiddlewareProtocol**. Please see **CryptoMiddleware.swift** for an example middleware implementation.
 
 <a name="debug_logging"></a>
 
