@@ -19,40 +19,38 @@
 
 import Foundation
 
-typealias InterceptorContinueCallbackType = (Data?, TNError?) -> Void
+typealias InterceptorFinishedCallbackType = (Data?, TNError?) -> Void
 
 extension Request {
     /// Handles the interceptors if they are passed in configuration object.
     /// - parameters:
     ///     - data: The response data.
     ///     - error: The TNError in case of failure.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
     func processNextInterceptorIfNeeded(data: Data?,
                                         error: TNError?,
-                                        continueCallback: @escaping InterceptorContinueCallbackType) {
+                                        finishCallback: @escaping InterceptorFinishedCallbackType) {
         if let nextInterceptor = interceptors?.first {
             nextInterceptor.requestFinished(responseData: data,
                                             error: error,
                                             request: self) { action in
                 switch action {
                 case .continue:
-                    interceptors?.removeFirst()
-                    if let data = data {
-                        /// Call success completion handler directly
-                        self.successCompletionHandler?(data, urlResponse)
-                    } else {
-                        continueCallback(data, error)
-                    }
+                    interceptorContinueAction(data: data,
+                                              error: error,
+                                              finishCallback: finishCallback)
                 case .retry(let delay):
-                    retryRequest(withDelay: delay ?? 0,
-                                 continueCallback: continueCallback)
+                    interceptorRetryAction(withDelay: delay ?? 0,
+                                           finishCallback: finishCallback)
                 }
             }
         } else {
-            continueCallback(data, error)
+            finishCallback(data, error)
         }
     }
 
-    func initializeInterceptorsIfNeeded() {
+    /// Initializes the interceptors chain.
+    func initializeInterceptorsChainIfNeeded() {
         guard let interceptors = configuration.interceptors,
               self.interceptors == nil,
               !configuration.skipInterceptors else {
@@ -63,52 +61,137 @@ extension Request {
 
     // MARK: Helpers
 
-    func retryRequest(withDelay delay: TimeInterval,
-                      continueCallback: @escaping InterceptorContinueCallbackType) {
+    /// Continue action of Interceptors.
+    /// - parameters:
+    ///     - data: The response data.
+    ///     - error: The TNError in case of failure.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
+    func interceptorContinueAction(data: Data?,
+                                   error: TNError?,
+                                   finishCallback: @escaping InterceptorFinishedCallbackType) {
+        // Remove the interceptor from chain.
+        interceptors?.removeFirst()
+
+        // If the request is retried and succeeded
+        if let data = data, error == nil, retryCount > 0 {
+            // ...and the interceptor is the last in chain.
+            if interceptors?.isEmpty == true {
+                // Call the success completion handler directly.
+                successCompletionHandler?(data, urlResponse)
+            } else {
+                // Else move to the next interceptor.
+                processNextInterceptorIfNeeded(data: data,
+                                               error: nil,
+                                               finishCallback: finishCallback)
+            }
+        } else {
+            //  If the interceptor is the last in chain
+            if interceptors?.isEmpty == true {
+                // Continue with the normal execution.
+                finishCallback(data, error)
+            } else {
+                // Else move to the next interceptor.
+                processNextInterceptorIfNeeded(data: data,
+                                               error: nil,
+                                               finishCallback: finishCallback)
+            }
+
+        }
+    }
+
+    /// Retry entry-point of Interceptors.
+    /// - parameters:
+    ///     - delay: The delay between retries.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
+    func interceptorRetryAction(withDelay delay: TimeInterval,
+                                finishCallback: @escaping InterceptorFinishedCallbackType) {
         guard let newRequest = self.copy() as? Request else {
             return
         }
         retryCount += 1
 
-        // Skip interceptors for cloned request, to prevent infinite loop.
+        // Skip interceptors for new request to prevent infinite loops.
         newRequest.configuration.skipInterceptors = true
 
-        // Prevent duplicate log on completed
+        // Prevent duplicate print log on completed.
         self.skipLogOnComplete = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            // Reset started at time.
+            // Reset the request start time.
             self.startedAt = Date()
 
+            // Retry request for different types.
             switch self.requestType {
             case .data:
-                newRequest.start(responseType: Data.self, onSuccess: { data in
-                    self.processNextInterceptorIfNeeded(data: data,
-                                                        error: nil,
-                                                        continueCallback: continueCallback)
-                }, onFailure: { error, data in
-                    self.processNextInterceptorIfNeeded(data: data,
-                                                        error: error,
-                                                        continueCallback: continueCallback)
-                })
+                self.retryDataRequest(request: newRequest,
+                                      finishCallback: finishCallback)
             case .upload:
-                newRequest.startUpload(
-                    responseType: Data.self,
-                    progressUpdate: self.progressCallback,
-                    onSuccess: { data in
-                        self.processNextInterceptorIfNeeded(data: data,
-                                                            error: nil,
-                                                            continueCallback: continueCallback)
-
-                    }, onFailure: { error, data in
-                        self.processNextInterceptorIfNeeded(data: data,
-                                                            error: error,
-                                                            continueCallback: continueCallback)
-                    })
-            case .download(_):
-                break
+                self.retryUploadRequest(request: newRequest,
+                                        finishCallback: finishCallback)
+            case .download(let file):
+                self.retryDownloadRequest(request: newRequest,
+                                          filePath: file,
+                                          finishCallback: finishCallback)
             }
-
         }
+    }
+
+    /// Retry request of .data type.
+    /// - parameters:
+    ///     - request: The new copied request.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
+    func retryDataRequest(request: Request,
+                          finishCallback: @escaping InterceptorFinishedCallbackType) {
+        request.start(responseType: Data.self, onSuccess: { data in
+            self.processNextInterceptorIfNeeded(data: data,
+                                                error: nil,
+                                                finishCallback: finishCallback)
+        }, onFailure: { error, data in
+            self.processNextInterceptorIfNeeded(data: data,
+                                                error: error,
+                                                finishCallback: finishCallback)
+        })
+    }
+
+    /// Retry request of .upload type.
+    /// - parameters:
+    ///     - request: The new copied request.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
+    func retryUploadRequest(request: Request,
+                            finishCallback: @escaping InterceptorFinishedCallbackType) {
+        request.startUpload(
+            responseType: Data.self,
+            progressUpdate: self.progressCallback,
+            onSuccess: { data in
+                self.processNextInterceptorIfNeeded(data: data,
+                                                    error: nil,
+                                                    finishCallback: finishCallback)
+
+            }, onFailure: { error, data in
+                self.processNextInterceptorIfNeeded(data: data,
+                                                    error: error,
+                                                    finishCallback: finishCallback)
+            })
+    }
+
+    /// Retry request of .download type.
+    /// - parameters:
+    ///     - request: The new copied request.
+    ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
+    func retryDownloadRequest(request: Request,
+                              filePath: String,
+                              finishCallback: @escaping InterceptorFinishedCallbackType) {
+        request.startDownload(
+            filePath: filePath,
+            progressUpdate: self.progressCallback,
+            onSuccess: {
+                self.processNextInterceptorIfNeeded(data: Data(),
+                    error: nil,
+                    finishCallback: finishCallback)
+            }, onFailure: { error, data in
+                self.processNextInterceptorIfNeeded(data: data,
+                                                    error: error,
+                                                    finishCallback: finishCallback)
+            })
     }
 }

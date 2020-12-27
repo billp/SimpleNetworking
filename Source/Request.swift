@@ -89,7 +89,7 @@ public final class Request: Operation {
     /// The environment of the request.
     public var environment: Environment?
     /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use
-    weak public var associatedObject: AnyObject?
+    public var associatedObject: AnyObject?
 
     // MARK: Initializers
     /// Default initializer
@@ -302,7 +302,7 @@ public final class Request: Operation {
         }
 
         currentQueue.beforeEachRequestCallback?(self)
-        initializeInterceptorsIfNeeded()
+        initializeInterceptorsChainIfNeeded()
 
         _executing = true
         _finished = false

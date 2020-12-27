@@ -106,6 +106,7 @@
 		F3A4B15125969694004812B6 /* TestInterceptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A4B14B2596963C004812B6 /* TestInterceptors.swift */; };
 		F3AA5132256EA13E00D64D31 /* FileStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5131256EA13E00D64D31 /* FileStreamer.swift */; };
 		F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AA5146256EF53000D64D31 /* TestHelpers.swift */; };
+		F3AF556925987256000E01D8 /* DoNothingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AF556825987256000E01D8 /* DoNothingInterceptor.swift */; };
 		F3B0F35B250A3121009FF4D0 /* herokuapp.com.cer in Resources */ = {isa = PBXBuildFile; fileRef = F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */; };
 		F3D16EC82575299900F7B523 /* TermiNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; };
 		F3D16EC92575299900F7B523 /* TermiNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F319682D243D01E1008725CE /* TermiNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -249,6 +250,7 @@
 		F3A4B14B2596963C004812B6 /* TestInterceptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInterceptors.swift; sourceTree = "<group>"; };
 		F3AA5131256EA13E00D64D31 /* FileStreamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStreamer.swift; sourceTree = "<group>"; };
 		F3AA5146256EF53000D64D31 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		F3AF556825987256000E01D8 /* DoNothingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNothingInterceptor.swift; sourceTree = "<group>"; };
 		F3B0F35A250A3121009FF4D0 /* herokuapp.com.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = herokuapp.com.cer; sourceTree = "<group>"; };
 		F3F255E8244C33B800517BF7 /* RouteConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteConfiguration.swift; sourceTree = "<group>"; };
 		F3F48287245EBE8000656449 /* TestUploadOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUploadOperations.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				F32195B725783ED0000941F1 /* GlobalInterceptor.swift */,
+				F3AF556825987256000E01D8 /* DoNothingInterceptor.swift */,
 			);
 			name = Interceptors;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 				F387B0ED2579531200A8C0C7 /* TestTransformer.swift in Sources */,
 				F31126AD257A563600775D7E /* FileResponse.swift in Sources */,
 				F3850C88243D103700F7CC13 /* Env.swift in Sources */,
+				F3AF556925987256000E01D8 /* DoNothingInterceptor.swift in Sources */,
 				F32C3D13243E499E004497BC /* TestPinning.swift in Sources */,
 				F3AA5147256EF53000D64D31 /* TestHelpers.swift in Sources */,
 				F3850C8D243D103700F7CC13 /* TestJSONParams.swift in Sources */,

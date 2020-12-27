@@ -86,7 +86,7 @@ internal class SessionTaskFactory {
                                completionHandler: ((Data, URLResponse?) -> Void)?,
                                onFailure: FailureCallback?) -> URLSessionUploadTask? {
 
-        // Hold completionHandler and progressCallback for later use.
+        // Hold completionHandler for later use.
         request.successCompletionHandler = completionHandler
         request.progressCallback = progressUpdate
 

@@ -87,7 +87,7 @@ class TestUploadOperations: XCTestCase {
         let checksum = TestHelpers.sha256(url: URL(fileURLWithPath: filePath))
 
         router.request(for: .dataUpload(data: uploadData, param: "bhbbrbrbrhbh"))
-            .startUpload(transformer: TestUploadTrasnformer.self,
+            .startUpload(transformer: TestUploadTransformer.self,
                          progressUpdate: { bytesSent, totalBytes, progress in
                 completed = bytesSent == totalBytes && progress == 1
             }, onSuccess: { response in

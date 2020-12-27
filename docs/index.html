@@ -79,7 +79,7 @@
             <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums/InteceptionActionType.html">InteceptionActionType</a>
+                <a class="nav-group-task-link" href="Enums/InterceptionAction.html">InterceptionAction</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums/Method.html">Method</a>
@@ -209,7 +209,7 @@
 <h2 id='features' class='heading'>Features</h2>
 
 <p align="center">
-Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Convert Rest models to Domain models with Transformers 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File and Data Upload/Download 🔸 Pretty printed debug information in console
+Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File/Data Upload/Download 🔸 Pretty printed debug information
 </p>
 <h4 id='table-of-contents' class='heading'>Table of contents</h4>
 
@@ -283,10 +283,10 @@ Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 
 <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
 
 <span class="kt">Request</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
-          <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span>
-          <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
-          <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
-                                <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
+        <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/api/todos"</span><span class="p">,</span>
+        <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+        <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">responseType</span><span class="p">:</span> <span class="kt">Todo</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                              <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">todo</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span>
 <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
@@ -324,12 +324,12 @@ Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 
 <span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s">"x-auth"</span><span class="p">:</span> <span class="s">"abcdef1234"</span><span class="p">]</span>
 
 <span class="kt">Request</span><span class="p">(</span><span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span>
-          <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">,</span>
-          <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
-          <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
-          <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">myQueue</span><span class="p">,</span>
-                                              <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
-                                              <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+        <span class="nv">url</span><span class="p">:</span> <span class="s">"https://myweb.com/todos"</span><span class="p">,</span>
+        <span class="nv">headers</span><span class="p">:</span> <span class="n">headers</span><span class="p">,</span>
+        <span class="nv">params</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+        <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span><span class="p">)</span><span class="o">.</span><span class="nf">start</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="n">myQueue</span><span class="p">,</span>
+                                            <span class="nv">responseType</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">,</span>
+                                            <span class="nv">onSuccess</span><span class="p">:</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 <span class="p">})</span> <span class="p">{</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="k">in</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
@@ -354,8 +354,8 @@ Multi-Environment configuration 🔸 Model deserialization with <b>Codables</b> 
 
     <span class="kd">func</span> <span class="nf">configure</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Environment</span> <span class="p">{</span>
         <span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">(</span><span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
-                                            <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-                                            <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span>
+                                          <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+                                          <span class="nv">requestBodyType</span><span class="p">:</span> <span class="o">.</span><span class="kt">JSON</span><span class="p">)</span>
         <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
         <span class="k">case</span> <span class="o">.</span><span class="nv">localhost</span><span class="p">:</span>
             <span class="k">return</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">scheme</span><span class="p">:</span> <span class="o">.</span><span class="n">https</span><span class="p">,</span>
@@ -579,12 +579,12 @@ return image
 <p><a name="debug_logging"></a></p>
 <h2 id='debug-logging' class='heading'>Debug Logging</h2>
 
-<p>You enable the debug logging by setting the <strong>verbose</strong> to <strong>true</strong> in your configuration</p>
+<p>You can enable the debug logging by setting the <strong>verbose</strong> to <strong>true</strong> in your configuration</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">Configuration</span><span class="p">()</span>
 <span class="n">configuration</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
 
-<p>And you will see a beautiful pretty-printed debug output in your console.
+<p>And you will see a beautiful pretty-printed debug output in debug window.
 <img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png"></p>
 <h2 id='tests' class='heading'>Tests</h2>
 
@@ -603,7 +603,7 @@ return image
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-25)</p>
+      <p>&copy; 2020 <a class="link" href="https://github.com/billp/TermiNetwork.git" target="_blank" rel="external">Bill Panagiotopoulos</a>. All rights reserved. (Last updated: 2020-12-27)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

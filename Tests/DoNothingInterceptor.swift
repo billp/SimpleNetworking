@@ -1,4 +1,4 @@
-// TermiNetwork.h
+// GlobalInterceptor.swift
 //
 // Copyright © 2018-2021 Vasilis Panagiotopoulos. All rights reserved.
 //
@@ -17,14 +17,15 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+import Foundation
+import TermiNetwork
 
-//! Project version number for TermiNetwork.
-FOUNDATION_EXPORT double TermiNetworkVersionNumber;
-
-//! Project version string for TermiNetwork.
-FOUNDATION_EXPORT const unsigned char TermiNetworkVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <TermiNetwork/PublicHeader.h>
-
-
+final class DoNothingInterceptor: InterceptorProtocol {
+    func requestFinished(responseData data: Data?,
+                         error: TNError?,
+                         request: Request,
+                         proceed: (InterceptionAction) -> Void) {
+        request.associatedObject = NSNumber(booleanLiteral: true)
+        proceed(.continue)
+    }
+}

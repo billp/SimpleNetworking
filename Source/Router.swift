@@ -23,7 +23,9 @@ import Foundation
 public final class Router<Route: RouteProtocol> {
     // MARK: Properties
     fileprivate var environment: Environment?
-    fileprivate var configuration: Configuration?
+
+    /// Router configuration
+    public var configuration: Configuration?
 
     /// Initialize with environment that overrides the one set by Environment.set(_).
     public init(environment: EnvironmentProtocol? = nil,
@@ -38,7 +40,6 @@ public final class Router<Route: RouteProtocol> {
     ///    - route: a RouteProtocol enum value
     public func request(for route: Route) -> Request {
         return Request(route: route,
-                         environment: environment,
-                         configuration: configuration)
-    }
+                       environment: environment,
+                       configuration: configuration)    }
 }
