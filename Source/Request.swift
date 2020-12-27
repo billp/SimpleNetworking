@@ -65,7 +65,6 @@ public final class Request: Operation {
     internal var responseHeadersClosure: ((URLResponse?) -> Void)?
     internal var processedHeaders: [String: String]?
     internal var pinningErrorOccured: Bool = false
-    internal var headers: [String: String]?
     /// The start date of the request.
     internal var startedAt: Date?
     /// The duration of the request.
@@ -88,8 +87,10 @@ public final class Request: Operation {
     public var retryCount: Int = 0
     /// The environment of the request.
     public var environment: Environment?
-    /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use
+    /// An associated object with the request. Use this variable to optionaly assign an object to it, for later use.
     public var associatedObject: AnyObject?
+    /// The headers of the request.
+    public var headers: [String: String]?
 
     // MARK: Initializers
     /// Default initializer

@@ -30,7 +30,7 @@ Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Cho
 	  - [Make a request](#construct_request)
 - [Queue Hooks](#queue_hooks)
 - [Error Handling](#error_handling)
-	- [Global Error Handlers](#global_error_handlers)
+- [Interceptors](#interceptors)
 - [Image Helpers](#image_helpers)
 - [Middlewares](#middlewares)
 - [Debug Logging](#debug_logging)
@@ -291,54 +291,76 @@ To see all the available cases, please visit at <a href="https://billp.github.io
 
 ```swift
 Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
-            .start(responseType: Todo.self,
-   onSuccess: { todo in
-    // do something with todo
-   },
-   onFailure: { (error, data) in
-    switch error {
-    case .notSuccess(let statusCode):
-        debugPrint("Status code " + String(statusCode))
-        break
-    case .networkError(let error):
-        debugPrint("Network error: " + error.localizedDescription)
-        break
-    case .cancelled(let error):
-        debugPrint("Request cancelled with error: " + error.localizedDescription)
-        break
-    default:
-        debugPrint("Error: " + error.localizedDescription)
-    }
+                    .start(responseType: Todo.self,
+           onSuccess: { todo in
+            // do something with todo
+           },
+           onFailure: { (error, data) in
+            switch error {
+            case .notSuccess(let statusCode):
+                debugPrint("Status code " + String(statusCode))
+                break
+            case .networkError(let error):
+                debugPrint("Network error: " + error.localizedDescription)
+                break
+            case .cancelled(let error):
+                debugPrint("Request cancelled with error: " + error.localizedDescription)
+                break
+            default:
+                debugPrint("Error: " + error.localizedDescription)
+            }
 })
 ```
-<a name="global_error_handlers"></a>
-### Global Error Handlers
-TermiNetwork allows you to define your own global error handlers, which means you can have a catch-all error closure to do the handling. To create a global error handler you have to create a class that implements the **ErrorHandlerProtocol**.
+<a name="interceptors"></a>
+### Interceptors
+Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh the access token when it is expired (got unauthorized status code 401) and retry the original request. 
+
+To do so, you have to implement the **InterceptorProtocol**:
 
 #### Example
-```swift 
-class GlobalNetworkErrorHandler: ErrorHandlerProtocol {
-    func requestFailed(withResponse response: Data?, error: Error, request: Request) {
-        if case .networkError(let error) = error {
-	        /// Do something with the network error
+```swift
+final class UnauthorizedInterceptor: InterceptorProtocol {
+    let retryDelay: TimeInterval = 0.1
+
+    func requestFinished(responseData data: Data?,
+                         error: TNError?,
+                         request: Request,
+                         proceed: @escaping (InterceptionAction) -> Void) {
+        switch error {
+        case .notSuccess(let statusCode):
+            if statusCode == 401 {
+                // Login to get a new token.
+                Request(method: .post,
+                        url: "https://www.myserviceapi.com/login",
+                        params: ["username": "johndoe",
+                                 "password": "p@44w0rd"])
+                    .start(responseType: LoginResponse.self) { res in
+                        let authorizationValue = String(format: "Bearer %@", res.token)
+
+                        // Update global header in configuration which is inherited by all requests.
+                        Environment.current.configuration?.headers["Authorization"] = authorizationValue
+
+                        // Update current request's header.
+                        request.headers["Authorization"] = authorizationValue
+                        
+                        // Retry the original request.
+                        proceed(.retry(delay: retryDelay))
+                    }
+            }
+        default:
+            proceed(.continue)
         }
     }
-
-    func shouldHandleRequestFailure(withResponse response: Data?, error: Error, request: Request) -> Bool {
-        return true
-    }
-
-    // Add default initializer
-    required init() { }
 }
+
 ```
 
-Then you have to pass them to your configuration object:
+Finally, you have to pass the **UnauthorizedInterceptor** to the interceptors property in Configuration:
 
 #### Example
 ```swift
 let configuration = Configuration()
-configuration.errorHandlers = [GlobalNetworkErrorHandler.self]
+configuration.interceptors = [UnauthorizedInterceptor.self]
 ```
 
 <a name="image_helpers"></a>

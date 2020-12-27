@@ -1,6 +1,13 @@
 {
   "warnings": [
     {
+      "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Extensions/Request+NSCopying.swift",
+      "line": 23,
+      "symbol": "Request.copy(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/billpanagiotopoulos/Projects/TermiNetwork/Source/Request.swift",
       "line": 32,
       "symbol": "Method.get",
