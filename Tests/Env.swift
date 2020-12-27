@@ -20,8 +20,6 @@
 import Foundation
 import TermiNetwork
 
-// swiftlint:disable function_body_length
-
 enum Env: EnvironmentProtocol {
     case httpHost
     case httpHostWithPort

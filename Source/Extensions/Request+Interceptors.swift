@@ -36,12 +36,12 @@ extension Request {
                                             request: self) { action in
                 switch action {
                 case .continue:
-                    interceptorContinueAction(data: data,
-                                              error: error,
-                                              finishCallback: finishCallback)
+                    self.interceptorContinueAction(data: data,
+                                                   error: error,
+                                                   finishCallback: finishCallback)
                 case .retry(let delay):
-                    interceptorRetryAction(withDelay: delay ?? 0,
-                                           finishCallback: finishCallback)
+                    self.interceptorRetryAction(withDelay: delay ?? 0,
+                                                finishCallback: finishCallback)
                 }
             }
         } else {
@@ -142,7 +142,10 @@ extension Request {
     ///     - finishCallback: A callback that continues the execution after the Interceptors handling.
     func retryDataRequest(request: Request,
                           finishCallback: @escaping InterceptorFinishedCallbackType) {
-        request.start(responseType: Data.self, onSuccess: { data in
+        request.start(
+            queue: request.currentQueue,
+            responseType: Data.self,
+            onSuccess: { data in
             self.processNextInterceptorIfNeeded(data: data,
                                                 error: nil,
                                                 finishCallback: finishCallback)
@@ -160,6 +163,7 @@ extension Request {
     func retryUploadRequest(request: Request,
                             finishCallback: @escaping InterceptorFinishedCallbackType) {
         request.startUpload(
+            queue: request.currentQueue,
             responseType: Data.self,
             progressUpdate: self.progressCallback,
             onSuccess: { data in
@@ -182,6 +186,7 @@ extension Request {
                               filePath: String,
                               finishCallback: @escaping InterceptorFinishedCallbackType) {
         request.startDownload(
+            queue: request.currentQueue,
             filePath: filePath,
             progressUpdate: self.progressCallback,
             onSuccess: {

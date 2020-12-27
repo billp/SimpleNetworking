@@ -40,7 +40,7 @@ public protocol InterceptorProtocol {
     func requestFinished(responseData data: Data?,
                          error: TNError?,
                          request: Request,
-                         proceed: (InterceptionAction) -> Void)
+                         proceed: @escaping (InterceptionAction) -> Void)
 
     /// Default initializer
     init()
