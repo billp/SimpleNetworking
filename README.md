@@ -16,7 +16,7 @@
 
 ## Features
 <p align="center">
-Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File/Data Upload/Download 🔸 Pretty printed debug information
+Multi-environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Choose the response type you want: <b>Codable</b>, <b>UIImage</b>, <b>Data</b> or <b>String</b> 🔸 <b>UIKit</b>/<b>SwiftUI</b> helpers for downloading remote images 🔸 Routers 🔸 Transformers (convert rest models to domain models) 🔸 Error handling 🔸 Mock responses 🔸 Certificate pinning  🔸 Flexible configuration  🔸 Middlewares  🔸 File/Data Upload/Download 🔸 Pretty printed debug information
 </p>
 
 #### Table of contents
@@ -26,13 +26,17 @@ Multi-Environment setup 🔸 Model deserialization with <b>Codables</b> 🔸 Cho
   - [Simple usage of <b>Request</b>](#simple_usage)
   - [Advanced usage of <b>Request</b> with <b>Configuration</b> and custom <b>Queue</b>](#advanced_usage)
   - [Complete project setup with <b>Environments</b> and <b>Routers</b> (Recommended)](#complete_setup)
-	  - [Setup Environment](#setup_environments)
-	  - [Setup Routes](#setup_routers)
+	  - [Environment setup](#setup_environments)
+	  - [Router setup](#setup_routers)
 	  - [Make a request](#construct_request)
 - [Queue Hooks](#queue_hooks)
 - [Error Handling](#error_handling)
+- [Transformers](#transformers)
+- [Mock responses](#mock_responses)
 - [Interceptors](#interceptors)
 - [Image Helpers](#image_helpers)
+	- [SwiftUI Image Helper](#swift_ui_image_helper)
+	- [UIImageView, NSImageView, WKInterfaceImage Extensions](#image_extensions)
 - [Middlewares](#middlewares)
 - [Debug Logging](#debug_logging)
 
@@ -83,7 +87,7 @@ struct Todo: Codable {
 }
 ```
 
-To construct a request which adds a new todo using a REST API, do the following:
+The following example creates a request that adds a new Todo:
 
 ```swift
 let params = ["title": "Go shopping."]
@@ -115,18 +119,21 @@ JSON.self, Codable.self (subclasses), UIImage.self, Data.self or String.self
 ```
 
 ##### onSuccess
-A callback that returns an object of the given type (specified in responseType parameter).
+A callback that returns an object of the given type. (specified in responseType parameter)
 
 ##### onFailure
-a callback that returns a **Error** and optionally the response **Data**.
+A callback that returns a **Error** and the response **Data** (if any).
 
 <a name="advanced_usage"></a>
 
 ### Advanced usage of Request with Configuration and custom Queue
 
-The following example uses a custom queue that specifies the **maxConcurrentOperationCount** (how many requests run in parallel) and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Configuration.html#/Public%20properties" target="_blank">Configuration properties</a> in documentation.
+The following example uses a custom **Queue** with **maxConcurrentOperationCount** and a configuration object. To see the full list of available configuration properties, take a look at <a href="https://billp.github.io/TermiNetwork/Classes/Configuration.html#/Public%20properties" target="_blank">Configuration properties</a> in documentation.
 
 ```swift
+let myQueue = Queue(failureMode: .continue)
+myQueue.maxConcurrentOperationCount = 2
+
 let configuration = Configuration(
     cachePolicy: .useProtocolCachePolicy,
     timeoutInterval: 30,
@@ -148,19 +155,21 @@ Request(method: .post,
     print(error)
 }
 ```
-The request above uses a custom queue *myQueue* with a failure mode of value *.continue* (default), which means that the queue continues its execution if a request fails.
+The request above uses a custom queue **myQueue** with a failure mode of **.continue** (default), which means that the queue continues its execution if a request fails.
 
 <a name="complete_setup"></a>
 
 ## Complete setup with <b>Environments</b> and <b>Routers</b>
-The complete and recommended usage of TermiNetwork library consists of creating your environments and define your own routers.  
+The complete and recommended setup of TermiNetwork consists of defining **Environments** and **Routers**.  
 
 <a name="setup_environments"></a>
 
-#### Setup your Environment
-Create a swift class that implements the **EnvironmentProtocol** and define your environments. See bellow for an example:
+#### Environment setup
+Create a swift **enum** that implements the **EnvironmentProtocol** and define your environments. 
+
+##### Example
 ```swift
-enum Env: EnvironmentProtocol {
+enum MyAppEnvironments: EnvironmentProtocol {
     case localhost
     case dev
     case production
@@ -189,13 +198,16 @@ enum Env: EnvironmentProtocol {
     }
 }
 ```
-*Optionally you can  pass a **configuration** object to make all requests inherit the given configuration settings.*
+*Optionally you can  pass a **configuration** object to make all Routers and Requests to inherit the given configuration settings.*
 
 <a name="setup_routers"></a>
 
-#### Setup your Routes
-The following code creates a TodosRoute enumeration with all the required routes in order to create the requests later.
+#### Router setup
+Create a swift **enum** that implements the **RouteProtocol** and define your environments. 
 
+The following example creates a TodosRoute with all the required API routes (cases).
+
+##### Example
 ```swift
 enum TodosRoute: RouteProtocol {
     // Define your routes
@@ -238,12 +250,12 @@ enum TodosRoute: RouteProtocol {
 }
 
 ```
-You can optionally pass a **configuration** object to specify settings for each route.
+You can optionally pass a **configuration** object to each case if you want provide different  configuration for each route.
 
 <a name="construct_request"></a>
 
 #### Make a request
-Use **Router** instance by specializing it with **TodosRoute** to create and execute the request:
+To create the request you have to initialize a **Router** instance and specialize it with your defined Router, in our case **TodosRoute**:
 ```swift
 Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
     .start(responseType: Todo.self,
@@ -257,7 +269,7 @@ Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
 <a name="queue_hooks"></a>
 
 ## Queue Hooks
-You can define closures that  run before and/or after a request execution in a queue. The following hooks are available:
+Hooks are closures that  run before and/or after a request execution in a queue. The following hooks are available:
 
 ```swift
 Queue.shared.beforeAllRequestsCallback = {
@@ -283,9 +295,9 @@ Queue.shared.afterEachRequestCallback = { request, data, urlResponse, error
 
 ## Error Handling
 
-TermiNetwork provides its own error types (Error) for all the possible cases. Those errors are typically returned by onFailure callbacks from requests. You can use the **localizedDescription** property to get a localized error message.
+TermiNetwork provides its own error types (TNError) for all the possible error cases. These errors are typically returned in onFailure callbacks of **start** methods. 
 
-To see all the available cases, please visit at <a href="https://billp.github.io/TermiNetwork/Enums/Error.html" target="_blank">Error</a> in documentation.
+To see all the available errors, please visit the <a href="https://billp.github.io/TermiNetwork/Enums/TNError.html" target="_blank">TNError</a> in documentation.
 
 
 #### Example
@@ -293,30 +305,109 @@ To see all the available cases, please visit at <a href="https://billp.github.io
 ```swift
 Router<TodosRoute>().request(for: .add(title: "Go shopping!"))
                     .start(responseType: Todo.self,
-           onSuccess: { todo in
-            // do something with todo
-           },
-           onFailure: { (error, data) in
-            switch error {
-            case .notSuccess(let statusCode):
-                debugPrint("Status code " + String(statusCode))
-                break
-            case .networkError(let error):
-                debugPrint("Network error: " + error.localizedDescription)
-                break
-            case .cancelled(let error):
-                debugPrint("Request cancelled with error: " + error.localizedDescription)
-                break
-            default:
-                debugPrint("Error: " + error.localizedDescription)
-            }
+   onSuccess: { todo in
+       // do something with todo
+   },
+   onFailure: { (error, data) in
+       switch error {
+       case .notSuccess(let statusCode):
+            debugPrint("Status code " + String(statusCode))
+            break
+       case .networkError(let error):
+            debugPrint("Network error: " + error.localizedDescription)
+            break
+       case .cancelled(let error):
+            debugPrint("Request cancelled with error: " + error.localizedDescription)
+            break
+       default:
+            debugPrint("Error: " + error.localizedDescription)
+    }
 })
 ```
+<a name="transformers"></a>
+## Transformers
+
+Transformers enables you to convert your Rest models to Domain models by defining your custom **transform** functions. To do so, you have to create a class that inherits the **Transformer** class and specializing it by providing the FromType and ToType generics.
+
+The following example transforms an array of **RSCity** (rest) to an array of **City** (domain) by overriding the transform function.
+
+#### Example
+
+```swift
+final class CitiesTransformer: Transformer<[RSCity], [City]> {
+    override func transform(_ object: [RSCity]) throws -> [City] {
+        object.map { rsCity in
+            City(id: UUID(),
+                 cityID: rsCity.id,
+                 name: rsCity.name,
+                 description: rsCity.description,
+                 countryName: rsCity.countryName,
+                 thumb: rsCity.thumb,
+                 image: rsCity.image)
+        }
+    }
+}
+```
+
+Finally, pass the **CitiesTransformer** in the Request's start method:
+#### Example
+```swift
+Router<CityRoute>()
+    .request(for: .cities)
+    .start(transformer: CitiesTransformer.self,
+           onSuccess: { cities in
+    // Cities are of type [City] (domain)
+    self.cities = cities
+}, onFailure: { (error, data) in
+   // Handle error
+})
+```
+
+<a name="mock_responses"></a>
+## Mock responses
+**Mock responses** is a powerful feature of TermiNetwork that enables you to provide a local resource file as Request's response. This is useful, for example, when the API service is not yet available and you need to implement the app's functionality without losing any time. (Prerequisite for this is to have an API contract) 
+
+#### Steps to enable mock responses
+
+1. Create a Bundle resource and put your files there. (File > New -> File... > Settings Bundle)
+2. Specify the Bundle path in Configuration
+	#### Example
+	```swift
+	let configuration = Configuration()
+	if let path = Bundle.main.path(forResource: "MockData", ofType: "bundle") {
+	    configuration.mockDataBundle = Bundle(path: path)
+	}
+	```
+3. Enable Mock responses in Configuration
+	#### Example
+ 	```swift
+	configuration.mockDataEnabled = true
+	```
+4. Define the mockFilePath path in your Routes
+	 #### Example
+ 	```swift
+	enum CityRoute: RouteProtocol {
+    case cities
+
+    func configure() -> RouteConfiguration {
+        switch self {
+        case .cities:
+            return RouteConfiguration(method: .get,
+                                        path: .path(["cities"]),
+                                        mockFilePath: .path(["Cities", "cities.json"]))
+	        }
+	    }
+	}
+	```
+	The example above loads the **Cities/cities.json** from **MockData.bundle** and returns its data as Request's response.
+
+For a complete example, open the demo application and take a look at **City Explorer - Offline Mode**.
+
 <a name="interceptors"></a>
 ## Interceptors
-Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh an expired access token (unauthorized status code 401) and then retry the original request. To do so, you just have to implement the **InterceptorProtocol**
+Interceptors offers you a way to change or augment the usual processing cycle of a Request.  For instance, you can refresh an expired access token (unauthorized status code 401) and then retry the original request. To do so, you just have to implement the **InterceptorProtocol**.
 
-The following Interceptor implementation does exactly that: it tries to refresh the access token with a retry limit (5):
+The following Interceptor implementation tries to refresh the access token with a retry limit (5).
 
 #### Example
 ```swift
@@ -371,25 +462,27 @@ configuration.interceptors = [UnauthorizedInterceptor.self]
 <a name="image_helpers"></a>
 
 ## SwiftUI/UIKit Image Helpers
-TermiNetwork provides two different helpers for setting remote images:
-### Image helper (SwiftUI)
+TermiNetwork provides two different helpers for setting remote images.
+<a name="swift_ui_image_helper"></a>
+### SwiftUI Image Helper
 #### Example
 1.  **Example with URL**
 ```swift
 var body: some View {
-	TermiNetwork.Image(withURL: "https://example.com/path/to/image.png",
-	                   defaultImage: UIImage(named: "DefaultThumbImage"))
+    TermiNetwork.Image(withURL: "https://example.com/path/to/image.png",
+	               defaultImage: UIImage(named: "DefaultThumbImage"))
 }
 ```
 2.  **Example with Request**
 ```swift
 var body: some View {
-	TermiNetwork.Image(withRequest: Router<CityRoute>().request(for: .image(city: city)),
+    TermiNetwork.Image(withRequest: Router<CityRoute>().request(for: .image(city: city)),
                        defaultImage: UIImage(named: "DefaultThumbImage"))
 }
 ```
 
-### UIImageView/NSImageView/WKInterfaceImage Extensions
+<a name="image_extensions"></a>
+### UIImageView, NSImageView, WKInterfaceImage Extensions
 
 1. **Example with URL**
 ```swift
@@ -403,7 +496,7 @@ imageView.tn_setRemoteImage(url: sampleImageURL,
     // Optionally handle response
 })
 ```
-2. **Example with Request and Route**
+2. **Example with Request**
 ```swift
 let imageView = UIImageView() // or NSImageView (macOS), or WKInterfaceImage (watchOS)
 imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(withID: "3125")),
@@ -419,18 +512,21 @@ imageView.tn_setRemoteImage(request: Router<CityRoute>().request(for: .thumb(wit
 <a name="middlewares"></a>
 
 ## Middlewares
-With Middlewares you are able to modify headers, params and response before they reach the success callback/failure callbacks. You can create your own middlewares by implementing the **RequestMiddlewareProtocol**. Please see **CryptoMiddleware.swift** for an example middleware implementation.
+Middlewares enables you to modify headers, params and response before they reach the success/failure callbacks. You can create your own middlewares by implementing the **RequestMiddlewareProtocol** and passing it to a **Configuration** object.
+
+Take a look at *./Examples/Communication/Middlewares/CryptoMiddleware.swift*  for an example that adds an additional encryption layer to the application.
 
 <a name="debug_logging"></a>
 
 ## Debug Logging
 
-You can enable the debug logging by setting the **verbose** to **true** in your configuration
+You can enable the debug logging by setting the **verbose** property to **true** in your **Configuration**.
 ```swift
 let configuration = Configuration()
 configuration.verbose = true
 ```
-And you will see a beautiful pretty-printed debug output in debug window.
+... and you will see a beautiful pretty-printed debug output in debug window
+
 <img width="750px" src="https://user-images.githubusercontent.com/1566052/102597522-75be5200-4123-11eb-9e6e-5740e42a20a5.png">
 
 ## Tests
