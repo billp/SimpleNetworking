@@ -38,7 +38,8 @@ final class UnauthorizedInterceptor: InterceptorProtocol {
                 UnauthorizedInterceptor.currentStatusCode = 200
 
                 // Update global header in configuration which is inherited by all requests.
-                Environment.current.configuration?.headers?["Authorization"] = UnauthorizedInterceptor.authorizationValue
+                Environment.current.configuration?.headers?["Authorization"] =
+                    UnauthorizedInterceptor.authorizationValue
 
                 // Update current request's header.
                 request.headers?["Authorization"] = UnauthorizedInterceptor.authorizationValue
