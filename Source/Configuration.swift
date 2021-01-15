@@ -25,11 +25,11 @@ import Foundation
 ///   - max: The upper bound of interval.
 public typealias MockDelayType = (min: TimeInterval, max: TimeInterval)
 
-/// A configuration class that can be used with Environment, RouteConfiguration and Request.
+/// A configuration class that can be used with Environment, Router, Route and Request.
 /// A configuration object follows the following rules:
-/// 1. When a Configuration object is passed to a Environment,
-/// each Router (with its routes) will inherit this configuration.
-/// 2. When a Configuration object is passed to Router, all its routes will inherit this configuration.
+/// 1. When a Configuration object is passed to an Environment,
+/// each Router with its routes and requests will inherit this configuration.
+/// 2. When a Configuration object is passed to Router, all its routes and requests will inherit this configuration.
 public final class Configuration {
     // MARK: Public properties
 

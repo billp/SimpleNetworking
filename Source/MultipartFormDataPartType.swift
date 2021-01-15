@@ -26,17 +26,15 @@ public enum MultipartFormDataPartType {
     ///   - value: The value of the multipart/form-data parameter.
     case value(value: String)
 
-    /// Data case.
+    /// Data case with filename and content-type.
     /// - Parameters
     ///   - data: The data  to upload of the multipart/form-data parameter.
     ///   - filename: The filename value of the multipart/form-data parameter.
     ///   - contentType: The Content-Type of the multipart/form-data parameter.
     case data(data: Data, filename: String?, contentType: String?)
 
-    /// URL case.
+    /// File URL case.
     /// - Parameters
-    ///   - file: The file URL that contains the data that will be uploaded.
-    ///   - filename: The filename value of the multipart/form-data parameter.
-    ///   - contentType: The Content-Type of the multipart/form-data parameter.
+    ///   - url: The file URL that contains the data that will be uploaded.
     case url(_ url: URL)
 }
