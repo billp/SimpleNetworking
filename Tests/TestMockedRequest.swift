@@ -20,7 +20,7 @@
 import XCTest
 import TermiNetwork
 
-class TestMockRequests: XCTestCase {
+class TestMockedRequests: XCTestCase {
     static var envConfiguration: Configuration = {
         let conf = Configuration()
         conf.verbose = true
@@ -74,7 +74,7 @@ class TestMockRequests: XCTestCase {
     }
 
     var router2: Router<APIRoute> {
-        return Router<APIRoute>(configuration: TestMockRequests.mockDelayConfiguration)
+        return Router<APIRoute>(configuration: TestMockedRequests.mockDelayConfiguration)
     }
 
     override func setUp() {
@@ -121,9 +121,9 @@ class TestMockRequests: XCTestCase {
             req.queue(queue)
                .success(responseType: TestHeaders.self) { response in
                     let res = req.mockDelay ?? 0
-                    let timeCheck = res >= TestMockRequests
+                    let timeCheck = res >= TestMockedRequests
                         .mockDelayConfiguration.mockDelay!.min
-                        && res <= TestMockRequests
+                        && res <= TestMockedRequests
                             .mockDelayConfiguration.mockDelay!.max
                     failed = failed && !(response.customHeader == "yo man!!!!" && timeCheck)
                }

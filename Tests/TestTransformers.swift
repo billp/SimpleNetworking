@@ -29,8 +29,24 @@ class TestTransformers: XCTestCase {
         Environment.set(Env.termiNetworkRemote)
     }
 
-    func testGetParamsWithTransformer() {
-        let expectation = XCTestExpectation(description: "testGetParamsWithTransformer")
+    func testCannotTransform() {
+        var failed = true
+        let object = TestHeaders(authorization: "", customHeader: "", userAgent: "")
+        do {
+            _ = try object.transform(with: StatusCodeTransformer.init())
+        } catch let error {
+            if let tnError = error as? TNError {
+                if case .transformationFailed = tnError {
+                    failed = false
+                }
+            }
+        }
+
+        XCTAssert(!failed)
+    }
+
+    func testGetParamsWithTransformerSuccess() {
+        let expectation = XCTestExpectation(description: "testGetParamsWithTransformerSuccess")
         var failed = true
         var testModel: TestModel?
         router.request(for: .testGetParams(value1: true,
@@ -51,4 +67,87 @@ class TestTransformers: XCTestCase {
 
         XCTAssert(!failed && testModel?.value == "true")
     }
+
+    func testGetParamsWithTransformerSuccessCannotDeserialize() {
+        let expectation = XCTestExpectation(description: "testGetParamsWithTransformerSuccessCannotDeserialize")
+        var failed = true
+
+        let req = router.request(for: .testGetParams(value1: true,
+                                                     value2: 3,
+                                                     value3: 5.13453124189,
+                                                     value4: "test",
+                                                     value5: nil))
+
+        req.success(transformer: StatusCodeTransformer.self) { _ in
+               expectation.fulfill()
+           }
+           .failure { error in
+                if case .cannotDeserialize = error {
+                    failed = false
+                } else {
+                    failed = true
+                }
+                expectation.fulfill()
+           }
+
+        wait(for: [expectation], timeout: 60)
+
+        XCTAssert(!failed)
+    }
+
+    func testGetParamsWithTransformerSuccessTransformError() {
+        let expectation = XCTestExpectation(description: "testGetParamsWithTransformerSuccessTransformError")
+        var failed = true
+
+        let req = router.request(for: .testGetParams(value1: true,
+                                                     value2: 3,
+                                                     value3: 5.13453124189,
+                                                     value4: "test",
+                                                     value5: nil))
+
+        req.success(transformer: StatusCodeTransformer.self) { _ in
+               expectation.fulfill()
+           }
+           .failure { error in
+                if case .cannotDeserialize = error {
+                    failed = false
+                } else {
+                    failed = true
+                }
+                expectation.fulfill()
+           }
+
+        wait(for: [expectation], timeout: 60)
+
+        XCTAssert(!failed)
+    }
+
+
+    func testGetParamsWithTransformerFailure() {
+        let expectation = XCTestExpectation(description: "testGetParamsWithTransformer")
+        var failed = true
+
+        let req = router.request(for: .testGetParams(value1: true,
+                                                     value2: 3,
+                                                     value3: 5.13453124189,
+                                                     value4: "test",
+                                                     value5: nil))
+
+        req.success(transformer: TestTransformer.self) { _ in
+                expectation.fulfill()
+           }
+           .failure { _ in
+                failed = false
+                expectation.fulfill()
+            }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
+            req.cancel()
+        }
+
+        wait(for: [expectation], timeout: 60)
+
+        XCTAssert(!failed)
+    }
+
 }

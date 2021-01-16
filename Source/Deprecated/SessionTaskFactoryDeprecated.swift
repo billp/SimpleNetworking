@@ -47,7 +47,7 @@ internal class SessionTaskFactoryDeprecated {
             return nil
         }
 
-        /// Create mock response if needed
+        /// Create mocked response if needed
         if request.shouldMockResponse() {
             return request.createMockResponse(request: urlRequest,
                                               completionHandler: completionHandler,

@@ -47,7 +47,7 @@ internal class SessionTaskFactory {
             return nil
         }
 
-        /// Create mock response if needed
+        /// Create mocked response if needed
         if request.shouldMockResponse() {
             // return fake session
             return URLSession(configuration: URLSession.shared.configuration)

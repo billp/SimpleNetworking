@@ -109,7 +109,7 @@
 		F38F34A225896ED500D5BB17 /* FileUploaderUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */; };
 		F397EC9F244F74360082E12D /* CryptoMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397EC9D244F65730082E12D /* CryptoMiddleware.swift */; };
 		F397ECA2244F76330082E12D /* EncryptedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F397ECA0244F76300082E12D /* EncryptedModel.swift */; };
-		F398575225AC945A00DCCAAE /* TestMockRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398575125AC945A00DCCAAE /* TestMockRequest.swift */; };
+		F398575225AC945A00DCCAAE /* TestMockedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398575125AC945A00DCCAAE /* TestMockedRequest.swift */; };
 		F398575E25AC94C900DCCAAE /* TestTransformersDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398575D25AC94C900DCCAAE /* TestTransformersDeprecated.swift */; };
 		F398576825ACA40B00DCCAAE /* SessionTaskFactoryDeprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398576725ACA40B00DCCAAE /* SessionTaskFactoryDeprecated.swift */; };
 		F3A0BC0F25769385005139D5 /* DemoEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0BC07257692E6005139D5 /* DemoEnvironment.swift */; };
@@ -270,7 +270,7 @@
 		F38F34A125896ED500D5BB17 /* FileUploaderUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploaderUtils.swift; sourceTree = "<group>"; };
 		F397EC9D244F65730082E12D /* CryptoMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoMiddleware.swift; sourceTree = "<group>"; };
 		F397ECA0244F76300082E12D /* EncryptedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedModel.swift; sourceTree = "<group>"; };
-		F398575125AC945A00DCCAAE /* TestMockRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockRequest.swift; sourceTree = "<group>"; };
+		F398575125AC945A00DCCAAE /* TestMockedRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMockedRequest.swift; sourceTree = "<group>"; };
 		F398575D25AC94C900DCCAAE /* TestTransformersDeprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTransformersDeprecated.swift; sourceTree = "<group>"; };
 		F398576725ACA40B00DCCAAE /* SessionTaskFactoryDeprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTaskFactoryDeprecated.swift; sourceTree = "<group>"; };
 		F3A0BC07257692E6005139D5 /* DemoEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoEnvironment.swift; sourceTree = "<group>"; };
@@ -598,7 +598,7 @@
 				F3363E6425A6395800699E73 /* TestRequest.swift */,
 				F3850C86243D103700F7CC13 /* TestTNErrors.swift */,
 				F35B533924422FAE00C1853A /* TestConfiguration.swift */,
-				F398575125AC945A00DCCAAE /* TestMockRequest.swift */,
+				F398575125AC945A00DCCAAE /* TestMockedRequest.swift */,
 				F32C3D12243E499E004497BC /* TestPinning.swift */,
 				F387B0F6257958EB00A8C0C7 /* TestTransformers.swift */,
 				F3A4B14B2596963C004812B6 /* TestInterceptors.swift */,
@@ -1017,7 +1017,7 @@
 				F35B534024439FAC00C1853A /* TestMockRequestDeprecated.swift in Sources */,
 				F368C9B025A9BD830059FECB /* TestDownloadOperationsDeprecated.swift in Sources */,
 				F35B533A24422FAE00C1853A /* TestConfiguration.swift in Sources */,
-				F398575225AC945A00DCCAAE /* TestMockRequest.swift in Sources */,
+				F398575225AC945A00DCCAAE /* TestMockedRequest.swift in Sources */,
 				F3850C93243D103700F7CC13 /* TestTNErrors.swift in Sources */,
 				F3850C8E243D103700F7CC13 /* TestHeaders.swift in Sources */,
 				F3850C87243D103700F7CC13 /* TestExtensions.swift in Sources */,

@@ -74,7 +74,7 @@ class TestMockRequestDeprecated: XCTestCase {
     }
 
     var router2: Router<APIRoute> {
-        return Router<APIRoute>(configuration: TestMockRequests.mockDelayConfiguration)
+        return Router<APIRoute>(configuration: TestMockRequestDeprecated.mockDelayConfiguration)
     }
 
     override func setUp() {
@@ -111,9 +111,9 @@ class TestMockRequestDeprecated: XCTestCase {
         router2.request(for: .testHeaders).start(responseType: TestHeaders.self,
                                                  onSuccess: { response in
                                                         let res = now.distance(to: Date().timeIntervalSince1970)
-                                                        let timeCheck = res >= TestMockRequests
+                                                        let timeCheck = res >= TestMockRequestDeprecated
                                                             .mockDelayConfiguration.mockDelay!.min
-                                                            && res <= TestMockRequests
+                                                            && res <= TestMockRequestDeprecated
                                                                 .mockDelayConfiguration.mockDelay!.max
                                                     failed = !(response.customHeader == "yo man!!!!" && timeCheck)
                                                         expectation.fulfill()
