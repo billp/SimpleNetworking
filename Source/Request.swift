@@ -257,7 +257,7 @@ public final class Request: Operation {
 
         /// Set executing to true in case it is not started
         if !_executing {
-            _executing = true
+            executing(true)
         }
 
         dataTask?.cancel()
@@ -334,8 +334,8 @@ public final class Request: Operation {
         queue.beforeEachRequestCallback?(self)
         initializeInterceptorsChainIfNeeded()
 
-        _executing = true
-        _finished = false
+        executing(true)
+        finished(false)
         startedAt = Date()
 
         Log.logRequest(request: self,
@@ -442,8 +442,8 @@ public final class Request: Operation {
                            error: nil)
         }
 
-        self._executing = false
-        self._finished = true
+        executing(false)
+        finished(true)
 
         self.queue.afterOperationFinished(request: self,
                                            data: data,
@@ -466,8 +466,8 @@ public final class Request: Operation {
             self.queue.cancelAllOperations()
         }
 
-        self._executing = false
-        self._finished = true
+        executing(false)
+        finished(true)
 
         self.queue.afterOperationFinished(request: self,
                                           data: data,

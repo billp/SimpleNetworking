@@ -56,7 +56,7 @@ public class Operation: Foundation.Operation {
         _executing = executing
     }
 
-    func finish(_ finished: Bool) {
+    func finished(_ finished: Bool) {
         _finished = finished
     }
 }

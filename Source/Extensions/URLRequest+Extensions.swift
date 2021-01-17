@@ -46,8 +46,4 @@ extension URLRequest {
 
         return command.joined(separator: " \\\n\t")
     }
-
-    init?(curlString: String) {
-        return nil
-    }
 }
