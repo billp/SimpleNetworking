@@ -38,14 +38,22 @@ class TestExtensions: XCTestCase {
     func testImageViewRemoteURL() {
         let expectation = XCTestExpectation(description: "Test testImageViewRemoteURL")
         var failed = true
+        let imageSize = CGSize(width: 86, height: 32)
 
         let imageView = UIImageView()
         imageView.tn_setRemoteImage(url: sampleImageURL,
                                     defaultImage: nil,
+                                    resize: imageSize,
                                     preprocessImage: { image in
             return image
         }, onFinish: { image, error in
-            failed = !(image != nil && error == nil)
+            guard let size = image?.size else {
+                expectation.fulfill()
+                return
+            }
+            failed = !(image != nil &&
+                        [imageSize.width, imageSize.height].contains(max(size.width, size.height)) &&
+                        error == nil)
             expectation.fulfill()
         })
 
@@ -60,10 +68,11 @@ class TestExtensions: XCTestCase {
         let imageView = UIImageView()
         imageView.tn_setRemoteImage(url: "abcdef",
                                     defaultImage: nil,
+                                    resize: CGSize(width: 50, height: 50),
                                     preprocessImage: { image in
             return image
-        }, onFinish: { _, error in
-            failed = error == nil
+        }, onFinish: { image, error in
+            failed = !(image?.size == nil && error != nil)
             expectation.fulfill()
         })
 

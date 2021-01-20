@@ -22,7 +22,6 @@
 		F3116AA92460A06600DFE453 /* RouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA72460A06600DFE453 /* RouteProtocol.swift */; };
 		F3116AAA2460A06600DFE453 /* RequestMiddlewareProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */; };
 		F3116AB62460A09E00DFE453 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */; };
-		F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAD2460A09E00DFE453 /* String+Extensions.swift */; };
 		F3116AB82460A09E00DFE453 /* Request+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAE2460A09E00DFE453 /* Request+Mock.swift */; };
 		F3116AB92460A09E00DFE453 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */; };
 		F3116ABA2460A09E00DFE453 /* Request+FileOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3116AB12460A09E00DFE453 /* Request+FileOperations.swift */; };
@@ -180,7 +179,6 @@
 		F3116AA72460A06600DFE453 /* RouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProtocol.swift; sourceTree = "<group>"; };
 		F3116AA82460A06600DFE453 /* RequestMiddlewareProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestMiddlewareProtocol.swift; sourceTree = "<group>"; };
 		F3116AAC2460A09E00DFE453 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		F3116AAD2460A09E00DFE453 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		F3116AAE2460A09E00DFE453 /* Request+Mock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+Mock.swift"; sourceTree = "<group>"; };
 		F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		F3116AB12460A09E00DFE453 /* Request+FileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Request+FileOperations.swift"; sourceTree = "<group>"; };
@@ -375,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				F3116AB02460A09E00DFE453 /* Operations */,
-				F3116AAD2460A09E00DFE453 /* String+Extensions.swift */,
 				F3116AAF2460A09E00DFE453 /* URLRequest+Extensions.swift */,
 				F3116AB32460A09E00DFE453 /* Request+Middleware.swift */,
 				F3116AAE2460A09E00DFE453 /* Request+Mock.swift */,
@@ -992,7 +989,6 @@
 				F3AA5132256EA13E00D64D31 /* FileStreamer.swift in Sources */,
 				F309C0ED25A512AB00D10877 /* Request+ResponseTypes.swift in Sources */,
 				F34080B425A7B62A00815C38 /* Request+FileOperationsDeprecated.swift in Sources */,
-				F3116AB72460A09E00DFE453 /* String+Extensions.swift in Sources */,
 				F3850CAE243D104900F7CC13 /* Configuration.swift in Sources */,
 				F3850CAA243D104900F7CC13 /* Path.swift in Sources */,
 				F32195B325782E1A000941F1 /* InterceptorProtocol.swift in Sources */,
