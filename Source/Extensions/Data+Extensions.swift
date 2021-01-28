@@ -47,8 +47,4 @@ public extension Data {
         }
         return nil
     }
-
-    internal func toString() -> String? {
-        return String(data: self, encoding: .utf8)
-    }
 }
