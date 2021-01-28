@@ -162,8 +162,7 @@ final public class ImageLoader: ObservableObject {
 /// Image is a SwiftUI component for downloading images.
 @available(iOS 13.0, *)
 public struct Image: View {
-    /// :no-doc
-    @ObservedObject public var imageLoader: ImageLoader
+    @ObservedObject internal var imageLoader: ImageLoader
     @State var image = ImageType()
 
     /// Main body
